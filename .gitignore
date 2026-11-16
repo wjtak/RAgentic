@@ -1,0 +1,11 @@
+.env
+.venv/
+chroma_db_final/
+eval/results_*.jsonl
+eval/summary_*.json
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+eval/retrieval_summary.md
+eval/golden_review.md
+eval/summary.md
