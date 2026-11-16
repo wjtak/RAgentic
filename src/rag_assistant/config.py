@@ -12,7 +12,7 @@ RAW_ZIP = RAW_DIR / "vosdroits-latest.zip"  # archive DILA téléchargée sur da
 CORPUS_PATH = RAW_DIR / "corpus.parquet"  # sortie de scripts/prepare_docs.py
 CHROMA_DIR = ROOT / "chroma_db_final"  # index vectoriel (non versionné)
 COLLECTION = "rag_sp_documents"
-GOLDEN_PATH = ROOT / "eval" / "golden.jsonl"
+GOLDEN_PATH = ROOT / "rag_eval" / "golden.jsonl"
 
 # --- Modèles ---------------------------------------------------------------
 EMBED_MODEL = "intfloat/multilingual-e5-small"

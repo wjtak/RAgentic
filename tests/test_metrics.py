@@ -1,6 +1,6 @@
 import math
 
-from eval.metrics import fiches, mrr, ndcg_at_k, recall_at_k
+from rag_eval.metrics import fiches, mrr, ndcg_at_k, recall_at_k
 
 
 def test_exemples_du_lab():

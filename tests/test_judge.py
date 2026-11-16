@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 from types import SimpleNamespace
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "eval"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "rag_eval"))
 
 from judge import Verdict, grade, judge_one, sources_text
 

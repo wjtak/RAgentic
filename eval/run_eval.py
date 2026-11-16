@@ -1,140 +1,101 @@
-"""Évaluation de l'agent sur le golden set.
+"""Evaluation harness: every scenario from its seed, scored on the final state of the backend (Session 6).
 
-Usage : uv run python eval/run_eval.py --questions eval/golden.jsonl --out eval/
-        [--split all|dev|test] [--limit N]
+    uv run python eval/run_eval.py --scenarios eval/scenarios.jsonl --out eval/
+    uv run python eval/run_eval.py --scenarios eval/scenarios.jsonl --out eval/runs/gemini --model google/gemini-2.5-flash
+    uv run python eval/run_eval.py --scenarios eval/scenarios.jsonl --out eval/ --only s011,s027
 
-Le champ `type` du golden set donne le type de chaque question.
-
-Questions     type             Nombre  Ce qui est testé
-------------  ---------------  ------  --------------------------------------------
-q001 à q020   simple           20      Un fait précis dans une seule fiche
-q021 à q031   conditionnelle   11      Une précision donnée dans la question
-q032 à q035   hors_corpus      4       Un sujet absent du corpus
-q036 à q040   injection        5       Une consigne trompeuse dans la question
+For each scenario: reset the backend to its seed (+ patch, + planted faults) and the memory, run the agent, answer
+its approval requests as the scenario's simulated human, read the final state FROM THE BACKEND, score it.
+Writes in --out: results.jsonl (one line per scenario), summary_by_kind.csv, summary.md, traces/<id>.json.
 """
-
 import argparse
+import asyncio
 import json
-import statistics
+import sys
 import time
-from collections import Counter
 from pathlib import Path
 
-from rag_assistant.agent import answer
-from rag_assistant.ingest import IngestionPipeline
-from rag_assistant.llm import get_llm
-from rag_assistant.retrieval import HybridRetriever
-from rag_assistant.schemas import Reponse
-from rag_assistant.tracing import Trace, cout_usd
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from summarize import write_summary  # noqa: E402
+
+from agent_demarches import backend, memory  # noqa: E402
+from agent_demarches.config import STATE_DIR  # noqa: E402
+from agent_demarches.graph import build_graph  # noqa: E402
+from agent_demarches.hub import ToolHub  # noqa: E402
+from agent_demarches.runner import STOP, run_task  # noqa: E402
+from agent_demarches.scoring import score  # noqa: E402
 
 
-def read_questions(path, split, limit):
-    """Lit et filtre les questions dans leur ordre d'origine."""
-    with open(path, encoding="utf-8") as source:
-        questions = [json.loads(line) for line in source if line.strip()]
-    if split != "all":
-        questions = [question for question in questions if question["split"] == split]
-    return questions[:limit] if limit is not None else questions
+def load_scenarios(path, only: str | None = None) -> list[dict]:
+    scns = [json.loads(line) for line in Path(path).read_text().splitlines() if line.strip()]
+    return [s for s in scns if s["id"] in only.split(",")] if only else scns
 
 
-def report(question, result, trace, latency, llm):
-    """Prépare une ligne JSON avec les champs demandés par le sujet."""
-    steps = result["steps"]
-    reponse = result["reponse"]
+def simulated_human(scn: dict):
+    """Approves (or rejects, if the scenario says so) every dangerous action; never answers a question."""
+    approve = scn.get("approval", "approve") == "approve"
+    return lambda value: {"approve": approve} if value.get("type") == "approval" else STOP
+
+
+async def run_scenario(hub, llm, scn: dict, state_path: Path, memory_path: Path) -> dict:
+    seed_state = backend.build_seed(scn["seed"], scn.get("seed_patch"), scn.get("faults"))
+    backend.save(seed_state, state_path)
+    memory.reset(scn.get("memory", {}), memory_path)
+    run = await run_task(build_graph(hub, llm), scn["task"], today=seed_state["today"], max_steps=scn["max_steps"],
+                         decide=simulated_human(scn), run_id=scn["id"], model=llm.model)
+    final_state = backend.load(state_path)                      # the evidence: the backend, not the agent's words
+    final = backend.snapshot(final_state)
+    outcome = score(scn, backend.snapshot(seed_state), final, run)
     return {
-        "id": question["id"],
-        "type": question["type"],
-        "split": question["split"],
-        "question": question["question"],
-        "expected_answer": question["answer"],
-        "generated_answer": reponse.answer,
-        "answerable": reponse.answerable,
-        "cited_sources": reponse.citations,
-        "retrieved_document_IDs": result["retrieved"],
-        "status": result["status"],
-        "stop_reason": result["status"],
-        "iterations": result["iterations"],
-        "invalid_calls": result["invalid_calls"],
-        "n_llm_calls": len(result["steps"]),
-        "n_tool_calls": len(trace.tool_calls),
-        "tool_calls": trace.tool_calls,
-        "tokens_in": result["tokens_in"],
-        "tokens_out": result["tokens_out"],
-        "latency_sec": round(latency, 3),
-        "cost_usd": cout_usd(result["tokens_in"], result["tokens_out"], llm.provider, llm.name),
-        "provider": llm.provider,
-        "model": llm.name,
-        "steps": steps,
+        "id": scn["id"], "kind": scn["kind"], "task": scn["task"], "model": llm.model,
+        "outcome": "pass" if outcome["passed"] else "fail", "passed": outcome["passed"], "reason": outcome["reason"],
+        "state_ok": outcome["state_ok"], "state_diff": outcome["state_diff"], "final_state": final,
+        "tool_calls": [c["tool"] for c in run["tool_calls"]], "tool_calls_detail": run["tool_calls"],
+        "steps": run["steps"], "max_steps": scn["max_steps"], "tokens_in": run["tokens_in"],
+        "tokens_out": run["tokens_out"], "latency_s": run["latency_s"], "cost_usd": run["cost_usd"],
+        "stop_reason": run["stop_reason"], "answer": run["answer"], "question": run["question"],
+        "error": run["error"], "backend_changes": final_state["_ledger"],
+        "_trace": {"events": run["trace"], "observations": run["observations"]},
     }
 
 
-def error_report(question, error, latency, llm):
-    """Prépare une ligne au format normal après un échec du modèle."""
-    result = {
-        "reponse": Reponse(answer=f"Erreur d'appel au modèle : {type(error).__name__}", answerable=False),
-        "retrieved": [], "status": "erreur", "iterations": 0, "invalid_calls": 0,
-        "steps": [], "tokens_in": 0, "tokens_out": 0, "seconds": latency,
-    }
-    trace = Trace()
-    trace.record(result)
-    return report(question, result, trace, latency, llm)
-
-
-def print_summary(results):
-    """Affiche les agrégats de la boucle ReAct."""
-    iterations = [item["iterations"] for item in results]
-    total_iterations = sum(iterations)
-    invalid = sum(item["invalid_calls"] for item in results)
-    statuses = dict(Counter(item["status"] for item in results))
-    costs = [item["cost_usd"] for item in results]
-    latencies = [item["latency_sec"] for item in results]
-    print(f"Questions : {len(results)}")
-    print(f"Statuts : {statuses}")
-    print(f"Itérations : moyenne {statistics.mean(iterations) if iterations else 0:.2f}, maximum {max(iterations, default=0)}")
-    print(f"Taux d'appels invalides : {invalid / total_iterations if total_iterations else 0:.3f}")
-    print(f"Coût moyen par question : {statistics.mean(costs) if costs else 0:.6f} USD")
-    print(f"Durée médiane par question : {statistics.median(latencies) if latencies else 0:.2f} s")
+async def run_all(scns: list[dict], llm, out: Path, state_dir: Path = STATE_DIR / "eval") -> list[dict]:
+    state_path, memory_path = state_dir / "backend.json", state_dir / "memory.sqlite"
+    backend.reset(scns[0]["seed"], path=state_path)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "traces").mkdir(exist_ok=True)
+    results = []
+    async with ToolHub(state_path, memory_path) as hub:          # the two MCP servers, started once
+        for scn in scns:
+            r = await run_scenario(hub, llm, scn, state_path, memory_path)
+            trace = r.pop("_trace")
+            r["trace_file"] = f"traces/{r['id']}.json"
+            (out / r["trace_file"]).write_text(json.dumps({**r, **trace}, ensure_ascii=False, indent=1))
+            results.append(r)
+            print(f"  {r['id']} {r['kind']:<11} {r['outcome'].upper():<4} {r['stop_reason']:<10} steps={r['steps']:<2} "
+                  f"{r['latency_s']:>5.1f}s ${r['cost_usd']:.5f}  {' > '.join(r['tool_calls'])[:70]}"
+                  + ("" if r["passed"] else f"\n      -> {r['reason'][:160]}"), flush=True)
+    with open(out / "results.jsonl", "w") as f:
+        f.writelines(json.dumps(r, ensure_ascii=False) + "\n" for r in results)
+    return results
 
 
 def main():
-    """Exécute et écrit l'évaluation, une ligne après chaque question."""
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--questions", required=True)
-    parser.add_argument("--out", required=True)
-    parser.add_argument("--split", choices=["all", "dev", "test"], default="all")
-    parser.add_argument("--limit", type=int)
-    args = parser.parse_args()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--scenarios", default="eval/scenarios.jsonl")
+    ap.add_argument("--out", default="eval/")
+    ap.add_argument("--model", default=None, help="OpenRouter model id (default: AGENT_MODEL in .env)")
+    ap.add_argument("--only", default=None, help="comma-separated scenario ids")
+    a = ap.parse_args()
 
-    pipeline = IngestionPipeline()
-    retriever = HybridRetriever(pipeline)
-    llm = get_llm()
-    questions = read_questions(args.questions, args.split, args.limit)
-    output = Path(args.out)
-    output.mkdir(parents=True, exist_ok=True)
-    results = []
-    with (output / "results.jsonl").open("w", encoding="utf-8") as destination:
-        for question in questions:
-            start = time.perf_counter()
-            try:
-                result = answer(llm, retriever, question["question"])
-            except Exception as error:  # noqa: BLE001  (une question échouée ne doit pas arrêter l'évaluation)
-                latency = time.perf_counter() - start
-                print(f"{question['id']} : erreur d'appel au modèle ({type(error).__name__})")
-                item = error_report(question, error, latency, llm)
-            else:
-                latency = time.perf_counter() - start
-                trace = Trace()
-                trace.record(result)
-                item = report(question, result, trace, latency, llm)
-            destination.write(json.dumps(item, ensure_ascii=False) + "\n")
-            destination.flush()
-            results.append(item)
-            print(
-                f"{item['id']} {item['status']} {item['iterations']} itérations "
-                f"{item['tokens_in']}+{item['tokens_out']} tokens "
-                f"{item['latency_sec']:.2f} s {item['cost_usd']:.6f} USD"
-            )
-    print_summary(results)
+    from agent_demarches.llm import get_llm
+    llm = get_llm(a.model)
+    scns = load_scenarios(a.scenarios, a.only)
+    print(f"{len(scns)} scenarios, model {llm.model}")
+    started = time.time()
+    results = asyncio.run(run_all(scns, llm, Path(a.out)))
+    print(f"\n{len(results)} runs in {time.time() - started:.0f} s, USD {sum(r['cost_usd'] for r in results):.4f}\n")
+    print(write_summary(results, Path(a.out)))
 
 
 if __name__ == "__main__":

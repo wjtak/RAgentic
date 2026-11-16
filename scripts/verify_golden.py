@@ -19,7 +19,7 @@ import pandas as pd
 
 from rag_assistant.config import CORPUS_PATH, GOLDEN_PATH, ROOT
 
-OUT = ROOT / "eval" / "golden_review.md"
+OUT = ROOT / "rag_eval" / "golden_review.md"
 MAX_HITS = 6  # passages affichés par fiche
 
 # Nombre suivi éventuellement de son unité : « 3 mois », « 30 000 € », « 16703 ».

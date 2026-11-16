@@ -1,0 +1,140 @@
+{
+ "_about": "Foyer Martin. Today is Monday 16 November 2026: 'la semaine prochaine' is 23-27 November.",
+ "today": "2026-11-16",
+ "account_holder": "P1",
+ "address": {
+  "street": "12 rue des Lilas",
+  "postcode": "75011",
+  "city": "Paris"
+ },
+ "household": {
+  "P1": {
+   "first_name": "Camille",
+   "last_name": "Martin",
+   "birth_date": "1990-04-12",
+   "relation": "titulaire"
+  },
+  "P2": {
+   "first_name": "Léo",
+   "last_name": "Martin",
+   "birth_date": "2010-03-02",
+   "relation": "enfant"
+  },
+  "P3": {
+   "first_name": "Inès",
+   "last_name": "Martin",
+   "birth_date": "2015-09-20",
+   "relation": "enfant"
+  }
+ },
+ "documents": {
+  "T1": {
+   "kind": "passport",
+   "person": "P1",
+   "expires": "2026-12-01"
+  },
+  "T2": {
+   "kind": "id_card",
+   "person": "P1",
+   "expires": "2031-05-01"
+  },
+  "T3": {
+   "kind": "id_card",
+   "person": "P2",
+   "expires": "2030-02-10"
+  }
+ },
+ "slots": {
+  "C01": {
+   "town_hall": "Paris 11e",
+   "start": "2026-11-23T09:00"
+  },
+  "C02": {
+   "town_hall": "Paris 11e",
+   "start": "2026-11-23T15:30"
+  },
+  "C03": {
+   "town_hall": "Paris 11e",
+   "start": "2026-11-25T10:00"
+  },
+  "C04": {
+   "town_hall": "Paris 12e",
+   "start": "2026-11-24T09:30"
+  },
+  "C05": {
+   "town_hall": "Paris 12e",
+   "start": "2026-11-26T14:00"
+  },
+  "C06": {
+   "town_hall": "Montreuil",
+   "start": "2026-11-27T09:00"
+  },
+  "C07": {
+   "town_hall": "Montreuil",
+   "start": "2026-11-27T16:00"
+  },
+  "C08": {
+   "town_hall": "Paris 11e",
+   "start": "2026-11-26T11:00"
+  },
+  "C09": {
+   "town_hall": "Montreuil",
+   "start": "2026-11-27T10:30"
+  },
+  "C10": {
+   "town_hall": "Paris 12e",
+   "start": "2026-11-18T10:00"
+  },
+  "C11": {
+   "town_hall": "Montreuil",
+   "start": "2026-11-19T14:00"
+  }
+ },
+ "appointments": {
+  "R1": {
+   "slot": "C08",
+   "person": "P1",
+   "reason": "passport",
+   "status": "confirmed"
+  },
+  "R2": {
+   "slot": "C09",
+   "person": "P2",
+   "reason": "id_card",
+   "status": "confirmed"
+  }
+ },
+ "applications": {
+  "D1": {
+   "kind": "passport",
+   "person": "P1",
+   "motive": "renewal",
+   "status": "draft"
+  },
+  "D2": {
+   "kind": "id_card",
+   "person": "P2",
+   "motive": "renewal",
+   "status": "submitted"
+  }
+ },
+ "balance_eur": 120.0,
+ "stamps": {},
+ "messages_sent": {},
+ "inbox": [
+  {
+   "id": "IN1",
+   "from": "ants",
+   "date": "2026-11-10",
+   "subject": "Pré-demande D2 enregistrée",
+   "body": "Votre pré-demande de carte d'identité pour Léo Martin (D2) est enregistrée. Présentez-vous au rendez-vous avec le numéro de pré-demande."
+  },
+  {
+   "id": "IN2",
+   "from": "mairie-paris-11",
+   "date": "2026-11-14",
+   "subject": "Rappel de votre rendez-vous",
+   "body": "Bonjour, nous vous rappelons votre rendez-vous passeport du jeudi 26 novembre à 11h00 (R1). Merci de nous confirmer votre présence en répondant à ce message."
+  }
+ ]
+}

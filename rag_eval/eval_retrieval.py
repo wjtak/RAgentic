@@ -4,7 +4,7 @@ Configurations : dense, BM25, hybride RRF, hybride + rerank et filtre thème.
 Les questions sans gold_docs sont ignorées. Les métriques sont calculées par fiche
 sur les 30 passages utilisés par le pipeline.
 
-Usage : uv run python eval/eval_retrieval.py [--index DIR] [--golden eval/golden.jsonl] [--out eval/]
+Usage : uv run python rag_eval/eval_retrieval.py [--index DIR] [--golden rag_eval/golden.jsonl] [--out rag_eval/]
 Sorties : retrieval_results.jsonl, retrieval_summary.csv, retrieval_summary.md.
 """
 
@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from metrics import fiches, mrr, ndcg_at_k, recall_at_k  # lancé par son chemin : eval/ est dans sys.path
+from metrics import fiches, mrr, ndcg_at_k, recall_at_k  # lancé par son chemin : rag_eval/ est dans sys.path
 from rag_assistant.config import CHROMA_DIR, GOLDEN_PATH
 from rag_assistant.ingest import IngestionPipeline
 from rag_assistant.retrieval import HybridRetriever, rrf
