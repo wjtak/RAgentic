@@ -1,6 +1,6 @@
 """Run one task to its end: invoke the graph, answer its interrupts with a policy, collect the trace.
 
-Used by the evaluation (the policy is the scenario's simulated human), the CLI and the UI (the policy is a person).
+Used by the evaluation (the policy is the scenario's simulated human), and the CLI scripts/run_task.py (the policy is you, in the terminal).
 """
 import time
 import uuid

@@ -1,4 +1,4 @@
-"""Shared helpers for the tests of the agentic part: a fresh backend + memory + the 4 MCP servers, no model."""
+"""Shared helpers for the tests of the agentic part: a fresh backend + memory + the 2 MCP servers, no model."""
 import asyncio
 import sys
 from contextlib import asynccontextmanager

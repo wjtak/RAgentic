@@ -65,7 +65,7 @@ def save(state: dict, path: Path | None = None) -> None:
 
 @contextmanager
 def transaction(path: Path | None = None):
-    """Load, let the caller change the state, save. A file lock serialises the four server processes."""
+    """Load, let the caller change the state, save. A file lock serialises the two server processes."""
     path = path or state_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path.with_suffix(".lock"), "w") as lock:

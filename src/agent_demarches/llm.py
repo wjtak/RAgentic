@@ -62,7 +62,7 @@ class OpenRouterLLM:
 
 
 class ScriptedLLM:
-    """A fake model for tests and offline demos. `policy(messages) -> (content, [(tool, args), ...])`."""
+    """A fake model for tests. `policy(messages) -> (content, [(tool, args), ...])`."""
 
     def __init__(self, policy, model: str = "scripted"):
         self.policy, self.model, self.calls = policy, model, 0

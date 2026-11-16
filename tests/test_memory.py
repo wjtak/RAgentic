@@ -6,7 +6,7 @@ Run 2 (a NEW conversation, new thread, backend reset): "book my passport appoint
 - with an empty memory, the same request is ambiguous: the agent asks, and nothing changes.
 
 The model is scripted so the test is deterministic and free: it decides ONLY from what the prompt contains, which
-is what the memory changes. `eval/memory_check.py` runs the same experiment with the real model.
+is what the memory changes. Scenarios s013 (with memory) and s018 (without) measure it with the real model.
 """
 from agentic_helpers import run, servers
 
