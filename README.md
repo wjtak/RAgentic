@@ -8,6 +8,7 @@ irreversible action.
 - The starting point is tagged **`v0.0-base`** (the Generative AI project, unchanged). Everything after it is the work
   of this course: `git diff v0.0-base --stat`. The old README is in [docs/](docs/README_generative_ai_project.md);
   its evaluation moved to `rag_eval/`.
+- Team plan (checks, improvements, defence roles): [docs/PLAN_EQUIPE.md](docs/PLAN_EQUIPE.md).
 - Retrieval is **one tool among others** (`search_fiches`), never the whole system.
 
 ## 1. The domain, the backend and the dangerous actions
