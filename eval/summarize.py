@@ -27,7 +27,7 @@ def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
 def load(path: str | Path) -> list[dict]:
     p = Path(path)
     p = p / "results.jsonl" if p.is_dir() else p
-    return [json.loads(line) for line in p.read_text().splitlines() if line.strip()]
+    return [json.loads(line) for line in p.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
 def per_kind(results: list[dict]) -> list[dict]:
@@ -62,7 +62,7 @@ def markdown(rows: list[dict], cols: list[str]) -> str:
 
 def write_summary(results: list[dict], out_dir: Path) -> str:
     rows = per_kind(results)
-    with open(out_dir / "summary_by_kind.csv", "w", newline="") as f:
+    with open(out_dir / "summary_by_kind.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
@@ -73,7 +73,7 @@ def write_summary(results: list[dict], out_dir: Path) -> str:
     text = [f"# Results: {model}", "", markdown(rows, cols), "", f"## Failed runs ({len(failed)})", ""]
     text += [f"- **{r['id']}** ({r['kind']}) {r['task']} -> `{r['reason']}`; calls: "
              f"{' > '.join(r['tool_calls']) or '-'}; stop: {r['stop_reason']}" for r in failed]
-    (out_dir / "summary.md").write_text("\n".join(text) + "\n")
+    (out_dir / "summary.md").write_text("\n".join(text) + "\n", encoding="utf-8")
     return markdown(rows, cols)
 
 
@@ -89,8 +89,8 @@ def compare(dirs: list[str], out: Path) -> str:
     cols = ["model", "kind", "runs", "pass_rate", "ci95", "mean_steps", "cost_usd_per_run", "latency_s_median"]
     table = markdown(rows, cols)
     out.mkdir(parents=True, exist_ok=True)
-    (out / "comparison.md").write_text("# Model comparison, same scenarios\n\n" + table + "\n")
-    with open(out / "comparison.csv", "w", newline="") as f:
+    (out / "comparison.md").write_text("# Model comparison, same scenarios\n\n" + table + "\n", encoding="utf-8")
+    with open(out / "comparison.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
         w.writerows(rows)

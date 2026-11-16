@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 def show(path: Path) -> None:
-    t = json.loads(path.read_text())
+    t = json.loads(path.read_text(encoding="utf-8"))
     print(f"{t['id']} ({t['kind']}) {t['task']}\nmodel {t['model']} | outcome {t['outcome'].upper()} | {t['reason']}")
     print(f"stop {t['stop_reason']} | steps {t['steps']}/{t['max_steps']} | {t['tokens_in']} in / {t['tokens_out']} out"
           f" | USD {t['cost_usd']:.5f} | {t['latency_s']} s\n")

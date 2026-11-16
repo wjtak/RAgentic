@@ -36,7 +36,7 @@ async def main(a):
     state, mem = d / "backend.json", d / "memory.sqlite"
     task, seed, patch, faults = a.task, a.seed, None, None
     if a.scenario:
-        scn = next(json.loads(l) for l in (ROOT / "eval" / "scenarios.jsonl").read_text().splitlines()
+        scn = next(json.loads(l) for l in (ROOT / "eval" / "scenarios.jsonl").read_text(encoding="utf-8").splitlines()
                    if json.loads(l)["id"] == a.scenario)
         task, seed, patch, faults = task or scn["task"], scn["seed"], scn.get("seed_patch"), scn.get("faults")
         if a.reset:
@@ -55,13 +55,15 @@ async def main(a):
                   + (f"  | {e['content'][:120]}" if e["content"] else ""))
         elif e["kind"] == "call":
             o = next((o for o in r["observations"] if o.get("step") == e["step"]), None)
+            a = next((a for a in r["trace"] if a["kind"] == "approval" and a["step"] == e["step"]), None)
             res = (o.get("result") if o and o["ok"] else (o or {}).get("error")) if o else "(not run)"
-            print(f"     -> {e['tool']}({json.dumps(e['args'], ensure_ascii=False)})\n        "
-                  f"{json.dumps(res, ensure_ascii=False)[:160]}")
-        elif e["kind"] == "approval":
-            print(f"     [human: {'APPROVED' if e['approve'] else 'REJECTED'}]")
+            print(f"     -> {e['tool']}({json.dumps(e['args'], ensure_ascii=False)})")
+            if a:
+                print(f"        [human: {'APPROVED' if a['approve'] else 'REJECTED'}]")
+            print(f"        {json.dumps(res, ensure_ascii=False)[:160]}")
     print(f"\nstop: {r['stop_reason']} | steps {r['steps']} | {r['tokens_in']} in / {r['tokens_out']} out | "
-          f"USD {r['cost_usd']:.5f} | {r['latency_s']} s")
+          f"USD {r['cost_usd']:.5f} | {r['latency_s']} s in total, of which model {r['model_latency_s']} s "
+          f"and tools {r['tool_latency_s']} s (the rest is the human)")
     print(f"answer: {r['answer'] or r['question']}")
     print("changes in the backend:", changes(before, backend.snapshot(backend.load(state))) or "none")
 
@@ -78,3 +80,4 @@ if __name__ == "__main__":
     if not args.task and not args.scenario:
         ap.error("give a task or --scenario")
     asyncio.run(main(args))
+    

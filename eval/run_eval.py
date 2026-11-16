@@ -27,7 +27,7 @@ from agent_demarches.scoring import score  # noqa: E402
 
 
 def load_scenarios(path, only: str | None = None) -> list[dict]:
-    scns = [json.loads(line) for line in Path(path).read_text().splitlines() if line.strip()]
+    scns = [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
     return [s for s in scns if s["id"] in only.split(",")] if only else scns
 
 
@@ -70,12 +70,12 @@ async def run_all(scns: list[dict], llm, out: Path, state_dir: Path = STATE_DIR 
             r = await run_scenario(hub, llm, scn, state_path, memory_path)
             trace = r.pop("_trace")
             r["trace_file"] = f"traces/{r['id']}.json"
-            (out / r["trace_file"]).write_text(json.dumps({**r, **trace}, ensure_ascii=False, indent=1))
+            (out / r["trace_file"]).write_text(json.dumps({**r, **trace}, ensure_ascii=False, indent=1), encoding="utf-8")
             results.append(r)
             print(f"  {r['id']} {r['kind']:<11} {r['outcome'].upper():<4} {r['stop_reason']:<10} steps={r['steps']:<2} "
                   f"{r['latency_s']:>5.1f}s ${r['cost_usd']:.5f}  {' > '.join(r['tool_calls'])[:70]}"
                   + ("" if r["passed"] else f"\n      -> {r['reason'][:160]}"), flush=True)
-    with open(out / "results.jsonl", "w") as f:
+    with open(out / "results.jsonl", "w", encoding="utf-8") as f:
         f.writelines(json.dumps(r, ensure_ascii=False) + "\n" for r in results)
     return results
 

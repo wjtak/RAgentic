@@ -49,7 +49,7 @@ def test_reference_plans_pass_every_scenario(tmp_path):
     rows = per_kind(results)
     assert rows[-1]["kind"] == "ALL" and rows[-1]["pass_rate"] == 1.0
     write_summary(results, tmp_path)
-    assert (tmp_path / "summary_by_kind.csv").exists() and "normal" in (tmp_path / "summary.md").read_text()
+    assert (tmp_path / "summary_by_kind.csv").exists() and "normal" in (tmp_path / "summary.md").read_text(encoding="utf-8")
 
 
 def test_naive_agent_fails_for_the_right_reasons(tmp_path):

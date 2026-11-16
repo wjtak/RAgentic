@@ -9,7 +9,6 @@ result and changes nothing. Faults can be planted in the state (`_faults`) to te
 or a timeout AFTER the effect (the agent cannot tell whether the write happened).
 """
 import copy
-import fcntl
 import json
 import os
 import tempfile
@@ -52,15 +51,41 @@ def load(path: Path | None = None) -> dict:
     path = path or state_path()
     if not path.exists():
         raise DomainError("backend_not_initialised", f"No backend state at {path}: run a reset first.")
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def save(state: dict, path: Path | None = None) -> None:
     path = path or state_path()
     path.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.NamedTemporaryFile("w", dir=path.parent, delete=False, suffix=".tmp") as f:
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False, suffix=".tmp") as f:
         json.dump(state, f, ensure_ascii=False, indent=1)
     os.replace(f.name, path)                                  # atomic: a reader never sees half a file
+
+
+if os.name == "nt":                                          # Windows has no fcntl: lock the first byte instead
+    import msvcrt
+    import time
+
+    def _lock(f) -> None:
+        while True:
+            try:
+                f.seek(0)
+                msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+                return
+            except OSError:
+                time.sleep(0.01)
+
+    def _unlock(f) -> None:
+        f.seek(0)
+        msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+else:
+    import fcntl
+
+    def _lock(f) -> None:
+        fcntl.flock(f, fcntl.LOCK_EX)
+
+    def _unlock(f) -> None:
+        fcntl.flock(f, fcntl.LOCK_UN)
 
 
 @contextmanager
@@ -68,8 +93,8 @@ def transaction(path: Path | None = None):
     """Load, let the caller change the state, save. A file lock serialises the two server processes."""
     path = path or state_path()
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path.with_suffix(".lock"), "w") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    with open(path.with_suffix(".lock"), "w", encoding="utf-8") as lock:
+        _lock(lock)
         try:
             state = load(path)
             try:
@@ -79,7 +104,7 @@ def transaction(path: Path | None = None):
                 raise
             save(state, path)
         finally:
-            fcntl.flock(lock, fcntl.LOCK_UN)
+            _unlock(lock)
 
 
 def merge_patch(target, patch):
@@ -102,7 +127,7 @@ def build_seed(seed: str | Path | dict, patch: dict | None = None, faults: dict 
         if not p.is_absolute() and not p.exists():
             from agent_demarches.config import ROOT
             p = ROOT / p
-        seed = json.loads(p.read_text())
+        seed = json.loads(p.read_text(encoding="utf-8"))
     state = merge_patch(seed, patch or {})
     state.setdefault("_idem", {})
     state.setdefault("_ledger", [])
