@@ -1,8 +1,12 @@
 """The two MCP servers through the real protocol (stdio): schemas, annotations, typed errors, the dispatcher."""
+import pytest
 from agentic_helpers import run, servers
 
 from agent_demarches import backend
 from agent_demarches.config import NEEDS_APPROVAL
+from rag_assistant.config import CHROMA_DIR
+
+needs_index = pytest.mark.skipif(not CHROMA_DIR.exists(), reason="RAG index not built: run scripts/run_ingest.py")
 
 
 def test_two_servers_and_typed_schemas(tmp_path):
@@ -13,9 +17,12 @@ def test_two_servers_and_typed_schemas(tmp_path):
             assert "list_facts" not in specs and "idempotency_key" not in specs["buy_tax_stamp"]["properties"]
             assert specs["book_appointment"]["properties"]["slot_id"]["pattern"] == r"^C\d{2}$"
             assert "enum" in specs["buy_tax_stamp"]["properties"]["stamp_type"]
+            doc = specs["stamp_price"]["properties"]["document"]                 # passports only
+            assert doc.get("const") == "passport" or doc.get("enum") == ["passport"]
+            assert specs["get_fiche"]["properties"]["doc_id"]["pattern"] == r"^F\d+$"
             for tool in NEEDS_APPROVAL:
                 assert hub.tools[tool].annotations.destructive_hint is True
-            assert hub.read_only("get_profile") and not hub.read_only("book_appointment")
+            assert hub.read_only("get_profile") and hub.read_only("get_fiche") and not hub.read_only("book_appointment")
     run(go())
 
 
@@ -48,4 +55,39 @@ def test_memory_server_refuses_secrets(tmp_path):
             r = await hub.call("remember", {"key": "code", "value": "mon mot de passe est 1234"})
             assert r["error"]["code"] == "refused"
             assert (await hub.call("list_facts", {}))["result"] == {"mairie_preferee": "Paris 12e"}
+    run(go())
+
+
+def test_search_fiches_says_when_the_index_is_missing(tmp_path, monkeypatch):
+    monkeypatch.setenv("RAG_INDEX_DIR", str(tmp_path / "no_index"))         # no silent fallback to keywords
+    async def go():
+        async with servers(tmp_path) as (hub, _, _):
+            r = await hub.call("search_fiches", {"query": "carte d'identité perdue timbre"})
+            assert not r["ok"] and r["error"]["code"] == "index_not_built" and not r["error"]["retryable"]
+            assert "scripts/run_ingest.py" in r["error"]["message"]
+    run(go())
+
+
+def test_get_fiche_reads_the_corpus(tmp_path):
+    async def go():
+        async with servers(tmp_path) as (hub, _, _):
+            r = await hub.call("get_fiche", {"doc_id": "F1344"})
+            assert r["ok"] and r["result"]["title"].startswith("Carte d'identité d'un majeur")
+            assert "25 €" in r["result"]["text"] and len(r["result"]["text"]) <= 4000
+            r = await hub.call("get_fiche", {"doc_id": "F999999"})
+            assert r["error"]["code"] == "unknown_fiche"
+            r = await hub.call("stamp_price", {"document": "id_card", "age": 36, "motive": "loss"})
+            assert r["error"]["code"] == "invalid_arguments"                  # passports only, by the schema
+    run(go())
+
+
+@needs_index
+def test_search_fiches_finds_the_identity_card_rules(tmp_path):
+    async def go():
+        async with servers(tmp_path) as (hub, _, _):
+            r = await hub.call("search_fiches", {"query": "carte d'identité perdue timbre"})
+            assert r["ok"] and {"doc_id", "title", "excerpt"} <= set(r["result"][0])
+            assert any(p["doc_id"] in ("F1344", "F33805") and "25 €" in p["excerpt"] for p in r["result"])
+            r = await hub.call("search_fiches", {"query": "première carte d'identité gratuite"})
+            assert any(p["doc_id"] in ("F1341", "F1342") and "gratuite" in p["excerpt"] for p in r["result"])
     run(go())

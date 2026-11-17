@@ -7,7 +7,7 @@ Chaque rôle correspond à une partie de la soutenance.
 ## Jour 1 (mardi), pour tous, en commun (environ 1 h)
 
 1. Dans le vrai dépôt : poser le tag `v0.0-base` sur le commit actuel, *puis* copier le nouveau code.
-2. `uv sync`, `cp .env.example .env` (ajouter `OPENROUTER_API_KEY`), puis `uv run pytest -q`.
+2. `uv sync`, `uv run python scripts/run_ingest.py` (construit l'index du RAG, obligatoire), `cp .env.example .env` (ajouter `OPENROUTER_API_KEY`), puis `uv run pytest -q`.
 3. `uv run python scripts/run_task.py --scenario s004 --reset` : voir l'agent tourner une fois.
 
 Points de vigilance :
@@ -19,7 +19,7 @@ Points de vigilance :
 Vérifier :
 - [ ] Les deux serveurs avec `uv run mcp dev servers/espace_usager_server.py` (l'inspecteur MCP) : schémas typés, annotations, erreurs JSON.
 - [ ] La reprise après panne : s011 (timeout après paiement → un seul timbre) et s012 (deux erreurs 429).
-- [ ] Que `search_fiches` marche avec et sans l'index Chroma (`scripts/run_ingest.py`).
+- [ ] Que `search_fiches` renvoie la bonne fiche avec l'index Chroma, et l'erreur `index_not_built` sans lui (`scripts/run_ingest.py`).
 
 Améliorer ou rectifier :
 - [ ] Les messages d'erreur des outils, s'ils sont mal compris par le modèle (à repérer dans les traces de la Personne 3).
@@ -43,7 +43,7 @@ Améliorer :
 ## Personne 3 : évaluation et analyse d'erreurs (Session 6)
 
 Vérifier :
-- [ ] Relire les 32 scénarios dans `eval/make_scenarios.py` : tâche claire en français ? État attendu juste ? (Après une modification : `uv run python eval/make_scenarios.py`.)
+- [ ] Relire les 35 scénarios dans `eval/make_scenarios.py` : tâche claire en français ? État attendu juste ? (Après une modification : `uv run python eval/make_scenarios.py`.)
 - [ ] Lancer `uv run python eval/run_eval.py --scenarios eval/scenarios.jsonl --out eval/`, idéalement 2 fois (le modèle n'est pas déterministe).
 
 Pour chaque échec :

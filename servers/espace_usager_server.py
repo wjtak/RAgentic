@@ -89,7 +89,8 @@ def send_message(to: Recipient, subject: str, body: str, idempotency_key: IdemKe
 @mcp.tool(annotations=DANGEROUS)
 def buy_tax_stamp(stamp_type: StampType, person_id: PersonId, idempotency_key: IdemKey = None) -> dict:
     """Buy ONE tax stamp for one person, paid from the balance. IRREVERSIBLE, not refundable. Needs the user's
-    approval. Get the right stamp from stamp_price first. Errors: insufficient_funds (nothing is paid)."""
+    approval. Passport: get the right stamp from stamp_price first. Identity card: check in the fact sheets
+    (search_fiches) whether a stamp is needed at all. Errors: insufficient_funds (nothing is paid)."""
     return write(b.buy_tax_stamp, stamp_type, person_id, idempotency_key)
 
 

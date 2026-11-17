@@ -25,11 +25,16 @@ def test_ages_are_computed_from_the_seed_date(state):
 
 @pytest.mark.parametrize("doc,age,motive,stype,amount", [
     ("passport", 36, "renewal", "passport_adult", 86.0), ("passport", 16, "first", "passport_minor_15_17", 42.0),
-    ("passport", 11, "first", "passport_minor_0_14", 17.0), ("id_card", 36, "loss", "id_card_loss_theft", 25.0),
-    ("id_card", 11, "first", None, 0.0)])
+    ("passport", 11, "first", "passport_minor_0_14", 17.0)])
 def test_stamp_price_follows_the_fact_sheets(doc, age, motive, stype, amount):
     out = b.stamp_price(None, doc, age, motive)
     assert (out["stamp_type"], out["amount_eur"]) == (stype, amount)
+
+
+def test_stamp_price_leaves_identity_cards_to_the_fact_sheets():
+    with pytest.raises(b.DomainError) as e:
+        b.stamp_price(None, "id_card", 36, "loss")
+    assert e.value.code == "not_covered" and "search_fiches" in e.value.message
 
 
 def test_new_ids_follow_the_largest_existing_one(state):

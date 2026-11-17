@@ -296,19 +296,15 @@ def get_wallet(state: dict) -> dict:
 
 
 def stamp_price(state: dict | None, document: str, age_years: int, motive: str) -> dict:
-    """The tax stamp a procedure needs, from the fact sheets. A pure rule: it does not depend on the account."""
+    """The tax stamp a PASSPORT procedure needs, from the fact sheets. A pure rule: it does not depend on the account.
+    Identity cards are left to the fact sheets on purpose: the agent must read them (search_fiches)."""
+    if document != "passport":
+        raise DomainError("not_covered", "This tool only covers passports. For identity cards, read the fact sheets "
+                                         "with search_fiches.")
     if age_years < 0 or age_years > 130:
         raise DomainError("invalid_age", f"Age {age_years} is not plausible.")
-    if document == "passport":
-        stype = "passport_adult" if age_years >= 18 else (
-            "passport_minor_15_17" if age_years >= 15 else "passport_minor_0_14")
-    elif motive in ("loss", "theft"):
-        stype = "id_card_loss_theft"
-    else:
-        out = {"stamp_type": None, "amount_eur": 0.0, "source": "F1341",
-               "explanation": "La carte d'identité est gratuite (première demande ou renouvellement d'une carte "
-                              "périmée) : aucun timbre n'est nécessaire."}
-        return _with_note("stamp_price", state or {}, out)
+    stype = "passport_adult" if age_years >= 18 else (
+        "passport_minor_15_17" if age_years >= 15 else "passport_minor_0_14")
     amount, source, label = STAMPS[stype]
     return _with_note("stamp_price", state or {}, {"stamp_type": stype, "amount_eur": amount, "source": source,
                                                    "explanation": label})
