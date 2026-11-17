@@ -1,0 +1,400 @@
+{
+ "id": "s012",
+ "kind": "normal",
+ "task": "Prends un rendez-vous à Montreuil vendredi prochain à 9h pour renouveler la carte d'identité de Léo.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C06",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.012
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-20",
+    "date_to": "2026-11-20",
+    "part_of_day": "morning"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 3,
+   "approved": null,
+   "latency_s": 1.559
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C06",
+    "person_id": "P2",
+    "reason": "id_card"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.012
+  }
+ ],
+ "steps": 5,
+ "max_steps": 6,
+ "tokens_in": 16957,
+ "tokens_out": 1155,
+ "latency_s": 8.973,
+ "cost_usd": 0.001046,
+ "stop_reason": "answered",
+ "answer": "Rendez-vous confirmé : **R1** — Léo Martin (P2), carte d'identité, **mairie de Montreuil, vendredi 27 novembre 2026 à 9h00**.\n\nÀ noter : aucun créneau n'était disponible le vendredi 20 novembre (vendredi prochain) à Montreuil ; j'ai donc pris le vendredi suivant à 9h, seul créneau matinal correspondant. Dites-moi si vous préférez un autre horaire (ex. jeudi 19 à 14h, ou vendredi 27 à 10h30/16h).",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C06",
+    "town_hall": "Montreuil",
+    "start": "2026-11-27T09:00",
+    "weekday": "vendredi",
+    "part_of_day": "morning",
+    "person": "P2",
+    "reason": "id_card"
+   }
+  }
+ ],
+ "trace_file": "traces/s012.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile",
+    "search_slots"
+   ],
+   "tokens_in": 2898,
+   "tokens_out": 174,
+   "cost_usd": 0.000139278,
+   "latency_s": 1.073
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": [
+    "search_slots"
+   ]
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3258,
+   "tokens_out": 160,
+   "cost_usd": 0.000200238,
+   "latency_s": 1.111
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-20",
+    "date_to": "2026-11-20",
+    "part_of_day": "morning"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3377,
+   "tokens_out": 116,
+   "cost_usd": 0.000120675,
+   "latency_s": 0.79
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 3629,
+   "tokens_out": 540,
+   "cost_usd": 0.000425079,
+   "latency_s": 2.859
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C06",
+    "person_id": "P2",
+    "reason": "id_card"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Rendez-vous confirmé : **R1** — Léo Martin (P2), carte d'identité, **mairie de Montreuil, vendredi 27 novembre 2026 à 9h00**.\n\nÀ noter : aucun créneau n'était disponible le vendredi 20 novembre (vendredi prochain) à Montreuil ; j'ai donc pris le vendredi suivant à 9h, seul créneau matinal correspondant. Dites-moi si vous préférez un autre horaire (ex. jeudi 19 à 14h, ou vendredi 27 à 10h30/16h).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3795,
+   "tokens_out": 165,
+   "cost_usd": 0.000160797,
+   "latency_s": 1.52
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.012,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-20",
+    "date_to": "2026-11-20",
+    "part_of_day": "morning"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 3,
+   "latency_s": 1.559,
+   "retried_errors": [
+    "rate_limited",
+    "rate_limited"
+   ],
+   "result": []
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C11",
+     "town_hall": "Montreuil",
+     "start": "2026-11-19T14:00",
+     "weekday": "jeudi",
+     "part_of_day": "afternoon"
+    },
+    {
+     "id": "C06",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T09:00",
+     "weekday": "vendredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C09",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C07",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T16:00",
+     "weekday": "vendredi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C06",
+    "person_id": "P2",
+    "reason": "id_card"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.012,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C06",
+    "town_hall": "Montreuil",
+    "start": "2026-11-27T09:00",
+    "weekday": "vendredi",
+    "part_of_day": "morning",
+    "person": "P2",
+    "reason": "id_card"
+   }
+  }
+ ]
+}

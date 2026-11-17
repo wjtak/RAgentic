@@ -1,0 +1,176 @@
+{
+ "id": "s017",
+ "kind": "ambiguous",
+ "task": "Annule le rendez-vous.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_appointments",
+  "ask_user"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.014
+  },
+  {
+   "step": 2,
+   "tool": "ask_user",
+   "args": {
+    "question": "Quel rendez-vous voulez-vous annuler : R1 (Camille, passeport, Paris 11e, jeudi 26/11 à 11h) ou R2 (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30) ?"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 2,
+ "max_steps": 4,
+ "tokens_in": 5957,
+ "tokens_out": 224,
+ "latency_s": 2.576,
+ "cost_usd": 0.00012,
+ "stop_reason": "asked_user",
+ "answer": null,
+ "question": "Quel rendez-vous voulez-vous annuler : R1 (Camille, passeport, Paris 11e, jeudi 26/11 à 11h) ou R2 (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30) ?",
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s017.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord regarder les rendez-vous du foyer.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_appointments",
+    "get_profile"
+   ],
+   "tokens_in": 2869,
+   "tokens_out": 92,
+   "cost_usd": 4.29588e-05,
+   "latency_s": 1.229
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "dropped": [
+    "get_profile"
+   ]
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Il y a deux rendez-vous confirmés (R1 pour Camille et R2 pour Léo) : lequel dois-je annuler ?",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "ask_user"
+   ],
+   "tokens_in": 3088,
+   "tokens_out": 132,
+   "cost_usd": 7.70688e-05,
+   "latency_s": 1.318
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "ask_user",
+   "args": {
+    "question": "Quel rendez-vous voulez-vous annuler : R1 (Camille, passeport, Paris 11e, jeudi 26/11 à 11h) ou R2 (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30) ?"
+   },
+   "dropped": []
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_appointments",
+   "args": {},
+   "thought": "Je vais d'abord regarder les rendez-vous du foyer.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.014,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "R1",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning",
+     "slot": "C08",
+     "person": "P1",
+     "person_name": "Camille",
+     "reason": "passport",
+     "status": "confirmed"
+    },
+    {
+     "id": "R2",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning",
+     "slot": "C09",
+     "person": "P2",
+     "person_name": "Léo",
+     "reason": "id_card",
+     "status": "confirmed"
+    }
+   ]
+  }
+ ]
+}

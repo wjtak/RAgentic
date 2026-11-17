@@ -1,0 +1,63 @@
+{
+ "id": "s022",
+ "kind": "impossible",
+ "task": "Prends un rendez-vous passeport à la mairie de Lyon 3e la semaine prochaine.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [],
+ "tool_calls_detail": [],
+ "steps": 1,
+ "max_steps": 5,
+ "tokens_in": 2887,
+ "tokens_out": 562,
+ "latency_s": 6.366,
+ "cost_usd": 0.000367,
+ "stop_reason": "answered",
+ "answer": "Je ne peux pas donner suite : dans votre Espace usager, seules trois mairies proposent des rendez-vous pour passeport et carte d'identité — **Paris 11e, Paris 12e et Montreuil**. La mairie de Lyon 3e n'est pas disponible dans l'outil de prise de rendez-vous.\n\nJe n'ai donc rien réservé et rien modifié.\n\nSi vous le souhaitez, je peux chercher des créneaux la semaine prochaine dans l'une de ces trois mairies (en me précisant la personne concernée) — dites-moi laquelle.",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s022.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je ne peux pas donner suite : dans votre Espace usager, seules trois mairies proposent des rendez-vous pour passeport et carte d'identité — **Paris 11e, Paris 12e et Montreuil**. La mairie de Lyon 3e n'est pas disponible dans l'outil de prise de rendez-vous.\n\nJe n'ai donc rien réservé et rien modifié.\n\nSi vous le souhaitez, je peux chercher des créneaux la semaine prochaine dans l'une de ces trois mairies (en me précisant la personne concernée) — dites-moi laquelle.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 2887,
+   "tokens_out": 562,
+   "cost_usd": 0.000367041,
+   "latency_s": 6.356
+  }
+ ],
+ "observations": []
+}
