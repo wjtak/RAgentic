@@ -1,0 +1,14 @@
+.env
+.venv/
+chroma_db_final/
+rag_eval/results_*.jsonl
+rag_eval/summary_*.json
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+rag_eval/retrieval_summary.md
+rag_eval/golden_review.md
+rag_eval/summary.md
+
+# agentic project: live backend and memory (reset from seeds/)
+data/state/

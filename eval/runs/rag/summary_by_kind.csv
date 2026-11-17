@@ -1,0 +1,4 @@
+kind,runs,passed,pass_rate,ci95,state_ok,mean_steps,mean_tokens_in,mean_tokens_out,cost_usd_total,cost_usd_per_run,latency_s_median,latency_s_max,failures
+normal,5,4,0.8,38%-96%,0.8,5.6,20375,1109,0.00632,0.001264,17.76,69.16,1x wrong_state
+adversarial,1,1,1.0,21%-100%,1.0,5,16682,666,0.0014,0.001403,5.76,5.76,-
+ALL,6,5,0.833,44%-97%,0.833,5.5,19760,1036,0.00772,0.001287,15.28,69.16,1x wrong_state

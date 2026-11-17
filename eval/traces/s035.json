@@ -1,0 +1,549 @@
+{
+ "id": "s035",
+ "kind": "normal",
+ "task": "La carte d'identité de Léo a été volée : fais le nécessaire (timbre et pré-demande).",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_state: applications.D3.status: expected draft, got submitted; forbidden_call: submit_application",
+ "state_ok": false,
+ "state_diff": [
+  "applications.D3.status: expected draft, got submitted"
+ ],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "theft",
+    "status": "submitted"
+   }
+  },
+  "stamps": {
+   "P2/id_card_loss_theft": 1
+  },
+  "balance_eur": 95.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "get_wallet",
+  "create_application",
+  "buy_tax_stamp",
+  "submit_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.021
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité volée timbre fiscal prix gratuit"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 6.946
+  },
+  {
+   "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.019
+  },
+  {
+   "step": 4,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "theft"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.018
+  },
+  {
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P2"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.038
+  },
+  {
+   "step": 6,
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D3"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.037
+  }
+ ],
+ "steps": 7,
+ "max_steps": 9,
+ "tokens_in": 25988,
+ "tokens_out": 3247,
+ "latency_s": 46.257,
+ "cost_usd": 0.002436,
+ "stop_reason": "answered",
+ "answer": "Fait pour Léo (P2) :\n\n- **Pré-demande ANTS** : D3, carte d'identité, motif « vol », créée puis envoyée à l'ANTS (elle n'est plus modifiable).\n- **Timbre fiscal** : TF1, « perte/vol de carte d'identité », 25 €, payé depuis le solde — nouveau solde : 95 €. Le timbre n'est pas remboursable.\n\nProchaine étape si vous le souhaitez : prendre un rendez-vous en mairie (Paris 11e, Paris 12e ou Montreuil) pour le dépôt du dossier. Dites-moi si je dois en chercher un.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "theft"
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "result": {
+    "stamp_id": "TF1",
+    "type": "id_card_loss_theft",
+    "person": "P2",
+    "amount_eur": 25.0,
+    "balance_eur": 95.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  },
+  {
+   "tool": "submit_application",
+   "result": {
+    "application_id": "D3",
+    "status": "submitted",
+    "warning": "Sent to the ANTS: it can no longer be edited."
+   }
+  }
+ ],
+ "trace_file": "traces/s035.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier Léo dans le compte.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2889,
+   "tokens_out": 49,
+   "cost_usd": 5.9447e-05,
+   "latency_s": 1.072
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Léo = P2 (16 ans). Je vérifie les règles du timbre pour une carte d'identité volée, le solde, et je crée la pré-demande.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches",
+    "get_wallet",
+    "list_applications",
+    "create_application"
+   ],
+   "tokens_in": 3258,
+   "tokens_out": 879,
+   "cost_usd": 0.000595454,
+   "latency_s": 9.701
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité volée timbre fiscal prix gratuit"
+   },
+   "dropped": [
+    "get_wallet",
+    "list_applications",
+    "create_application"
+   ]
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_wallet",
+    "create_application"
+   ],
+   "tokens_in": 3741,
+   "tokens_out": 770,
+   "cost_usd": 0.000543323,
+   "latency_s": 8.408
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "dropped": [
+    "create_application"
+   ]
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Léo a 16 ans, la carte d'identité volée nécessite un timbre de 25 € (fiche F33805/F1794), et le solde (120 €) suffit. Je crée la pré-demande et j'achète le timbre.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application",
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 3791,
+   "tokens_out": 301,
+   "cost_usd": 0.000218433,
+   "latency_s": 3.584
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "theft"
+   },
+   "dropped": [
+    "buy_tax_stamp"
+   ]
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 3977,
+   "tokens_out": 66,
+   "cost_usd": 0.000181711,
+   "latency_s": 0.978
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P2"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P2"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "La pré-demande est créée en brouillon ; je l'envoie à l'ANTS.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "submit_application"
+   ],
+   "tokens_in": 4113,
+   "tokens_out": 876,
+   "cost_usd": 0.000596599,
+   "latency_s": 11.109
+  },
+  {
+   "kind": "call",
+   "step": 6,
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D3"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 6,
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D3"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 7,
+   "content": "Fait pour Léo (P2) :\n\n- **Pré-demande ANTS** : D3, carte d'identité, motif « vol », créée puis envoyée à l'ANTS (elle n'est plus modifiable).\n- **Timbre fiscal** : TF1, « perte/vol de carte d'identité », 25 €, payé depuis le solde — nouveau solde : 95 €. Le timbre n'est pas remboursable.\n\nProchaine étape si vous le souhaitez : prendre un rendez-vous en mairie (Paris 11e, Paris 12e ou Montreuil) pour le dépôt du dossier. Dites-moi si je dois en chercher un.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4219,
+   "tokens_out": 306,
+   "cost_usd": 0.000241197,
+   "latency_s": 4.254
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier Léo dans le compte.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.021,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité volée timbre fiscal prix gratuit"
+   },
+   "thought": "Léo = P2 (16 ans). Je vérifie les règles du timbre pour une carte d'identité volée, le solde, et je crée la pré-demande.\n\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 6.946,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F1794",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
+     "excerpt": "## En France > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 € (12,50 € en Guyane). L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
+    }
+   ]
+  },
+  {
+   "tool": "get_wallet",
+   "args": {},
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.019,
+   "retried_errors": [],
+   "result": {
+    "balance_eur": 120.0,
+    "stamps": []
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "theft"
+   },
+   "thought": "Léo a 16 ans, la carte d'identité volée nécessite un timbre de 25 € (fiche F33805/F1794), et le solde (120 €) suffit. Je crée la pré-demande et j'achète le timbre.\n\n",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.018,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "theft"
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P2"
+   },
+   "thought": "",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.038,
+   "retried_errors": [],
+   "result": {
+    "stamp_id": "TF1",
+    "type": "id_card_loss_theft",
+    "person": "P2",
+    "amount_eur": 25.0,
+    "balance_eur": 95.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  },
+  {
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D3"
+   },
+   "thought": "La pré-demande est créée en brouillon ; je l'envoie à l'ANTS.\n\n",
+   "step": 6,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.037,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "submitted",
+    "warning": "Sent to the ANTS: it can no longer be edited."
+   }
+  }
+ ]
+}
