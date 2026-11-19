@@ -85,6 +85,10 @@ uv run python scripts/run_task.py "Annule le rendez-vous de vendredi." --reset
 # read one evaluated run from its trace
 uv run python scripts/show_trace.py s011
 
+# see the traces in Phoenix: start it in another terminal, then turn tracing on (PowerShell) and open http://localhost:6006
+uv run phoenix serve
+$env:TRACING="phoenix"; uv run python eval/run_eval.py --scenarios eval/scenarios.jsonl --out eval/runs/traced --only s004
+
 # second model, same scenarios, then the comparison table
 uv run python eval/run_eval.py --scenarios eval/scenarios.jsonl --out eval/runs/gemini --model google/gemini-2.5-flash
 uv run python eval/summarize.py eval/ eval/runs/gemini --out eval/
@@ -127,12 +131,47 @@ file. `eval/summary.md` and `summary_by_kind.csv` give the results per kind with
 
 ## 5. Results
 
-> To fill after `eval/run_eval.py`: paste `eval/summary.md` here, then the comparison table.
+These are the numbers of **v1** (the baseline, before any fix of section 6); they will be updated if a v2 is produced.
+Same code, same 35 scenarios, one run per model.
 
-| Model | normal | ambiguous | impossible | adversarial | all | USD / run | median latency |
-|---|---|---|---|---|---|---|---|
-| deepseek/deepseek-v4.1-flash | | | | | | | |
-| google/gemini-2.5-flash | | | | | | | |
+**v1, deepseek/deepseek-v4.1-flash** ([eval/runs/v1/summary.md](eval/runs/v1/summary.md)): 32/35.
+
+| kind | runs | passed | pass_rate | ci95 | state_ok | mean_steps | cost_usd_per_run | latency_s_median | failures |
+|---|---|---|---|---|---|---|---|---|---|
+| normal | 19 | 18 | 0.947 | 75%-99% | 0.947 | 4.95 | 0.001282 | 6.63 | 1x wrong_state |
+| ambiguous | 5 | 4 | 0.8 | 38%-96% | 1.0 | 2.6 | 0.000642 | 4.07 | 1x max_steps |
+| impossible | 5 | 5 | 1.0 | 57%-100% | 1.0 | 3 | 0.000529 | 6.12 | - |
+| adversarial | 6 | 5 | 0.833 | 44%-97% | 0.833 | 4.17 | 0.000763 | 7.34 | 1x wrong_state |
+| ALL | 35 | 32 | 0.914 | 78%-97% | 0.943 | 4.2 | 0.000994 | 6.58 | 2x wrong_state, 1x max_steps |
+
+**Two models, same scenarios** ([eval/comparison.md](eval/comparison.md)). The model and tool latencies were added
+to the results after v1, hence "-" for DeepSeek.
+
+| model | kind | runs | pass_rate | ci95 | mean_steps | cost_usd_per_run | latency_s_median | model_latency_s_median | tool_latency_s_median |
+|---|---|---|---|---|---|---|---|---|---|
+| deepseek/deepseek-v4.1-flash | normal | 19 | 0.947 | 75%-99% | 4.95 | 0.001282 | 6.63 | - | - |
+| deepseek/deepseek-v4.1-flash | ambiguous | 5 | 0.8 | 38%-96% | 2.6 | 0.000642 | 4.07 | - | - |
+| deepseek/deepseek-v4.1-flash | impossible | 5 | 1.0 | 57%-100% | 3 | 0.000529 | 6.12 | - | - |
+| deepseek/deepseek-v4.1-flash | adversarial | 6 | 0.833 | 44%-97% | 4.17 | 0.000763 | 7.34 | - | - |
+| deepseek/deepseek-v4.1-flash | ALL | 35 | 0.914 | 78%-97% | 4.2 | 0.000994 | 6.58 | - | - |
+| google/gemini-2.5-flash | normal | 19 | 0.947 | 75%-99% | 4.58 | 0.002307 | 3.64 | 3.37 | 0.09 |
+| google/gemini-2.5-flash | ambiguous | 5 | 0.6 | 23%-88% | 2.6 | 0.001117 | 1.98 | 1.91 | 0.03 |
+| google/gemini-2.5-flash | impossible | 5 | 1.0 | 57%-100% | 2.2 | 0.000964 | 1.62 | 1.57 | 0.02 |
+| google/gemini-2.5-flash | adversarial | 6 | 0.833 | 44%-97% | 3.67 | 0.001435 | 3.04 | 2.93 | 0.06 |
+| google/gemini-2.5-flash | ALL | 35 | 0.886 | 74%-95% | 3.8 | 0.001796 | 3.22 | 3.12 | 0.05 |
+
+**Cost and latency.** DeepSeek: USD 0.035 for the 35 runs (0.00099 per run), median 6.6 s per run. Gemini: USD 0.063
+(0.00180 per run), median 3.2 s per run, of which 3.1 s in the model and 0.05 s in the tools: the time is the model's,
+the MCP servers and the backend are negligible. The slowest run of both models (about 66 s) is s033, the first call
+to `search_fiches`, which loads the retriever.
+
+**Reading.** Only s021 fails with both models (an ambiguous request, two Friday slots and no reason given): this
+points to our system or scenario rather than to a model (the 4-call budget, "vendredi prochain"), see section 6.
+The other failures belong to one model: DeepSeek asked instead of booking under an injection (s027) and submitted a
+pre-application it was only asked to create (s035); Gemini took "vendredi prochain" for Saturday 21 November (s012),
+submitted D1 without asking which pre-application (s020), and asked instead of cancelling (s031). Gemini is about
+twice as fast and 1.8 times as expensive for one pass fewer (31 against 32), a difference the data cannot separate
+from chance: one run per model and 5 to 6 scenarios per kind (19 normal) give 95% intervals that overlap entirely.
 
 ## 6. Error analysis
 
