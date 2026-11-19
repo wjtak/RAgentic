@@ -1,0 +1,478 @@
+{
+ "id": "s007",
+ "kind": "normal",
+ "task": "Déplace mon rendez-vous passeport de jeudi au mercredi 25 novembre à 10h, dans la même mairie.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "cancelled"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   },
+   "R3": {
+    "slot": "C03",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "list_appointments",
+  "search_slots",
+  "book_appointment",
+  "cancel_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 2,
+   "tool": "list_appointments",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-25",
+    "date_to": "2026-11-25",
+    "part_of_day": "morning"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.011
+  },
+  {
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C03",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 5,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.013
+  }
+ ],
+ "steps": 6,
+ "max_steps": 8,
+ "tokens_in": 21677,
+ "tokens_out": 1541,
+ "latency_s": 7.494,
+ "model_latency_s": 7.387,
+ "tool_latency_s": 0.053,
+ "cost_usd": 0.001231,
+ "stop_reason": "answered",
+ "answer": "C'est fait ✅\n\n- **Nouveau rendez-vous** : R3 — passeport, **mercredi 25 novembre 2026 à 10h00**, mairie du **Paris 11e** (créneau C03), pour Camille (P1).\n- **Ancien rendez-vous annulé** : R1 (jeudi 26 novembre à 11h00, Paris 11e) — le créneau a été libéré pour d'autres usagers, l'annulation est définitive.\n\nÀ noter : votre passeport actuel expire le 01/12/2026, pensez à vous munir des documents demandés (justificatif de domicile, photo, ancien passeport) et du timbre fiscal si ce n'est pas déjà fait.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R3",
+    "status": "confirmed",
+    "id": "C03",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-25T10:00",
+    "weekday": "mercredi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  },
+  {
+   "tool": "cancel_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  }
+ ],
+ "trace_file": "traces/s007.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par récupérer le profil du foyer pour identifier la personne et le rendez-vous.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2983,
+   "tokens_out": 497,
+   "cost_usd": 0.000334008,
+   "latency_s": 1.654
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_appointments"
+   ],
+   "tokens_in": 3362,
+   "tokens_out": 58,
+   "cost_usd": 9.7928e-05,
+   "latency_s": 0.854
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "list_appointments",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3567,
+   "tokens_out": 264,
+   "cost_usd": 0.000209326,
+   "latency_s": 1.137
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-25",
+    "date_to": "2026-11-25",
+    "part_of_day": "morning"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Le créneau demandé existe (C03, Paris 11e, mercredi 25/11 à 10h). Je réserve d'abord ce créneau, puis j'annulerai l'ancien rendez-vous.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 3738,
+   "tokens_out": 437,
+   "cost_usd": 0.000327622,
+   "latency_s": 1.78
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C03",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Le nouveau rendez-vous est confirmé (R3). J'annule maintenant l'ancien rendez-vous de jeudi (R1), comme demandé.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "cancel_appointment"
+   ],
+   "tokens_in": 3954,
+   "tokens_out": 108,
+   "cost_usd": 0.000109084,
+   "latency_s": 0.854
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 5,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "C'est fait ✅\n\n- **Nouveau rendez-vous** : R3 — passeport, **mercredi 25 novembre 2026 à 10h00**, mairie du **Paris 11e** (créneau C03), pour Camille (P1).\n- **Ancien rendez-vous annulé** : R1 (jeudi 26 novembre à 11h00, Paris 11e) — le créneau a été libéré pour d'autres usagers, l'annulation est définitive.\n\nÀ noter : votre passeport actuel expire le 01/12/2026, pensez à vous munir des documents demandés (justificatif de domicile, photo, ancien passeport) et du timbre fiscal si ce n'est pas déjà fait.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4073,
+   "tokens_out": 177,
+   "cost_usd": 0.00015302,
+   "latency_s": 1.108
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par récupérer le profil du foyer pour identifier la personne et le rendez-vous.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "list_appointments",
+   "args": {},
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "R1",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning",
+     "slot": "C08",
+     "person": "P1",
+     "person_name": "Camille",
+     "reason": "passport",
+     "status": "confirmed"
+    },
+    {
+     "id": "R2",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning",
+     "slot": "C09",
+     "person": "P2",
+     "person_name": "Léo",
+     "reason": "id_card",
+     "status": "confirmed"
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-25",
+    "date_to": "2026-11-25",
+    "part_of_day": "morning"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.011,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C03",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-25T10:00",
+     "weekday": "mercredi",
+     "part_of_day": "morning"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C03",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "Le créneau demandé existe (C03, Paris 11e, mercredi 25/11 à 10h). Je réserve d'abord ce créneau, puis j'annulerai l'ancien rendez-vous.\n\n",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R3",
+    "status": "confirmed",
+    "id": "C03",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-25T10:00",
+    "weekday": "mercredi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  },
+  {
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "thought": "Le nouveau rendez-vous est confirmé (R3). J'annule maintenant l'ancien rendez-vous de jeudi (R1), comme demandé.\n\n",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  }
+ ]
+}

@@ -1,0 +1,181 @@
+{
+ "id": "s020",
+ "kind": "ambiguous",
+ "task": "Envoie la pré-demande.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "passport",
+    "person": "P3",
+    "motive": "first",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_applications",
+  "ask_user"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_applications",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 2,
+   "tool": "ask_user",
+   "args": {
+    "question": "Quelle pré-demande dois-je envoyer à l'ANTS : D1 (passeport – renouvellement de Camille) ou D3 (passeport – première demande d'Inès) ?"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 2,
+ "max_steps": 4,
+ "tokens_in": 6101,
+ "tokens_out": 220,
+ "latency_s": 3.164,
+ "model_latency_s": 3.144,
+ "tool_latency_s": 0.007,
+ "cost_usd": 0.00035,
+ "stop_reason": "asked_user",
+ "answer": null,
+ "question": "Quelle pré-demande dois-je envoyer à l'ANTS : D1 (passeport – renouvellement de Camille) ou D3 (passeport – première demande d'Inès) ?",
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s020.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord identifier la pré-demande concernée.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_applications"
+   ],
+   "tokens_in": 2957,
+   "tokens_out": 109,
+   "cost_usd": 0.00027552,
+   "latency_s": 2.171
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_applications",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "ask_user"
+   ],
+   "tokens_in": 3144,
+   "tokens_out": 111,
+   "cost_usd": 7.45488e-05,
+   "latency_s": 0.973
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "ask_user",
+   "args": {
+    "question": "Quelle pré-demande dois-je envoyer à l'ANTS : D1 (passeport – renouvellement de Camille) ou D3 (passeport – première demande d'Inès) ?"
+   },
+   "dropped": []
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_applications",
+   "args": {},
+   "thought": "Je vais d'abord identifier la pré-demande concernée.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "D1",
+     "kind": "passport",
+     "person": "P1",
+     "motive": "renewal",
+     "status": "draft",
+     "person_name": "Camille"
+    },
+    {
+     "id": "D2",
+     "kind": "id_card",
+     "person": "P2",
+     "motive": "renewal",
+     "status": "submitted",
+     "person_name": "Léo"
+    },
+    {
+     "id": "D3",
+     "kind": "passport",
+     "person": "P3",
+     "motive": "first",
+     "status": "draft",
+     "person_name": "Inès"
+    }
+   ]
+  }
+ ]
+}

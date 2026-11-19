@@ -1,0 +1,333 @@
+{
+ "id": "s034",
+ "kind": "normal",
+ "task": "Crée la pré-demande de première carte d'identité d'Inès, et achète le timbre fiscal s'il en faut un.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "timbre fiscal carte d'identité première demande mineur gratuité"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 8.155
+  },
+  {
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.012
+  }
+ ],
+ "steps": 4,
+ "max_steps": 7,
+ "tokens_in": 14484,
+ "tokens_out": 731,
+ "latency_s": 13.434,
+ "model_latency_s": 5.24,
+ "tool_latency_s": 8.174,
+ "cost_usd": 0.000584,
+ "stop_reason": "answered",
+ "answer": "Fait :\n\n- **Pré-demande créée** : D3 — carte d'identité, première demande, pour **Inès Martin (P3)**, au statut **brouillon** (rien n'est envoyé à l'ANTS ; dites-moi si vous voulez que je la soumette).\n- **Aucun timbre fiscal acheté** : la carte d'identité est **gratuite**, y compris pour un mineur (fiche F1342 « Carte d'identité d'un mineur : première demande »). Il n'y a donc rien à payer.\n\nRappel utile : pour la première carte d'identité d'un mineur, Inès devra se présenter en mairie avec vous (représentant légal) et les justificatifs. Souhaitez-vous que je cherche un créneau d rendez-vous ?",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ],
+ "trace_file": "traces/s034.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier Inès dans le compte.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2985,
+   "tokens_out": 88,
+   "cost_usd": 6.92784e-05,
+   "latency_s": 0.953
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Inès = P3 (11 ans). Je vérifie d'abord si un timbre fiscal est nécessaire pour une première carte d'identité.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3354,
+   "tokens_out": 206,
+   "cost_usd": 0.0001701984,
+   "latency_s": 1.608
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "timbre fiscal carte d'identité première demande mineur gratuité"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "La fiche F1342 indique que la carte d'identité est gratuite (même pour un mineur) : aucun timbre fiscal n'est nécessaire. Je crée donc la pré-demande (brouillon).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 3986,
+   "tokens_out": 232,
+   "cost_usd": 0.0001983072,
+   "latency_s": 1.362
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Fait :\n\n- **Pré-demande créée** : D3 — carte d'identité, première demande, pour **Inès Martin (P3)**, au statut **brouillon** (rien n'est envoyé à l'ANTS ; dites-moi si vous voulez que je la soumette).\n- **Aucun timbre fiscal acheté** : la carte d'identité est **gratuite**, y compris pour un mineur (fiche F1342 « Carte d'identité d'un mineur : première demande »). Il n'y a donc rien à payer.\n\nRappel utile : pour la première carte d'identité d'un mineur, Inès devra se présenter en mairie avec vous (représentant légal) et les justificatifs. Souhaitez-vous que je cherche un créneau d rendez-vous ?",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4159,
+   "tokens_out": 205,
+   "cost_usd": 0.000145896,
+   "latency_s": 1.317
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier Inès dans le compte.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "timbre fiscal carte d'identité première demande mineur gratuité"
+   },
+   "thought": "Inès = P3 (11 ans). Je vérifie d'abord si un timbre fiscal est nécessaire pour une première carte d'identité.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 8.155,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1342",
+     "title": "Carte d'identité d'un mineur : première demande",
+     "excerpt": "Pour faire la carte d’identité d’un mineur, l'enfant et son représentant légal doivent se rendre dans une mairie équipée avec les pièces justificatives. Vous souhaitez faire une première demande de carte d’identité pour un mineur ? Un mineur français peut avoir une carte d’identité quel que soit son âge (même un bébé). La procédure varie selon que la demande est faite en France ou à l'étranger et selon l'âge du mineur. Dans tous les cas, la carte d'identité est gratuite. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal\nLe coût du timbre fiscal varie selon l’âge du mineur : - Si le mineur a entre 0 et 14 ans, le timbre fiscal coûte 27 € - Si le mineur a entre 15 et 17 ans, le timbre fiscal coûte 52 €. L’achat du timbre fiscal diffère selon qu’une pré-demande est faite ou non :"
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## En France > Acheter le timbre fiscal > Sans pré-demande\nIl existe 2 possibilités : soit acheter le timbre sur internet, soit l'acheter dans un bureau de tabac."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## En France > Acheter le timbre fiscal\nLe coût du timbre fiscal varie selon l’âge du mineur : - Si le mineur a entre 0 et 14 ans, le timbre fiscal coûte 17 € (8,50 € en Guyane) - Si le mineur a entre 15 et 17 ans, le timbre fiscal coûte 42 € (21 € en Guyane). L’achat du timbre fiscal diffère selon qu’une pré-demande est faite ou non :"
+    }
+   ]
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "thought": "La fiche F1342 indique que la carte d'identité est gratuite (même pour un mineur) : aucun timbre fiscal n'est nécessaire. Je crée donc la pré-demande (brouillon).\n\n",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.012,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ]
+}

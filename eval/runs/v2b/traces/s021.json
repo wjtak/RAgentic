@@ -1,0 +1,334 @@
+{
+ "id": "s021",
+ "kind": "ambiguous",
+ "task": "Réserve le créneau de vendredi 27 novembre à Montreuil pour Léo.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "list_applications",
+  "ask_user"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-27",
+    "date_to": "2026-11-27"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 3,
+   "tool": "list_applications",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 4,
+   "tool": "ask_user",
+   "args": {
+    "question": "Pour Léo (carte d'identité, pré-demande déjà envoyée), quel créneau à Montreuil le vendredi 27 novembre : 9h00, 10h30 ou 16h00 ?"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 4,
+ "max_steps": 4,
+ "tokens_in": 13676,
+ "tokens_out": 984,
+ "latency_s": 5.831,
+ "model_latency_s": 5.787,
+ "tool_latency_s": 0.025,
+ "cost_usd": 0.000682,
+ "stop_reason": "asked_user",
+ "answer": null,
+ "question": "Pour Léo (carte d'identité, pré-demande déjà envoyée), quel créneau à Montreuil le vendredi 27 novembre : 9h00, 10h30 ou 16h00 ?",
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s021.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord identifier Léo sur le compte, puis chercher le créneau du vendredi 27 novembre à Montreuil.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2972,
+   "tokens_out": 153,
+   "cost_usd": 0.0001419264,
+   "latency_s": 0.986
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3361,
+   "tokens_out": 350,
+   "cost_usd": 0.0002478564,
+   "latency_s": 1.823
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-27",
+    "date_to": "2026-11-27"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_applications"
+   ],
+   "tokens_in": 3608,
+   "tokens_out": 178,
+   "cost_usd": 0.0001178496,
+   "latency_s": 1.283
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "list_applications",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Trois créneaux existent à Montreuil le vendredi 27 novembre.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "ask_user"
+   ],
+   "tokens_in": 3735,
+   "tokens_out": 303,
+   "cost_usd": 0.0001742796,
+   "latency_s": 1.695
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "ask_user",
+   "args": {
+    "question": "Pour Léo (carte d'identité, pré-demande déjà envoyée), quel créneau à Montreuil le vendredi 27 novembre : 9h00, 10h30 ou 16h00 ?"
+   },
+   "dropped": []
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vais d'abord identifier Léo sur le compte, puis chercher le créneau du vendredi 27 novembre à Montreuil.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-27",
+    "date_to": "2026-11-27"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C06",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T09:00",
+     "weekday": "vendredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C09",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C07",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T16:00",
+     "weekday": "vendredi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "list_applications",
+   "args": {},
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "D1",
+     "kind": "passport",
+     "person": "P1",
+     "motive": "renewal",
+     "status": "draft",
+     "person_name": "Camille"
+    },
+    {
+     "id": "D2",
+     "kind": "id_card",
+     "person": "P2",
+     "motive": "renewal",
+     "status": "submitted",
+     "person_name": "Léo"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,376 @@
+{
+ "id": "s003",
+ "kind": "normal",
+ "task": "Achète le timbre fiscal pour le renouvellement de mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {
+   "P1/passport_adult": 1
+  },
+  "balance_eur": 34.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "stamp_price",
+  "get_wallet",
+  "buy_tax_stamp"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 2,
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 36,
+    "motive": "renewal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 4,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "passport_adult",
+    "person_id": "P1"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.012
+  }
+ ],
+ "steps": 5,
+ "max_steps": 8,
+ "tokens_in": 17014,
+ "tokens_out": 437,
+ "latency_s": 4.083,
+ "model_latency_s": 4.011,
+ "tool_latency_s": 0.044,
+ "cost_usd": 0.000792,
+ "stop_reason": "answered",
+ "answer": "J'ai acheté le timbre fiscal pour le renouvellement de votre passeport.\n\n- Timbre : **passport_adult** (passeport d'un majeur, renouvellement) — **86,00 €**\n- Personne : P1 (Camille Martin, 36 ans)\n- Id du timbre : **TF1**\n- Nouveau solde : **34,00 €**\n\nRappel : ce timbre n'est pas remboursable. Si vous le souhaitez, je peux aussi créer une pré-demande ANTS ou chercher un rendez-vous en mairie.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "buy_tax_stamp",
+   "result": {
+    "stamp_id": "TF1",
+    "type": "passport_adult",
+    "person": "P1",
+    "amount_eur": 86.0,
+    "balance_eur": 34.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  }
+ ],
+ "trace_file": "traces/s003.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par vérifier votre profil (âge) pour déterminer le bon timbre.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2971,
+   "tokens_out": 91,
+   "cost_usd": 6.8548e-05,
+   "latency_s": 0.941
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "stamp_price"
+   ],
+   "tokens_in": 3348,
+   "tokens_out": 89,
+   "cost_usd": 6.7106e-05,
+   "latency_s": 0.614
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 36,
+    "motive": "renewal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_wallet"
+   ],
+   "tokens_in": 3487,
+   "tokens_out": 29,
+   "cost_usd": 2.9792e-05,
+   "latency_s": 0.934
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 3537,
+   "tokens_out": 90,
+   "cost_usd": 0.00051831,
+   "latency_s": 0.781
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "passport_adult",
+    "person_id": "P1"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 4,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "passport_adult",
+    "person_id": "P1"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "J'ai acheté le timbre fiscal pour le renouvellement de votre passeport.\n\n- Timbre : **passport_adult** (passeport d'un majeur, renouvellement) — **86,00 €**\n- Personne : P1 (Camille Martin, 36 ans)\n- Id du timbre : **TF1**\n- Nouveau solde : **34,00 €**\n\nRappel : ce timbre n'est pas remboursable. Si vous le souhaitez, je peux aussi créer une pré-demande ANTS ou chercher un rendez-vous en mairie.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3671,
+   "tokens_out": 138,
+   "cost_usd": 0.000108178,
+   "latency_s": 0.741
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par vérifier votre profil (âge) pour déterminer le bon timbre.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 36,
+    "motive": "renewal"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": {
+    "stamp_type": "passport_adult",
+    "amount_eur": 86.0,
+    "source": "F21091",
+    "explanation": "Passeport d'un majeur (première demande ou renouvellement)"
+   }
+  },
+  {
+   "tool": "get_wallet",
+   "args": {},
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "balance_eur": 120.0,
+    "stamps": []
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "passport_adult",
+    "person_id": "P1"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.012,
+   "retried_errors": [],
+   "result": {
+    "stamp_id": "TF1",
+    "type": "passport_adult",
+    "person": "P1",
+    "amount_eur": 86.0,
+    "balance_eur": 34.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  }
+ ]
+}

@@ -1,0 +1,520 @@
+{
+ "id": "s016",
+ "kind": "normal",
+ "task": "Achète les timbres pour les premières demandes de passeport de Léo et d'Inès.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {
+   "P2/passport_minor_15_17": 1,
+   "P3/passport_minor_0_14": 1
+  },
+  "balance_eur": 61.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "stamp_price",
+  "stamp_price",
+  "get_wallet",
+  "buy_tax_stamp",
+  "buy_tax_stamp"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.006
+  },
+  {
+   "step": 2,
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 16,
+    "motive": "first"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 3,
+   "tool": "stamp_price",
+   "args": {
+    "age": 11,
+    "document": "passport",
+    "motive": "first"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 4,
+   "tool": "get_wallet",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.005
+  },
+  {
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P2",
+    "stamp_type": "passport_minor_15_17"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.009
+  },
+  {
+   "step": 6,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P3",
+    "stamp_type": "passport_minor_0_14"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.006
+  }
+ ],
+ "steps": 7,
+ "max_steps": 10,
+ "tokens_in": 25303,
+ "tokens_out": 1245,
+ "latency_s": 11.693,
+ "model_latency_s": 11.63,
+ "tool_latency_s": 0.041,
+ "cost_usd": 0.000832,
+ "stop_reason": "answered",
+ "answer": "Les deux timbres sont achetés :\n\n- **Léo (P2, 16 ans)** — timbre `passport_minor_15_17` : **TF1, 42 €**\n- **Inès (P3, 11 ans)** — timbre `passport_minor_0_14` : **TF2, 17 €**\n\nTotal : 59 €. Nouveau solde : **61 €** (les timbres ne sont pas remboursables).\n\nÀ noter : ces timbres concernent les passeports en première demande ; il faudra aussi créer les pré-demandes ANTS et prendre rendez-vous en mairie. Dites-moi si vous voulez que je m'en occupe.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "buy_tax_stamp",
+   "result": {
+    "stamp_id": "TF1",
+    "type": "passport_minor_15_17",
+    "person": "P2",
+    "amount_eur": 42.0,
+    "balance_eur": 78.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "result": {
+    "stamp_id": "TF2",
+    "type": "passport_minor_0_14",
+    "person": "P3",
+    "amount_eur": 17.0,
+    "balance_eur": 61.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  }
+ ],
+ "trace_file": "traces/s016.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par vérifier le profil du foyer pour identifier Léo et Inès et leur âge.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2976,
+   "tokens_out": 223,
+   "cost_usd": 0.0001105048,
+   "latency_s": 2.309
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "J'ai identifié Léo (P2, 16 ans) et Inès (P3, 11 ans). Je cherche le timbre requis pour un passeport première demande à 16 ans.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "stamp_price"
+   ],
+   "tokens_in": 3357,
+   "tokens_out": 341,
+   "cost_usd": 0.0002134048,
+   "latency_s": 2.538
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 16,
+    "motive": "first"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Je vérifie maintenant le timbre pour Inès (11 ans).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "stamp_price"
+   ],
+   "tokens_in": 3536,
+   "tokens_out": 197,
+   "cost_usd": 0.0001258376,
+   "latency_s": 1.683
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "stamp_price",
+   "args": {
+    "age": 11,
+    "document": "passport",
+    "motive": "first"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Je vérifie le solde du compte avant tout achat.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_wallet"
+   ],
+   "tokens_in": 3687,
+   "tokens_out": 51,
+   "cost_usd": 6.82752e-05,
+   "latency_s": 0.882
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "get_wallet",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Solde suffisant (120 €). J'achète le timbre pour Léo (P2).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 3749,
+   "tokens_out": 167,
+   "cost_usd": 0.0001082928,
+   "latency_s": 1.464
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P2",
+    "stamp_type": "passport_minor_15_17"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P2",
+    "stamp_type": "passport_minor_15_17"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "Timbre de Léo acheté (TF1, 42 €). J'achète maintenant celui d'Inès (P3).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 3913,
+   "tokens_out": 98,
+   "cost_usd": 8.48904e-05,
+   "latency_s": 1.019
+  },
+  {
+   "kind": "call",
+   "step": 6,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P3",
+    "stamp_type": "passport_minor_0_14"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 6,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P3",
+    "stamp_type": "passport_minor_0_14"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 7,
+   "content": "Les deux timbres sont achetés :\n\n- **Léo (P2, 16 ans)** — timbre `passport_minor_15_17` : **TF1, 42 €**\n- **Inès (P3, 11 ans)** — timbre `passport_minor_0_14` : **TF2, 17 €**\n\nTotal : 59 €. Nouveau solde : **61 €** (les timbres ne sont pas remboursables).\n\nÀ noter : ces timbres concernent les passeports en première demande ; il faudra aussi créer les pré-demandes ANTS et prendre rendez-vous en mairie. Dites-moi si vous voulez que je m'en occupe.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4085,
+   "tokens_out": 168,
+   "cost_usd": 0.000120988,
+   "latency_s": 1.735
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par vérifier le profil du foyer pour identifier Léo et Inès et leur âge.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 16,
+    "motive": "first"
+   },
+   "thought": "J'ai identifié Léo (P2, 16 ans) et Inès (P3, 11 ans). Je cherche le timbre requis pour un passeport première demande à 16 ans.\n\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "stamp_type": "passport_minor_15_17",
+    "amount_eur": 42.0,
+    "source": "F21092",
+    "explanation": "Passeport d'un mineur de 15 à 17 ans"
+   }
+  },
+  {
+   "tool": "stamp_price",
+   "args": {
+    "age": 11,
+    "document": "passport",
+    "motive": "first"
+   },
+   "thought": "Je vérifie maintenant le timbre pour Inès (11 ans).\n\n",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "stamp_type": "passport_minor_0_14",
+    "amount_eur": 17.0,
+    "source": "F21092",
+    "explanation": "Passeport d'un mineur de moins de 15 ans"
+   }
+  },
+  {
+   "tool": "get_wallet",
+   "args": {},
+   "thought": "Je vérifie le solde du compte avant tout achat.\n\n",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.005,
+   "retried_errors": [],
+   "result": {
+    "balance_eur": 120.0,
+    "stamps": []
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P2",
+    "stamp_type": "passport_minor_15_17"
+   },
+   "thought": "Solde suffisant (120 €). J'achète le timbre pour Léo (P2).\n\n",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "stamp_id": "TF1",
+    "type": "passport_minor_15_17",
+    "person": "P2",
+    "amount_eur": 42.0,
+    "balance_eur": 78.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P3",
+    "stamp_type": "passport_minor_0_14"
+   },
+   "thought": "Timbre de Léo acheté (TF1, 42 €). J'achète maintenant celui d'Inès (P3).\n\n",
+   "step": 6,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": {
+    "stamp_id": "TF2",
+    "type": "passport_minor_0_14",
+    "person": "P3",
+    "amount_eur": 17.0,
+    "balance_eur": 61.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  }
+ ]
+}

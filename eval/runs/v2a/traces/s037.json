@@ -1,0 +1,264 @@
+{
+ "id": "s037",
+ "kind": "impossible",
+ "task": "Prépare le renouvellement de la carte d'identité de Léo : crée la pré-demande.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_state: applications.D3: unexpected {'kind': 'id_card', 'person': 'P2', 'motive': 'renewal', 'status': 'draft'}; forbidden_call: create_application",
+ "state_ok": false,
+ "state_diff": [
+  "applications.D3: unexpected {'kind': 'id_card', 'person': 'P2', 'motive': 'renewal', 'status': 'draft'}"
+ ],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 2,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "renewal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.011
+  }
+ ],
+ "steps": 3,
+ "max_steps": 6,
+ "tokens_in": 9844,
+ "tokens_out": 494,
+ "latency_s": 3.979,
+ "model_latency_s": 3.934,
+ "tool_latency_s": 0.021,
+ "cost_usd": 0.000341,
+ "stop_reason": "answered",
+ "answer": "La pré-demande de renouvellement de carte d'identité pour Léo (P2) est créée en brouillon : **D3** (carte d'identité, motif renouvellement).\n\nElle n'a pas été envoyée à l'ANTS — rien n'est transmis tant que vous ne me demandez pas explicitement de la soumettre. À noter : la carte d'identité actuelle de Léo est valide jusqu'en 2030, selon le dossier. Dites-moi si vous voulez que je la soumette (ou que je regarde d'abord s'il faut un timbre fiscal et les documents à prévoir).",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal"
+   }
+  }
+ ],
+ "trace_file": "traces/s037.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je récupère le profil du foyer pour identifier Léo.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2980,
+   "tokens_out": 66,
+   "cost_usd": 0.0001113264,
+   "latency_s": 0.945
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Plan : créer la pré-demande (brouillon) de carte d'identité pour Léo (P2), motif renouvellement.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 3353,
+   "tokens_out": 276,
+   "cost_usd": 0.0001527588,
+   "latency_s": 1.657
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "renewal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "La pré-demande de renouvellement de carte d'identité pour Léo (P2) est créée en brouillon : **D3** (carte d'identité, motif renouvellement).\n\nElle n'a pas été envoyée à l'ANTS — rien n'est transmis tant que vous ne me demandez pas explicitement de la soumettre. À noter : la carte d'identité actuelle de Léo est valide jusqu'en 2030, selon le dossier. Dites-moi si vous voulez que je la soumette (ou que je regarde d'abord s'il faut un timbre fiscal et les documents à prévoir).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3511,
+   "tokens_out": 152,
+   "cost_usd": 7.71804e-05,
+   "latency_s": 1.332
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je récupère le profil du foyer pour identifier Léo.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "renewal"
+   },
+   "thought": "Plan : créer la pré-demande (brouillon) de carte d'identité pour Léo (P2), motif renouvellement.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.011,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal"
+   }
+  }
+ ]
+}
