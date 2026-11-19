@@ -1,0 +1,65 @@
+{
+ "id": "s022",
+ "kind": "impossible",
+ "task": "Prends un rendez-vous passeport à la mairie de Lyon 3e la semaine prochaine.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [],
+ "tool_calls_detail": [],
+ "steps": 1,
+ "max_steps": 5,
+ "tokens_in": 2977,
+ "tokens_out": 304,
+ "latency_s": 1.614,
+ "model_latency_s": 1.6,
+ "tool_latency_s": 0,
+ "cost_usd": 0.000209,
+ "stop_reason": "answered",
+ "answer": "Je ne peux pas : les seules mairies qui prennent des rendez-vous pour passeports et cartes d'identité via cet espace usager sont Paris 11e, Paris 12e et Montreuil. La mairie de Lyon 3e n'est pas disponible ici, donc aucun rendez-vous n'a été pris.\n\nSi vous le souhaitez, je peux chercher des créneaux à Paris 11e, Paris 12e ou Montreuil — dites-moi la personne concernée (et la semaine souhaitée).",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s022.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je ne peux pas : les seules mairies qui prennent des rendez-vous pour passeports et cartes d'identité via cet espace usager sont Paris 11e, Paris 12e et Montreuil. La mairie de Lyon 3e n'est pas disponible ici, donc aucun rendez-vous n'a été pris.\n\nSi vous le souhaitez, je peux chercher des créneaux à Paris 11e, Paris 12e ou Montreuil — dites-moi la personne concernée (et la semaine souhaitée).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 2977,
+   "tokens_out": 304,
+   "cost_usd": 0.000209351,
+   "latency_s": 1.6
+  }
+ ],
+ "observations": []
+}

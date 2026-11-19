@@ -37,6 +37,9 @@ def parse_error(text: str) -> dict:
                 "message": message[:400], "retryable": False, "outcome_unknown": False}
 
 
+READ_TIMEOUT_S = 300   # the first search_fiches waits for the models to load: > 120 s on a slow or busy machine
+
+
 class ToolHub:
     """`async with ToolHub(state_dir) as hub:` starts the servers on stdio; `await hub.call(tool, args, run_id)`."""
 
@@ -53,7 +56,7 @@ class ToolHub:
         self._stack = AsyncExitStack()
         for name, path in SERVERS.items():
             params = StdioServerParameters(command=sys.executable, args=[str(path)], env=self.env, cwd=str(ROOT))
-            client = await self._stack.enter_async_context(Client(params, read_timeout_seconds=120))
+            client = await self._stack.enter_async_context(Client(params, read_timeout_seconds=READ_TIMEOUT_S))
             self.clients[name] = client
             for tool in (await client.list_tools()).tools:
                 self.owner[tool.name], self.tools[tool.name] = name, tool

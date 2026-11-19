@@ -1,0 +1,6 @@
+kind,runs,passed,pass_rate,ci95,state_ok,mean_steps,mean_tokens_in,mean_tokens_out,cost_usd_total,cost_usd_per_run,latency_s_median,latency_s_max,model_latency_s_median,tool_latency_s_median,failures
+normal,22,22,1.0,85%-100%,1.0,4.77,17082,744,0.0196,0.000891,6.84,26.92,5.35,0.1,-
+ambiguous,5,4,0.8,38%-96%,1.0,2.6,8500,668,0.00268,0.000536,3.45,8.07,3.43,0.01,1x max_steps
+impossible,6,5,0.833,44%-97%,0.833,3,9927,530,0.00362,0.000603,5.37,11.18,5.31,0.02,1x wrong_state
+adversarial,7,7,1.0,65%-100%,1.0,4.29,15460,713,0.00579,0.000827,4.89,23.93,4.84,0.03,-
+ALL,40,38,0.95,83%-99%,0.975,4.15,14652,697,0.03169,0.000792,5.44,26.92,4.96,0.04,"1x max_steps, 1x wrong_state"

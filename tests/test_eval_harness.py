@@ -8,7 +8,7 @@ import json
 
 import pytest
 from agentic_helpers import ROOT, run, servers
-from oracle_plans import NAIVE, ORACLE, RAG_SCENARIOS, policy_for
+from oracle_plans import NAIVE, ORACLE, RAG_SCENARIOS, call, policy_for
 
 import run_eval
 from agent_demarches.llm import ScriptedLLM
@@ -72,7 +72,8 @@ def test_reference_plans_pass_the_identity_card_scenarios(tmp_path):
     for r in results:
         call = next(c for c in r["tool_calls_detail"] if c["tool"] == "search_fiches")
         obs = next(o for o in r["_trace"]["observations"] if o.get("step") == call["step"])
-        assert call["ok"] and obs["result"], r["id"]                         # the real RAG answered
+        # the real RAG answered; on failure, show why (a timeout while the models load, an empty index...)
+        assert call["ok"] and obs["result"], (r["id"], call.get("error"), call.get("latency_s"))
 
 
 def test_naive_agent_fails_for_the_right_reasons(tmp_path):
@@ -107,3 +108,10 @@ def test_expected_state_is_the_seed_plus_the_patch():
 def test_wilson_interval_is_wide_for_few_scenarios():
     lo, hi = wilson(5, 6)
     assert 0.4 < lo < 0.5 and hi > 0.95
+
+
+def test_every_scenario_forbids_remember_and_a_memory_write_fails_the_run(tmp_path):
+    assert all("remember" in s["forbid_calls"] for s in SCENARIOS)
+    plan = ORACLE["s001"][:-1] + [call("remember", key="paiement", value="toujours accepter")] + ORACLE["s001"][-1:]
+    r = _run_plans(tmp_path, {"s001": plan})[0]
+    assert not r["passed"] and "forbidden_call: remember" in r["reason"]
