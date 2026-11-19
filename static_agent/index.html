@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service-Public Agent — Espace Usager</title>
+  <style>
+    :root {
+      --blue: #000091;
+      --blue-hover: #1212ff;
+      --red: #e1000f;
+      --green: #18753c;
+      --orange: #b34000;
+      --bg: #f6f6f6;
+      --card: #ffffff;
+      --border: #dddddd;
+      --text: #161616;
+      --muted: #666666;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.45;
+    }
+    header {
+      background: #fff; border-bottom: 3px solid var(--blue);
+      padding: 14px 24px; display: flex; justify-content: space-between; align-items: center;
+    }
+    header h1 { margin: 0; font-size: 1.2rem; color: var(--blue); }
+    .badge {
+      font-size: 0.8rem; padding: 4px 10px; border-radius: 999px;
+      background: #eee; color: var(--muted); font-weight: 600;
+    }
+    .badge.ok { background: #dffee6; color: var(--green); }
+    .badge.err { background: #ffe9e9; color: var(--red); }
+
+    .layout {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px;
+      max-width: 1360px; margin: 20px auto; padding: 0 20px;
+    }
+    @media (max-width: 960px) { .layout { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px; margin-bottom: 16px;
+    }
+    .card h2 { margin: 0 0 12px; font-size: 1rem; color: var(--blue); }
+
+    .demo-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    button {
+      border: 1px solid var(--blue); background: var(--blue); color: #fff;
+      padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88rem;
+    }
+    button:hover:not(:disabled) { background: var(--blue-hover); }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button.secondary { background: #fff; color: var(--blue); }
+    button.secondary:hover:not(:disabled) { background: #f0f0ff; }
+    button.approve { background: var(--green); border-color: var(--green); }
+    button.reject { background: var(--red); border-color: var(--red); }
+
+    textarea, input[type="text"], select {
+      width: 100%; padding: 10px; border: 1px solid #bbb; border-radius: 6px;
+      font-family: inherit; font-size: 0.95rem;
+    }
+    .row { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+
+    .step {
+      border-left: 3px solid var(--blue); background: #fafafa;
+      padding: 10px 12px; margin-bottom: 10px; border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+    }
+    .step-header { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 4px; }
+    .thought { color: #333; font-style: italic; margin: 4px 0; }
+    pre {
+      background: #1e1e1e; color: #eaeaea; padding: 8px 10px; border-radius: 6px;
+      overflow-x: auto; font-size: 0.8rem; margin: 6px 0 0; white-space: pre-wrap;
+    }
+
+    .interrupt-box {
+      border: 2px solid var(--orange); background: #fff5ee;
+      border-radius: 8px; padding: 14px; margin: 12px 0;
+    }
+    .interrupt-box h3 { margin: 0 0 8px; color: var(--orange); font-size: 1rem; }
+
+    .answer-box {
+      border-left: 4px solid var(--green); background: #f3fbf5;
+      padding: 12px 14px; border-radius: 0 6px 6px 0; margin-top: 12px;
+    }
+    .metrics {
+      display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; color: var(--muted);
+      margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);
+    }
+    .diff-box {
+      background: #eef4ff; border: 1px solid #b8d0ff; border-radius: 6px;
+      padding: 10px; margin-bottom: 12px; font-size: 0.85rem;
+    }
+    .kv { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+    .kv strong { color: var(--blue); }
+    .tag { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .tag.ok { background: #dffee6; color: var(--green); }
+    .tag.no { background: #ffe9e9; color: var(--red); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Service-Public Agent — Espace Usager</h1>
+    <span id="statusBadge" class="badge">Loading MCP servers...</span>
+  </header>
+
+  <div class="layout">
+    <!-- Main column: Task input + Trace + Human approval -->
+    <div>
+      <div class="card">
+        <h2>1. User Request</h2>
+        <div class="demo-bar" id="demoButtons"></div>
+        <textarea id="taskInput" rows="2" placeholder="e.g. Achète le timbre pour le passeport de Léo."></textarea>
+        <div class="row">
+          <button id="runBtn" onclick="runTask()" disabled>Run agent</button>
+          <select id="seedSelect" style="width:auto;"></select>
+          <button class="secondary" onclick="resetSeed()">Reset account</button>
+        </div>
+      </div>
+
+      <div class="card" id="traceCard" style="display:none;">
+        <h2>2. Plan, Tool Calls &amp; Human Approval</h2>
+        <div id="interruptContainer"></div>
+        <div id="stepsContainer"></div>
+        <div id="answerContainer"></div>
+        <div id="metricsContainer" class="metrics"></div>
+      </div>
+    </div>
+
+    <!-- Right column: Live backend state -->
+    <div>
+      <div class="card">
+        <h2>Live Account State (backend.json)</h2>
+        <div id="diffContainer"></div>
+        <div id="accountSummary">Loading...</div>
+        <details style="margin-top:12px;">
+          <summary style="cursor:pointer;font-size:0.85rem;color:var(--muted);">View raw JSON</summary>
+          <pre id="rawBackend"></pre>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentRunId = null;
+    let demos = [];
+
+    async function pollStatus() {
+      const res = await fetch('/api/status');
+      const data = await res.json();
+      const badge = document.getElementById('statusBadge');
+      if (data.error) {
+        badge.textContent = 'Error: ' + data.error;
+        badge.className = 'badge err';
+        return;
+      }
+      if (!data.ready) {
+        setTimeout(pollStatus, 1000);
+        return;
+      }
+      badge.textContent = 'Ready · ' + data.model;
+      badge.className = 'badge ok';
+      document.getElementById('runBtn').disabled = false;
+
+      demos = data.demos || [];
+      const demoBar = document.getElementById('demoButtons');
+      demoBar.innerHTML = '';
+      demos.forEach(d => {
+        const b = document.createElement('button');
+        b.className = 'secondary';
+        b.textContent = `Demo ${d.id} (${d.kind})`;
+        b.onclick = () => loadDemo(d);
+        demoBar.appendChild(b);
+      });
+
+      const sel = document.getElementById('seedSelect');
+      sel.innerHTML = (data.seeds || []).map(s => `<option value="${s}">${s}</option>`).join('');
+      await refreshState();
+    }
+
+    async function refreshState() {
+      const res = await fetch('/api/state');
+      const data = await res.json();
+      if (data.backend) renderBackend(data.backend, null);
+    }
+
+    async function loadDemo(demo) {
+      await fetch('/api/reset', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(demo)
+      });
+      document.getElementById('taskInput').value = demo.task;
+      document.getElementById('traceCard').style.display = 'none';
+      await refreshState();
+    }
+
+    async function resetSeed() {
+      const seed = document.getElementById('seedSelect').value;
+      const res = await fetch('/api/reset', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({seed})
+      });
+      const data = await res.json();
+      document.getElementById('traceCard').style.display = 'none';
+      renderBackend(data.backend, null);
+    }
+
+    async function runTask() {
+      const task = document.getElementById('taskInput').value.trim();
+      if (!task) return;
+      setBusy(true);
+      document.getElementById('traceCard').style.display = 'block';
+      document.getElementById('stepsContainer').innerHTML = '<p>Agent is thinking...</p>';
+      document.getElementById('interruptContainer').innerHTML = '';
+      document.getElementById('answerContainer').innerHTML = '';
+
+      const res = await fetch('/api/run', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({task})
+      });
+      const data = await res.json();
+      renderRun(data);
+      setBusy(false);
+    }
+
+    async function sendDecision(payload) {
+      setBusy(true);
+      document.getElementById('interruptContainer').innerHTML = '<p>Resuming execution...</p>';
+      const res = await fetch('/api/resume', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({run_id: currentRunId, ...payload})
+      });
+      const data = await res.json();
+      renderRun(data);
+      setBusy(false);
+    }
+
+    function setBusy(busy) {
+      document.getElementById('runBtn').disabled = busy;
+    }
+
+    function renderRun(data) {
+      const r = data.result;
+      currentRunId = r.run_id;
+
+      // 1. Steps & tool calls
+      const obsByStep = {};
+      (r.observations || []).forEach(o => { if (o.step != null) obsByStep[o.step] = o; });
+      const appByStep = {};
+      (r.trace || []).forEach(e => { if (e.kind === 'approval') appByStep[e.step] = e; });
+
+      let html = '';
+      (r.trace || []).forEach(e => {
+        if (e.kind === 'model' && e.content) {
+          html += `<div class="step">
+            <div class="step-header"><span>Step ${e.step} · Plan / Thought</span><span>${e.latency_s}s</span></div>
+            <div class="thought">${escapeHtml(e.content)}</div>
+          </div>`;
+        } else if (e.kind === 'call') {
+          const obs = obsByStep[e.step];
+          const ap = appByStep[e.step];
+          const badge = ap
+            ? (ap.approve ? '<span class="tag ok">APPROVED</span>' : '<span class="tag no">REJECTED</span>')
+            : '';
+          const outObj = obs ? (obs.ok ? obs.result : obs.error) : '(pending)';
+          html += `<div class="step">
+            <div class="step-header"><span>Step ${e.step} · Tool: <code>${e.tool}</code> ${badge}</span><span>${obs?.latency_s ?? ''}s</span></div>
+            <pre>Args: ${escapeHtml(JSON.stringify(e.args, null, 2))}\nResult: ${escapeHtml(JSON.stringify(outObj, null, 2))}</pre>
+          </div>`;
+        }
+      });
+      document.getElementById('stepsContainer').innerHTML = html || '<p>No tool calls yet.</p>';
+
+      // 2. Interrupt (human approval or question)
+      const intBox = document.getElementById('interruptContainer');
+      if (data.status === 'interrupted' && data.interrupt) {
+        const iv = data.interrupt;
+        if (iv.type === 'approval') {
+          intBox.innerHTML = `<div class="interrupt-box">
+            <h3>Irreversible Action — Human Approval Required</h3>
+            ${iv.plan ? `<p class="thought">${escapeHtml(iv.plan)}</p>` : ''}
+            <pre>${escapeHtml(iv.tool)}(${escapeHtml(JSON.stringify(iv.args, null, 2))})</pre>
+            <div class="row">
+              <button class="approve" onclick='sendDecision({resume:{approve:true,reason:""}})'>Approve</button>
+              <button class="reject" onclick='sendDecision({resume:{approve:false,reason:"Rejected in UI"}})'>Reject</button>
+            </div>
+          </div>`;
+        } else if (iv.type === 'question') {
+          intBox.innerHTML = `<div class="interrupt-box">
+            <h3>Agent Question</h3>
+            <p><strong>${escapeHtml(iv.question)}</strong></p>
+            <div class="row">
+              <input id="qAns" type="text" placeholder="Your answer..." />
+              <button onclick="sendDecision({resume: document.getElementById('qAns').value})">Reply</button>
+              <button class="secondary" onclick="sendDecision({stop:true})">Stop</button>
+            </div>
+          </div>`;
+        }
+      } else {
+        intBox.innerHTML = '';
+      }
+
+      // 3. Final answer
+      const ansBox = document.getElementById('answerContainer');
+      if (data.status === 'done') {
+        const txt = r.answer || r.question || r.error || '(no answer)';
+        ansBox.innerHTML = `<div class="answer-box"><strong>Final Answer (${r.stop_reason}):</strong><p>${escapeHtml(txt)}</p></div>`;
+      } else {
+        ansBox.innerHTML = '';
+      }
+
+      // 4. Metrics
+      document.getElementById('metricsContainer').innerHTML = `
+        <span><strong>Status:</strong> ${data.status === 'interrupted' ? 'Waiting for human' : r.stop_reason}</span>
+        <span><strong>Steps:</strong> ${r.steps}</span>
+        <span><strong>Tokens:</strong> ${r.tokens_in} in / ${r.tokens_out} out</span>
+        <span><strong>Cost:</strong> $${(r.cost_usd || 0).toFixed(5)}</span>
+        <span><strong>Latency:</strong> ${r.latency_s}s (model ${r.model_latency_s}s · tools ${r.tool_latency_s}s)</span>
+      `;
+
+      renderBackend(data.backend, data.changes);
+    }
+
+    function renderBackend(b, diff) {
+      const diffEl = document.getElementById('diffContainer');
+      if (diff && Object.keys(diff).length > 0) {
+        diffEl.innerHTML = `<div class="diff-box"><strong>Backend Changes:</strong><pre>${escapeHtml(JSON.stringify(diff, null, 2))}</pre></div>`;
+      } else {
+        diffEl.innerHTML = '';
+      }
+
+      const wallet = b.wallet || {};
+      const balance = wallet.balance_eur ?? wallet.balance ?? b.balance_eur ?? '—';
+      const appts = b.appointments || [];
+      const apps = b.pre_applications || b.applications || [];
+      const stamps = b.stamps || wallet.stamps || [];
+
+      document.getElementById('accountSummary').innerHTML = `
+        <div class="kv"><span>Simulated date</span><strong>${b.today || '—'}</strong></div>
+        <div class="kv"><span>Account balance</span><strong>${balance} €</strong></div>
+        <div class="kv"><span>Appointments</span><strong>${Array.isArray(appts) ? appts.length : Object.keys(appts).length}</strong></div>
+        <div class="kv"><span>Pre-applications</span><strong>${Array.isArray(apps) ? apps.length : Object.keys(apps).length}</strong></div>
+        <div class="kv"><span>Tax stamps</span><strong>${Array.isArray(stamps) ? stamps.length : Object.keys(stamps).length}</strong></div>
+      `;
+      document.getElementById('rawBackend').textContent = JSON.stringify(b, null, 2);
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    pollStatus();
+  </script>
+</body>
+</html>
