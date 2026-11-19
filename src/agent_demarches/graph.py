@@ -19,7 +19,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 
-from agent_demarches import memory
+from agent_demarches import memory, tracing
 from agent_demarches.config import NEEDS_APPROVAL
 from agent_demarches.prompts import ASK_USER, SYSTEM
 
@@ -80,7 +80,11 @@ def build_graph(hub, llm, checkpointer=None, needs_approval=frozenset(NEEDS_APPR
 
     async def think(state: AgentState) -> dict:
         n = state["steps"] + 1
-        reply = await llm.chat(build_messages(state), tools)
+        with tracing.span(f"llm step {n}", "LLM", **{"llm.model_name": llm.model}) as s:
+            reply = await llm.chat(build_messages(state), tools)
+            said = [{c["name"]: c["arguments"]} for c in reply.tool_calls] or reply.content
+            tracing.set_attrs(s, **{"llm.token_count.prompt": reply.tokens_in,
+                                    "llm.token_count.completion": reply.tokens_out, "output.value": said})
         event = {"kind": "model", "step": n, "content": reply.content, "model": reply.model,
                  "tool_calls": [c["name"] for c in reply.tool_calls], "tokens_in": reply.tokens_in,
                  "tokens_out": reply.tokens_out, "cost_usd": reply.cost_usd, "latency_s": reply.latency_s}
@@ -135,7 +139,11 @@ def build_graph(hub, llm, checkpointer=None, needs_approval=frozenset(NEEDS_APPR
         if a["args"] is None:                            # the model wrote invalid JSON: tell it, run nothing
             return {"observations": [{**base, "ok": False, "executed": False, "error": {
                 "code": "invalid_json", "message": f"Arguments are not valid JSON: {str(a['raw'])[:200]}"}}]}
-        res = await hub.call(a["tool"], a["args"], state["run_id"])
+        with tracing.span(a["tool"], "TOOL", **{"tool.name": a["tool"], "input.value": a["args"]}) as s:
+            res = await hub.call(a["tool"], a["args"], state["run_id"])
+            tracing.set_attrs(s, **{"output.value": res["result"] if res["ok"] else res["error"]})
+            if not res["ok"]:
+                tracing.error(s, str(res["error"].get("code", "tool_error")))
         obs = {**base, "ok": res["ok"], "executed": True, "attempts": res["attempts"], "latency_s": res["latency_s"],
                "retried_errors": [e.get("code") for e in res.get("errors", [])]}
         obs["result" if res["ok"] else "error"] = res["result"] if res["ok"] else res["error"]

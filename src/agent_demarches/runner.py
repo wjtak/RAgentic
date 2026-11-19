@@ -5,6 +5,8 @@ Used by the evaluation (the policy is the scenario's simulated human), and the C
 import time
 import uuid
 
+from agent_demarches import tracing
+
 STOP = object()          # a policy returns STOP to end the run on an interrupt (e.g. the agent asked a question)
 
 
@@ -17,22 +19,29 @@ async def run_task(app, task: str, *, today: str, max_steps: int = 10, run_id: s
     config = {"configurable": {"thread_id": run_id}, "recursion_limit": 4 * max_steps + 20}
     started = time.perf_counter()
     interrupts, question, error = [], None, None
-    try:
-        out = await app.ainvoke({"task": task, "today": today, "run_id": run_id, "max_steps": max_steps}, config)
-        while out.get("__interrupt__"):                  # the graph paused: approval or question
-            value = out["__interrupt__"][0].value
-            interrupts.append(value)
-            resume = decide(value)
-            if resume is STOP:
-                if value.get("type") == "question":
-                    question = value.get("question")
-                break
-            out = await app.ainvoke(Command(resume=resume), config)
-    except Exception as e:                               # an API outage must be visible, never look like a pass
-        error = f"{type(e).__name__}: {e}"[:300]
-    state = (await app.aget_state(config)).values
-    result = collect(state, interrupts, question, error)
-    result.update(run_id=run_id, model=model, latency_s=round(time.perf_counter() - started, 3))
+    # one AGENT span for the whole run, resumes included: the LLM and TOOL spans of graph.py are its children
+    with tracing.span(f"run {run_id}", "AGENT", **{"input.value": task, "session.id": run_id}) as span:
+        try:
+            out = await app.ainvoke({"task": task, "today": today, "run_id": run_id, "max_steps": max_steps}, config)
+            while out.get("__interrupt__"):                  # the graph paused: approval or question
+                value = out["__interrupt__"][0].value
+                interrupts.append(value)
+                resume = decide(value)
+                if resume is STOP:
+                    if value.get("type") == "question":
+                        question = value.get("question")
+                    break
+                out = await app.ainvoke(Command(resume=resume), config)
+        except Exception as e:                               # an API outage must be visible, never look like a pass
+            error = f"{type(e).__name__}: {e}"[:300]
+        state = (await app.aget_state(config)).values
+        result = collect(state, interrupts, question, error)
+        result.update(run_id=run_id, model=model, latency_s=round(time.perf_counter() - started, 3))
+        tracing.set_attrs(span, **{"output.value": result["answer"] or question or error or "",
+                                   "metadata": {"model": model, "stop_reason": result["stop_reason"],
+                                                "steps": result["steps"], "cost_usd": result["cost_usd"]}})
+        if error:
+            tracing.error(span, error)
     return result
 
 

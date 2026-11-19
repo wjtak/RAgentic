@@ -18,7 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from summarize import write_summary  # noqa: E402
 
-from agent_demarches import backend, memory  # noqa: E402
+from agent_demarches import backend, memory, tracing  # noqa: E402
 from agent_demarches.config import STATE_DIR  # noqa: E402
 from agent_demarches.graph import build_graph  # noqa: E402
 from agent_demarches.hub import ToolHub  # noqa: E402
@@ -52,7 +52,8 @@ async def run_scenario(hub, llm, scn: dict, state_path: Path, memory_path: Path)
         "state_ok": outcome["state_ok"], "state_diff": outcome["state_diff"], "final_state": final,
         "tool_calls": [c["tool"] for c in run["tool_calls"]], "tool_calls_detail": run["tool_calls"],
         "steps": run["steps"], "max_steps": scn["max_steps"], "tokens_in": run["tokens_in"],
-        "tokens_out": run["tokens_out"], "latency_s": run["latency_s"], "cost_usd": run["cost_usd"],
+        "tokens_out": run["tokens_out"], "latency_s": run["latency_s"], "model_latency_s": run["model_latency_s"],
+        "tool_latency_s": run["tool_latency_s"], "cost_usd": run["cost_usd"],
         "stop_reason": run["stop_reason"], "answer": run["answer"], "question": run["question"],
         "error": run["error"], "backend_changes": final_state["_ledger"],
         "_trace": {"events": run["trace"], "observations": run["observations"]},
@@ -81,6 +82,7 @@ async def run_all(scns: list[dict], llm, out: Path, state_dir: Path = STATE_DIR 
 
 
 def main():
+    tracing.setup()                                      # no-op unless TRACING=phoenix
     ap = argparse.ArgumentParser()
     ap.add_argument("--scenarios", default="eval/scenarios.jsonl")
     ap.add_argument("--out", default="eval/")

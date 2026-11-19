@@ -30,6 +30,12 @@ def load(path: str | Path) -> list[dict]:
     return [json.loads(line) for line in p.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
+def _median(sel: list[dict], key: str):
+    """Median of a field that older results (eval/runs/v1) do not have: "-" when absent."""
+    values = [r[key] for r in sel if r.get(key) is not None]
+    return round(statistics.median(values), 2) if values else "-"
+
+
 def per_kind(results: list[dict]) -> list[dict]:
     rows = []
     for kind in [*KINDS, "ALL"]:
@@ -49,6 +55,8 @@ def per_kind(results: list[dict]) -> list[dict]:
             "cost_usd_per_run": round(sum(r["cost_usd"] for r in sel) / len(sel), 6),
             "latency_s_median": round(statistics.median(r["latency_s"] for r in sel), 2),
             "latency_s_max": round(max(r["latency_s"] for r in sel), 2),
+            "model_latency_s_median": _median(sel, "model_latency_s"),
+            "tool_latency_s_median": _median(sel, "tool_latency_s"),
             "failures": ", ".join(f"{n}x {c}" for c, n in fails.most_common()) or "-",
         })
     return rows
@@ -68,7 +76,8 @@ def write_summary(results: list[dict], out_dir: Path) -> str:
         w.writerows(rows)
     model = results[0].get("model", "?")
     cols = ["kind", "runs", "passed", "pass_rate", "ci95", "state_ok", "mean_steps", "mean_tokens_in",
-            "mean_tokens_out", "cost_usd_per_run", "latency_s_median", "failures"]
+            "mean_tokens_out", "cost_usd_per_run", "latency_s_median", "model_latency_s_median",
+            "tool_latency_s_median", "failures"]
     failed = [r for r in results if not r["passed"]]
     text = [f"# Results: {model}", "", markdown(rows, cols), "", f"## Failed runs ({len(failed)})", ""]
     text += [f"- **{r['id']}** ({r['kind']}) {r['task']} -> `{r['reason']}`; calls: "
@@ -85,8 +94,10 @@ def compare(dirs: list[str], out: Path) -> str:
         model = results[0].get("model", Path(d).name)
         for r in per_kind(results):
             rows.append({"model": model, **{k: r[k] for k in ("kind", "runs", "pass_rate", "ci95", "mean_steps",
-                                                              "cost_usd_per_run", "latency_s_median")}})
-    cols = ["model", "kind", "runs", "pass_rate", "ci95", "mean_steps", "cost_usd_per_run", "latency_s_median"]
+                                                              "cost_usd_per_run", "latency_s_median",
+                                                              "model_latency_s_median", "tool_latency_s_median")}})
+    cols = ["model", "kind", "runs", "pass_rate", "ci95", "mean_steps", "cost_usd_per_run", "latency_s_median",
+            "model_latency_s_median", "tool_latency_s_median"]
     table = markdown(rows, cols)
     out.mkdir(parents=True, exist_ok=True)
     (out / "comparison.md").write_text("# Model comparison, same scenarios\n\n" + table + "\n", encoding="utf-8")

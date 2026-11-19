@@ -10,7 +10,7 @@ import argparse
 import asyncio
 import json
 
-from agent_demarches import backend, memory
+from agent_demarches import backend, memory, tracing
 from agent_demarches.config import ROOT, STATE_DIR
 from agent_demarches.graph import build_graph
 from agent_demarches.hub import ToolHub
@@ -32,6 +32,7 @@ def human(value: dict):
 
 
 async def main(a):
+    tracing.setup()                                      # no-op unless TRACING=phoenix
     d = STATE_DIR / "demo"
     state, mem = d / "backend.json", d / "memory.sqlite"
     task, seed, patch, faults = a.task, a.seed, None, None
