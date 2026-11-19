@@ -1,0 +1,226 @@
+{
+ "id": "s021",
+ "kind": "ambiguous",
+ "task": "Réserve le créneau de vendredi prochain à Montreuil pour Léo.",
+ "model": "google/gemini-2.5-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_stop: expected asked_user, got answered",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "date_to": "2026-11-21",
+    "date_from": "2026-11-21",
+    "town_hall": "Montreuil"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  }
+ ],
+ "steps": 3,
+ "max_steps": 4,
+ "tokens_in": 7635,
+ "tokens_out": 137,
+ "latency_s": 2.114,
+ "model_latency_s": 2.053,
+ "tool_latency_s": 0.028,
+ "cost_usd": 0.001211,
+ "stop_reason": "answered",
+ "answer": "Il n'y a pas de créneau disponible à Montreuil pour vendredi prochain.",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s021.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan: Get the profile to find Léo's ID, then search for slots in Montreuil for next Friday, then ask the user to choose a slot.\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2237,
+   "tokens_out": 44,
+   "cost_usd": 0.000314,
+   "latency_s": 0.751
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Plan: Search for slots in Montreuil for next Friday (2026-11-21).\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 2654,
+   "tokens_out": 75,
+   "cost_usd": 0.00050661,
+   "latency_s": 0.713
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "date_to": "2026-11-21",
+    "date_from": "2026-11-21",
+    "town_hall": "Montreuil"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Il n'y a pas de créneau disponible à Montreuil pour vendredi prochain.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [],
+   "tokens_in": 2744,
+   "tokens_out": 18,
+   "cost_usd": 0.00039084,
+   "latency_s": 0.589
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Plan: Get the profile to find Léo's ID, then search for slots in Montreuil for next Friday, then ask the user to choose a slot.\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "date_to": "2026-11-21",
+    "date_from": "2026-11-21",
+    "town_hall": "Montreuil"
+   },
+   "thought": "Plan: Search for slots in Montreuil for next Friday (2026-11-21).\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": []
+  }
+ ]
+}

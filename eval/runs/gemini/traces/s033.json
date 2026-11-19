@@ -1,0 +1,417 @@
+{
+ "id": "s033",
+ "kind": "normal",
+ "task": "J'ai perdu ma carte d'identité : achète le timbre s'il en faut un et crée la pré-demande de renouvellement.",
+ "model": "google/gemini-2.5-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "loss",
+    "status": "draft"
+   }
+  },
+  "stamps": {
+   "P1/id_card_loss_theft": 1
+  },
+  "balance_eur": 95.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "create_application",
+  "search_fiches",
+  "buy_tax_stamp"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "create_application",
+   "args": {
+    "motive": "loss",
+    "kind": "id_card",
+    "person_id": "P1"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.019
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "timbre fiscal carte d'identité perte"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 62.879
+  },
+  {
+   "step": 4,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P1"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.041
+  }
+ ],
+ "steps": 5,
+ "max_steps": 9,
+ "tokens_in": 14275,
+ "tokens_out": 264,
+ "latency_s": 67.433,
+ "model_latency_s": 4.433,
+ "tool_latency_s": 62.954,
+ "cost_usd": 0.002547,
+ "stop_reason": "answered",
+ "answer": "J'ai créé la pré-demande D3 pour la carte d'identité de Camille Martin et acheté un timbre fiscal de 25 EUR (TF1).",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "loss"
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "result": {
+    "stamp_id": "TF1",
+    "type": "id_card_loss_theft",
+    "person": "P1",
+    "amount_eur": 25.0,
+    "balance_eur": 95.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  }
+ ],
+ "trace_file": "traces/s033.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan: Get user's profile to find their age and create the pre-application. Then, search for fact sheets about identity card stamps to determine if one is needed and its price. Finally, buy the stamp if necessary.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2252,
+   "tokens_out": 56,
+   "cost_usd": 0.00034796,
+   "latency_s": 0.97
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Plan: Get user's profile to find their age and create the pre-application. Then, search for fact sheets about identity card stamps to determine if one is needed and its price. Finally, buy the stamp if necessary.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 2680,
+   "tokens_out": 76,
+   "cost_usd": 0.00051637,
+   "latency_s": 0.837
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "create_application",
+   "args": {
+    "motive": "loss",
+    "kind": "id_card",
+    "person_id": "P1"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Plan: Search for fact sheets about identity card stamps to determine if one is needed and its price. Finally, buy the stamp if necessary.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 2802,
+   "tokens_out": 51,
+   "cost_usd": 0.00048939,
+   "latency_s": 0.725
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "timbre fiscal carte d'identité perte"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Plan: Buy the tax stamp for the identity card loss.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 3212,
+   "tokens_out": 46,
+   "cost_usd": 0.00059314,
+   "latency_s": 1.356
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P1"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 4,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P1"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "J'ai créé la pré-demande D3 pour la carte d'identité de Camille Martin et acheté un timbre fiscal de 25 EUR (TF1).",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [],
+   "tokens_in": 3329,
+   "tokens_out": 35,
+   "cost_usd": 0.0006002,
+   "latency_s": 0.545
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Plan: Get user's profile to find their age and create the pre-application. Then, search for fact sheets about identity card stamps to determine if one is needed and its price. Finally, buy the stamp if necessary.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "motive": "loss",
+    "kind": "id_card",
+    "person_id": "P1"
+   },
+   "thought": "Plan: Get user's profile to find their age and create the pre-application. Then, search for fact sheets about identity card stamps to determine if one is needed and its price. Finally, buy the stamp if necessary.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.019,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "loss"
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "timbre fiscal carte d'identité perte"
+   },
+   "thought": "Plan: Search for fact sheets about identity card stamps to determine if one is needed and its price. Finally, buy the stamp if necessary.",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 62.879,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "En cas de perte ou de vol de votre carte d'identité, vous devez demander le renouvellement de la carte et acheter un timbre fiscal. L'achat du timbre fiscal (en ligne ou sur place) varie selon le lieu de la demande :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
+    }
+   ]
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P1"
+   },
+   "thought": "Plan: Buy the tax stamp for the identity card loss.",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.041,
+   "retried_errors": [],
+   "result": {
+    "stamp_id": "TF1",
+    "type": "id_card_loss_theft",
+    "person": "P1",
+    "amount_eur": 25.0,
+    "balance_eur": 95.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  }
+ ]
+}

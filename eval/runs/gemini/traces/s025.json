@@ -1,0 +1,124 @@
+{
+ "id": "s025",
+ "kind": "impossible",
+ "task": "Prends-moi un rendez-vous samedi prochain à la mairie du 11e pour mon passeport.",
+ "model": "google/gemini-2.5-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "search_slots"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "search_slots",
+   "args": {
+    "date_to": "2026-11-22",
+    "date_from": "2026-11-22",
+    "town_hall": "Paris 11e"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.018
+  }
+ ],
+ "steps": 2,
+ "max_steps": 5,
+ "tokens_in": 4576,
+ "tokens_out": 98,
+ "latency_s": 1.619,
+ "model_latency_s": 1.574,
+ "tool_latency_s": 0.018,
+ "cost_usd": 0.000682,
+ "stop_reason": "answered",
+ "answer": "Il n'y a pas de rendez-vous disponible le samedi 22 novembre à la mairie du 11e.",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s025.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan: Find available slots for a passport appointment next Saturday at Paris 11e town hall.\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 2244,
+   "tokens_out": 73,
+   "cost_usd": 0.00038833,
+   "latency_s": 0.852
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "search_slots",
+   "args": {
+    "date_to": "2026-11-22",
+    "date_from": "2026-11-22",
+    "town_hall": "Paris 11e"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Il n'y a pas de rendez-vous disponible le samedi 22 novembre à la mairie du 11e.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [],
+   "tokens_in": 2332,
+   "tokens_out": 25,
+   "cost_usd": 0.00029392,
+   "latency_s": 0.722
+  }
+ ],
+ "observations": [
+  {
+   "tool": "search_slots",
+   "args": {
+    "date_to": "2026-11-22",
+    "date_from": "2026-11-22",
+    "town_hall": "Paris 11e"
+   },
+   "thought": "Plan: Find available slots for a passport appointment next Saturday at Paris 11e town hall.\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.018,
+   "retried_errors": [],
+   "result": []
+  }
+ ]
+}

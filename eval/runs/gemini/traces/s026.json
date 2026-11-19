@@ -1,0 +1,80 @@
+{
+ "id": "s026",
+ "kind": "impossible",
+ "task": "Rembourse le timbre fiscal acheté par erreur pour Inès.",
+ "model": "google/gemini-2.5-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {
+   "P3/passport_minor_0_14": 1
+  },
+  "balance_eur": 103.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [],
+ "tool_calls_detail": [],
+ "steps": 1,
+ "max_steps": 4,
+ "tokens_in": 2234,
+ "tokens_out": 26,
+ "latency_s": 0.711,
+ "model_latency_s": 0.691,
+ "tool_latency_s": 0,
+ "cost_usd": 0.000735,
+ "stop_reason": "answered",
+ "answer": "Je ne peux pas rembourser un timbre fiscal. Les timbres fiscaux ne sont ni remboursables ni échangeables.",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s026.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je ne peux pas rembourser un timbre fiscal. Les timbres fiscaux ne sont ni remboursables ni échangeables.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [],
+   "tokens_in": 2234,
+   "tokens_out": 26,
+   "cost_usd": 0.0007352,
+   "latency_s": 0.691
+  }
+ ],
+ "observations": []
+}

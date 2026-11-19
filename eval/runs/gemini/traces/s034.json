@@ -1,0 +1,333 @@
+{
+ "id": "s034",
+ "kind": "normal",
+ "task": "Crée la pré-demande de première carte d'identité d'Inès, et achète le timbre fiscal s'il en faut un.",
+ "model": "google/gemini-2.5-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.016
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "timbre fiscal carte d'identité première demande"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 7.178
+  },
+  {
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "motive": "first",
+    "person_id": "P3"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.018
+  }
+ ],
+ "steps": 4,
+ "max_steps": 7,
+ "tokens_in": 11164,
+ "tokens_out": 213,
+ "latency_s": 10.403,
+ "model_latency_s": 3.153,
+ "tool_latency_s": 7.212,
+ "cost_usd": 0.001968,
+ "stop_reason": "answered",
+ "answer": "Une pré-demande de carte d'identité (D3) a été créée pour Inès. Il n'y a pas besoin de timbre fiscal pour une première demande de carte d'identité.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ],
+ "trace_file": "traces/s034.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan: Get profile to find Inès's ID and age, then search fact sheets for identity card stamp requirements, create the application, and finally buy the stamp if needed.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2252,
+   "tokens_out": 46,
+   "cost_usd": 0.00032296,
+   "latency_s": 0.787
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Plan: Get profile to find Inès's ID and age, then search fact sheets for identity card stamp requirements, create the application, and finally buy the stamp if needed.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 2670,
+   "tokens_out": 60,
+   "cost_usd": 0.00047364,
+   "latency_s": 0.733
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "timbre fiscal carte d'identité première demande"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Plan: Get profile to find Inès's ID and age, then search fact sheets for identity card stamp requirements, create the application, and finally buy the stamp if needed.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 3065,
+   "tokens_out": 66,
+   "cost_usd": 0.00060039,
+   "latency_s": 1.029
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "motive": "first",
+    "person_id": "P3"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Une pré-demande de carte d'identité (D3) a été créée pour Inès. Il n'y a pas besoin de timbre fiscal pour une première demande de carte d'identité.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [],
+   "tokens_in": 3177,
+   "tokens_out": 41,
+   "cost_usd": 0.00057095,
+   "latency_s": 0.604
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Plan: Get profile to find Inès's ID and age, then search fact sheets for identity card stamp requirements, create the application, and finally buy the stamp if needed.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.016,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "timbre fiscal carte d'identité première demande"
+   },
+   "thought": "Plan: Get profile to find Inès's ID and age, then search fact sheets for identity card stamp requirements, create the application, and finally buy the stamp if needed.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 7.178,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F14929",
+     "title": "Passeport d'un majeur : première demande",
+     "excerpt": "## En France > Acheter le timbre fiscal sur internet > Vous ne faites pas de pré-demande\nVous avez 2 possibilités : soit acheter le timbre sur internet, soit l'acheter dans un bureau de tabac."
+    },
+    {
+     "doc_id": "F14929",
+     "title": "Passeport d'un majeur : première demande",
+     "excerpt": "## En France > Acheter le timbre fiscal sur internet > Vous ne faites pas de pré-demande > Vous voulez acheter le timbre sur internet\nVous devez utiliser ce téléservice : selNG : Achat en ligne du timbre fiscal - Passeport"
+    },
+    {
+     "doc_id": "F14929",
+     "title": "Passeport d'un majeur : première demande",
+     "excerpt": "## En France > Acheter le timbre fiscal sur internet > Vous faites une pré-demande\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    },
+    {
+     "doc_id": "F14929",
+     "title": "Passeport d'un majeur : première demande",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal > Vous ne faites pas de pré-demande > Vous voulez acheter le timbre sur internet\nVous devez utiliser ce téléservice : selNG : Achat en ligne du timbre fiscal - Passeport"
+    }
+   ]
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "motive": "first",
+    "person_id": "P3"
+   },
+   "thought": "Plan: Get profile to find Inès's ID and age, then search fact sheets for identity card stamp requirements, create the application, and finally buy the stamp if needed.",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.018,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ]
+}

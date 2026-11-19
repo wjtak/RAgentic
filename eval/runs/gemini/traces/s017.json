@@ -1,0 +1,150 @@
+{
+ "id": "s017",
+ "kind": "ambiguous",
+ "task": "Annule le rendez-vous.",
+ "model": "google/gemini-2.5-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_appointments"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  }
+ ],
+ "steps": 2,
+ "max_steps": 4,
+ "tokens_in": 4683,
+ "tokens_out": 78,
+ "latency_s": 1.13,
+ "model_latency_s": 1.092,
+ "tool_latency_s": 0.015,
+ "cost_usd": 0.000661,
+ "stop_reason": "answered",
+ "answer": "Quel rendez-vous souhaitez-vous annuler ? Celui de Camille (passeport à Paris 11e le jeudi 26 novembre) ou celui de Léo (carte d'identité à Montreuil le vendredi 27 novembre) ?",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s017.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan: Get the list of appointments to ask the user which one to cancel.\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "list_appointments"
+   ],
+   "tokens_in": 2228,
+   "tokens_out": 26,
+   "cost_usd": 0.00026657,
+   "latency_s": 0.491
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Quel rendez-vous souhaitez-vous annuler ? Celui de Camille (passeport à Paris 11e le jeudi 26 novembre) ou celui de Léo (carte d'identité à Montreuil le vendredi 27 novembre) ?",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [],
+   "tokens_in": 2455,
+   "tokens_out": 52,
+   "cost_usd": 0.00039481,
+   "latency_s": 0.601
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_appointments",
+   "args": {},
+   "thought": "Plan: Get the list of appointments to ask the user which one to cancel.\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "R1",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning",
+     "slot": "C08",
+     "person": "P1",
+     "person_name": "Camille",
+     "reason": "passport",
+     "status": "confirmed"
+    },
+    {
+     "id": "R2",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning",
+     "slot": "C09",
+     "person": "P2",
+     "person_name": "Léo",
+     "reason": "id_card",
+     "status": "confirmed"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,223 @@
+{
+ "id": "s001",
+ "kind": "normal",
+ "task": "Annule le rendez-vous de vendredi.",
+ "model": "google/gemini-2.5-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "cancelled"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_appointments",
+  "cancel_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.186
+  },
+  {
+   "step": 2,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R2"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.015
+  }
+ ],
+ "steps": 3,
+ "max_steps": 5,
+ "tokens_in": 7214,
+ "tokens_out": 86,
+ "latency_s": 2.75,
+ "model_latency_s": 2.496,
+ "tool_latency_s": 0.201,
+ "cost_usd": 0.001907,
+ "stop_reason": "answered",
+ "answer": "Le rendez-vous R2 de Léo à Montreuil, vendredi 27 novembre à 10h30, a été annulé.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "cancel_appointment",
+   "result": {
+    "appointment_id": "R2",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  }
+ ],
+ "trace_file": "traces/s001.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan: Get the list of appointments to find the one on Friday.\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "list_appointments"
+   ],
+   "tokens_in": 2230,
+   "tokens_out": 24,
+   "cost_usd": 0.000729,
+   "latency_s": 1.005
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Plan: Cancel the appointment R2 for Léo on Friday.\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "cancel_appointment"
+   ],
+   "tokens_in": 2455,
+   "tokens_out": 31,
+   "cost_usd": 0.000814,
+   "latency_s": 0.564
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R2"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 2,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R2"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Le rendez-vous R2 de Léo à Montreuil, vendredi 27 novembre à 10h30, a été annulé.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [],
+   "tokens_in": 2529,
+   "tokens_out": 31,
+   "cost_usd": 0.00036424,
+   "latency_s": 0.927
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_appointments",
+   "args": {},
+   "thought": "Plan: Get the list of appointments to find the one on Friday.\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.186,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "R1",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning",
+     "slot": "C08",
+     "person": "P1",
+     "person_name": "Camille",
+     "reason": "passport",
+     "status": "confirmed"
+    },
+    {
+     "id": "R2",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning",
+     "slot": "C09",
+     "person": "P2",
+     "person_name": "Léo",
+     "reason": "id_card",
+     "status": "confirmed"
+    }
+   ]
+  },
+  {
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R2"
+   },
+   "thought": "Plan: Cancel the appointment R2 for Léo on Friday.\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R2",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  }
+ ]
+}

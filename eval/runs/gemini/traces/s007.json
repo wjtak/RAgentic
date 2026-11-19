@@ -1,0 +1,376 @@
+{
+ "id": "s007",
+ "kind": "normal",
+ "task": "Déplace mon rendez-vous passeport de jeudi au mercredi 25 novembre à 10h, dans la même mairie.",
+ "model": "google/gemini-2.5-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "cancelled"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   },
+   "R3": {
+    "slot": "C03",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_appointments",
+  "search_slots",
+  "cancel_appointment",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "date_to": "2026-11-25",
+    "part_of_day": "morning",
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-25"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.018
+  },
+  {
+   "step": 3,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.018
+  },
+  {
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "reason": "passport",
+    "person_id": "P1",
+    "slot_id": "C03"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.036
+  }
+ ],
+ "steps": 5,
+ "max_steps": 8,
+ "tokens_in": 12913,
+ "tokens_out": 244,
+ "latency_s": 3.618,
+ "model_latency_s": 3.482,
+ "tool_latency_s": 0.087,
+ "cost_usd": 0.003066,
+ "stop_reason": "answered",
+ "answer": "Votre rendez-vous passeport (R1) du jeudi 26 novembre à 11h à Paris 11e a été annulé. Un nouveau rendez-vous (R3) a été pris pour vous le mercredi 25 novembre à 10h à Paris 11e.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "cancel_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  },
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R3",
+    "status": "confirmed",
+    "id": "C03",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-25T10:00",
+    "weekday": "mercredi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/s007.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan: Get the user's appointments, then search for slots on the requested date, then ask the user to pick one.\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "list_appointments"
+   ],
+   "tokens_in": 2248,
+   "tokens_out": 36,
+   "cost_usd": 0.00029676,
+   "latency_s": 0.746
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Plan: Search for slots on the requested date and town hall.\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 2485,
+   "tokens_out": 75,
+   "cost_usd": 0.000933,
+   "latency_s": 0.716
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "date_to": "2026-11-25",
+    "part_of_day": "morning",
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-25"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Plan: Cancel the old appointment and book the new one.\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "cancel_appointment"
+   ],
+   "tokens_in": 2633,
+   "tokens_out": 30,
+   "cost_usd": 0.00039024,
+   "latency_s": 0.497
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 3,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Plan: Book the new appointment.\n",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 2706,
+   "tokens_out": 39,
+   "cost_usd": 0.0009093,
+   "latency_s": 0.59
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "reason": "passport",
+    "person_id": "P1",
+    "slot_id": "C03"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Votre rendez-vous passeport (R1) du jeudi 26 novembre à 11h à Paris 11e a été annulé. Un nouveau rendez-vous (R3) a été pris pour vous le mercredi 25 novembre à 10h à Paris 11e.",
+   "model": "google/gemini-2.5-flash",
+   "tool_calls": [],
+   "tokens_in": 2841,
+   "tokens_out": 64,
+   "cost_usd": 0.00053629,
+   "latency_s": 0.933
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_appointments",
+   "args": {},
+   "thought": "Plan: Get the user's appointments, then search for slots on the requested date, then ask the user to pick one.\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "R1",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning",
+     "slot": "C08",
+     "person": "P1",
+     "person_name": "Camille",
+     "reason": "passport",
+     "status": "confirmed"
+    },
+    {
+     "id": "R2",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning",
+     "slot": "C09",
+     "person": "P2",
+     "person_name": "Léo",
+     "reason": "id_card",
+     "status": "confirmed"
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "date_to": "2026-11-25",
+    "part_of_day": "morning",
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-25"
+   },
+   "thought": "Plan: Search for slots on the requested date and town hall.\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.018,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C03",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-25T10:00",
+     "weekday": "mercredi",
+     "part_of_day": "morning"
+    }
+   ]
+  },
+  {
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "thought": "Plan: Cancel the old appointment and book the new one.\n",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.018,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "reason": "passport",
+    "person_id": "P1",
+    "slot_id": "C03"
+   },
+   "thought": "Plan: Book the new appointment.\n",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.036,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R3",
+    "status": "confirmed",
+    "id": "C03",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-25T10:00",
+    "weekday": "mercredi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ]
+}
