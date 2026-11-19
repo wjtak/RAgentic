@@ -1,7 +1,11 @@
 """Results per kind (Session 6), and the comparison of several runs (two models on the same scenarios).
 
-    uv run python eval/summarize.py eval/                                   # one run: per-kind table
-    uv run python eval/summarize.py eval/runs/deepseek eval/runs/gemini     # comparison -> eval/comparison.md
+    uv run python eval/summarize.py eval/runs/gemini                        # one run: summary.md in that folder
+    uv run python eval/summarize.py eval/runs/v1 --out tmp/                 # one run, written elsewhere (v1 untouched)
+    uv run python eval/summarize.py eval/runs/v1 eval/runs/gemini           # comparison -> eval/comparison.md
+
+One folder: summary.md and summary_by_kind.csv go to --out if given, else into that folder (a results.jsonl file:
+into its folder). Several folders: comparison.md and comparison.csv go to --out, else to eval/.
 """
 import argparse
 import csv
@@ -111,10 +115,13 @@ def compare(dirs: list[str], out: Path) -> str:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("dirs", nargs="+")
-    ap.add_argument("--out", default="eval")
+    ap.add_argument("--out", default=None, help="output folder (default: the run's folder, or eval/ to compare)")
     a = ap.parse_args()
     if len(a.dirs) == 1:
-        print(write_summary(load(a.dirs[0]), Path(a.dirs[0]) if Path(a.dirs[0]).is_dir() else Path(a.out)))
+        src = Path(a.dirs[0])
+        out = Path(a.out) if a.out else (src if src.is_dir() else src.parent)
+        out.mkdir(parents=True, exist_ok=True)
+        print(write_summary(load(src), out))
     else:
-        print(compare(a.dirs, Path(a.out)))
+        print(compare(a.dirs, Path(a.out or "eval")))
     sys.exit(0)
