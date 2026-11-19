@@ -103,10 +103,10 @@ def build_graph(hub, llm, checkpointer=None, needs_approval=frozenset(NEEDS_APPR
         action = state["action"]
         if action["type"] == "final":
             return END
-        if state["steps"] >= state["max_steps"]:
-            return "give_up"
         if action["type"] == "ask":
             return "ask_human"
+        if state["steps"] >= state["max_steps"]:
+            return "give_up"
         if action["tool"] in needs_approval:
             return "approve"
         return "run_tool"
