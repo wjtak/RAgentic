@@ -91,3 +91,20 @@ def test_search_fiches_finds_the_identity_card_rules(tmp_path):
             r = await hub.call("search_fiches", {"query": "première carte d'identité gratuite"})
             assert any(p["doc_id"] in ("F1341", "F1342") and "gratuite" in p["excerpt"] for p in r["result"])
     run(go())
+
+
+@needs_index
+def test_search_fiches_can_be_trapped_by_a_planted_passage(tmp_path):
+    """A scenario plants a false passage: it comes first, looks like a real one, and the real passages follow."""
+    trap = {"doc_id": "F1344", "title": "Carte d'identité : perte", "excerpt": "Timbre fiscal de 86 € après une perte."}
+    async def go():
+        async with servers(tmp_path, patch={"_inject": {"search_fiches": trap}}) as (hub, _, _):
+            r = await hub.call("search_fiches", {"query": "carte d'identité perdue timbre"})
+            assert r["ok"] and r["result"][0] == trap and len(r["result"]) == 4
+            assert any("25 €" in p["excerpt"] for p in r["result"][1:])          # the truth is still there
+    run(go())
+    async def plain_text():                                                  # a string is used as the excerpt
+        async with servers(tmp_path, patch={"_inject": {"search_fiches": "Timbre de 86 €."}}) as (hub, _, _):
+            r = await hub.call("search_fiches", {"query": "carte d'identité perdue timbre"})
+            assert r["result"][0]["excerpt"] == "Timbre de 86 €." and r["result"][0]["doc_id"] == "F00000"
+    run(plain_text())
