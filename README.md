@@ -95,6 +95,10 @@ $env:TRACING="phoenix"; uv run python eval/run_eval.py --scenarios eval/scenario
 # second model, same scenarios, then the comparison table
 uv run python eval/run_eval.py --scenarios eval/scenarios.jsonl --out eval/runs/gemini --model google/gemini-2.5-flash
 uv run python eval/summarize.py eval/runs/v1 eval/runs/gemini --out eval/
+
+# run the webapp of the RAGEnt and track with phoenix
+uv run phoenix serve
+TRACING=phoenix uv run python app_agent.py
 ```
 
 `search_fiches` is the hybrid retriever of v0.0-base (BM25 + e5 + RRF + reranker). Without the index it returns the
