@@ -1,0 +1,462 @@
+{
+ "id": "s010",
+ "kind": "normal",
+ "task": "Prends un rendez-vous pour la première carte d'identité d'Inès à Montreuil, un après-midi de la semaine prochaine.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   },
+   "R3": {
+    "slot": "C07",
+    "person": "P3",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "get_fiche",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.016
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande carte d'identité mineur conditions justificatif domicile"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 6.184
+  },
+  {
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1342"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 5,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C07",
+    "person_id": "P3",
+    "reason": "id_card"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.006
+  }
+ ],
+ "steps": 6,
+ "max_steps": 6,
+ "tokens_in": 29823,
+ "tokens_out": 1300,
+ "latency_s": 17.143,
+ "model_latency_s": 10.847,
+ "tool_latency_s": 6.224,
+ "cost_usd": 0.00219,
+ "stop_reason": "answered",
+ "answer": "Rendez-vous confirmé ✅\n\n- **Inès (P3)** — première carte d'identité\n- **Mairie de Montreuil**, vendredi **27 novembre 2026 à 16h00** (après-midi)\n- Référence : **R3** (créneau C07)\n\nÀ savoir : la carte d'identité d'un mineur est **gratuite** (aucun timbre fiscal à acheter). Le lieu ne dépend pas du domicile, donc Montreuil est bien possible. Pensez à apporter le jour J : une photo d'identité de moins de 6 mois, votre pièce d'identité (représentant légal), un justificatif de domicile, et un acte de naissance de moins de 3 mois si Inès n'a pas de passeport. Une pré-demande en ligne est conseillée mais facultative — dites-moi si vous voulez que j'en prépare une.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R3",
+    "status": "confirmed",
+    "id": "C07",
+    "town_hall": "Montreuil",
+    "start": "2026-11-27T16:00",
+    "weekday": "vendredi",
+    "part_of_day": "afternoon",
+    "person": "P3",
+    "reason": "id_card"
+   }
+  }
+ ],
+ "trace_file": "traces/s010.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par consulter le profil du foyer pour identifier Inès.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3044,
+   "tokens_out": 88,
+   "cost_usd": 0.000119364,
+   "latency_s": 1.211
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Inès est P3 (11 ans). Je consulte les fiches Service-Public sur la première carte d'identité d'un mineur.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3418,
+   "tokens_out": 182,
+   "cost_usd": 0.000288114,
+   "latency_s": 1.797
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande carte d'identité mineur conditions justificatif domicile"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Je consulte la fiche complète pour vérifier les règles de lieu et de gratuité.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 4742,
+   "tokens_out": 371,
+   "cost_usd": 0.000672018,
+   "latency_s": 3.034
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1342"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "La carte d'identité est gratuite et le lieu ne dépend pas du domicile. Je cherche les créneaux à Montreuil la semaine prochaine (23–29 novembre), l'après-midi.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 5997,
+   "tokens_out": 251,
+   "cost_usd": 0.000538041,
+   "latency_s": 1.449
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Un seul créneau correspond : C07, vendredi 27 novembre à 16h00. Je le réserve pour Inès (P3).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 6213,
+   "tokens_out": 158,
+   "cost_usd": 0.000250653,
+   "latency_s": 1.221
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C07",
+    "person_id": "P3",
+    "reason": "id_card"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "Rendez-vous confirmé ✅\n\n- **Inès (P3)** — première carte d'identité\n- **Mairie de Montreuil**, vendredi **27 novembre 2026 à 16h00** (après-midi)\n- Référence : **R3** (créneau C07)\n\nÀ savoir : la carte d'identité d'un mineur est **gratuite** (aucun timbre fiscal à acheter). Le lieu ne dépend pas du domicile, donc Montreuil est bien possible. Pensez à apporter le jour J : une photo d'identité de moins de 6 mois, votre pièce d'identité (représentant légal), un justificatif de domicile, et un acte de naissance de moins de 3 mois si Inès n'a pas de passeport. Une pré-demande en ligne est conseillée mais facultative — dites-moi si vous voulez que j'en prépare une.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 6409,
+   "tokens_out": 250,
+   "cost_usd": 0.000321489,
+   "latency_s": 2.135
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par consulter le profil du foyer pour identifier Inès.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.016,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande carte d'identité mineur conditions justificatif domicile"
+   },
+   "thought": "Inès est P3 (11 ans). Je consulte les fiches Service-Public sur la première carte d'identité d'un mineur.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 6.184,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1342",
+     "title": "Carte d'identité d'un mineur : première demande",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > Le mineur n’a pas de passeport > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - En l'absence de passeport ou s’il a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En cas de pré-demande, n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour"
+    },
+    {
+     "doc_id": "F1342",
+     "title": "Carte d'identité d'un mineur : première demande",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > Le mineur n’a pas de passeport > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - En l'absence de passeport ou s’il a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En cas de pré-demande, n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F1342",
+     "title": "Carte d'identité d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur n’a pas de passeport > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - En l'absence de passeport ou s’il a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En cas de pré-demande, n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F1342",
+     "title": "Carte d'identité d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur n’a pas de passeport > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - En l'absence de passeport ou s’il a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En cas de pré-demande, n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour"
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1342"
+   },
+   "thought": "Je consulte la fiche complète pour vérifier les règles de lieu et de gratuité.",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F1342",
+    "title": "Carte d'identité d'un mineur : première demande",
+    "text": "Pour faire la carte d’identité d’un mineur, l'enfant et son représentant légal doivent se rendre dans une mairie équipée avec les pièces justificatives.\nVous souhaitez faire une première demande de carte d’identité pour un mineur ? Un mineur français peut avoir une carte d’identité quel que soit son âge (même un bébé). La procédure varie selon que la demande est faite en France ou à l'étranger et selon l'âge du mineur. Dans tous les cas, la carte d'identité est gratuite. Nous vous présentons les étapes de la démarche.\n\n## En France\n\n## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nOù s'adresser : Mairie délivrant des cartes d'identité\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée :\noutilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité\nIl est possible de préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande permet de gagner du temps lors du dépôt du dossier.\nTéléservice : Pré-demande pour une 1re demande de carte d'identité\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\nLes documents à fournir varient selon que le mineur a déjà un passeport ou non :\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide\nLes documents à fournir varient selon la situation familiale du mineur :\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants :\n- Passeport du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- Pièce d'identité du représentant légal qui dépose la demande\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- En cas de pré-demande, ln° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Les parents du mineur sont séparés ou divorcés\nLes documents à fournir varient selon le mode de garde du mineur :\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Les parents du mineur sont séparés ou divorcés > La garde est alternée\nIl faut présenter les documents suivants :\n- Passeport du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- Pièce d'identité du représentant légal qui dépose la demande\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- En cas de pré-demande, ln° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\nÀ noter\nEn cas de garde alternée, il est possible de mentionner les 2 adresses du mineur sur le titre d'identité. Dans ce cas, il faut présenter :\n- La preuve de la résidence alternée (copie de la décision du juge, convention de divorce ou convention parentale)\n- Et 2 justificatifs de domicile (un pour chaque parent).\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants :\n- Passeport du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- Pièce d'identité du représentant légal qui dépose la demande\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- En cas de pré-demande, ln° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitul"
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "afternoon"
+   },
+   "thought": "La carte d'identité est gratuite et le lieu ne dépend pas du domicile. Je cherche les créneaux à Montreuil la semaine prochaine (23–29 novembre), l'après-midi.",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C07",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T16:00",
+     "weekday": "vendredi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C07",
+    "person_id": "P3",
+    "reason": "id_card"
+   },
+   "thought": "Un seul créneau correspond : C07, vendredi 27 novembre à 16h00. Je le réserve pour Inès (P3).",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R3",
+    "status": "confirmed",
+    "id": "C07",
+    "town_hall": "Montreuil",
+    "start": "2026-11-27T16:00",
+    "weekday": "vendredi",
+    "part_of_day": "afternoon",
+    "person": "P3",
+    "reason": "id_card"
+   }
+  }
+ ]
+}

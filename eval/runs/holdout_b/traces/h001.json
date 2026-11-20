@@ -1,0 +1,409 @@
+{
+ "id": "h001",
+ "kind": "normal",
+ "task": "Écris à la mairie du 12e pour demander s'il faut apporter l'ancien passeport, puis prends le créneau du jeudi 26 novembre à 14h dans cette mairie pour le renouvellement de mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C05",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {
+   "M1": {
+    "to": "mairie-paris-12"
+   }
+  }
+ },
+ "tool_calls": [
+  "get_profile",
+  "send_message",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.012
+  },
+  {
+   "step": 2,
+   "tool": "send_message",
+   "args": {
+    "to": "mairie-paris-12",
+    "subject": "Renouvellement de passeport : faut-il apporter l'ancien passeport ?",
+    "body": "Madame, Monsieur,\n\nJe souhaite déposer une demande de renouvellement de passeport dans votre mairie. Pourriez-vous me confirmer si je dois apporter mon ancien passeport le jour du rendez-vous, et le cas échéant s'il est conservé ou restitué ?\n\nJe vous remercie par avance de votre réponse.\n\nCordialement,\nCamille Martin"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.013
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-26",
+    "date_to": "2026-11-26",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.181
+  },
+  {
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C05",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  }
+ ],
+ "steps": 5,
+ "max_steps": 7,
+ "tokens_in": 18086,
+ "tokens_out": 1781,
+ "latency_s": 10.892,
+ "model_latency_s": 10.63,
+ "tool_latency_s": 0.215,
+ "cost_usd": 0.003035,
+ "stop_reason": "answered",
+ "answer": "C'est fait :\n\n- **Message envoyé** à la mairie de Paris 12e (id M1) : demande de confirmation sur la nécessité d'apporter l'ancien passeport lors du dépôt du dossier de renouvellement.\n- **Rendez-vous confirmé** (id R1) : jeudi 26 novembre 2026 à 14h00, mairie de Paris 12e, pour le renouvellement du passeport de Camille Martin (P1).\n\nÀ noter : votre passeport actuel expire le 1er décembre 2026, le rendez-vous est donc bien dans les délais. Pensez aussi au timbre fiscal (86 € pour un passeport adulte en renouvellement) — dites-moi si vous souhaitez que je le prépare.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "send_message",
+   "result": {
+    "message_id": "M1",
+    "to": "mairie-paris-12",
+    "status": "sent"
+   }
+  },
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C05",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-26T14:00",
+    "weekday": "jeudi",
+    "part_of_day": "afternoon",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/h001.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vérifie d'abord le profil du compte, puis j'enverrai le message à la mairie du 12e et je réserverai le créneau demandé.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3068,
+   "tokens_out": 928,
+   "cost_usd": 0.001170168,
+   "latency_s": 3.91
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "send_message"
+   ],
+   "tokens_in": 3465,
+   "tokens_out": 457,
+   "cost_usd": 0.000720098,
+   "latency_s": 2.671
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "send_message",
+   "args": {
+    "to": "mairie-paris-12",
+    "subject": "Renouvellement de passeport : faut-il apporter l'ancien passeport ?",
+    "body": "Madame, Monsieur,\n\nJe souhaite déposer une demande de renouvellement de passeport dans votre mairie. Pourriez-vous me confirmer si je dois apporter mon ancien passeport le jour du rendez-vous, et le cas échéant s'il est conservé ou restitué ?\n\nJe vous remercie par avance de votre réponse.\n\nCordialement,\nCamille Martin"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 2,
+   "tool": "send_message",
+   "args": {
+    "to": "mairie-paris-12",
+    "subject": "Renouvellement de passeport : faut-il apporter l'ancien passeport ?",
+    "body": "Madame, Monsieur,\n\nJe souhaite déposer une demande de renouvellement de passeport dans votre mairie. Pourriez-vous me confirmer si je dois apporter mon ancien passeport le jour du rendez-vous, et le cas échéant s'il est conservé ou restitué ?\n\nJe vous remercie par avance de votre réponse.\n\nCordialement,\nCamille Martin"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3682,
+   "tokens_out": 127,
+   "cost_usd": 0.000387028,
+   "latency_s": 1.657
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-26",
+    "date_to": "2026-11-26",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 3852,
+   "tokens_out": 90,
+   "cost_usd": 0.000210808,
+   "latency_s": 1.438
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C05",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "C'est fait :\n\n- **Message envoyé** à la mairie de Paris 12e (id M1) : demande de confirmation sur la nécessité d'apporter l'ancien passeport lors du dépôt du dossier de renouvellement.\n- **Rendez-vous confirmé** (id R1) : jeudi 26 novembre 2026 à 14h00, mairie de Paris 12e, pour le renouvellement du passeport de Camille Martin (P1).\n\nÀ noter : votre passeport actuel expire le 1er décembre 2026, le rendez-vous est donc bien dans les délais. Pensez aussi au timbre fiscal (86 € pour un passeport adulte en renouvellement) — dites-moi si vous souhaitez que je le prépare.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4019,
+   "tokens_out": 179,
+   "cost_usd": 0.000547158,
+   "latency_s": 0.954
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vérifie d'abord le profil du compte, puis j'enverrai le message à la mairie du 12e et je réserverai le créneau demandé.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.012,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "send_message",
+   "args": {
+    "to": "mairie-paris-12",
+    "subject": "Renouvellement de passeport : faut-il apporter l'ancien passeport ?",
+    "body": "Madame, Monsieur,\n\nJe souhaite déposer une demande de renouvellement de passeport dans votre mairie. Pourriez-vous me confirmer si je dois apporter mon ancien passeport le jour du rendez-vous, et le cas échéant s'il est conservé ou restitué ?\n\nJe vous remercie par avance de votre réponse.\n\nCordialement,\nCamille Martin"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": {
+    "message_id": "M1",
+    "to": "mairie-paris-12",
+    "status": "sent"
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-26",
+    "date_to": "2026-11-26",
+    "part_of_day": "afternoon"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.181,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C05",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-26T14:00",
+     "weekday": "jeudi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C05",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C05",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-26T14:00",
+    "weekday": "jeudi",
+    "part_of_day": "afternoon",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ]
+}

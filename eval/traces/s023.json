@@ -56,7 +56,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.017
+   "latency_s": 0.008
   },
   {
    "step": 2,
@@ -71,7 +71,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.012
+   "latency_s": 0.011
   },
   {
    "step": 3,
@@ -87,12 +87,14 @@
  ],
  "steps": 4,
  "max_steps": 6,
- "tokens_in": 13285,
- "tokens_out": 507,
- "latency_s": 4.53,
- "cost_usd": 0.000547,
+ "tokens_in": 13719,
+ "tokens_out": 516,
+ "latency_s": 4.133,
+ "model_latency_s": 4.073,
+ "tool_latency_s": 0.033,
+ "cost_usd": 0.00045,
  "stop_reason": "answered",
- "answer": "Je n'ai rien acheté : le timbre fiscal pour le renouvellement d'un passeport d'adulte (vous, Camille Martin, 36 ans) coûte **86 €** (timbre `passport_adult`, source F21091), alors que le solde de votre compte n'est que de **30 €**. Le paiement échouerait pour fonds insuffisants.\n\nVous pouvez recharger votre compte, puis me redemander l'achat du timbre.",
+ "answer": "Je ne peux pas acheter le timbre : le solde du compte est de **30,00 €**, alors que le timbre fiscal « passeport adulte » pour un renouvellement (Camille Martin, P1, 36 ans) coûte **86,00 €** (source : fiche F21091).\n\nRien n'a donc été acheté ni débité. Vous pouvez créditer le compte (il manque 56 €) puis me redemander l'achat du timbre `passport_adult` pour P1 — je le ferai après votre accord.",
  "question": null,
  "error": null,
  "backend_changes": [],
@@ -105,39 +107,35 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je commence par vérifier votre profil et votre solde.\n\n",
+   "content": "Plan : je vérifie d'abord votre profil (identité et âge) pour déterminer le timbre passeport adapté.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "get_wallet"
+    "get_profile"
    ],
-   "tokens_in": 2961,
-   "tokens_out": 124,
-   "cost_usd": 0.000124167,
-   "latency_s": 0.83
+   "tokens_in": 3027,
+   "tokens_out": 96,
+   "cost_usd": 5.86188e-05,
+   "latency_s": 0.861
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
    "step": 2,
-   "content": "",
+   "content": "Profil récupéré : Camille Martin (P1, 36 ans), passeport expirant le 01/12/2026. Je vérifie le timbre requis pour un renouvellement depasseport adulte.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "stamp_price",
-    "get_wallet"
+    "stamp_price"
    ],
-   "tokens_in": 3332,
-   "tokens_out": 113,
-   "cost_usd": 0.000136851,
-   "latency_s": 0.797
+   "tokens_in": 3414,
+   "tokens_out": 137,
+   "cost_usd": 0.0001759464,
+   "latency_s": 1.08
   },
   {
    "kind": "call",
@@ -148,22 +146,20 @@
     "age": 36,
     "motive": "renewal"
    },
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
    "step": 3,
-   "content": "",
+   "content": "Timbre requis : passeport adulte, 86 €. Je vérifie le solde du compte avant paiement.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_wallet"
    ],
-   "tokens_in": 3471,
-   "tokens_out": 29,
-   "cost_usd": 8.364e-05,
-   "latency_s": 0.493
+   "tokens_in": 3602,
+   "tokens_out": 55,
+   "cost_usd": 7.30296e-05,
+   "latency_s": 0.694
   },
   {
    "kind": "call",
@@ -175,25 +171,25 @@
   {
    "kind": "model",
    "step": 4,
-   "content": "Je n'ai rien acheté : le timbre fiscal pour le renouvellement d'un passeport d'adulte (vous, Camille Martin, 36 ans) coûte **86 €** (timbre `passport_adult`, source F21091), alors que le solde de votre compte n'est que de **30 €**. Le paiement échouerait pour fonds insuffisants.\n\nVous pouvez recharger votre compte, puis me redemander l'achat du timbre.",
+   "content": "Je ne peux pas acheter le timbre : le solde du compte est de **30,00 €**, alors que le timbre fiscal « passeport adulte » pour un renouvellement (Camille Martin, P1, 36 ans) coûte **86,00 €** (source : fiche F21091).\n\nRien n'a donc été acheté ni débité. Vous pouvez créditer le compte (il manque 56 €) puis me redemander l'achat du timbre `passport_adult` pour P1 — je le ferai après votre accord.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3521,
-   "tokens_out": 241,
-   "cost_usd": 0.00020217,
-   "latency_s": 2.345
+   "tokens_in": 3676,
+   "tokens_out": 228,
+   "cost_usd": 0.0001419696,
+   "latency_s": 1.438
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je commence par vérifier votre profil et votre solde.\n\n",
+   "thought": "Plan : je vérifie d'abord votre profil (identité et âge) pour déterminer le timbre passeport adapté.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.017,
+   "latency_s": 0.008,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -262,12 +258,12 @@
     "age": 36,
     "motive": "renewal"
    },
-   "thought": "",
+   "thought": "Profil récupéré : Camille Martin (P1, 36 ans), passeport expirant le 01/12/2026. Je vérifie le timbre requis pour un renouvellement depasseport adulte.",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.012,
+   "latency_s": 0.011,
    "retried_errors": [],
    "result": {
     "stamp_type": "passport_adult",
@@ -279,7 +275,7 @@
   {
    "tool": "get_wallet",
    "args": {},
-   "thought": "",
+   "thought": "Timbre requis : passeport adulte, 86 €. Je vérifie le solde du compte avant paiement.",
    "step": 3,
    "ok": true,
    "executed": true,

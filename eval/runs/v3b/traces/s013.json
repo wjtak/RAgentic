@@ -1,0 +1,396 @@
+{
+ "id": "s013",
+ "kind": "normal",
+ "task": "Prends-moi un rendez-vous pour renouveler mon passeport la semaine prochaine, comme d'habitude.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C04",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.017
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions validité mairie"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.713
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "morning"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C04",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  }
+ ],
+ "steps": 5,
+ "max_steps": 6,
+ "tokens_in": 20257,
+ "tokens_out": 862,
+ "latency_s": 13.019,
+ "model_latency_s": 8.23,
+ "tool_latency_s": 4.751,
+ "cost_usd": 0.002099,
+ "stop_reason": "answered",
+ "answer": "C'est fait ✅\n\n- **Rendez-vous R1** : mardi **24 novembre 2026 à 9h30**, mairie du **Paris 12e**, motif **renouvellement de passeport** pour **Camille Martin** (P1).\n\nPour le jour du rendez-vous, pensez à apporter : votre passeport actuel (valable jusqu'au 01/12/2026), une photo d'identité de moins de 6 mois, un justificatif de domicile de moins d'un an, et le timbre fiscal (sauf si vous faites la pré-demande en ligne et l'achetez à ce moment-là).\n\nSouhaitez-vous que je prépare la **pré-demande ANTS** et/ou que j'achète le **timbre fiscal** depuis votre compte ? Je ne le fais pas sans votre accord.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C04",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-24T09:30",
+    "weekday": "mardi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/s013.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "- horaire_prefere: le matin\n- mairie_preferee: Paris 12e"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par vérifier votre profil, puis je chercherai un créneau le matin à Paris 12e la semaine prochaine.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3059,
+   "tokens_out": 178,
+   "cost_usd": 0.0011313,
+   "latency_s": 1.124
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3446,
+   "tokens_out": 204,
+   "cost_usd": 0.000214352,
+   "latency_s": 2.317
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions validité mairie"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 4415,
+   "tokens_out": 137,
+   "cost_usd": 0.000244744,
+   "latency_s": 1.379
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "morning"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 4585,
+   "tokens_out": 106,
+   "cost_usd": 0.000288312,
+   "latency_s": 0.97
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C04",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "C'est fait ✅\n\n- **Rendez-vous R1** : mardi **24 novembre 2026 à 9h30**, mairie du **Paris 12e**, motif **renouvellement de passeport** pour **Camille Martin** (P1).\n\nPour le jour du rendez-vous, pensez à apporter : votre passeport actuel (valable jusqu'au 01/12/2026), une photo d'identité de moins de 6 mois, un justificatif de domicile de moins d'un an, et le timbre fiscal (sauf si vous faites la pré-demande en ligne et l'achetez à ce moment-là).\n\nSouhaitez-vous que je prépare la **pré-demande ANTS** et/ou que j'achète le **timbre fiscal** depuis votre compte ? Je ne le fais pas sans votre accord.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4752,
+   "tokens_out": 237,
+   "cost_usd": 0.00022016,
+   "latency_s": 2.44
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par vérifier votre profil, puis je chercherai un créneau le matin à Paris 12e la semaine prochaine.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.017,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions validité mairie"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.713,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous ne répondez pas à ces conditions > Préparer les documents à fournir et décider du mode de retrait du passeport > Votre passeport est en cours de validité\nVous devez présenter les documents suivants : - Votre passeport - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande) - Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet). Votre passeport actuel vous est remis à la fin du rendez-vous."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## France > Préparer les documents à présenter > Votre passeport est en cours de validité\nVous devez présenter les documents suivants : - Votre passeport - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande) - Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet). Votre passeport actuel vous est remis à la fin du rendez-vous."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Autre pays > Préparer les documents à fournir et décider du mode de retrait du passeport > Documents à fournir > Votre passeport est en cours de validité\nVous devez présenter les documents suivants : - Votre passeport - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande) - Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet). Votre passeport actuel vous est remis à la fin du rendez-vous."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal\nVous pouvez faire la demande de renouvellement du passeport sans vous déplacer à l'ambassade ou au consulat si vous répondez à toutes les conditions suivantes : - Vous avez toujours votre passeport (il n'a pas été perdu ou volé) - Vous étiez âgé d'au moins 18 ans à la date d'émission de votre passeport actuel - Votre passeport est encore valide ou a expiré depuis moins de 5 ans - Vous ne demandez pas le renouvellement de votre passeport pour faire modifier votre nom de naissance ou votre prénom ou votre sexe - Vous ne demandez pas un 2e passeport (pour raisons professionnelles ou destinations incompatibles) - Vous êtes inscrit au Registre des Français établis hors de France et avez en votre possession votre numéro d'inscription consulaire (Numic) ainsi que votre adresse e-mail figurant au Registre - Vous avez une identité numérique France Identité certifiée ou une identité numérique La"
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "morning"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C04",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-24T09:30",
+     "weekday": "mardi",
+     "part_of_day": "morning"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C04",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C04",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-24T09:30",
+    "weekday": "mardi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ]
+}

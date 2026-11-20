@@ -64,7 +64,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.009
   },
   {
    "step": 2,
@@ -75,7 +75,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.013
+   "latency_s": 0.016
   },
   {
    "step": 3,
@@ -83,14 +83,15 @@
    "args": {
     "town_hall": "Paris 11e",
     "date_from": "2026-11-25",
-    "date_to": "2026-11-25"
+    "date_to": "2026-11-25",
+    "part_of_day": "morning"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.014
   },
   {
    "step": 4,
@@ -105,7 +106,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.01
+   "latency_s": 0.016
   },
   {
    "step": 5,
@@ -118,17 +119,19 @@
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.013
+   "latency_s": 0.01
   }
  ],
  "steps": 6,
  "max_steps": 8,
- "tokens_in": 21022,
- "tokens_out": 1225,
- "latency_s": 7.14,
- "cost_usd": 0.001169,
+ "tokens_in": 21846,
+ "tokens_out": 1644,
+ "latency_s": 8.308,
+ "model_latency_s": 8.198,
+ "tool_latency_s": 0.065,
+ "cost_usd": 0.002647,
  "stop_reason": "answered",
- "answer": "C'est fait : votre rendez-vous passeport est déplacé.\n\n- **Nouveau rendez-vous** : R3 — mercredi 25 novembre 2026 à 10h00, mairie du **Paris 11e** (créneau C03), pour Camille (passeport).\n- **Ancien rendez-vous** : R1 — jeudi 26 novembre 2026 à 11h00, annulé (le créneau a été libéré, c'est irréversible).\n\nÀ noter : votre passeport actuel expire le 01/12/2026, pensez au timbre fiscal et aux documents à apporter pour ce rendez-vous.",
+ "answer": "C'est fait : votre rendez-vous passeport est déplacé.\n\n- **Nouveau rendez-vous (R3)** : mercredi 25 novembre 2026 à 10h00, mairie du **Paris 11e**, pour Camille (passeport).\n- **Ancien rendez-vous (R1)** : jeudi 26 novembre à 11h00 — annulé (le créneau a été libéré, action irréversible).\n\nÀ noter : votre passeport actuel expire le 1er décembre 2026, pensez à vous munir des documents demandés (photo, justificatif de domicile, ancien passeport) et du timbre fiscal si ce n'est pas déjà fait.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -164,25 +167,22 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "",
+   "content": "Je commence par vérifier votre profil et vos rendez-vous.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "list_appointments"
+    "get_profile"
    ],
-   "tokens_in": 2894,
-   "tokens_out": 178,
-   "cost_usd": 0.000141138,
-   "latency_s": 0.988
+   "tokens_in": 3039,
+   "tokens_out": 235,
+   "cost_usd": 0.000170988,
+   "latency_s": 1.482
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "list_appointments"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -192,10 +192,10 @@
    "tool_calls": [
     "list_appointments"
    ],
-   "tokens_in": 3254,
-   "tokens_out": 56,
-   "cost_usd": 0.000130818,
-   "latency_s": 0.691
+   "tokens_in": 3410,
+   "tokens_out": 58,
+   "cost_usd": 0.000481,
+   "latency_s": 0.716
   },
   {
    "kind": "call",
@@ -212,10 +212,10 @@
    "tool_calls": [
     "search_slots"
    ],
-   "tokens_in": 3459,
-   "tokens_out": 334,
-   "cost_usd": 0.000280545,
-   "latency_s": 1.723
+   "tokens_in": 3615,
+   "tokens_out": 443,
+   "cost_usd": 0.000331916,
+   "latency_s": 1.578
   },
   {
    "kind": "call",
@@ -224,7 +224,8 @@
    "args": {
     "town_hall": "Paris 11e",
     "date_from": "2026-11-25",
-    "date_to": "2026-11-25"
+    "date_to": "2026-11-25",
+    "part_of_day": "morning"
    },
    "dropped": []
   },
@@ -236,10 +237,10 @@
    "tool_calls": [
     "book_appointment"
    ],
-   "tokens_in": 3611,
-   "tokens_out": 272,
-   "cost_usd": 0.000220113,
-   "latency_s": 1.486
+   "tokens_in": 3786,
+   "tokens_out": 352,
+   "cost_usd": 0.00072098,
+   "latency_s": 1.657
   },
   {
    "kind": "call",
@@ -260,10 +261,10 @@
    "tool_calls": [
     "cancel_appointment"
    ],
-   "tokens_in": 3858,
-   "tokens_out": 231,
-   "cost_usd": 0.000234807,
-   "latency_s": 1.146
+   "tokens_in": 3954,
+   "tokens_out": 392,
+   "cost_usd": 0.00076882,
+   "latency_s": 1.546
   },
   {
    "kind": "call",
@@ -287,25 +288,25 @@
   {
    "kind": "model",
    "step": 6,
-   "content": "C'est fait : votre rendez-vous passeport est déplacé.\n\n- **Nouveau rendez-vous** : R3 — mercredi 25 novembre 2026 à 10h00, mairie du **Paris 11e** (créneau C03), pour Camille (passeport).\n- **Ancien rendez-vous** : R1 — jeudi 26 novembre 2026 à 11h00, annulé (le créneau a été libéré, c'est irréversible).\n\nÀ noter : votre passeport actuel expire le 01/12/2026, pensez au timbre fiscal et aux documents à apporter pour ce rendez-vous.",
+   "content": "C'est fait : votre rendez-vous passeport est déplacé.\n\n- **Nouveau rendez-vous (R3)** : mercredi 25 novembre 2026 à 10h00, mairie du **Paris 11e**, pour Camille (passeport).\n- **Ancien rendez-vous (R1)** : jeudi 26 novembre à 11h00 — annulé (le créneau a été libéré, action irréversible).\n\nÀ noter : votre passeport actuel expire le 1er décembre 2026, pensez à vous munir des documents demandés (photo, justificatif de domicile, ancien passeport) et du timbre fiscal si ce n'est pas déjà fait.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3946,
-   "tokens_out": 154,
-   "cost_usd": 0.000161844,
-   "latency_s": 1.001
+   "tokens_in": 4042,
+   "tokens_out": 164,
+   "cost_usd": 0.000173308,
+   "latency_s": 1.219
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "",
+   "thought": "Je commence par vérifier votre profil et vos rendez-vous.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.009,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -375,7 +376,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.013,
+   "latency_s": 0.016,
    "retried_errors": [],
    "result": [
     {
@@ -409,14 +410,15 @@
    "args": {
     "town_hall": "Paris 11e",
     "date_from": "2026-11-25",
-    "date_to": "2026-11-25"
+    "date_to": "2026-11-25",
+    "part_of_day": "morning"
    },
    "thought": "",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": [
     {
@@ -440,7 +442,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.01,
+   "latency_s": 0.016,
    "retried_errors": [],
    "result": {
     "appointment_id": "R3",
@@ -464,7 +466,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.013,
+   "latency_s": 0.01,
    "retried_errors": [],
    "result": {
     "appointment_id": "R1",

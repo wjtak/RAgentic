@@ -1,0 +1,396 @@
+{
+ "id": "h002",
+ "kind": "normal",
+ "task": "Si Léo n'a pas encore de pré-demande de passeport, crée-la (première demande), sans l'envoyer.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "passport",
+    "person": "P2",
+    "motive": "first",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "list_applications",
+  "search_fiches",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 2,
+   "tool": "list_applications",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.011
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande de passeport pour un mineur de 16 ans pièces à fournir"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.795
+  },
+  {
+   "step": 4,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P2",
+    "motive": "first"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 2,
+   "approved": null,
+   "latency_s": 0.547
+  }
+ ],
+ "steps": 5,
+ "max_steps": 6,
+ "tokens_in": 19451,
+ "tokens_out": 591,
+ "latency_s": 10.851,
+ "model_latency_s": 6.466,
+ "tool_latency_s": 4.363,
+ "cost_usd": 0.001217,
+ "stop_reason": "answered",
+ "answer": "C'est fait : Léo n'avait aucune pré-demande de passeport (seulement une pré-demande de carte d'identité, D2). J'ai donc créé la pré-demande **D3** — passeport, première demande, pour Léo (P2, 16 ans) — au statut **brouillon** : elle n'a pas été envoyée à l'ANTS.\n\nSi vous voulez la transmettre, dites-le-moi et je la soumettrai. Notez qu'il faudra le timbre fiscal correspondant à un passeport pour un mineur de 15-17 ans.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P2",
+    "motive": "first"
+   }
+  }
+ ],
+ "trace_file": "traces/h002.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan : identifier Léo dans le foyer, puis vérifier s'il a déjà une pré-demande de passeport avant d'en créer une.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3039,
+   "tokens_out": 63,
+   "cost_usd": 0.0002311128,
+   "latency_s": 1.007
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_applications"
+   ],
+   "tokens_in": 3428,
+   "tokens_out": 110,
+   "cost_usd": 0.0001994976,
+   "latency_s": 1.473
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "list_applications",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3555,
+   "tokens_out": 148,
+   "cost_usd": 0.0001594008,
+   "latency_s": 1.14
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande de passeport pour un mineur de 16 ans pièces à fournir"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 4653,
+   "tokens_out": 130,
+   "cost_usd": 0.0003892392,
+   "latency_s": 1.641
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P2",
+    "motive": "first"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "C'est fait : Léo n'avait aucune pré-demande de passeport (seulement une pré-demande de carte d'identité, D2). J'ai donc créé la pré-demande **D3** — passeport, première demande, pour Léo (P2, 16 ans) — au statut **brouillon** : elle n'a pas été envoyée à l'ANTS.\n\nSi vous voulez la transmettre, dites-le-moi et je la soumettrai. Notez qu'il faudra le timbre fiscal correspondant à un passeport pour un mineur de 15-17 ans.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4776,
+   "tokens_out": 140,
+   "cost_usd": 0.0002379456,
+   "latency_s": 1.205
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Plan : identifier Léo dans le foyer, puis vérifier s'il a déjà une pré-demande de passeport avant d'en créer une.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "list_applications",
+   "args": {},
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.011,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "D1",
+     "kind": "passport",
+     "person": "P1",
+     "motive": "renewal",
+     "status": "draft",
+     "person_name": "Camille"
+    },
+    {
+     "id": "D2",
+     "kind": "id_card",
+     "person": "P2",
+     "motive": "renewal",
+     "status": "submitted",
+     "person_name": "Léo"
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande de passeport pour un mineur de 16 ans pièces à fournir"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.795,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## À l'étranger > Préparer les documents à fournir et décider du mode de retrait du passeport > Documents à fournir > Le mineur a une carte d'identité périmée > Date d’expiration : moins de 5 ans > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Carte d'identité du mineur - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## À l'étranger > Préparer les documents à fournir et décider du mode de retrait du passeport > Documents à fournir > Le mineur a une carte d'identité périmée > Date d’expiration : + de 5 ans > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - En l'absence de carte d'identité ou si elle a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## À l'étranger > Préparer les documents à fournir et décider du mode de retrait du passeport > Documents à fournir > Le mineur a une carte d’identité valide > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Carte d'identité du mineur - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour le mineur."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## À l'étranger > Préparer les documents à fournir et décider du mode de retrait du passeport > Documents à fournir > Le mineur a une carte d'identité périmée > Date d’expiration : moins de 5 ans > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Carte d'identité du mineur - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    }
+   ]
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P2",
+    "motive": "first"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 2,
+   "latency_s": 0.547,
+   "retried_errors": [
+    "rate_limited"
+   ],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P2",
+    "motive": "first"
+   }
+  }
+ ]
+}

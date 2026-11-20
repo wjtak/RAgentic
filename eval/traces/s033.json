@@ -52,6 +52,7 @@
  "tool_calls": [
   "get_profile",
   "search_fiches",
+  "get_fiche",
   "get_wallet",
   "buy_tax_stamp",
   "create_application"
@@ -66,23 +67,36 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.014
   },
   {
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité perte vol timbre fiscal prix gratuit"
+    "query": "carte d'identité perte vol timbre fiscal prix renouvellement"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 49.272
+   "latency_s": 3.057
   },
   {
    "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F33805"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 4,
    "tool": "get_wallet",
    "args": {},
    "executed": true,
@@ -90,10 +104,10 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.014
   },
   {
-   "step": 4,
+   "step": 5,
    "tool": "buy_tax_stamp",
    "args": {
     "stamp_type": "id_card_loss_theft",
@@ -104,15 +118,15 @@
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.013
+   "latency_s": 0.015
   },
   {
-   "step": 5,
+   "step": 6,
    "tool": "create_application",
    "args": {
     "kind": "id_card",
-    "person_id": "P1",
-    "motive": "loss"
+    "motive": "loss",
+    "person_id": "P1"
    },
    "executed": true,
    "ok": true,
@@ -122,14 +136,16 @@
    "latency_s": 0.011
   }
  ],
- "steps": 6,
+ "steps": 7,
  "max_steps": 9,
- "tokens_in": 21639,
- "tokens_out": 2123,
- "latency_s": 65.652,
- "cost_usd": 0.001298,
+ "tokens_in": 30937,
+ "tokens_out": 1874,
+ "latency_s": 22.958,
+ "model_latency_s": 19.792,
+ "tool_latency_s": 3.12,
+ "cost_usd": 0.001755,
  "stop_reason": "answered",
- "answer": "C'est fait :\n\n- **Timbre fiscal** : un timbre « carte d'identité – perte/vol » de **25 €** a été acheté pour vous (Camille Martin, P1) — id **TF1**. Solde restant : **95 €**. (La fiche F33805 confirme que le renouvellement d'une carte d'identité perdue coûte 25 € en France.)\n- **Pré-demande ANTS** : créée en brouillon — id **D3**, carte d'identité, motif « perte », pour P1.\n\nElle n'a pas été envoyée à l'ANTS (vous ne me l'avez pas demandé) : dites-moi si vous voulez que je la soumette.",
+ "answer": "Fait pour vous, Camille :\n\n- **Timbre fiscal acheté** (TF1) : reçu, type « carte d'identité – perte/vol », **25 €** débités ; nouveau solde **95 €**. ⚠️ Il n'est pas remboursable.\n- **Pré-demande créée en brouillon** (D3) : carte d'identité, motif « perte », pour P1 (Camille Martin). Elle n'est **pas encore transmise à l'ANTS** — dites-moi si vous voulez que je l'envoie.\n\nPour la suite : le dépôt se fait en mairie sur rendez-vous (avec le timbre et une photo d'identité récente). Voulez-vous que je cherche un créneau disponible (Paris 11e, 12e ou Montreuil) ?",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -164,25 +180,22 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je vérifie d'abord votre profil et les règles sur le timbre fiscal pour une carte d'identité perdue.\n\n",
+   "content": "Je commence par identifier la personne concernée sur le compte.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "search_fiches"
+    "get_profile"
    ],
-   "tokens_in": 2898,
-   "tokens_out": 995,
-   "cost_usd": 0.0004941984,
-   "latency_s": 6.251
+   "tokens_in": 3040,
+   "tokens_out": 240,
+   "cost_usd": 0.000588,
+   "latency_s": 2.33
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "search_fiches"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -190,24 +203,21 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "search_fiches",
-    "get_wallet"
+    "search_fiches"
    ],
-   "tokens_in": 3284,
-   "tokens_out": 537,
-   "cost_usd": 0.0003206784,
-   "latency_s": 3.285
+   "tokens_in": 3412,
+   "tokens_out": 513,
+   "cost_usd": 0.0003094656,
+   "latency_s": 5.112
   },
   {
    "kind": "call",
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité perte vol timbre fiscal prix gratuit"
+    "query": "carte d'identité perte vol timbre fiscal prix renouvellement"
    },
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -215,18 +225,20 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_wallet"
+    "get_fiche"
    ],
-   "tokens_in": 3728,
-   "tokens_out": 67,
-   "cost_usd": 0.0001182528,
-   "latency_s": 1.018
+   "tokens_in": 3856,
+   "tokens_out": 317,
+   "cost_usd": 0.0002235072,
+   "latency_s": 3.135
   },
   {
    "kind": "call",
    "step": 3,
-   "tool": "get_wallet",
-   "args": {},
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F33805"
+   },
    "dropped": []
   },
   {
@@ -235,29 +247,46 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "buy_tax_stamp",
-    "create_application"
+    "get_wallet"
    ],
-   "tokens_in": 3778,
-   "tokens_out": 230,
-   "cost_usd": 0.0001422816,
-   "latency_s": 2.248
+   "tokens_in": 4996,
+   "tokens_out": 128,
+   "cost_usd": 0.000209376,
+   "latency_s": 1.991
   },
   {
    "kind": "call",
    "step": 4,
+   "tool": "get_wallet",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "J'ai les infos : la perte de carte d'identité en France coûte 25 € (timbre obligatoire) et le solde est de 120 €. J'achète le timbre.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 5047,
+   "tokens_out": 345,
+   "cost_usd": 0.0001841808,
+   "latency_s": 3.195
+  },
+  {
+   "kind": "call",
+   "step": 5,
    "tool": "buy_tax_stamp",
    "args": {
     "stamp_type": "id_card_loss_theft",
     "person_id": "P1"
    },
-   "dropped": [
-    "create_application"
-   ]
+   "dropped": []
   },
   {
    "kind": "approval",
-   "step": 4,
+   "step": 5,
    "tool": "buy_tax_stamp",
    "args": {
     "stamp_type": "id_card_loss_theft",
@@ -268,50 +297,50 @@
   },
   {
    "kind": "model",
-   "step": 5,
+   "step": 6,
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "create_application"
    ],
-   "tokens_in": 3914,
-   "tokens_out": 95,
-   "cost_usd": 9.38016e-05,
-   "latency_s": 1.356
+   "tokens_in": 5231,
+   "tokens_out": 75,
+   "cost_usd": 7.66608e-05,
+   "latency_s": 1.274
   },
   {
    "kind": "call",
-   "step": 5,
+   "step": 6,
    "tool": "create_application",
    "args": {
     "kind": "id_card",
-    "person_id": "P1",
-    "motive": "loss"
+    "motive": "loss",
+    "person_id": "P1"
    },
    "dropped": []
   },
   {
    "kind": "model",
-   "step": 6,
-   "content": "C'est fait :\n\n- **Timbre fiscal** : un timbre « carte d'identité – perte/vol » de **25 €** a été acheté pour vous (Camille Martin, P1) — id **TF1**. Solde restant : **95 €**. (La fiche F33805 confirme que le renouvellement d'une carte d'identité perdue coûte 25 € en France.)\n- **Pré-demande ANTS** : créée en brouillon — id **D3**, carte d'identité, motif « perte », pour P1.\n\nElle n'a pas été envoyée à l'ANTS (vous ne me l'avez pas demandé) : dites-moi si vous voulez que je la soumette.",
+   "step": 7,
+   "content": "Fait pour vous, Camille :\n\n- **Timbre fiscal acheté** (TF1) : reçu, type « carte d'identité – perte/vol », **25 €** débités ; nouveau solde **95 €**. ⚠️ Il n'est pas remboursable.\n- **Pré-demande créée en brouillon** (D3) : carte d'identité, motif « perte », pour P1 (Camille Martin). Elle n'est **pas encore transmise à l'ANTS** — dites-moi si vous voulez que je l'envoie.\n\nPour la suite : le dépôt se fait en mairie sur rendez-vous (avec le timbre et une photo d'identité récente). Voulez-vous que je cherche un créneau disponible (Paris 11e, 12e ou Montreuil) ?",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 4037,
-   "tokens_out": 199,
-   "cost_usd": 0.000128376,
-   "latency_s": 2.134
+   "tokens_in": 5355,
+   "tokens_out": 256,
+   "cost_usd": 0.000163368,
+   "latency_s": 2.755
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je vérifie d'abord votre profil et les règles sur le timbre fiscal pour une carte d'identité perdue.\n\n",
+   "thought": "Je commence par identifier la personne concernée sur le compte.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -376,14 +405,14 @@
   {
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité perte vol timbre fiscal prix gratuit"
+    "query": "carte d'identité perte vol timbre fiscal prix renouvellement"
    },
    "thought": "",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 49.272,
+   "latency_s": 3.057,
    "retried_errors": [],
    "result": [
     {
@@ -394,29 +423,47 @@
     {
      "doc_id": "F33805",
      "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
-     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
+     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
     },
     {
      "doc_id": "F33805",
      "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
-     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
+     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
     },
     {
      "doc_id": "F1794",
      "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
-     "excerpt": "## En France > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 € (12,50 € en Guyane). L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 €. L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
     }
    ]
   },
   {
-   "tool": "get_wallet",
-   "args": {},
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F33805"
+   },
    "thought": "",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F33805",
+    "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+    "text": "En cas de perte ou de vol de votre carte d'identité, vous devez demander le renouvellement de la carte et acheter un timbre fiscal.\nL'achat du timbre fiscal (en ligne ou sur place) varie selon le lieu de la demande :\n\n## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €.\nVous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :\n\n## En France > Sur internet\nLa pré-demande sur le site de l'ANTS vous permet de gagner du temps lors du dépôt du dossier.\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande :\nselNG : Pré-demande pour un renouvellement de carte d'identité\nSinon, vous pouvez acheter le timbre fiscal sur le site timbres.impots.gouv.fr :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\nLe timbre électronique peut être délivré sur 2 supports :\n- Document PDF avec un code 2D qui peut également être scanné directement depuis un téléphone ou une tablette par le service chargé de recevoir votre demande\n- SMS contenant l'identifiant à 16 chiffres du timbre qui sera accepté par l'agent chargé de traiter votre dossier.\n\n## En France > Dans un bureau de tabac\nVous pouvez acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €.\nVous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :\n\n## En Guyane > Sur internet\nLa pré-demande sur le site de l'ANTS vous permet de gagner du temps lors du dépôt du dossier.\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande :\nselNG : Pré-demande pour un renouvellement de carte d'identité\nSinon, vous pouvez acheter le timbre fiscal sur le site timbres.impots.gouv.fr :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\nLe timbre électronique peut être délivré sur 2 supports :\n- Document PDF avec un code 2D qui peut également être scanné directement depuis un téléphone ou une tablette par le service chargé de recevoir votre demande\n- SMS contenant l'identifiant à 16 chiffres du timbre qui sera accepté par l'agent chargé de traiter votre dossier.\n\n## En Guyane > Dans un bureau de tabac\nVous pouvez acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €.\nVous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :\n\n## À l'étranger > Sur internet\nLa pré-demande sur le site de l'ANTS vous permet de gagner du temps lors du dépôt du dossier.\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande :\nselNG : Pré-demande pour un renouvellement de carte d'identité\nSinon, vous pouvez acheter le timbre fiscal sur le site timbres.impots.gouv.fr :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\nLe timbre électronique peut être délivré sur 2 supports :\n- Document PDF avec un code 2D qui peut également être scanné directement depuis un téléphone ou une tablette par le service chargé de recevoir votre demande\n- SMS contenant l'identifiant à 16 chiffres du timbre qui sera accepté par l'agent chargé de traiter votre dossier.\n\n## À l'étranger > Au consulat\nVous pouvez aussi régler directement en espèces au consulat. Certains consulats acceptent aussi le paiement par carte bancaire, chèque ou virement. Consultez le site internet du consulat pour savoir comment payer.\nOù s'adresser : Ambassade ou consulat français à l'étranger"
+   }
+  },
+  {
+   "tool": "get_wallet",
+   "args": {},
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "balance_eur": 120.0,
@@ -429,12 +476,12 @@
     "stamp_type": "id_card_loss_theft",
     "person_id": "P1"
    },
-   "thought": "",
-   "step": 4,
+   "thought": "J'ai les infos : la perte de carte d'identité en France coûte 25 € (timbre obligatoire) et le solde est de 120 €. J'achète le timbre.",
+   "step": 5,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.013,
+   "latency_s": 0.015,
    "retried_errors": [],
    "result": {
     "stamp_id": "TF1",
@@ -449,11 +496,11 @@
    "tool": "create_application",
    "args": {
     "kind": "id_card",
-    "person_id": "P1",
-    "motive": "loss"
+    "motive": "loss",
+    "person_id": "P1"
    },
    "thought": "",
-   "step": 5,
+   "step": 6,
    "ok": true,
    "executed": true,
    "attempts": 1,

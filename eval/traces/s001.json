@@ -43,6 +43,8 @@
  },
  "tool_calls": [
   "list_appointments",
+  "get_profile",
+  "search_fiches",
   "cancel_appointment"
  ],
  "tool_calls_detail": [
@@ -55,10 +57,34 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.08
+   "latency_s": 0.061
   },
   {
    "step": 2,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "annulation d'un rendez-vous en mairie pour carte d'identité ou passeport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 22.856
+  },
+  {
+   "step": 4,
    "tool": "cancel_appointment",
    "args": {
     "appointment_id": "R2"
@@ -68,17 +94,19 @@
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.008
+   "latency_s": 0.009
   }
  ],
- "steps": 3,
+ "steps": 5,
  "max_steps": 5,
- "tokens_in": 9261,
- "tokens_out": 418,
- "latency_s": 4.735,
- "cost_usd": 0.000933,
+ "tokens_in": 19324,
+ "tokens_out": 1132,
+ "latency_s": 31.134,
+ "model_latency_s": 8.165,
+ "tool_latency_s": 22.933,
+ "cost_usd": 0.004898,
  "stop_reason": "answered",
- "answer": "C'est fait : le rendez-vous R2 de Léo (carte d'identité, mairie de Montreuil, vendredi 27/11 à 10h30) est annulé. Attention, l'annulation est définitive et le créneau a été remis à disposition d'autres usagers — il faudra en rechercher un nouveau si besoin.\n\nLe rendez-vous R1 de Camille (passeport, Paris 11e, jeudi 26/11) reste inchangé.",
+ "answer": "C'est fait : le rendez-vous de vendredi (R2) — Léo, carte d'identité, mairie de Montreuil, vendredi 27 novembre 2026 à 10h30 — a été annulé. Le créneau est désormais libéré pour d'autres usagers et l'annulation est irréversible.\n\nLe rendez-vous de Camille (R1, passeport, Paris 11e, jeudi 26 novembre à 11h00) reste confirmé. Dites-moi si vous souhaitez en reprendre un autre pour Léo.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -103,39 +131,78 @@
    "content": "Je regarde d'abord les rendez-vous du foyer pour identifier celui de vendredi.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "list_appointments",
-    "get_profile"
+    "list_appointments"
    ],
-   "tokens_in": 2952,
-   "tokens_out": 135,
-   "cost_usd": 0.00064863,
-   "latency_s": 2.053
+   "tokens_in": 3018,
+   "tokens_out": 88,
+   "cost_usd": 0.000872148,
+   "latency_s": 1.102
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "list_appointments",
    "args": {},
-   "dropped": [
-    "get_profile"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
    "step": 2,
-   "content": "Un seul rendez-vous tombe un vendredi : R2 (Léo, Montreuil, vendredi 27/11). Je l'annule.\n\n",
+   "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "cancel_appointment"
+    "get_profile"
    ],
-   "tokens_in": 3095,
-   "tokens_out": 161,
-   "cost_usd": 0.000147865,
-   "latency_s": 1.388
+   "tokens_in": 3241,
+   "tokens_out": 357,
+   "cost_usd": 0.001259618,
+   "latency_s": 2.583
   },
   {
    "kind": "call",
    "step": 2,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3601,
+   "tokens_out": 352,
+   "cost_usd": 0.00146669,
+   "latency_s": 2.021
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "annulation d'un rendez-vous en mairie pour carte d'identité ou passeport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Un seul rendez-vous tombe un vendredi : R2 (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30). Je l'annule comme demandé.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "cancel_appointment"
+   ],
+   "tokens_in": 4665,
+   "tokens_out": 206,
+   "cost_usd": 0.000585778,
+   "latency_s": 1.359
+  },
+  {
+   "kind": "call",
+   "step": 4,
    "tool": "cancel_appointment",
    "args": {
     "appointment_id": "R2"
@@ -144,7 +211,7 @@
   },
   {
    "kind": "approval",
-   "step": 2,
+   "step": 4,
    "tool": "cancel_appointment",
    "args": {
     "appointment_id": "R2"
@@ -154,14 +221,14 @@
   },
   {
    "kind": "model",
-   "step": 3,
-   "content": "C'est fait : le rendez-vous R2 de Léo (carte d'identité, mairie de Montreuil, vendredi 27/11 à 10h30) est annulé. Attention, l'annulation est définitive et le créneau a été remis à disposition d'autres usagers — il faudra en rechercher un nouveau si besoin.\n\nLe rendez-vous R1 de Camille (passeport, Paris 11e, jeudi 26/11) reste inchangé.",
+   "step": 5,
+   "content": "C'est fait : le rendez-vous de vendredi (R2) — Léo, carte d'identité, mairie de Montreuil, vendredi 27 novembre 2026 à 10h30 — a été annulé. Le créneau est désormais libéré pour d'autres usagers et l'annulation est irréversible.\n\nLe rendez-vous de Camille (R1, passeport, Paris 11e, jeudi 26 novembre à 11h00) reste confirmé. Dites-moi si vous souhaitez en reprendre un autre pour Léo.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3214,
-   "tokens_out": 122,
-   "cost_usd": 0.000136722,
-   "latency_s": 1.174
+   "tokens_in": 4799,
+   "tokens_out": 129,
+   "cost_usd": 0.000713358,
+   "latency_s": 1.1
   }
  ],
  "observations": [
@@ -173,7 +240,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.08,
+   "latency_s": 0.061,
    "retried_errors": [],
    "result": [
     {
@@ -203,16 +270,121 @@
    ]
   },
   {
-   "tool": "cancel_appointment",
-   "args": {
-    "appointment_id": "R2"
-   },
-   "thought": "Un seul rendez-vous tombe un vendredi : R2 (Léo, Montreuil, vendredi 27/11). Je l'annule.\n\n",
+   "tool": "get_profile",
+   "args": {},
+   "thought": "",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.008,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "annulation d'un rendez-vous en mairie pour carte d'identité ou passeport"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 22.856,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F12567",
+     "title": "Quels recours si un dossier de carte d'identité ou passeport est refusé ?",
+     "excerpt": "Si la mairie refuse votre dossier de carte d'identité ou de passeport, vous pouvez faire un recours auprès du Cert (préfecture) ou du ministère de l’Intérieur. Lors d'une demande de carte d'identité ou de passeport, vous pouvez rencontrer des difficultés que vous estimez injustifiées. Vos moyens de recours dépendent de l'administration qui a rejeté votre dossier : mairie, centre d'expertise et de ressources titres (Cert), consulat."
+    },
+    {
+     "doc_id": "F21092",
+     "title": "Renouvellement du passeport d'un mineur",
+     "excerpt": "## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe mineur et son représentant légal doivent se présenter ensemble au guichet. Leur présence est indispensable. Le représentant légal doit exercer l'autorité parentale. Il peut s'agir du père, de la mère ou du tuteur. Il doit présenter sa propre pièce d'identité. Le lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. La liste des mairies équipées est consultable en ligne : Où s'adresser : Mairie délivrant des passeports Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée : Outil de recherche : Rechercher un rendez-vous pour une demande de passeport Il est possible de préparer la démarche en effectuant une pré-demande en ligne, mais ce"
+    },
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des cartes d'identité Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée : outilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de carte d'identité"
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. La liste des mairies équipées est consultable en ligne. Où s'adresser : Mairie délivrant des cartes d'identité Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée : outilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité Il est possible de préparer la démarche en effectuant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de carte d'identité"
+    }
+   ]
+  },
+  {
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R2"
+   },
+   "thought": "Un seul rendez-vous tombe un vendredi : R2 (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30). Je l'annule comme demandé.\n\n",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
    "retried_errors": [],
    "result": {
     "appointment_id": "R2",

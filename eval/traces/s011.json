@@ -59,7 +59,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.013
+   "latency_s": 0.008
   },
   {
    "step": 2,
@@ -74,7 +74,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.018
+   "latency_s": 0.014
   },
   {
    "step": 3,
@@ -85,7 +85,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.011
   },
   {
    "step": 4,
@@ -99,17 +99,19 @@
    "error": null,
    "attempts": 2,
    "approved": true,
-   "latency_s": 0.606
+   "latency_s": 0.558
   }
  ],
  "steps": 5,
  "max_steps": 8,
- "tokens_in": 16541,
- "tokens_out": 464,
- "latency_s": 5.609,
- "cost_usd": 0.000815,
+ "tokens_in": 17319,
+ "tokens_out": 475,
+ "latency_s": 5.671,
+ "model_latency_s": 5.05,
+ "tool_latency_s": 0.591,
+ "cost_usd": 0.000594,
  "stop_reason": "answered",
- "answer": "Acheté : timbre fiscal **passport_adult** pour Camille Martin (P1), renouvellement de passeport, **86,00 €** — timbre TF1. Nouveau solde du compte : **34,00 €**. Le timbre n'est pas remboursable.",
+ "answer": "J'ai acheté le timbre fiscal pour le renouvellement de votre passeport (Camille Martin, P1) :\n\n- **Timbre** : TF1 — timbre passeport majeur (renouvellement), **86,00 €**\n- **Nouveau solde** : 34,00 €\n\nRappel : un timbre fiscal n'est pas remboursable. Si vous le souhaitez, je peux aussi préparer un brouillon de pré-demande ANTS ou chercher un créneau en mairie.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -134,15 +136,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je commence par identifier la personne et son âge.\n\n",
+   "content": "Je vais d'abord vérifier votre profil pour connaître votre âge, puis le prix du timbre.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 2881,
-   "tokens_out": 105,
-   "cost_usd": 9.2223e-05,
-   "latency_s": 1.439
+   "tokens_in": 3027,
+   "tokens_out": 89,
+   "cost_usd": 7.4528e-05,
+   "latency_s": 0.868
   },
   {
    "kind": "call",
@@ -157,13 +159,12 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "stamp_price",
-    "get_wallet"
+    "stamp_price"
    ],
-   "tokens_in": 3251,
-   "tokens_out": 111,
-   "cost_usd": 0.000133933,
-   "latency_s": 0.754
+   "tokens_in": 3409,
+   "tokens_out": 100,
+   "cost_usd": 0.000131338,
+   "latency_s": 1.191
   },
   {
    "kind": "call",
@@ -174,9 +175,7 @@
     "age": 36,
     "motive": "renewal"
    },
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -186,10 +185,10 @@
    "tool_calls": [
     "get_wallet"
    ],
-   "tokens_in": 3390,
-   "tokens_out": 24,
-   "cost_usd": 0.00036357,
-   "latency_s": 0.626
+   "tokens_in": 3548,
+   "tokens_out": 30,
+   "cost_usd": 0.000103908,
+   "latency_s": 0.662
   },
   {
    "kind": "call",
@@ -206,10 +205,10 @@
    "tool_calls": [
     "buy_tax_stamp"
    ],
-   "tokens_in": 3440,
-   "tokens_out": 108,
-   "cost_usd": 0.00010296,
-   "latency_s": 0.916
+   "tokens_in": 3598,
+   "tokens_out": 130,
+   "cost_usd": 0.000175408,
+   "latency_s": 1.155
   },
   {
    "kind": "call",
@@ -235,25 +234,25 @@
   {
    "kind": "model",
    "step": 5,
-   "content": "Acheté : timbre fiscal **passport_adult** pour Camille Martin (P1), renouvellement de passeport, **86,00 €** — timbre TF1. Nouveau solde du compte : **34,00 €**. Le timbre n'est pas remboursable.",
+   "content": "J'ai acheté le timbre fiscal pour le renouvellement de votre passeport (Camille Martin, P1) :\n\n- **Timbre** : TF1 — timbre passeport majeur (renouvellement), **86,00 €**\n- **Nouveau solde** : 34,00 €\n\nRappel : un timbre fiscal n'est pas remboursable. Si vous le souhaitez, je peux aussi préparer un brouillon de pré-demande ANTS ou chercher un créneau en mairie.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3579,
-   "tokens_out": 116,
-   "cost_usd": 0.000122077,
-   "latency_s": 1.195
+   "tokens_in": 3737,
+   "tokens_out": 126,
+   "cost_usd": 0.000108958,
+   "latency_s": 1.174
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je commence par identifier la personne et son âge.\n\n",
+   "thought": "Je vais d'abord vérifier votre profil pour connaître votre âge, puis le prix du timbre.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.013,
+   "latency_s": 0.008,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -327,7 +326,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.018,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "stamp_type": "passport_adult",
@@ -344,7 +343,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.011,
    "retried_errors": [],
    "result": {
     "balance_eur": 120.0,
@@ -362,7 +361,7 @@
    "ok": true,
    "executed": true,
    "attempts": 2,
-   "latency_s": 0.606,
+   "latency_s": 0.558,
    "retried_errors": [
     "timeout"
    ],
