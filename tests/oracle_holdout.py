@@ -38,7 +38,7 @@ ORACLE_HOLDOUT = {
     "h014": [call(P), call("search_slots", town_hall="Paris 12e", date_from="2026-11-18", date_to="2026-11-18"),
              call("book_appointment", slot_id="C10", person_id="P3", reason="id_card"), F],
     "h015": [call(P), call("search_slots", town_hall="Montreuil", date_from="2026-11-23", date_to="2026-11-27"),
-             call("book_appointment", slot_id="C07", person_id="P2", reason="id_card"), F],
+             call("book_appointment", slot_id="C07", person_id="P2", reason="passport"), F],
     "h016": [call(P), call("stamp_price", document="passport", age=74, motive="first"), call("get_wallet"),
              call("buy_tax_stamp", stamp_type="passport_adult", person_id="P4"), F],
     "h017": [call(P), call("create_application", kind="passport", person_id="P4", motive="renewal"), F],

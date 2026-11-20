@@ -37,7 +37,7 @@ ORACLE = {
     "s011": [call(P), call("stamp_price", document="passport", age=36, motive="renewal"), call("get_wallet"),
              call("buy_tax_stamp", stamp_type="passport_adult", person_id="P1"), F],
     "s012": [call(P), call("search_slots", town_hall="Montreuil", date_from="2026-11-27", date_to="2026-11-27"),
-             call("book_appointment", slot_id="C06", person_id="P2", reason="id_card"), F],
+             call("book_appointment", slot_id="C06", person_id="P2", reason="passport"), F],
     "s013": [call("search_slots", town_hall="Paris 12e", date_from="2026-11-23", date_to="2026-11-27",
                   part_of_day="morning"), call("book_appointment", slot_id="C04", person_id="P1", reason="passport"), F],
     "s014": [call(P), call("stamp_price", document="passport", age=16, motive="first"), call("get_wallet"),

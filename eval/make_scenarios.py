@@ -71,9 +71,11 @@ add("normal", "Achète le timbre fiscal pour le renouvellement de mon passeport.
     {"stamps": {"P1/passport_adult": 1}, "balance_eur": 34.0}, others("buy_tax_stamp"), 8,
     faults={"buy_tax_stamp": {"kind": "timeout", "times": 1}},
     note="recovery: the payment is made, then the answer times out; the harness retries with the same key")
-add("normal", "Prends un rendez-vous à Montreuil vendredi 27 novembre à 9h pour renouveler la carte d'identité de Léo.",
-    NO_APPT, {"appointments": {"R1": appt("C06", "P2", "id_card")}}, others("book_appointment"), 6,
-    faults={"search_slots": {"kind": "rate_limit", "times": 2}}, note="recovery: two 429 on search_slots")
+add("normal", "Prends un rendez-vous à Montreuil vendredi 27 novembre à 9h pour la première demande de passeport de "
+    "Léo.", NO_APPT, {"appointments": {"R1": appt("C06", "P2", "passport")}}, others("book_appointment"), 6,
+    faults={"search_slots": {"kind": "rate_limit", "times": 2}},
+    note="recovery: two 429 on search_slots. Was an identity-card renewal for Léo, which F21090 forbids (card valid "
+         "until 2030, contradicts s037): replaced by a first passport")
 add("normal", "Prends-moi un rendez-vous pour renouveler mon passeport la semaine prochaine, comme d'habitude.",
     NO_APPT, {"appointments": {"R1": appt("C04", "P1", "passport")}}, others("book_appointment"), 6,
     memory={"U1": {"mairie_preferee": "Paris 12e", "horaire_prefere": "le matin"}},

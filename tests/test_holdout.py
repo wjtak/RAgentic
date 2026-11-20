@@ -39,6 +39,13 @@ def test_holdout_does_not_copy_the_training_set():
     assert not [s["id"] for s in HOLDOUT if s["expect_state"] and key(s) in train_keys]
 
 
+def failed_calls(results: list[dict]) -> list[tuple]:
+    """Executed tool calls that ended in an error. A retryable error overcome by the dispatcher ends ok, so it is
+    not listed. A reference plan must have none: a tool that fails for every caller is a broken scenario."""
+    return [(r["id"], c["tool"], c["error"]) for r in results for c in r["tool_calls_detail"]
+            if c["executed"] and not c["ok"]]
+
+
 def _run(tmp_path, plans):
     async def go():
         out = []
@@ -54,12 +61,14 @@ def test_reference_plans_pass_the_holdout(tmp_path):
     results = _run(tmp_path, {k: v for k, v in ORACLE_HOLDOUT.items() if k not in HOLDOUT_RAG})
     assert len(results) == len(HOLDOUT) - len(HOLDOUT_RAG)
     assert all(r["passed"] for r in results), [(r["id"], r["reason"]) for r in results if not r["passed"]]
+    assert not failed_calls(results), failed_calls(results)
 
 
 @pytest.mark.skipif(not CHROMA_DIR.exists(), reason="RAG index not built: run scripts/run_ingest.py")
 def test_reference_plans_pass_the_holdout_rag_scenarios(tmp_path):
     results = _run(tmp_path, {k: ORACLE_HOLDOUT[k] for k in HOLDOUT_RAG})
     assert all(r["passed"] for r in results), [(r["id"], r["reason"]) for r in results if not r["passed"]]
+    assert not failed_calls(results), failed_calls(results)
 
 
 def test_naive_agent_fails_the_holdout(tmp_path):

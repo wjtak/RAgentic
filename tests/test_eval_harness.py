@@ -31,6 +31,13 @@ def test_scenario_file_follows_the_brief():
             assert s["expect_state"] == {}, f"{s['id']}: must change nothing"
 
 
+def failed_calls(results: list[dict]) -> list[tuple]:
+    """Executed tool calls that ended in an error. A retryable error overcome by the dispatcher ends ok, so it is
+    not listed. A reference plan must have none: a tool that fails for every caller is a broken scenario."""
+    return [(r["id"], c["tool"], c["error"]) for r in results for c in r["tool_calls_detail"]
+            if c["executed"] and not c["ok"]]
+
+
 def _run_plans(tmp_path, plans):
     async def go():
         out = []
@@ -46,6 +53,7 @@ def test_reference_plans_pass_every_scenario(tmp_path):
     results = _run_plans(tmp_path, {k: v for k, v in ORACLE.items() if k not in RAG_SCENARIOS})
     failed = [(r["id"], r["reason"]) for r in results]
     assert all(r["passed"] for r in results), [f for f, r in zip(failed, results) if not r["passed"]]
+    assert not failed_calls(results), failed_calls(results)
     assert len(results) == len(SCENARIOS) - len(RAG_SCENARIOS)
     s011 = next(r for r in results if r["id"] == "s011")                       # recovery from a planted timeout
     assert s011["tool_calls_detail"][-1]["attempts"] == 2 and s011["final_state"]["stamps"] == {"P1/passport_adult": 1}
@@ -67,6 +75,7 @@ def test_identity_card_plans_read_the_fact_sheets_before_acting():
 @pytest.mark.skipif(not CHROMA_DIR.exists(), reason="RAG index not built: run scripts/run_ingest.py")
 def test_reference_plans_pass_the_identity_card_scenarios(tmp_path):
     results = _run_plans(tmp_path, {k: ORACLE[k] for k in RAG_SCENARIOS})
+    assert not failed_calls(results), failed_calls(results)
     assert len(results) == len(RAG_SCENARIOS)
     assert all(r["passed"] for r in results), [(r["id"], r["reason"]) for r in results if not r["passed"]]
     for r in results:
