@@ -1,0 +1,518 @@
+{
+ "id": "s033",
+ "kind": "normal",
+ "task": "J'ai perdu ma carte d'identité : achète le timbre s'il en faut un et crée la pré-demande de renouvellement.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "loss",
+    "status": "draft"
+   }
+  },
+  "stamps": {
+   "P1/id_card_loss_theft": 1
+  },
+  "balance_eur": 95.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "get_fiche",
+  "get_wallet",
+  "create_application",
+  "buy_tax_stamp"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité perdue ou volée : renouvellement, timbre fiscal, déclaration de perte"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.882
+  },
+  {
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F33805"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 4,
+   "tool": "get_wallet",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.012
+  },
+  {
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P1",
+    "motive": "loss"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 6,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P1",
+    "stamp_type": "id_card_loss_theft"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.031
+  }
+ ],
+ "steps": 7,
+ "max_steps": 9,
+ "tokens_in": 31097,
+ "tokens_out": 1499,
+ "latency_s": 15.048,
+ "model_latency_s": 10.043,
+ "tool_latency_s": 4.96,
+ "cost_usd": 0.001261,
+ "stop_reason": "answered",
+ "answer": "Fait, Camille :\n\n- **Pré-demande créée en brouillon** : D3 — carte d'identité, motif « perte », pour vous (P1). Elle n'est **pas envoyée** à l'ANTS : dites-moi si vous voulez que je la transmette.\n- **Timbre fiscal acheté** : TF1 — timbre « carte d'identité perte/vol » de **25 €** (obligatoire en cas de perte, selon la fiche F33805). Nouveau solde : **95 €**.\n\nPensez à déclarer la perte et à prendre rendez-vous en mairie pour déposer le dossier ; je peux chercher un créneau (Paris 11e, 12e ou Montreuil) si vous le souhaitez.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "loss"
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "result": {
+    "stamp_id": "TF1",
+    "type": "id_card_loss_theft",
+    "person": "P1",
+    "amount_eur": 25.0,
+    "balance_eur": 95.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  }
+ ],
+ "trace_file": "traces/s033.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord vérifier votre profil, puis les règles sur le timbre pour une carte d'identité perdue, avant de créer la pré-demande.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3044,
+   "tokens_out": 410,
+   "cost_usd": 0.0002409264,
+   "latency_s": 2.143
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3440,
+   "tokens_out": 343,
+   "cost_usd": 0.0002524464,
+   "latency_s": 2.247
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité perdue ou volée : renouvellement, timbre fiscal, déclaration de perte"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 3905,
+   "tokens_out": 145,
+   "cost_usd": 0.0001326996,
+   "latency_s": 1.059
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F33805"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_wallet"
+   ],
+   "tokens_in": 5044,
+   "tokens_out": 150,
+   "cost_usd": 0.0002370096,
+   "latency_s": 1.346
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "get_wallet",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 5094,
+   "tokens_out": 158,
+   "cost_usd": 0.0001540728,
+   "latency_s": 0.948
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P1",
+    "motive": "loss"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 5217,
+   "tokens_out": 109,
+   "cost_usd": 0.0001475028,
+   "latency_s": 0.98
+  },
+  {
+   "kind": "call",
+   "step": 6,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P1",
+    "stamp_type": "id_card_loss_theft"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 6,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P1",
+    "stamp_type": "id_card_loss_theft"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 7,
+   "content": "Fait, Camille :\n\n- **Pré-demande créée en brouillon** : D3 — carte d'identité, motif « perte », pour vous (P1). Elle n'est **pas envoyée** à l'ANTS : dites-moi si vous voulez que je la transmette.\n- **Timbre fiscal acheté** : TF1 — timbre « carte d'identité perte/vol » de **25 €** (obligatoire en cas de perte, selon la fiche F33805). Nouveau solde : **95 €**.\n\nPensez à déclarer la perte et à prendre rendez-vous en mairie pour déposer le dossier ; je peux chercher un créneau (Paris 11e, 12e ou Montreuil) si vous le souhaitez.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 5353,
+   "tokens_out": 184,
+   "cost_usd": 9.6426e-05,
+   "latency_s": 1.32
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vais d'abord vérifier votre profil, puis les règles sur le timbre pour une carte d'identité perdue, avant de créer la pré-demande.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité perdue ou volée : renouvellement, timbre fiscal, déclaration de perte"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.882,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "En cas de perte ou de vol de votre carte d'identité, vous devez demander le renouvellement de la carte et acheter un timbre fiscal. L'achat du timbre fiscal (en ligne ou sur place) varie selon le lieu de la demande :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F33805"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F33805",
+    "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+    "text": "En cas de perte ou de vol de votre carte d'identité, vous devez demander le renouvellement de la carte et acheter un timbre fiscal.\nL'achat du timbre fiscal (en ligne ou sur place) varie selon le lieu de la demande :\n\n## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €.\nVous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :\n\n## En France > Sur internet\nLa pré-demande sur le site de l'ANTS vous permet de gagner du temps lors du dépôt du dossier.\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande :\nselNG : Pré-demande pour un renouvellement de carte d'identité\nSinon, vous pouvez acheter le timbre fiscal sur le site timbres.impots.gouv.fr :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\nLe timbre électronique peut être délivré sur 2 supports :\n- Document PDF avec un code 2D qui peut également être scanné directement depuis un téléphone ou une tablette par le service chargé de recevoir votre demande\n- SMS contenant l'identifiant à 16 chiffres du timbre qui sera accepté par l'agent chargé de traiter votre dossier.\n\n## En France > Dans un bureau de tabac\nVous pouvez acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €.\nVous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :\n\n## En Guyane > Sur internet\nLa pré-demande sur le site de l'ANTS vous permet de gagner du temps lors du dépôt du dossier.\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande :\nselNG : Pré-demande pour un renouvellement de carte d'identité\nSinon, vous pouvez acheter le timbre fiscal sur le site timbres.impots.gouv.fr :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\nLe timbre électronique peut être délivré sur 2 supports :\n- Document PDF avec un code 2D qui peut également être scanné directement depuis un téléphone ou une tablette par le service chargé de recevoir votre demande\n- SMS contenant l'identifiant à 16 chiffres du timbre qui sera accepté par l'agent chargé de traiter votre dossier.\n\n## En Guyane > Dans un bureau de tabac\nVous pouvez acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €.\nVous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :\n\n## À l'étranger > Sur internet\nLa pré-demande sur le site de l'ANTS vous permet de gagner du temps lors du dépôt du dossier.\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande :\nselNG : Pré-demande pour un renouvellement de carte d'identité\nSinon, vous pouvez acheter le timbre fiscal sur le site timbres.impots.gouv.fr :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\nLe timbre électronique peut être délivré sur 2 supports :\n- Document PDF avec un code 2D qui peut également être scanné directement depuis un téléphone ou une tablette par le service chargé de recevoir votre demande\n- SMS contenant l'identifiant à 16 chiffres du timbre qui sera accepté par l'agent chargé de traiter votre dossier.\n\n## À l'étranger > Au consulat\nVous pouvez aussi régler directement en espèces au consulat. Certains consulats acceptent aussi le paiement par carte bancaire, chèque ou virement. Consultez le site internet du consulat pour savoir comment payer.\nOù s'adresser : Ambassade ou consulat français à l'étranger"
+   }
+  },
+  {
+   "tool": "get_wallet",
+   "args": {},
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.012,
+   "retried_errors": [],
+   "result": {
+    "balance_eur": 120.0,
+    "stamps": []
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P1",
+    "motive": "loss"
+   },
+   "thought": "",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "loss"
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P1",
+    "stamp_type": "id_card_loss_theft"
+   },
+   "thought": "",
+   "step": 6,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.031,
+   "retried_errors": [],
+   "result": {
+    "stamp_id": "TF1",
+    "type": "id_card_loss_theft",
+    "person": "P1",
+    "amount_eur": 25.0,
+    "balance_eur": 95.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  }
+ ]
+}

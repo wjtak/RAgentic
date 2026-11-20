@@ -1,0 +1,175 @@
+{
+ "id": "h006",
+ "kind": "ambiguous",
+ "task": "Envoie un message à la mairie pour décaler le rendez-vous.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_appointments",
+  "ask_user"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.017
+  },
+  {
+   "step": 2,
+   "tool": "ask_user",
+   "args": {
+    "question": "Quel rendez-vous souhaitez-vous décaler, et vers quelle date ? (Camille, passeport le jeudi 26/11 à 11h00 à Paris 11e — ou Léo, carte d'identité le vendredi 27/11 à 10h30 à Montreuil)"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 2,
+ "max_steps": 4,
+ "tokens_in": 6270,
+ "tokens_out": 523,
+ "latency_s": 5.641,
+ "model_latency_s": 5.598,
+ "tool_latency_s": 0.017,
+ "cost_usd": 0.000311,
+ "stop_reason": "asked_user",
+ "answer": null,
+ "question": "Quel rendez-vous souhaitez-vous décaler, et vers quelle date ? (Camille, passeport le jeudi 26/11 à 11h00 à Paris 11e — ou Léo, carte d'identité le vendredi 27/11 à 10h30 à Montreuil)",
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h006.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je regarde d'abord les rendez-vous du foyer pour identifier lequel est concerné.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_appointments"
+   ],
+   "tokens_in": 3023,
+   "tokens_out": 150,
+   "cost_usd": 8.85456e-05,
+   "latency_s": 2.256
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "ask_user"
+   ],
+   "tokens_in": 3247,
+   "tokens_out": 373,
+   "cost_usd": 0.0002224656,
+   "latency_s": 3.342
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "ask_user",
+   "args": {
+    "question": "Quel rendez-vous souhaitez-vous décaler, et vers quelle date ? (Camille, passeport le jeudi 26/11 à 11h00 à Paris 11e — ou Léo, carte d'identité le vendredi 27/11 à 10h30 à Montreuil)"
+   },
+   "dropped": []
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_appointments",
+   "args": {},
+   "thought": "Je regarde d'abord les rendez-vous du foyer pour identifier lequel est concerné.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.017,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "R1",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning",
+     "slot": "C08",
+     "person": "P1",
+     "person_name": "Camille",
+     "reason": "passport",
+     "status": "confirmed"
+    },
+    {
+     "id": "R2",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning",
+     "slot": "C09",
+     "person": "P2",
+     "person_name": "Léo",
+     "reason": "id_card",
+     "status": "confirmed"
+    }
+   ]
+  }
+ ]
+}

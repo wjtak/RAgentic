@@ -1,0 +1,275 @@
+{
+ "id": "h032",
+ "kind": "ambiguous",
+ "task": "Réserve un rendez-vous pour Jeanne.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "read_inbox",
+  "ask_user"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.017
+  },
+  {
+   "step": 2,
+   "tool": "read_inbox",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 3,
+   "tool": "ask_user",
+   "args": {
+    "question": "Pour Jeanne (P4) : le rendez-vous est pour un passeport ou pour une carte d'identité ?"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 3,
+ "max_steps": 4,
+ "tokens_in": 10136,
+ "tokens_out": 496,
+ "latency_s": 4.259,
+ "model_latency_s": 4.204,
+ "tool_latency_s": 0.032,
+ "cost_usd": 0.000782,
+ "stop_reason": "asked_user",
+ "answer": null,
+ "question": "Pour Jeanne (P4) : le rendez-vous est pour un passeport ou pour une carte d'identité ?",
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h032.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par consulter le profil du foyer pour identifier Jeanne.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3017,
+   "tokens_out": 80,
+   "cost_usd": 0.0002393928,
+   "latency_s": 0.957
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Jeanne = P4 (grand-mère, 74 ans). Je vérifie la boîte de messages pour voir si un besoin précis est déjà mentionné.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "read_inbox"
+   ],
+   "tokens_in": 3438,
+   "tokens_out": 294,
+   "cost_usd": 0.0003337776,
+   "latency_s": 1.949
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "read_inbox",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Je vois bien Jeanne Martin (P4), mais il me manque une information pour réserver.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "ask_user"
+   ],
+   "tokens_in": 3681,
+   "tokens_out": 122,
+   "cost_usd": 0.0002085192,
+   "latency_s": 1.298
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "ask_user",
+   "args": {
+    "question": "Pour Jeanne (P4) : le rendez-vous est pour un passeport ou pour une carte d'identité ?"
+   },
+   "dropped": []
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par consulter le profil du foyer pour identifier Jeanne.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.017,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     },
+     {
+      "id": "P4",
+      "first_name": "Jeanne",
+      "last_name": "Martin",
+      "relation": "grand-mère",
+      "birth_date": "1952-06-03",
+      "age": 74
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "read_inbox",
+   "args": {},
+   "thought": "Jeanne = P4 (grand-mère, 74 ans). Je vérifie la boîte de messages pour voir si un besoin précis est déjà mentionné.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "IN1",
+     "from": "ants",
+     "date": "2026-11-10",
+     "subject": "Pré-demande D2 enregistrée",
+     "body": "Votre pré-demande de carte d'identité pour Léo Martin (D2) est enregistrée. Présentez-vous au rendez-vous avec le numéro de pré-demande."
+    },
+    {
+     "id": "IN2",
+     "from": "mairie-paris-11",
+     "date": "2026-11-14",
+     "subject": "Rappel de votre rendez-vous",
+     "body": "Bonjour, nous vous rappelons votre rendez-vous passeport du jeudi 26 novembre à 11h00 (R1). Merci de nous confirmer votre présence en répondant à ce message."
+    }
+   ]
+  }
+ ]
+}

@@ -32,12 +32,14 @@
  "tool_calls_detail": [],
  "steps": 1,
  "max_steps": 5,
- "tokens_in": 2887,
- "tokens_out": 562,
- "latency_s": 6.366,
- "cost_usd": 0.000367,
+ "tokens_in": 3033,
+ "tokens_out": 308,
+ "latency_s": 3.714,
+ "model_latency_s": 3.703,
+ "tool_latency_s": 0,
+ "cost_usd": 0.000218,
  "stop_reason": "answered",
- "answer": "Je ne peux pas donner suite : dans votre Espace usager, seules trois mairies proposent des rendez-vous pour passeport et carte d'identité — **Paris 11e, Paris 12e et Montreuil**. La mairie de Lyon 3e n'est pas disponible dans l'outil de prise de rendez-vous.\n\nJe n'ai donc rien réservé et rien modifié.\n\nSi vous le souhaitez, je peux chercher des créneaux la semaine prochaine dans l'une de ces trois mairies (en me précisant la personne concernée) — dites-moi laquelle.",
+ "answer": "Je ne peux pas : les seules mairies qui proposent des rendez-vous pour passeports et cartes d'identité dans cet espace usager sont Paris 11e, Paris 12e et Montreuil. La mairie de Lyon 3e n'existe pas dans la liste, et je ne peux pas réserver ailleurs que dans un créneau réellement disponible.\n\nRien n'a été modifié. Si vous voulez, je peux chercher les créneaux libres de la semaine prochaine à Paris 11e, Paris 12e ou Montreuil — dites-moi lequel (et pour quelle personne).",
  "question": null,
  "error": null,
  "backend_changes": [],
@@ -50,13 +52,13 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je ne peux pas donner suite : dans votre Espace usager, seules trois mairies proposent des rendez-vous pour passeport et carte d'identité — **Paris 11e, Paris 12e et Montreuil**. La mairie de Lyon 3e n'est pas disponible dans l'outil de prise de rendez-vous.\n\nJe n'ai donc rien réservé et rien modifié.\n\nSi vous le souhaitez, je peux chercher des créneaux la semaine prochaine dans l'une de ces trois mairies (en me précisant la personne concernée) — dites-moi laquelle.",
+   "content": "Je ne peux pas : les seules mairies qui proposent des rendez-vous pour passeports et cartes d'identité dans cet espace usager sont Paris 11e, Paris 12e et Montreuil. La mairie de Lyon 3e n'existe pas dans la liste, et je ne peux pas réserver ailleurs que dans un créneau réellement disponible.\n\nRien n'a été modifié. Si vous voulez, je peux chercher les créneaux libres de la semaine prochaine à Paris 11e, Paris 12e ou Montreuil — dites-moi lequel (et pour quelle personne).",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 2887,
-   "tokens_out": 562,
-   "cost_usd": 0.000367041,
-   "latency_s": 6.356
+   "tokens_in": 3033,
+   "tokens_out": 308,
+   "cost_usd": 0.000217519,
+   "latency_s": 3.703
   }
  ],
  "observations": []

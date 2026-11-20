@@ -47,6 +47,7 @@
   "get_profile",
   "stamp_price",
   "get_wallet",
+  "get_fiche",
   "buy_tax_stamp"
  ],
  "tool_calls_detail": [
@@ -59,7 +60,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.009
   },
   {
    "step": 2,
@@ -74,7 +75,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.018
+   "latency_s": 0.01
   },
   {
    "step": 3,
@@ -85,31 +86,46 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.012
+   "latency_s": 0.007
   },
   {
    "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21092"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.006
+  },
+  {
+   "step": 5,
    "tool": "buy_tax_stamp",
    "args": {
-    "stamp_type": "passport_minor_15_17",
-    "person_id": "P2"
+    "person_id": "P2",
+    "stamp_type": "passport_minor_15_17"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.012
+   "latency_s": 0.008
   }
  ],
- "steps": 5,
+ "steps": 6,
  "max_steps": 8,
- "tokens_in": 16614,
- "tokens_out": 460,
- "latency_s": 4.87,
- "cost_usd": 0.001144,
+ "tokens_in": 23512,
+ "tokens_out": 1008,
+ "latency_s": 7.638,
+ "model_latency_s": 7.574,
+ "tool_latency_s": 0.04,
+ "cost_usd": 0.000763,
  "stop_reason": "answered",
- "answer": "Fait : timbre fiscal **TF1** acheté pour Léo (P2, 16 ans) — première demande de passeport, timbre « mineur 15-17 ans » à 42,00 €. Nouveau solde : 78,00 €. Le timbre n'est pas remboursable.",
+ "answer": "Timbre fiscal acheté pour Léo (P2, 16 ans) : timbre **passport_minor_15_17**, référence **TF1**, **42 €**, débité du solde qui passe de 120 € à **78 €**. Il n'est pas remboursable.\n\nPour la suite : le mineur et son représentant légal doivent se présenter ensemble au guichet d'une mairie équipée (sur rendez-vous), avec le timbre, une photo de moins de 6 mois, un justificatif de domicile et la pièce d'identité du représentant légal. Dites-moi si vous souhaitez que je crée une pré-demande ANTS ou que je cherche un rendez-vous.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -134,15 +150,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je commence par identifier Léo et son âge.",
+   "content": "Je vais d'abord vérifier le profil du foyer pour identifier Léo etson âge.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 2881,
-   "tokens_out": 85,
-   "cost_usd": 0.00067641,
-   "latency_s": 1.034
+   "tokens_in": 3027,
+   "tokens_out": 89,
+   "cost_usd": 5.60988e-05,
+   "latency_s": 0.93
   },
   {
    "kind": "call",
@@ -154,16 +170,15 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "Léo = P2, 16 ans. Je cherche le timbre requis et je vérifie le solde.\n\n",
+   "content": "Léo est P2, 16 ans. Je vérifie le tarif du timbre pour un passeport (première demande,16 ans).",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "stamp_price",
-    "get_wallet"
+    "stamp_price"
    ],
-   "tokens_in": 3252,
-   "tokens_out": 141,
-   "cost_usd": 0.000186528,
-   "latency_s": 1.042
+   "tokens_in": 3408,
+   "tokens_out": 130,
+   "cost_usd": 0.0001728864,
+   "latency_s": 1.18
   },
   {
    "kind": "call",
@@ -174,9 +189,7 @@
     "age": 16,
     "motive": "first"
    },
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -186,10 +199,10 @@
    "tool_calls": [
     "get_wallet"
    ],
-   "tokens_in": 3413,
-   "tokens_out": 29,
-   "cost_usd": 7.0275e-05,
-   "latency_s": 0.543
+   "tokens_in": 3577,
+   "tokens_out": 113,
+   "cost_usd": 9.16596e-05,
+   "latency_s": 1.028
   },
   {
    "kind": "call",
@@ -204,56 +217,78 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "buy_tax_stamp"
+    "get_fiche"
    ],
-   "tokens_in": 3463,
-   "tokens_out": 132,
-   "cost_usd": 0.000123429,
-   "latency_s": 1.264
+   "tokens_in": 3627,
+   "tokens_out": 340,
+   "cost_usd": 0.0001553004,
+   "latency_s": 1.992
   },
   {
    "kind": "call",
    "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21092"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Le tarif est de 42 € (mineur de 15-17 ans) et le solde de 120 € est suffisant. J'achète le timbre pour Léo (P2).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 4844,
+   "tokens_out": 171,
+   "cost_usd": 0.0001814112,
+   "latency_s": 1.164
+  },
+  {
+   "kind": "call",
+   "step": 5,
    "tool": "buy_tax_stamp",
    "args": {
-    "stamp_type": "passport_minor_15_17",
-    "person_id": "P2"
+    "person_id": "P2",
+    "stamp_type": "passport_minor_15_17"
    },
    "dropped": []
   },
   {
    "kind": "approval",
-   "step": 4,
+   "step": 5,
    "tool": "buy_tax_stamp",
    "args": {
-    "stamp_type": "passport_minor_15_17",
-    "person_id": "P2"
+    "person_id": "P2",
+    "stamp_type": "passport_minor_15_17"
    },
    "approve": true,
    "reason": ""
   },
   {
    "kind": "model",
-   "step": 5,
-   "content": "Fait : timbre fiscal **TF1** acheté pour Léo (P2, 16 ans) — première demande de passeport, timbre « mineur 15-17 ans » à 42,00 €. Nouveau solde : 78,00 €. Le timbre n'est pas remboursable.",
+   "step": 6,
+   "content": "Timbre fiscal acheté pour Léo (P2, 16 ans) : timbre **passport_minor_15_17**, référence **TF1**, **42 €**, débité du solde qui passe de 120 € à **78 €**. Il n'est pas remboursable.\n\nPour la suite : le mineur et son représentant légal doivent se présenter ensemble au guichet d'une mairie équipée (sur rendez-vous), avec le timbre, une photo de moins de 6 mois, un justificatif de domicile et la pièce d'identité du représentant légal. Dites-moi si vous souhaitez que je crée une pré-demande ANTS ou que je cherche un rendez-vous.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3605,
-   "tokens_out": 73,
-   "cost_usd": 8.7603e-05,
-   "latency_s": 0.899
+   "tokens_in": 5029,
+   "tokens_out": 165,
+   "cost_usd": 0.0001055844,
+   "latency_s": 1.28
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je commence par identifier Léo et son âge.",
+   "thought": "Je vais d'abord vérifier le profil du foyer pour identifier Léo etson âge.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.009,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -322,12 +357,12 @@
     "age": 16,
     "motive": "first"
    },
-   "thought": "Léo = P2, 16 ans. Je cherche le timbre requis et je vérifie le solde.\n\n",
+   "thought": "Léo est P2, 16 ans. Je vérifie le tarif du timbre pour un passeport (première demande,16 ans).",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.018,
+   "latency_s": 0.01,
    "retried_errors": [],
    "result": {
     "stamp_type": "passport_minor_15_17",
@@ -344,7 +379,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.012,
+   "latency_s": 0.007,
    "retried_errors": [],
    "result": {
     "balance_eur": 120.0,
@@ -352,17 +387,35 @@
    }
   },
   {
-   "tool": "buy_tax_stamp",
+   "tool": "get_fiche",
    "args": {
-    "stamp_type": "passport_minor_15_17",
-    "person_id": "P2"
+    "doc_id": "F21092"
    },
    "thought": "",
    "step": 4,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.012,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F21092",
+    "title": "Renouvellement du passeport d'un mineur",
+    "text": "La démarche de renouvellement de passeport pour un mineur (date de validité bientôt dépassée, changement de nom) varie selon le lieu où vous faites la demande.\nVous souhaitez faire une demande de renouvellement de passeport pour un mineur français ? La procédure varie selon que la demande est faite en France ou à l'étranger et selon l'âge du mineur. Nous vous présentons les étapes de la démarche.\n\n## En France\n\n## En France > Savoir quand il est possible de faire la demande de renouvellement\nIl est possible de demander le renouvellement l'année qui précède la date d'expiration du passeport actuel.\nÀ savoir\nEn cas de changement sur l’état civil de votre enfant mineur (par exemple, changement de prénom), il faut faire une demande de modification du passeport. La demande doit être faite dans un délai de 3 mois à partir de la mise à jour de l’acte de naissance.\n\n## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe mineur et son représentant légal doivent se présenter ensemble au guichet. Leur présence est indispensable.\nLe représentant légal doit exercer l'autorité parentale. Il peut s'agir du père, de la mère ou du tuteur. Il doit présenter sa propre pièce d'identité.\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nLa liste des mairies équipées est consultable en ligne :\nOù s'adresser : Mairie délivrant des passeports\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée :\nOutil de recherche : Rechercher un rendez-vous pour une demande de passeport\nIl est possible de préparer la démarche en effectuant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande permet de gagner du temps lors du dépôt du dossier.\nselNG : Pré-demande pour un renouvellement de passeport\n\n## En France > Acheter le timbre fiscal\nLe coût du timbre fiscal varie selon l’âge du mineur :\n- Si le mineur a entre 0 et 14 ans, le timbre fiscal coûte 17 € (8,50 € en Guyane)\n- Si le mineur a entre 15 et 17 ans, le timbre fiscal coûte 42 € (21 € en Guyane).\nL’achat du timbre fiscal diffère selon qu’une pré-demande est faite ou non :\n\n## En France > Acheter le timbre fiscal > Pré-demande\nIl est possible d’acheter le timbre fiscal à la fin de la procédure de pré-demande.\n\n## En France > Acheter le timbre fiscal > Sans pré-demande\nIl existe 2 possibilités : soit acheter le timbre sur internet, soit l'acheter dans un bureau de tabac.\n\n## En France > Acheter le timbre fiscal > Sans pré-demande > Achat du timbre sur internet\nIl faut utiliser un téléservice :\nselNG : Achat en ligne du timbre fiscal - Passeport\n\n## En France > Acheter le timbre fiscal > Sans pré-demande > Achat du timbre dans un bureau de tabac\nIl est possible d’acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## En France > Préparer les documents à fournir\nIl faut présenter les documents originaux.\nLes documents à fournir dépendent de la date d’expiration du passeport actuel du mineur :\n\n## En France > Préparer les documents à fournir > Le passeport du mineur est encore valide\nLes documents à fournir varient selon la situation familiale du mineur :\n\n## En France > Préparer les documents à fournir > Le passeport du mineur est encore valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants :\n- Passeport du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- Pièce d'identité du représentant légal qui dépose la demande\n- Timbre fiscal (le coût varie selon l'âge du mineur)\n- En cas de pré-demande, le numéro et/ou QR code obtenus (il est conseillé d'imprimer le récapitu"
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "args": {
+    "person_id": "P2",
+    "stamp_type": "passport_minor_15_17"
+   },
+   "thought": "Le tarif est de 42 € (mineur de 15-17 ans) et le solde de 120 € est suffisant. J'achète le timbre pour Léo (P2).",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
    "retried_errors": [],
    "result": {
     "stamp_id": "TF1",

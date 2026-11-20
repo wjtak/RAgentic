@@ -1,22 +1,17 @@
 {
  "id": "s012",
  "kind": "normal",
- "task": "Prends un rendez-vous à Montreuil vendredi prochain à 9h pour renouveler la carte d'identité de Léo.",
+ "task": "Prends un rendez-vous à Montreuil vendredi 27 novembre à 9h pour renouveler la carte d'identité de Léo.",
  "model": "deepseek/deepseek-v4.1-flash",
- "outcome": "pass",
- "passed": true,
- "reason": "pass",
- "state_ok": true,
- "state_diff": [],
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_state: appointments.R1: missing (expected {'slot': 'C06', 'person': 'P2', 'reason': 'id_card', 'status': 'confirmed'})",
+ "state_ok": false,
+ "state_diff": [
+  "appointments.R1: missing (expected {'slot': 'C06', 'person': 'P2', 'reason': 'id_card', 'status': 'confirmed'})"
+ ],
  "final_state": {
-  "appointments": {
-   "R1": {
-    "slot": "C06",
-    "person": "P2",
-    "reason": "id_card",
-    "status": "confirmed"
-   }
-  },
+  "appointments": {},
   "applications": {
    "D1": {
     "kind": "passport",
@@ -37,9 +32,8 @@
  },
  "tool_calls": [
   "get_profile",
-  "search_slots",
-  "search_slots",
-  "book_appointment"
+  "search_fiches",
+  "get_fiche"
  ],
  "tool_calls_detail": [
   {
@@ -51,79 +45,48 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.012
-  },
-  {
-   "step": 2,
-   "tool": "search_slots",
-   "args": {
-    "town_hall": "Montreuil",
-    "date_from": "2026-11-20",
-    "date_to": "2026-11-20",
-    "part_of_day": "morning"
-   },
-   "executed": true,
-   "ok": true,
-   "error": null,
-   "attempts": 3,
-   "approved": null,
-   "latency_s": 1.559
-  },
-  {
-   "step": 3,
-   "tool": "search_slots",
-   "args": {
-    "town_hall": "Montreuil"
-   },
-   "executed": true,
-   "ok": true,
-   "error": null,
-   "attempts": 1,
-   "approved": null,
    "latency_s": 0.01
   },
   {
-   "step": 4,
-   "tool": "book_appointment",
+   "step": 2,
+   "tool": "search_fiches",
    "args": {
-    "slot_id": "C06",
-    "person_id": "P2",
-    "reason": "id_card"
+    "query": "renouvellement carte d'identité conditions validité"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.012
+   "latency_s": 4.389
+  },
+  {
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21090"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.003
   }
  ],
- "steps": 5,
+ "steps": 4,
  "max_steps": 6,
- "tokens_in": 16957,
- "tokens_out": 1155,
- "latency_s": 8.973,
- "cost_usd": 0.001046,
+ "tokens_in": 16129,
+ "tokens_out": 726,
+ "latency_s": 9.018,
+ "model_latency_s": 4.587,
+ "tool_latency_s": 4.402,
+ "cost_usd": 0.000914,
  "stop_reason": "answered",
- "answer": "Rendez-vous confirmé : **R1** — Léo Martin (P2), carte d'identité, **mairie de Montreuil, vendredi 27 novembre 2026 à 9h00**.\n\nÀ noter : aucun créneau n'était disponible le vendredi 20 novembre (vendredi prochain) à Montreuil ; j'ai donc pris le vendredi suivant à 9h, seul créneau matinal correspondant. Dites-moi si vous préférez un autre horaire (ex. jeudi 19 à 14h, ou vendredi 27 à 10h30/16h).",
+ "answer": "Je n'ai rien réservé : la démarche n'est pas possible aujourd'hui.\n\n**Pourquoi :** la carte d'identité de Léo (P2) est valide jusqu'au **10/02/2030**. D'après la fiche Service-Public « Renouvellement de la carte d'identité d'un mineur » (F21090), le renouvellement ne peut être demandé que **l'année qui précède la date d'expiration**, soit à partir de février 2029. Aucun rendez-vous ni pré-demande n'est donc recevable pour l'instant.\n\nSi vous le souhaitez, je peux en revanche m'occuper d'autre chose (par exemple le passeport de Camille, qui expire le 01/12/2026).",
  "question": null,
  "error": null,
- "backend_changes": [
-  {
-   "tool": "book_appointment",
-   "result": {
-    "appointment_id": "R1",
-    "status": "confirmed",
-    "id": "C06",
-    "town_hall": "Montreuil",
-    "start": "2026-11-27T09:00",
-    "weekday": "vendredi",
-    "part_of_day": "morning",
-    "person": "P2",
-    "reason": "id_card"
-   }
-  }
- ],
+ "backend_changes": [],
  "trace_file": "traces/s012.json",
  "events": [
   {
@@ -133,119 +96,89 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "",
+   "content": "Je commence par identifier Léo dans le compte.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "search_slots"
+    "get_profile"
    ],
-   "tokens_in": 2898,
-   "tokens_out": 174,
-   "cost_usd": 0.000139278,
-   "latency_s": 1.073
+   "tokens_in": 3044,
+   "tokens_out": 78,
+   "cost_usd": 6.9588e-05,
+   "latency_s": 0.767
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "search_slots"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
    "step": 2,
-   "content": "",
+   "content": "Léo est P2 (16 ans). Sa carte d'identité est valide jusqu'en 2030 — je vérifie les conditions de renouvellement avant de réserver.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "search_slots"
+    "search_fiches"
    ],
-   "tokens_in": 3258,
-   "tokens_out": 160,
-   "cost_usd": 0.000200238,
-   "latency_s": 1.111
+   "tokens_in": 3413,
+   "tokens_out": 206,
+   "cost_usd": 0.000200758,
+   "latency_s": 1.278
   },
   {
    "kind": "call",
    "step": 2,
-   "tool": "search_slots",
+   "tool": "search_fiches",
    "args": {
-    "town_hall": "Montreuil",
-    "date_from": "2026-11-20",
-    "date_to": "2026-11-20",
-    "part_of_day": "morning"
+    "query": "renouvellement carte d'identité conditions validité"
    },
    "dropped": []
   },
   {
    "kind": "model",
    "step": 3,
-   "content": "",
+   "content": "Léo est mineur : je consulte la fiche dédiée aux mineurs.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "search_slots"
+    "get_fiche"
    ],
-   "tokens_in": 3377,
-   "tokens_out": 116,
-   "cost_usd": 0.000120675,
-   "latency_s": 0.79
+   "tokens_in": 4217,
+   "tokens_out": 115,
+   "cost_usd": 0.000246128,
+   "latency_s": 0.93
   },
   {
    "kind": "call",
    "step": 3,
-   "tool": "search_slots",
+   "tool": "get_fiche",
    "args": {
-    "town_hall": "Montreuil"
+    "doc_id": "F21090"
    },
    "dropped": []
   },
   {
    "kind": "model",
    "step": 4,
-   "content": "",
-   "model": "deepseek/deepseek-v4.1-flash",
-   "tool_calls": [
-    "book_appointment"
-   ],
-   "tokens_in": 3629,
-   "tokens_out": 540,
-   "cost_usd": 0.000425079,
-   "latency_s": 2.859
-  },
-  {
-   "kind": "call",
-   "step": 4,
-   "tool": "book_appointment",
-   "args": {
-    "slot_id": "C06",
-    "person_id": "P2",
-    "reason": "id_card"
-   },
-   "dropped": []
-  },
-  {
-   "kind": "model",
-   "step": 5,
-   "content": "Rendez-vous confirmé : **R1** — Léo Martin (P2), carte d'identité, **mairie de Montreuil, vendredi 27 novembre 2026 à 9h00**.\n\nÀ noter : aucun créneau n'était disponible le vendredi 20 novembre (vendredi prochain) à Montreuil ; j'ai donc pris le vendredi suivant à 9h, seul créneau matinal correspondant. Dites-moi si vous préférez un autre horaire (ex. jeudi 19 à 14h, ou vendredi 27 à 10h30/16h).",
+   "content": "Je n'ai rien réservé : la démarche n'est pas possible aujourd'hui.\n\n**Pourquoi :** la carte d'identité de Léo (P2) est valide jusqu'au **10/02/2030**. D'après la fiche Service-Public « Renouvellement de la carte d'identité d'un mineur » (F21090), le renouvellement ne peut être demandé que **l'année qui précède la date d'expiration**, soit à partir de février 2029. Aucun rendez-vous ni pré-demande n'est donc recevable pour l'instant.\n\nSi vous le souhaitez, je peux en revanche m'occuper d'autre chose (par exemple le passeport de Camille, qui expire le 01/12/2026).",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3795,
-   "tokens_out": 165,
-   "cost_usd": 0.000160797,
-   "latency_s": 1.52
+   "tokens_in": 5455,
+   "tokens_out": 327,
+   "cost_usd": 0.000397412,
+   "latency_s": 1.612
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "",
+   "thought": "Je commence par identifier Léo dans le compte.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.012,
+   "latency_s": 0.01,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -308,92 +241,56 @@
    }
   },
   {
-   "tool": "search_slots",
+   "tool": "search_fiches",
    "args": {
-    "town_hall": "Montreuil",
-    "date_from": "2026-11-20",
-    "date_to": "2026-11-20",
-    "part_of_day": "morning"
+    "query": "renouvellement carte d'identité conditions validité"
    },
-   "thought": "",
+   "thought": "Léo est P2 (16 ans). Sa carte d'identité est valide jusqu'en 2030 — je vérifie les conditions de renouvellement avant de réserver.\n\n",
    "step": 2,
    "ok": true,
    "executed": true,
-   "attempts": 3,
-   "latency_s": 1.559,
-   "retried_errors": [
-    "rate_limited",
-    "rate_limited"
-   ],
-   "result": []
-  },
-  {
-   "tool": "search_slots",
-   "args": {
-    "town_hall": "Montreuil"
-   },
-   "thought": "",
-   "step": 3,
-   "ok": true,
-   "executed": true,
    "attempts": 1,
-   "latency_s": 0.01,
+   "latency_s": 4.389,
    "retried_errors": [],
    "result": [
     {
-     "id": "C11",
-     "town_hall": "Montreuil",
-     "start": "2026-11-19T14:00",
-     "weekday": "jeudi",
-     "part_of_day": "afternoon"
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Vous êtes majeur et la date de validité de votre carte nationale d'identité est prochainement dépassée ou l'est déjà ? Vous avez une carte d'identité ancien modèle et vous souhaitez obtenir une carte au nouveau format ? La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Nous vous présentons les étapes de la démarche."
     },
     {
-     "id": "C06",
-     "town_hall": "Montreuil",
-     "start": "2026-11-27T09:00",
-     "weekday": "vendredi",
-     "part_of_day": "morning"
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## En France > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants : - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
     },
     {
-     "id": "C09",
-     "town_hall": "Montreuil",
-     "start": "2026-11-27T10:30",
-     "weekday": "vendredi",
-     "part_of_day": "morning"
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants : - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
     },
     {
-     "id": "C07",
-     "town_hall": "Montreuil",
-     "start": "2026-11-27T16:00",
-     "weekday": "vendredi",
-     "part_of_day": "afternoon"
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - Carte d'identité du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
     }
    ]
   },
   {
-   "tool": "book_appointment",
+   "tool": "get_fiche",
    "args": {
-    "slot_id": "C06",
-    "person_id": "P2",
-    "reason": "id_card"
+    "doc_id": "F21090"
    },
-   "thought": "",
-   "step": 4,
+   "thought": "Léo est mineur : je consulte la fiche dédiée aux mineurs.\n\n",
+   "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.012,
+   "latency_s": 0.003,
    "retried_errors": [],
    "result": {
-    "appointment_id": "R1",
-    "status": "confirmed",
-    "id": "C06",
-    "town_hall": "Montreuil",
-    "start": "2026-11-27T09:00",
-    "weekday": "vendredi",
-    "part_of_day": "morning",
-    "person": "P2",
-    "reason": "id_card"
+    "doc_id": "F21090",
+    "title": "Renouvellement de la carte d'identité d'un mineur",
+    "text": "La demande de renouvellement de la carte d'identité d’un mineur est gratuite, à condition de pouvoir présenter l'ancienne carte.\nLa carte d'identité de votre enfant mineur est périmée ou le devient bientôt ? La demande de renouvellement de la carte d’identité est gratuite, à condition de pouvoir présenter l’ancienne carte. Nous vous présentons les étapes de la démarche. Elles varient selon que vous vivez en France ou à l’étranger.\n\n## En France\n\n## En France > Savoir quand il est possible de faire la demande de renouvellement\nIl est possible de demander le renouvellement l'année qui précède la date d'expiration de la carte d'identité actuelle.\nÀ savoir\nEn cas de changement sur l’état civil de votre enfant mineur (par exemple, changement de prénom), il faut faire une demande de modification de la carte d’identité. La demande doit être faite dans un délai de 3 mois à partir de la mise à jour de l’acte de naissance.\n\n## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nLa liste des mairies équipées est consultable en ligne.\nOù s'adresser : Mairie délivrant des cartes d'identité\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée :\noutilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité\nIl est possible de préparer la démarche en effectuant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande permet de gagner du temps lors du dépôt du dossier.\nselNG : Pré-demande pour un renouvellement de carte d'identité\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide\nLes documents à fournir varient selon la situation familiale du mineur :\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants :\n- Carte d'identité du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- Pièce d’identité du représentant légal qui dépose la demande\n- En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur sont séparés ou divorcés\nLes documents à fournir varient selon le mode de garde du mineur :\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur sont séparés ou divorcés > La garde est alternée\nIl faut présenter les documents suivants :\n- Carte d'identité du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- Pièce d’identité du représentant légal qui dépose la demande\n- En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\nÀ noter\nEn cas de garde alternée, il est possible de mentionner les 2 adresses du mineur sur le titre d'identité. Dans ce cas, il faut présenter :\n- La preuve de la résidence alternée (copie de la décision du juge, convention de divorce ou convention parentale)\n- Et 2 justificatifs de domicile (un pour chaque parent).\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement "
    }
   }
  ]

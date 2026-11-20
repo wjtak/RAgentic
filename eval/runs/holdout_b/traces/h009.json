@@ -1,0 +1,397 @@
+{
+ "id": "h009",
+ "kind": "impossible",
+ "task": "Prends-moi le créneau du mardi 24 novembre à 9h30 à la mairie du 12e pour renouveler mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "max_steps: budget of 5 model calls spent",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   },
+   "R3": {
+    "slot": "C04",
+    "person": "P2",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "search_slots",
+  "search_slots",
+  "search_slots"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.017
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.016
+  },
+  {
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.012
+  },
+  {
+   "step": 5,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-24",
+    "date_to": "2026-12-06"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 5,
+ "max_steps": 5,
+ "tokens_in": 17459,
+ "tokens_out": 1189,
+ "latency_s": 8.176,
+ "model_latency_s": 8.08,
+ "tool_latency_s": 0.06,
+ "cost_usd": 0.001289,
+ "stop_reason": "max_steps",
+ "answer": null,
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h009.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vérifie d'abord votre profil, puis je chercherai le créneau demandé.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3046,
+   "tokens_out": 387,
+   "cost_usd": 0.0003301776,
+   "latency_s": 1.851
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3424,
+   "tokens_out": 168,
+   "cost_usd": 0.0002405376,
+   "latency_s": 1.247
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3544,
+   "tokens_out": 196,
+   "cost_usd": 0.0001919808,
+   "latency_s": 1.461
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3673,
+   "tokens_out": 264,
+   "cost_usd": 0.0003093192,
+   "latency_s": 2.087
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3772,
+   "tokens_out": 174,
+   "cost_usd": 0.0002171808,
+   "latency_s": 1.434
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-24",
+    "date_to": "2026-12-06"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "stop",
+   "reason": "max_steps",
+   "step": 5
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vérifie d'abord votre profil, puis je chercherai le créneau demandé.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.017,
+   "retried_errors": [],
+   "result": []
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.016,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C05",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-26T14:00",
+     "weekday": "jeudi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.012,
+   "retried_errors": [],
+   "result": []
+  }
+ ]
+}

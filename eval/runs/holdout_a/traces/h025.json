@@ -1,0 +1,152 @@
+{
+ "id": "h025",
+ "kind": "normal",
+ "task": "Si la loi oblige à avoir une carte d'identité, crée la pré-demande de première carte d'identité d'Inès ; sinon, ne fais rien.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "search_fiches"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité obligatoire pour tous les Français"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 5.951
+  }
+ ],
+ "steps": 2,
+ "max_steps": 5,
+ "tokens_in": 7026,
+ "tokens_out": 333,
+ "latency_s": 9.468,
+ "model_latency_s": 3.493,
+ "tool_latency_s": 5.951,
+ "cost_usd": 0.000486,
+ "stop_reason": "answered",
+ "answer": "La fiche F11601 est claire : aucun texte n'oblige à avoir une carte d'identité (elle reste utile pour justifier son identité dans de nombreuses démarches, mais elle n'est pas obligatoire).\n\nComme la condition posée n'est pas remplie, je n'ai rien fait : aucune pré-demande n'a été créée.",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h025.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan : vérifier dans les fiches Service-Public si la carte d'identité est obligatoire en France, puis agir en conséquence.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3049,
+   "tokens_out": 242,
+   "cost_usd": 0.0001930572,
+   "latency_s": 2.142
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité obligatoire pour tous les Français"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "La fiche F11601 est claire : aucun texte n'oblige à avoir une carte d'identité (elle reste utile pour justifier son identité dans de nombreuses démarches, mais elle n'est pas obligatoire).\n\nComme la condition posée n'est pas remplie, je n'ai rien fait : aucune pré-demande n'a été créée.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3977,
+   "tokens_out": 91,
+   "cost_usd": 0.0002928072,
+   "latency_s": 1.351
+  }
+ ],
+ "observations": [
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité obligatoire pour tous les Français"
+   },
+   "thought": "Plan : vérifier dans les fiches Service-Public si la carte d'identité est obligatoire en France, puis agir en conséquence.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 5.951,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F11601",
+     "title": "Est-on obligé d'avoir une carte d'identité ?",
+     "excerpt": "Non, avoir une carte d'identité n'est pas obligatoire. Néanmoins, pour la plupart des démarches, il est nécessaire de justifier son identité. Non, aucun texte ne vous oblige à avoir une carte d'identité. Néanmoins, si vous êtes soumis à un contrôle d'identité, la procédure sera plus longue si vous ne pouvez pas présenter de titre d'identité. Par ailleurs, pour la plupart des démarches, il faut prouver son identité. Si vous n'avez aucun titre d'identité, vous risquez donc d'avoir des difficultés. Il s'agit, par exemple, des situations suivantes : - Examen ou concours - Inscription à France Travail (anciennement Pôle emploi) - Inscription sur les listes électorales et vote aux élections - Opérations bancaires (paiement par chèque, retrait au guichet de votre banque) - Voyage à l'étranger. À noter La carte d'identité, tout comme le passeport, vous permet de justifier de votre identité, mais aussi de votre nationalité française."
+    },
+    {
+     "doc_id": "F1361",
+     "title": "Élections : papiers d'identité à présenter pour voter",
+     "excerpt": "## En France > Français\npas obligatoire. Mais en cas de doute, le président du bureau de vote peut vous demander de prouver votre identité par tout moyen. À savoir La carte électorale n'est pas une pièce d'identité. Elle n'est pas obligatoire pour voter."
+    },
+    {
+     "doc_id": "F1361",
+     "title": "Élections : papiers d'identité à présenter pour voter",
+     "excerpt": "## En France > Français\n- Carte d'identité avec photographie ou carte de circulation (en cours de validité) avec photographie, délivrée par les autorités militaires - Permis de conduire (en cours de validité) - Récépissé valant justification de l'identité (en cours de validité), délivré en échange des pièces d'identité en cas de contrôle judiciaire - Permis de chasser (en cours de validité) avec photographie, délivré par l'Office national de la chasse et de la faune sauvage (ONCFS). Le permis de chasser délivré par l'Office français de la biodiversité n'est pas valable. Attention Vous devez présenter l'original du document. Une photographie ou un téléchargement sur smartphone ou une photocopie ne sont pas acceptés. Dans une commune de moins de 1 000 habitants, la pièce d’identité n'est pas obligatoire. Mais en cas de doute, le président du bureau de vote peut vous demander de prouver votre identité par tout moyen. À savoir La carte électorale n'est pas"
+    },
+    {
+     "doc_id": "F556",
+     "title": "Carte d'identité / Passeport : la présence au guichet est-elle obligatoire ?",
+     "excerpt": "## Carte d'identité > En France > Pour un majeur\nOui, votre présence est obligatoire pour déposer le dossier. Vous devez également vous déplacer pour retirer votre carte d’identité. À savoir Exceptionnellement, un agent peut se déplacer à domicile si un motif médical ou une infirmité vous empêche de vous déplacer. Dans ce cas, il faut fournir un certificat médical de moins de 3 mois qui indique cette impossibilité."
+    }
+   ]
+  }
+ ]
+}

@@ -50,7 +50,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.019
+   "latency_s": 0.008
   },
   {
    "step": 2,
@@ -66,7 +66,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.019
+   "latency_s": 0.01
   },
   {
    "step": 3,
@@ -81,17 +81,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.008
   }
  ],
  "steps": 4,
  "max_steps": 6,
- "tokens_in": 13295,
- "tokens_out": 829,
- "latency_s": 27.233,
- "cost_usd": 0.001491,
+ "tokens_in": 13849,
+ "tokens_out": 731,
+ "latency_s": 7.148,
+ "model_latency_s": 7.105,
+ "tool_latency_s": 0.026,
+ "cost_usd": 0.001284,
  "stop_reason": "answered",
- "answer": "C'est fait : rendez-vous confirmé (R1) pour vous, Camille Martin (P1), le **mardi 24 novembre 2026 à 9h30**, en mairie du **Paris 12e**, pour un **renouvellement de passeport** — le matin, comme d'habitude.\n\nSi vous le souhaitez, je peux aussi créer la pré-demande ANTS et vous indiquer le timbre fiscal à prévoir : dites-le-moi.",
+ "answer": "Rendez-vous confirmé : **mardi 24 novembre 2026 à 9h30**, mairie du **Paris 12e**, pour le renouvellement de votre passeport (réf. **R1**, personne : Camille Martin).\n\nÀ prévoir pour le jour J : votre ancien passeport (il expire le 01/12/2026), une photo d'identité récente, un justificatif de domicile et le timbre fiscal. Je n'ai rien acheté ni créé de pré-demande ANTS, puisque vous ne me l'avez pas demandé — dites-moi si vous voulez que je m'en occupe.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -119,38 +121,35 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "",
+   "content": "Je commence par vérifier votre profil et vos documents.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "search_slots"
+    "get_profile"
    ],
-   "tokens_in": 2912,
-   "tokens_out": 302,
-   "cost_usd": 0.000432496,
-   "latency_s": 2.615
+   "tokens_in": 3058,
+   "tokens_out": 122,
+   "cost_usd": 0.00037336,
+   "latency_s": 1.144
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "search_slots"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
    "step": 2,
-   "content": "Je cherche un créneau pour la semaine prochaine (23–29 novembre), selon vos habitudes : Paris 12e, le matin.\n\n",
+   "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "search_slots"
    ],
-   "tokens_in": 3272,
-   "tokens_out": 207,
-   "cost_usd": 0.000412576,
-   "latency_s": 4.917
+   "tokens_in": 3428,
+   "tokens_out": 292,
+   "cost_usd": 0.00052656,
+   "latency_s": 2.45
   },
   {
    "kind": "call",
@@ -172,10 +171,10 @@
    "tool_calls": [
     "book_appointment"
    ],
-   "tokens_in": 3472,
-   "tokens_out": 89,
-   "cost_usd": 0.00046114,
-   "latency_s": 16.974
+   "tokens_in": 3598,
+   "tokens_out": 107,
+   "cost_usd": 0.000170512,
+   "latency_s": 0.889
   },
   {
    "kind": "call",
@@ -191,25 +190,25 @@
   {
    "kind": "model",
    "step": 4,
-   "content": "C'est fait : rendez-vous confirmé (R1) pour vous, Camille Martin (P1), le **mardi 24 novembre 2026 à 9h30**, en mairie du **Paris 12e**, pour un **renouvellement de passeport** — le matin, comme d'habitude.\n\nSi vous le souhaitez, je peux aussi créer la pré-demande ANTS et vous indiquer le timbre fiscal à prévoir : dites-le-moi.",
+   "content": "Rendez-vous confirmé : **mardi 24 novembre 2026 à 9h30**, mairie du **Paris 12e**, pour le renouvellement de votre passeport (réf. **R1**, personne : Camille Martin).\n\nÀ prévoir pour le jour J : votre ancien passeport (il expire le 01/12/2026), une photo d'identité récente, un justificatif de domicile et le timbre fiscal. Je n'ai rien acheté ni créé de pré-demande ANTS, puisque vous ne me l'avez pas demandé — dites-moi si vous voulez que je m'en occupe.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3639,
-   "tokens_out": 231,
-   "cost_usd": 0.000185097,
-   "latency_s": 2.648
+   "tokens_in": 3765,
+   "tokens_out": 210,
+   "cost_usd": 0.000213464,
+   "latency_s": 2.622
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "",
+   "thought": "Je commence par vérifier votre profil et vos documents.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.019,
+   "latency_s": 0.008,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -279,12 +278,12 @@
     "date_to": "2026-11-29",
     "part_of_day": "morning"
    },
-   "thought": "Je cherche un créneau pour la semaine prochaine (23–29 novembre), selon vos habitudes : Paris 12e, le matin.\n\n",
+   "thought": "",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.019,
+   "latency_s": 0.01,
    "retried_errors": [],
    "result": [
     {
@@ -308,7 +307,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.008,
    "retried_errors": [],
    "result": {
     "appointment_id": "R1",

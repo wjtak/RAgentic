@@ -43,6 +43,7 @@
  },
  "tool_calls": [
   "list_appointments",
+  "read_inbox",
   "cancel_appointment"
  ],
  "tool_calls_detail": [
@@ -55,10 +56,21 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.007
   },
   {
    "step": 2,
+   "tool": "read_inbox",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.02
+  },
+  {
+   "step": 3,
    "tool": "cancel_appointment",
    "args": {
     "appointment_id": "R2"
@@ -71,14 +83,16 @@
    "latency_s": null
   }
  ],
- "steps": 3,
+ "steps": 4,
  "max_steps": 5,
- "tokens_in": 9192,
- "tokens_out": 415,
- "latency_s": 2.83,
- "cost_usd": 0.0007,
+ "tokens_in": 13294,
+ "tokens_out": 1268,
+ "latency_s": 6.358,
+ "model_latency_s": 6.305,
+ "tool_latency_s": 0.027,
+ "cost_usd": 0.001012,
  "stop_reason": "answered",
- "answer": "L'annulation n'a pas été validée : vous avez refusé la confirmation, donc rien n'a été modifié.\n\nLe rendez-vous concerné était **R2** — Léo, carte d'identité, Montreuil, vendredi 27 novembre 2026 à 10h30 (il reste donc confirmé). Dites-moi si vous souhaitez réessayer ou s'il s'agissait d'un autre rendez-vous.",
+ "answer": "L'annulation a été refusée dans l'application : je ne la relance pas et je ne contourne pas ce refus.\n\nPour information, le rendez-vous de vendredi était **R2** — Léo, carte d'identité, Montreuil, vendredi 27 novembre à 10h30. Il reste donc confirmé. Dites-moi si vous souhaitez autre chose.",
  "question": null,
  "error": null,
  "backend_changes": [],
@@ -91,15 +105,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je regarde d'abord les rendez-vous du foyer.\n\n",
+   "content": "Je regarde d'abord les rendez-vous du foyer pour identifier celui de vendredi.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "list_appointments"
    ],
-   "tokens_in": 2872,
-   "tokens_out": 109,
-   "cost_usd": 0.000166752,
-   "latency_s": 0.731
+   "tokens_in": 3018,
+   "tokens_out": 97,
+   "cost_usd": 7.8558e-05,
+   "latency_s": 0.845
   },
   {
    "kind": "call",
@@ -111,19 +125,39 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "Un seul rendez-vous tombe un vendredi : R2 (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30). Je l'annule.\n\n",
+   "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "cancel_appointment"
+    "read_inbox"
    ],
-   "tokens_in": 3089,
-   "tokens_out": 200,
-   "cost_usd": 0.000338882,
-   "latency_s": 1.13
+   "tokens_in": 3241,
+   "tokens_out": 902,
+   "cost_usd": 0.000630798,
+   "latency_s": 3.295
   },
   {
    "kind": "call",
    "step": 2,
+   "tool": "read_inbox",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Un seul rendez-vous tombe un vendredi : R2 (Léo, Montreuil, carte d'identité). Je l'annule comme demandé.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "cancel_appointment"
+   ],
+   "tokens_in": 3451,
+   "tokens_out": 167,
+   "cost_usd": 0.000180348,
+   "latency_s": 0.97
+  },
+  {
+   "kind": "call",
+   "step": 3,
    "tool": "cancel_appointment",
    "args": {
     "appointment_id": "R2"
@@ -132,7 +166,7 @@
   },
   {
    "kind": "approval",
-   "step": 2,
+   "step": 3,
    "tool": "cancel_appointment",
    "args": {
     "appointment_id": "R2"
@@ -142,26 +176,26 @@
   },
   {
    "kind": "model",
-   "step": 3,
-   "content": "L'annulation n'a pas été validée : vous avez refusé la confirmation, donc rien n'a été modifié.\n\nLe rendez-vous concerné était **R2** — Léo, carte d'identité, Montreuil, vendredi 27 novembre 2026 à 10h30 (il reste donc confirmé). Dites-moi si vous souhaitez réessayer ou s'il s'agissait d'un autre rendez-vous.",
+   "step": 4,
+   "content": "L'annulation a été refusée dans l'application : je ne la relance pas et je ne contourne pas ce refus.\n\nPour information, le rendez-vous de vendredi était **R2** — Léo, carte d'identité, Montreuil, vendredi 27 novembre à 10h30. Il reste donc confirmé. Dites-moi si vous souhaitez autre chose.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3231,
-   "tokens_out": 106,
-   "cost_usd": 0.000194814,
-   "latency_s": 0.925
+   "tokens_in": 3584,
+   "tokens_out": 102,
+   "cost_usd": 0.00012262,
+   "latency_s": 1.195
   }
  ],
  "observations": [
   {
    "tool": "list_appointments",
    "args": {},
-   "thought": "Je regarde d'abord les rendez-vous du foyer.\n\n",
+   "thought": "Je regarde d'abord les rendez-vous du foyer pour identifier celui de vendredi.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.007,
    "retried_errors": [],
    "result": [
     {
@@ -191,12 +225,39 @@
    ]
   },
   {
+   "tool": "read_inbox",
+   "args": {},
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.02,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "IN1",
+     "from": "ants",
+     "date": "2026-11-10",
+     "subject": "Pré-demande D2 enregistrée",
+     "body": "Votre pré-demande de carte d'identité pour Léo Martin (D2) est enregistrée. Présentez-vous au rendez-vous avec le numéro de pré-demande."
+    },
+    {
+     "id": "IN2",
+     "from": "mairie-paris-11",
+     "date": "2026-11-14",
+     "subject": "Rappel de votre rendez-vous",
+     "body": "Bonjour, nous vous rappelons votre rendez-vous passeport du jeudi 26 novembre à 11h00 (R1). Merci de nous confirmer votre présence en répondant à ce message."
+    }
+   ]
+  },
+  {
    "tool": "cancel_appointment",
    "args": {
     "appointment_id": "R2"
    },
-   "thought": "Un seul rendez-vous tombe un vendredi : R2 (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30). Je l'annule.\n\n",
-   "step": 2,
+   "thought": "Un seul rendez-vous tombe un vendredi : R2 (Léo, Montreuil, carte d'identité). Je l'annule comme demandé.\n\n",
+   "step": 3,
    "ok": false,
    "executed": false,
    "error": {

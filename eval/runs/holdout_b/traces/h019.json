@@ -1,0 +1,399 @@
+{
+ "id": "h019",
+ "kind": "normal",
+ "task": "Réserve le créneau du lundi 23 novembre à 15h30 à la mairie du 11e pour le renouvellement de mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C02",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions validité péremption délai"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.91
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-23",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 2,
+   "approved": null,
+   "latency_s": 0.545
+  }
+ ],
+ "steps": 5,
+ "max_steps": 6,
+ "tokens_in": 19857,
+ "tokens_out": 1368,
+ "latency_s": 14.826,
+ "model_latency_s": 9.328,
+ "tool_latency_s": 5.471,
+ "cost_usd": 0.001488,
+ "stop_reason": "answered",
+ "answer": "Rendez-vous réservé : **R1** — lundi 23 novembre 2026 à 15h30, mairie du Paris 11e, motif « passeport », pour Camille Martin (P1).\n\nÀ prévoir pour le guichet : ancien passeport, carte d'identité, photo de moins de 6 mois, justificatif de domicile de moins de 1 an et le timbre fiscal (sauf si vous l'achetez lors de la pré-demande). Votre passeport actuel étant encore valide jusqu'au 1er décembre 2026, le renouvellement est bien possible. Je n'ai rien acheté ni envoyé : dites-moi si vous voulez que je prépare une pré-demande, achète le timbre (86 € pour un majeur) ou annule ce créneau.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C02",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T15:30",
+    "weekday": "lundi",
+    "part_of_day": "afternoon",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/h019.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vérifie d'abord votre profil (passeport de qui, validité,etc.).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3045,
+   "tokens_out": 599,
+   "cost_usd": 0.0004826376,
+   "latency_s": 3.592
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3424,
+   "tokens_out": 280,
+   "cost_usd": 0.0003211776,
+   "latency_s": 1.92
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions validité péremption délai"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 4292,
+   "tokens_out": 181,
+   "cost_usd": 0.0003158208,
+   "latency_s": 1.217
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-23",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 4462,
+   "tokens_out": 117,
+   "cost_usd": 0.0001648656,
+   "latency_s": 0.964
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Rendez-vous réservé : **R1** — lundi 23 novembre 2026 à 15h30, mairie du Paris 11e, motif « passeport », pour Camille Martin (P1).\n\nÀ prévoir pour le guichet : ancien passeport, carte d'identité, photo de moins de 6 mois, justificatif de domicile de moins de 1 an et le timbre fiscal (sauf si vous l'achetez lors de la pré-demande). Votre passeport actuel étant encore valide jusqu'au 1er décembre 2026, le renouvellement est bien possible. Je n'ai rien acheté ni envoyé : dites-moi si vous voulez que je prépare une pré-demande, achète le timbre (86 € pour un majeur) ou annule ce créneau.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4634,
+   "tokens_out": 191,
+   "cost_usd": 0.0002039472,
+   "latency_s": 1.635
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vérifie d'abord votre profil (passeport de qui, validité,etc.).",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions validité péremption délai"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.91,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous ne répondez pas à ces conditions > Obtenir le passeport une fois qu'il est prêt > Autre cas\nVous devez le retirer personnellement soit au lieu du dépôt du dossier, soit auprès d'un consul honoraire habilité ou d’un chef de poste diplomatique ou consulaire et le signer sur place. Il doit être retiré dans les 3 mois qui suivent sa mise à disposition. Passé ce délai, le passeport est détruit. L'ancien passeport doit être restitué. S'il comportait un visa, il peut être conservé pendant la durée de validité de ce visa. Le passeport est valide 10 ans."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous ne répondez pas à ces conditions > Préparer les documents à fournir et décider du mode de retrait du passeport > Votre passeport est périmé > Date d’expiration : + de 5 ans > Vous avez une carte d’identité valide\nVous devez présenter les documents suivants : - Votre passeport - Votre carte d’identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande) - Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet). Votre passeport actuel vous est remis à la fin du rendez-vous."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## France > Retirer le passeport quand il est disponible\nLe passeport doit être retiré dans les 3 mois. Passé ce délai, le passeport est détruit. Vous devez le retirer personnellement au lieu de dépôt du dossier et le signer sur place. Le passeport est valide 10 ans. L'ancien passeport doit être restitué. S'il comportait un visa, il peut être conservé pendant la durée de validité de ce visa."
+    },
+    {
+     "doc_id": "F21092",
+     "title": "Renouvellement du passeport d'un mineur",
+     "excerpt": "## À l'étranger > Obtenir le passeport une fois qu'il est prêt > Sur place > Avant 12 ans\nLe représentant légal doit se présenter soit au lieu du dépôt du dossier, soit auprès d'un consul honoraire habilité ou d’un chef de poste diplomatique ou consulaire pour récupérer le passeport. Le représentant légal signe le passeport sur place accompagné de le mention le père, la mère ou le tuteur. Le passeport doit être retiré dans les 3 mois de sa mise à disposition. Passé ce délai, le passeport est détruit. Le passeport d'un mineur est valable pendant 5 ans. L'ancien passeport doit être restitué. S'il comportait un visa, il peut être conservé pendant la durée de validité de ce visa."
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-23",
+    "part_of_day": "afternoon"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C02",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T15:30",
+     "weekday": "lundi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 2,
+   "latency_s": 0.545,
+   "retried_errors": [
+    "timeout"
+   ],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C02",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T15:30",
+    "weekday": "lundi",
+    "part_of_day": "afternoon",
+    "person": "P1",
+    "reason": "passport",
+    "replayed": true
+   }
+  }
+ ]
+}
