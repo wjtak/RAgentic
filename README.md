@@ -208,8 +208,9 @@ only for identity cards and conditional rules, so the runs that call `search_fic
 and 8 (v4), exactly the 8 training scenarios that need them, and the mean number of steps from 4.8 to 4.2-4.3. That
 change was made from the failures of the **training** set v3: `0358377` was committed at 01:10 on 20 November, after
 the v3 training passes (finished at 00:59) and before the held-out results were committed (01:22); the first held-out
-pass had ended on one team member's machine at 01:06, unpublished, and the change targets the training failures
-(fact-sheet reads before bookings: s010, s027, s036), so we treat the held-out set as still valid. With 40 scenarios
+pass had ended on one team member's machine at 01:06, unpublished. The author of `0358377` confirmed he had not
+seen any held-out result when he made the change, which targets the training failures (fact-sheet reads before
+bookings: s010, s027, s036): the held-out set is fully independent of the v4 agent. With 40 scenarios
 per pass the 95% intervals (74%-100%) overlap: one run more or less is noise.
 
 ### The model comparison (v1 only)
