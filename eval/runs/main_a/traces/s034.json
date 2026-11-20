@@ -1,0 +1,475 @@
+{
+ "id": "s034",
+ "kind": "normal",
+ "task": "Crée la pré-demande de première carte d'identité d'Inès, et achète le timbre fiscal s'il en faut un.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_fiches",
+  "search_fiches",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.006
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première carte d'identité timbre fiscal gratuit mineur"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 2.339
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité première demande gratuité timbre fiscal 25 euros perte vol"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.066
+  },
+  {
+   "step": 4,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande carte nationale d'identité prix gratuit documents"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.544
+  },
+  {
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.006
+  }
+ ],
+ "steps": 6,
+ "max_steps": 7,
+ "tokens_in": 26414,
+ "tokens_out": 1378,
+ "latency_s": 20.916,
+ "model_latency_s": 10.932,
+ "tool_latency_s": 9.961,
+ "cost_usd": 0.001383,
+ "stop_reason": "answered",
+ "answer": "Fait :\n\n- **Pré-demande créée (brouillon)** : D3 — carte d'identité, **première demande**, pour **Inès Martin (P3, 11 ans)**. Elle n'est **pas envoyée** à l'ANTS : dites-moi si vous voulez que je la soumette.\n- **Timbre fiscal : aucun achat.** La première demande de carte d'identité est **gratuite** (fiches F1341 majeur / F1342 mineur) ; le timbre de 25 € ne concerne que les renouvellements après perte ou vol. Aucun paiement n'a donc été effectué.\n\nPour le rendez-vous en mairie, il faudra notamment : une photo d'identité de moins de 6 mois, votre pièce d'identité, un justificatif de domicile, et le n° de pré-demande/QR code (acte de naissance de moins de 3 mois si l'état civil de naissance n'est pas dématérialisé).",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ],
+ "trace_file": "traces/s034.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par récupérer le profil du foyer pour identifier Inès et son âge.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3025,
+   "tokens_out": 114,
+   "cost_usd": 0.000100295,
+   "latency_s": 1.367
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3404,
+   "tokens_out": 265,
+   "cost_usd": 0.000229932,
+   "latency_s": 2.27
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première carte d'identité timbre fiscal gratuit mineur"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 4070,
+   "tokens_out": 215,
+   "cost_usd": 0.00026853,
+   "latency_s": 1.851
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité première demande gratuité timbre fiscal 25 euros perte vol"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 4511,
+   "tokens_out": 118,
+   "cost_usd": 0.000158473,
+   "latency_s": 1.071
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande carte nationale d'identité prix gratuit documents"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "La carte d'identité est gratuite (première demande, y compris pour un mineur) : aucun timbre fiscal n'est requis. Je crée donc seulement le brouillon de pré-demande pour Inès.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 5616,
+   "tokens_out": 329,
+   "cost_usd": 0.000350248,
+   "latency_s": 1.963
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "Fait :\n\n- **Pré-demande créée (brouillon)** : D3 — carte d'identité, **première demande**, pour **Inès Martin (P3, 11 ans)**. Elle n'est **pas envoyée** à l'ANTS : dites-moi si vous voulez que je la soumette.\n- **Timbre fiscal : aucun achat.** La première demande de carte d'identité est **gratuite** (fiches F1341 majeur / F1342 mineur) ; le timbre de 25 € ne concerne que les renouvellements après perte ou vol. Aucun paiement n'a donc été effectué.\n\nPour le rendez-vous en mairie, il faudra notamment : une photo d'identité de moins de 6 mois, votre pièce d'identité, un justificatif de domicile, et le n° de pré-demande/QR code (acte de naissance de moins de 3 mois si l'état civil de naissance n'est pas dématérialisé).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 5788,
+   "tokens_out": 337,
+   "cost_usd": 0.000275484,
+   "latency_s": 2.41
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par récupérer le profil du foyer pour identifier Inès et son âge.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "première carte d'identité timbre fiscal gratuit mineur"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 2.339,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > Le mineur a un passeport périmé > Date d’expiration : + de 5 ans > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nl’acte de naissance - Timbre fiscal - En cas de pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour le mineur."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a un passeport périmé > Date d’expiration : + de 5 ans > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nl’acte de naissance - Timbre fiscal - En cas de pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour le mineur."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal > Sans pré-demande en ligne\nIl existe 2 possibilités : soit acheter le timbre sur internet, soit l'acheter directement au consulat."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Acheter le timbre fiscal > Sans pré-demande en ligne\nIl existe 2 possibilités : soit acheter le timbre sur internet, soit l'acheter dans un bureau de tabac."
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité première demande gratuité timbre fiscal 25 euros perte vol"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.066,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
+    },
+    {
+     "doc_id": "F1794",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 €. L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
+    },
+    {
+     "doc_id": "F1759",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de vol",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal\nLa carte d’identité coûte 25 €. L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande carte nationale d'identité prix gratuit documents"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.544,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1341",
+     "title": "Carte d'identité d'un majeur : première demande",
+     "excerpt": "Pour demander une carte d’identité, il faut se rendre dans une mairie équipée avec les pièces justificatives. Une pré-demande peut être faite sur internet. Vous êtes majeur et souhaitez demander votre première carte nationale d'identité ? La procédure varie selon que la demande est faite en France ou à l'étranger et si vous avez déjà un passeport ou non. Dans tous les cas, la carte d'identité est gratuite. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F1342",
+     "title": "Carte d'identité d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur n’a pas de passeport > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - En l'absence de passeport ou s’il a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En cas de pré-demande, n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour"
+    },
+    {
+     "doc_id": "F1342",
+     "title": "Carte d'identité d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur n’a pas de passeport > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - En l'absence de passeport ou s’il a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En cas de pré-demande, n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F1342",
+     "title": "Carte d'identité d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur n’a pas de passeport > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - En l'absence de passeport ou s’il a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En cas de pré-demande, n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    }
+   ]
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "thought": "La carte d'identité est gratuite (première demande, y compris pour un mineur) : aucun timbre fiscal n'est requis. Je crée donc seulement le brouillon de pré-demande pour Inès.\n\n",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ]
+}

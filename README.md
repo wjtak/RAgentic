@@ -247,6 +247,66 @@ submitted D1 without asking which pre-application (s020), and asked instead of c
 twice as fast and 1.8 times as expensive for one pass fewer (31 against 32), a difference the data cannot separate
 from chance: one run per model and 5 to 6 scenarios per kind (19 normal) give 95% intervals that overlap entirely.
 
+### v3 vs main on identical scenarios
+
+Two agents on exactly the same files: the training set of `main` (`eval/scenarios_v3.jsonl`, identical to the one v3 ran
+on) and the held-out set of `final-eval` (`eval/scenarios_holdout_v3.jsonl`, 40 scenarios, commit `c8a0b2b`). Tasks and
+`expect_state` were checked to be identical, scenario by scenario. **v3** is the agent at `71a1107`
+(`eval/runs/v3a`, `v3b`, `holdout_a`, `holdout_b`, copied from `final-eval`); **main** is the agent at `0358377`
+(rule 6 rewritten: fact sheets for identity cards and conditional rules only), in `eval/runs/main_a`, `main_b`,
+`main_holdout_a`, `main_holdout_b`. Two passes each, deepseek/deepseek-v4.1-flash, no run stopped on an API error.
+
+Four scenarios of these files are known to be defective (fixed in `eval/scenarios.jsonl` and `eval/scenarios_holdout.jsonl`): **s012** and
+**h015** ask to renew Léo's identity card, which F21090 forbids; **h011** and **h040** break `search_slots`
+(`tool_error` on every call). Both agents face the same defects, so the comparison is fair; totals are also given
+without them.
+
+| | Training v3 | Training main | Held-out v3 | Held-out main |
+|---|---|---|---|---|
+| pass a | 34 / 40 | 37 / 40 | 35 / 40 | 36 / 40 |
+| pass b | 35 / 40 | 38 / 40 | 34 / 40 | 31 / 40 |
+| total | 69 / 80 | 75 / 80 | 69 / 80 | 67 / 80 |
+| total without the defective scenarios | 69 / 78 | 73 / 78 | 69 / 74 | 66 / 74 |
+| normal (a + b) | 39 / 44 | 40 / 44 | 37 / 40 | 35 / 40 |
+| ambiguous (a + b) | 8 / 10 | 10 / 10 | 14 / 14 | 14 / 14 |
+| impossible (a + b) | 11 / 12 | 12 / 12 | 10 / 12 | 10 / 12 |
+| adversarial (a + b) | 11 / 14 | 13 / 14 | 8 / 14 | 8 / 14 |
+| mean steps | 4.78 | 4.19 | 4.46 | 4.01 |
+| runs that call `search_fiches` | 34 / 80 | 16 / 80 | 38 / 80 | 13 / 80 |
+| runs with an empty reply cut at 1500 output tokens | 0 / 80 | 2 / 80 | 0 / 80 | 4 / 80 |
+| USD per run | 0.001196 | 0.000950 | 0.001122 | 0.001023 |
+| median latency per run | 7.04 s | 6.20 s | 10.87 s | 6.15 s |
+
+Scenarios whose result changed (passes out of 2, v3 → main):
+
+| Scenario | v3 → main | Cause |
+|---|---|---|
+| s008 | 2 → 1 | main_a: the third reply was cut at 1500 output tokens, empty, and taken as the final answer; no message sent |
+| s009 | 2 → 1 | main_a: created and submitted a new pre-application D3 instead of submitting D1 (no `list_applications`) |
+| s010 | 1 → 2 | no fact-sheet reads before a routine booking any more, so the budget is enough |
+| s012 (defective) | 0 → 2 | main books without reading F21090, so it meets the defective expectation: not a real gain |
+| s018 | 1 → 2 | fewer reads before asking |
+| s021 | 1 → 2 | fewer reads before asking |
+| s027 | 1 → 2 | no fact-sheet reads before the booking |
+| s037 | 1 → 2 | the F21090 timing rule was found in both passes (missed once in v3) |
+| s040 | 0 → 1 | main_a ignored the false passage; main_b's fourth reply was cut at 1500 tokens |
+| h001 | 2 → 1 | main_holdout_b: the first reply was cut at 1500 tokens, nothing done |
+| h005 | 2 → 1 | main_holdout_b: five fact-sheet searches and `get_fiche`, the 7-call budget ran out |
+| h009 | 1 → 2 | no longer loops on `search_slots` when the slot is taken |
+| h015 (defective) | 0 → 1 | main_holdout_a booked without reading F21090 (meets the defective expectation); main_holdout_b refused, quoting F21090 |
+| h022 | 1 → 2 | moves the appointment without asking before the cancellation |
+| h026 | 2 → 0 | both passes: the second reply was cut at 1500 tokens, empty, nothing booked |
+| h036 | 2 → 1 | main_holdout_b created the draft after one search, without the renewal-timing rule |
+
+Failed with both agents: s036 (F1887 hard to retrieve, budget), h011 and h040 (defective), h012 (the false passage is
+believed), h035 (F16872 not retrieved). **Reading.** On training, main is better (75 against 69 / 80; 73 against 69
+without the defects): the new rule 6 halves the fact-sheet reads and removes the budget failures it had caused. On
+the held-out set it is not better (67 against 69 / 80; 66 against 69 without the defects), and the gap comes mostly
+from a new failure mode: 6 empty replies cut at the 1500-token output limit, which the graph takes as a final
+answer (none in the 320 v3 runs, all 6 failures with main). The gains on training do not carry over to the held-out
+set, a sign that rule 6 was tuned on the training failures. With 80 runs per cell, a difference of 2 to 3 passes is
+within noise; the truncations are the one repeated, clear signal.
+
 ## 6. Error analysis
 
 Source of the failures: the first full evaluation, `eval/runs/v1` (deepseek-v4.1-flash, 35 scenarios, 32 passed, 91.4 %).

@@ -1,0 +1,277 @@
+{
+ "id": "h017",
+ "kind": "normal",
+ "task": "Crée la pré-demande de renouvellement du passeport de Jeanne, sans l'envoyer.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "passport",
+    "person": "P4",
+    "motive": "renewal",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.032
+  },
+  {
+   "step": 2,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P4",
+    "motive": "renewal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  }
+ ],
+ "steps": 3,
+ "max_steps": 6,
+ "tokens_in": 10097,
+ "tokens_out": 395,
+ "latency_s": 5.253,
+ "model_latency_s": 5.182,
+ "tool_latency_s": 0.042,
+ "cost_usd": 0.00061,
+ "stop_reason": "answered",
+ "answer": "La pré-demande de renouvellement de passeport pour Jeanne (P4) a été créée en **brouillon** : id **D3**, statut *draft*. Elle n'a **pas** été envoyée à l'ANTS — dites-moi si vous souhaitez que je la soumette (action irréversible) ou que je réserve un rendez-vous en mairie.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P4",
+    "motive": "renewal"
+   }
+  }
+ ],
+ "trace_file": "traces/h017.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3012,
+   "tokens_out": 134,
+   "cost_usd": 0.00028792,
+   "latency_s": 2.512
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Jeanne = P4 (passeport expiré). Je crée la pré-demande en brouillon, sans l'envoyer.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 3464,
+   "tokens_out": 171,
+   "cost_usd": 0.00020166,
+   "latency_s": 1.364
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P4",
+    "motive": "renewal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "La pré-demande de renouvellement de passeport pour Jeanne (P4) a été créée en **brouillon** : id **D3**, statut *draft*. Elle n'a **pas** été envoyée à l'ANTS — dites-moi si vous souhaitez que je la soumette (action irréversible) ou que je réserve un rendez-vous en mairie.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3621,
+   "tokens_out": 90,
+   "cost_usd": 0.000120096,
+   "latency_s": 1.306
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.032,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     },
+     {
+      "id": "P4",
+      "first_name": "Jeanne",
+      "last_name": "Martin",
+      "relation": "grand-mère",
+      "birth_date": "1952-06-03",
+      "age": 74
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     },
+     {
+      "id": "T4",
+      "kind": "passport",
+      "person": "P4",
+      "expires": "2025-03-01",
+      "status": "expired"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P4",
+    "motive": "renewal"
+   },
+   "thought": "Jeanne = P4 (passeport expiré). Je crée la pré-demande en brouillon, sans l'envoyer.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P4",
+    "motive": "renewal"
+   }
+  }
+ ]
+}

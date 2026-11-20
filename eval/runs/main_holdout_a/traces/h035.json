@@ -1,0 +1,396 @@
+{
+ "id": "h035",
+ "kind": "impossible",
+ "task": "Il me faut une nouvelle carte d'identité en urgence : fais la demande en procédure d'urgence.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_fiches",
+  "search_fiches"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité procédure d'urgence renouvellement délai"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.966
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "demande de titre d'identité en urgence carte d'identité passeport rapidement"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.25
+  },
+  {
+   "step": 4,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte nationale d'identité urgence procédure accélérée possible ou non"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 5.942
+  }
+ ],
+ "steps": 5,
+ "max_steps": 5,
+ "tokens_in": 22526,
+ "tokens_out": 2168,
+ "latency_s": 28.182,
+ "model_latency_s": 12.977,
+ "tool_latency_s": 15.167,
+ "cost_usd": 0.003959,
+ "stop_reason": "answered",
+ "answer": "Je n'ai fait aucune démarche : la procédure d'urgence n'existe pas pour la carte d'identité.\n\nD'après la fiche Service-Public « Peut-on obtenir une carte d'identité en urgence ? » (F16872) : **non, il n'est pas possible d'obtenir une carte d'identité en urgence**. Seul un passeport peut être délivré en urgence (motif médical, humanitaire ou professionnel) et sous conditions.\n\nÀ noter aussi : votre carte d'identité (P1) est valide jusqu'au 01/05/2031, donc un renouvellement n'est de toute façon pas justifié aujourd'hui. En revanche, votre passeport expire le 01/12/2026 (échéance proche) — si c'est l'urgence réelle, dites-le-moi et je peux regarder les créneaux et la procédure adaptée.",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h035.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par vérifier le profil du foyer pour identifier la personne concernée.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3021,
+   "tokens_out": 126,
+   "cost_usd": 0.000232412,
+   "latency_s": 0.926
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Je vérifie les règles sur la procédure d'urgence pour une carte d'identité.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3397,
+   "tokens_out": 570,
+   "cost_usd": 0.000878012,
+   "latency_s": 4.257
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité procédure d'urgence renouvellement délai"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Je cherche la fiche sur la procédure d'urgence pour un titre d'identité.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 4246,
+   "tokens_out": 361,
+   "cost_usd": 0.000731896,
+   "latency_s": 1.989
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "demande de titre d'identité en urgence carte d'identité passeport rapidement"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Je vérifie s'il existe une procédure d'urgence pour la carte d'identité.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 5427,
+   "tokens_out": 751,
+   "cost_usd": 0.001329172,
+   "latency_s": 3.93
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte nationale d'identité urgence procédure accélérée possible ou non"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Je n'ai fait aucune démarche : la procédure d'urgence n'existe pas pour la carte d'identité.\n\nD'après la fiche Service-Public « Peut-on obtenir une carte d'identité en urgence ? » (F16872) : **non, il n'est pas possible d'obtenir une carte d'identité en urgence**. Seul un passeport peut être délivré en urgence (motif médical, humanitaire ou professionnel) et sous conditions.\n\nÀ noter aussi : votre carte d'identité (P1) est valide jusqu'au 01/05/2031, donc un renouvellement n'est de toute façon pas justifié aujourd'hui. En revanche, votre passeport expire le 01/12/2026 (échéance proche) — si c'est l'urgence réelle, dites-le-moi et je peux regarder les créneaux et la procédure adaptée.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 6435,
+   "tokens_out": 360,
+   "cost_usd": 0.000787332,
+   "latency_s": 1.875
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par vérifier le profil du foyer pour identifier la personne concernée.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité procédure d'urgence renouvellement délai"
+   },
+   "thought": "Je vérifie les règles sur la procédure d'urgence pour une carte d'identité.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.966,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F36379",
+     "title": "Procédure simplifiée de changement de nom de famille",
+     "excerpt": "## Demander le renouvellement des titres d'identité\nUne fois les actes de l'état civil concernés par votre changement de nom mis à jour, vous devez demander le renouvellement de votre carte d'identité et/ou de votre passeport. Vous devez faire la démarche dans un délai de 3 mois à partir de la mise à jour de votre acte de naissance. Cette démarche est obligatoire même si vos titres d'identité sont encore valides. Cette démarche est gratuite si vous fournissez la carte nationale d’identité et/ou le passeport dont vous demandez le renouvellement. Après le renouvellement de votre carte d’identité et/ou de votre passeport, vous devez également demander le renouvellement de votre permis de conduire ainsi que de votre carte vitale. N’oubliez pas de communiquer votre changement de nom aux administrations et organismes concernés par votre changement de nom. À noter L’usage d’un titre d’identité qui ne correspond pas à votre état civil est puni de 5 ans d'emprisonnement maximum"
+    },
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## En France > Retirer la carte d'identité quand elle est disponible\nVous devez retirer la carte personnellement au lieu de dépôt du dossier. Elle doit être retirée dans les 3 mois. Passé ce délai, elle sera détruite. La carte d'identité a la forme d'une carte de crédit. La carte est valide pendant 10 ans."
+    },
+    {
+     "doc_id": "F1759",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de vol",
+     "excerpt": "## En France > Retirer la carte d'identité quand elle est disponible\nVous devez retirer la carte personnellement au lieu de dépôt du dossier. Elle doit être retirée dans les 3 mois. Passé ce délai, elle sera détruite. La carte d'identité a la forme d'une carte de crédit. La carte est valide pendant 10 ans."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Suivre l'avancement de la fabrication de la carte d'identité\nLa carte d'identité n'est pas fabriquée sur place et ne peut donc pas être délivrée immédiatement. Le délai de fabrication dépend du lieu et de la période de la demande. Il faut compter plusieurs semaines et, à l'approche des vacances d'été, les délais peuvent s'étendre. Il est possible de suivre l’état d’avancement de la demande sur le site de l’ANTS : Téléservice : Suivez votre demande de carte d'identité Si un numéro de téléphone portable a été renseigné lors de la demande, un SMS sera envoyé lorsque la carte d'identité sera disponible."
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "demande de titre d'identité en urgence carte d'identité passeport rapidement"
+   },
+   "thought": "Je cherche la fiche sur la procédure d'urgence pour un titre d'identité.",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.25,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1373",
+     "title": "Passeport en urgence : passeport temporaire pour un majeur",
+     "excerpt": "## À l'étranger > Quels sont les documents à fournir pour demander un passeport en urgence ? > Vous avez un passeport périmé > Date d'expiration : + de 5 ans\n- Carte d'identité récente (valide ou périmée depuis moins de 5 ans) - 1 justificatif de domicile - 1 photo d'identité de moins de 6 mois et conforme aux normes - Si vous n'avez pas de carte d'identité ou si elle est plus ancienne, vérifiez si l'état civil de votre lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - 1 justificatif de nationalité française si vous vous trouvez dans une situation particulière (naissance à l'étranger de parents nés à l'étranger par exemple) - Timbre fiscal de 90 € - Tout document justifiant l'urgence du déplacement et demandé par la préfecture (par exemple, acte de décès, attestation d'hospitalisation)"
+    },
+    {
+     "doc_id": "F1373",
+     "title": "Passeport en urgence : passeport temporaire pour un majeur",
+     "excerpt": "## À l'étranger > Quels sont les documents à fournir pour demander un passeport en urgence ? > Vous n'avez pas de passeport > Vous avez une carte d'identité > La carte d'identité est périmée > Date d'expiration : + de 5 ans\n- 1 justificatif de domicile - 1 photo d'identité de moins de 6 mois et conforme aux normes - Si vous n'avez pas de carte d'identité ou si elle est plus ancienne, vérifiez si l'état civil de votre lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - 1 justificatif de nationalité française si vous vous trouvez dans une situation particulière (naissance à l'étranger de parents nés à l'étranger par exemple) - Timbre fiscal de 90 € - Tout document justifiant l'urgence du déplacement et demandé par la préfecture (par exemple, acte de décès, attestation d'hospitalisation)"
+    },
+    {
+     "doc_id": "F1373",
+     "title": "Passeport en urgence : passeport temporaire pour un majeur",
+     "excerpt": "## À l'étranger > Quels sont les documents à fournir pour demander un passeport en urgence ? > Vous n'avez pas de passeport > Vous avez une carte d'identité > La carte d'identité est périmée > Date d'expiration : moins de 5 ans\n- Carte d'identité - 1 justificatif de domicile - 1 photo d'identité de moins de 6 mois et conforme aux normes - Timbre fiscal de 90 € - Tout document justifiant l'urgence du déplacement et demandé par la préfecture (par exemple, acte de décès, attestation d'hospitalisation)"
+    },
+    {
+     "doc_id": "F1373",
+     "title": "Passeport en urgence : passeport temporaire pour un majeur",
+     "excerpt": "## En France > Quels sont les documents à fournir pour demander un passeport en urgence ? > Vous n'avez pas de passeport > Vous n'avez pas de carte d'identité\n- 1 justificatif de domicile - 1 photo d'identité de moins de 6 mois et conforme aux normes - Si vous n'avez pas de carte d'identité ou si elle est plus ancienne, vérifiez si l'état civil de votre lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - 1 justificatif de nationalité française si vous vous trouvez dans une situation particulière (naissance à l'étranger de parents nés à l'étranger par exemple) - Timbre fiscal de 30 € (il s'achète en ligne) - Tout document justifiant l'urgence du déplacement et demandé par la préfecture (par exemple, acte de décès, attestation d'hospitalisation) À savoir Pour utiliser un nom d'usage qui ne figure pas encore sur un titre d'identité, d'autres documents doivent être fournis selon la nature de ce 2e nom : nom de l'époux(se) ou nom de l'autre"
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte nationale d'identité urgence procédure accélérée possible ou non"
+   },
+   "thought": "Je vérifie s'il existe une procédure d'urgence pour la carte d'identité.",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 5.942,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F16872",
+     "title": "Peut-on obtenir une carte d'identité en urgence ?",
+     "excerpt": "Non. Il n'est pas possible d'obtenir une carte d'identité en urgence. Seul un passeport peut être délivré en urgence sous certaines conditions. Non. Il n'est pas possible d'obtenir une carte d'identité en urgence. Seul un passeport peut être délivré en urgence (motif d'ordre médical ou humanitaire ou pour des raisons professionnelles) et sous certaines conditions."
+    },
+    {
+     "doc_id": "F2548",
+     "title": "La procédure en référé existe-t-elle devant le tribunal administratif ?",
+     "excerpt": "Le référé administratif permet de prendre des mesures urgentes et provisoires dans un conflit avec l'administration avant qu'un jugement définitif soit rendu. Oui, le référé existe devant le tribunal administratif. Il s'agit d'une procédure accélérée qui aboutit à une décision rapide, mais provisoire. Vous pouvez utiliser cette procédure pour demander au juge administratif de prendre, en urgence et de manière provisoire, des mesures pour préserver vos droits ou vos biens en cas de conflit avec l'administration. Comme le référé devant le juge civil, le référé administratif ne permet pas de régler définitivement le litige. Un procès principal, déjà engagé ou à venir, doit intervenir pour trancher définitivement le litige. Il y a plusieurs types de référés : - Ceux liés à l'urgence (référé suspension, référé liberté et référé conservatoire) - Ceux dont la situation n'est pas urgente (référé constat, référé instruction et référé provision). Intitulé du référé | Description |"
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Suivre l'avancement de la fabrication de la carte d'identité\nLa carte d'identité n'est pas fabriquée sur place et ne peut donc pas être délivrée immédiatement. Le délai de fabrication dépend du lieu et de la période de la demande. Il faut compter plusieurs semaines et, à l'approche des vacances d'été, les délais peuvent s'étendre. Il est possible de suivre l’état d’avancement de la demande sur le site de l’ANTS : Téléservice : Suivez votre demande de carte d'identité Si un numéro de téléphone portable a été renseigné lors de la demande, un SMS sera envoyé lorsque la carte d'identité sera disponible."
+    },
+    {
+     "doc_id": "F1373",
+     "title": "Passeport en urgence : passeport temporaire pour un majeur",
+     "excerpt": "## À l'étranger > Quels sont les documents à fournir pour demander un passeport en urgence ? > Vous n'avez pas de passeport > Vous avez une carte d'identité > La carte d'identité est périmée > Date d'expiration : + de 5 ans\n- 1 justificatif de domicile - 1 photo d'identité de moins de 6 mois et conforme aux normes - Si vous n'avez pas de carte d'identité ou si elle est plus ancienne, vérifiez si l'état civil de votre lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - 1 justificatif de nationalité française si vous vous trouvez dans une situation particulière (naissance à l'étranger de parents nés à l'étranger par exemple) - Timbre fiscal de 90 € - Tout document justifiant l'urgence du déplacement et demandé par la préfecture (par exemple, acte de décès, attestation d'hospitalisation)"
+    }
+   ]
+  }
+ ]
+}
