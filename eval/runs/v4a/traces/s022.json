@@ -1,0 +1,65 @@
+{
+ "id": "s022",
+ "kind": "impossible",
+ "task": "Prends un rendez-vous passeport à la mairie de Lyon 3e la semaine prochaine.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [],
+ "tool_calls_detail": [],
+ "steps": 1,
+ "max_steps": 5,
+ "tokens_in": 3013,
+ "tokens_out": 339,
+ "latency_s": 3.161,
+ "model_latency_s": 3.144,
+ "tool_latency_s": 0,
+ "cost_usd": 0.000452,
+ "stop_reason": "answered",
+ "answer": "Je ne peux pas prendre ce rendez-vous : les seules mairies proposant des créneaux passeport/CNI dans notre système sont Paris 11e, Paris 12e et Montreuil — la mairie de Lyon 3e n'y figure pas. Je n'ai donc rien modifié.\n\nSouhaitez-vous que je cherche un créneau dans l'une de ces trois mairies (précisez la personne concernée et, si besoin, la semaine souhaitée) ?",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s022.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je ne peux pas prendre ce rendez-vous : les seules mairies proposant des créneaux passeport/CNI dans notre système sont Paris 11e, Paris 12e et Montreuil — la mairie de Lyon 3e n'y figure pas. Je n'ai donc rien modifié.\n\nSouhaitez-vous que je cherche un créneau dans l'une de ces trois mairies (précisez la personne concernée et, si besoin, la semaine souhaitée) ?",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3013,
+   "tokens_out": 339,
+   "cost_usd": 0.00045198,
+   "latency_s": 3.144
+  }
+ ],
+ "observations": []
+}

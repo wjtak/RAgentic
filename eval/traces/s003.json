@@ -59,7 +59,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.006
+   "latency_s": 0.01
   },
   {
    "step": 2,
@@ -74,7 +74,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.011
+   "latency_s": 0.013
   },
   {
    "step": 3,
@@ -85,7 +85,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.009
+   "latency_s": 0.012
   },
   {
    "step": 4,
@@ -99,19 +99,19 @@
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.008
+   "latency_s": 0.01
   }
  ],
  "steps": 5,
  "max_steps": 8,
- "tokens_in": 17408,
- "tokens_out": 521,
- "latency_s": 5.411,
- "model_latency_s": 5.352,
- "tool_latency_s": 0.034,
- "cost_usd": 0.00203,
+ "tokens_in": 17401,
+ "tokens_out": 576,
+ "latency_s": 4.707,
+ "model_latency_s": 4.622,
+ "tool_latency_s": 0.045,
+ "cost_usd": 0.001493,
  "stop_reason": "answered",
- "answer": "C'est fait : j'ai acheté le timbre fiscal **passport_adult** pour Camille Martin (P1), au prix de **86 €** (timbre TF1). Le solde du compte passe de 120 € à **34 €**. Le timbre n'est pas remboursable.\n\nSi vous le souhaitez, je peux aussi préparer une pré-demande ANTS pour ce renouvellement de passeport (elle ne sera pas envoyée sans votre accord).",
+ "answer": "Fait : timbre fiscal **TF1** acheté pour votre renouvellement de passeport (Camille Martin, P1) — **86 €** (timbre « passeport adulte », réf. F21091). Nouveau solde du compte : **34 €**. Le timbre n'est pas remboursable.\n\nSouhaitez-vous que je crée aussi une pré-demande ANTS ou que je cherche un rendez-vous en mairie ?",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -136,15 +136,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je vérifie d'abord votre profil pour connaître votre âge et votre situation.\n\n",
+   "content": "Je regarde d'abord votre profil pour connaître votre âge, puis le prix du timbre.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 3027,
-   "tokens_out": 73,
-   "cost_usd": 0.00040996,
-   "latency_s": 1.12
+   "tokens_in": 3011,
+   "tokens_out": 70,
+   "cost_usd": 0.000315653,
+   "latency_s": 0.78
   },
   {
    "kind": "call",
@@ -156,15 +156,15 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "Je consulte le tarif du timbre pour un passeport (renouvellement, 36 ans).\n\n",
+   "content": "Vous êtes Camille Martin (P1), 36 ans. Je vérifie quel timbre s'applique pour un renouvellement de passeport.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "stamp_price"
    ],
-   "tokens_in": 3403,
-   "tokens_out": 142,
-   "cost_usd": 0.00053469,
-   "latency_s": 1.125
+   "tokens_in": 3391,
+   "tokens_out": 221,
+   "cost_usd": 0.000481873,
+   "latency_s": 1.325
   },
   {
    "kind": "call",
@@ -180,15 +180,15 @@
   {
    "kind": "model",
    "step": 3,
-   "content": "Je vérifie le solde du compte avant tout paiement.\n\n",
+   "content": "Le timbre nécessaire est un timbre « passeport adulte » à 86 €. Je vérifie le solde du compte.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_wallet"
    ],
-   "tokens_in": 3565,
-   "tokens_out": 44,
-   "cost_usd": 0.000442898,
-   "latency_s": 0.7
+   "tokens_in": 3562,
+   "tokens_out": 57,
+   "cost_usd": 0.000401086,
+   "latency_s": 0.618
   },
   {
    "kind": "call",
@@ -205,10 +205,10 @@
    "tool_calls": [
     "buy_tax_stamp"
    ],
-   "tokens_in": 3627,
-   "tokens_out": 151,
-   "cost_usd": 0.000127292,
-   "latency_s": 0.934
+   "tokens_in": 3639,
+   "tokens_out": 120,
+   "cost_usd": 0.000167137,
+   "latency_s": 0.88
   },
   {
    "kind": "call",
@@ -234,25 +234,25 @@
   {
    "kind": "model",
    "step": 5,
-   "content": "C'est fait : j'ai acheté le timbre fiscal **passport_adult** pour Camille Martin (P1), au prix de **86 €** (timbre TF1). Le solde du compte passe de 120 € à **34 €**. Le timbre n'est pas remboursable.\n\nSi vous le souhaitez, je peux aussi préparer une pré-demande ANTS pour ce renouvellement de passeport (elle ne sera pas envoyée sans votre accord).",
+   "content": "Fait : timbre fiscal **TF1** acheté pour votre renouvellement de passeport (Camille Martin, P1) — **86 €** (timbre « passeport adulte », réf. F21091). Nouveau solde du compte : **34 €**. Le timbre n'est pas remboursable.\n\nSouhaitez-vous que je crée aussi une pré-demande ANTS ou que je cherche un rendez-vous en mairie ?",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3786,
-   "tokens_out": 111,
-   "cost_usd": 0.000515178,
-   "latency_s": 1.473
+   "tokens_in": 3798,
+   "tokens_out": 108,
+   "cost_usd": 0.000127674,
+   "latency_s": 1.019
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je vérifie d'abord votre profil pour connaître votre âge et votre situation.\n\n",
+   "thought": "Je regarde d'abord votre profil pour connaître votre âge, puis le prix du timbre.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.006,
+   "latency_s": 0.01,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -321,12 +321,12 @@
     "age": 36,
     "motive": "renewal"
    },
-   "thought": "Je consulte le tarif du timbre pour un passeport (renouvellement, 36 ans).\n\n",
+   "thought": "Vous êtes Camille Martin (P1), 36 ans. Je vérifie quel timbre s'applique pour un renouvellement de passeport.\n\n",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.011,
+   "latency_s": 0.013,
    "retried_errors": [],
    "result": {
     "stamp_type": "passport_adult",
@@ -338,12 +338,12 @@
   {
    "tool": "get_wallet",
    "args": {},
-   "thought": "Je vérifie le solde du compte avant tout paiement.\n\n",
+   "thought": "Le timbre nécessaire est un timbre « passeport adulte » à 86 €. Je vérifie le solde du compte.\n\n",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.009,
+   "latency_s": 0.012,
    "retried_errors": [],
    "result": {
     "balance_eur": 120.0,
@@ -361,7 +361,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.008,
+   "latency_s": 0.01,
    "retried_errors": [],
    "result": {
     "stamp_id": "TF1",

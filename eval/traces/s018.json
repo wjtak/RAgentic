@@ -5,7 +5,7 @@
  "model": "deepseek/deepseek-v4.1-flash",
  "outcome": "fail",
  "passed": false,
- "reason": "max_steps: budget of 4 model calls spent",
+ "reason": "wrong_stop: expected asked_user, got answered",
  "state_ok": true,
  "state_diff": [],
  "final_state": {
@@ -30,9 +30,7 @@
  },
  "tool_calls": [
   "get_profile",
-  "search_slots",
-  "search_fiches",
-  "read_inbox"
+  "search_slots"
  ],
  "tool_calls_detail": [
   {
@@ -44,7 +42,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.012
+   "latency_s": 0.017
   },
   {
    "step": 2,
@@ -58,43 +56,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.017
-  },
-  {
-   "step": 3,
-   "tool": "search_fiches",
-   "args": {
-    "query": "renouvellement passeport rendez-vous mairie conditions"
-   },
-   "executed": true,
-   "ok": true,
-   "error": null,
-   "attempts": 1,
-   "approved": null,
-   "latency_s": 4.213
-  },
-  {
-   "step": 4,
-   "tool": "read_inbox",
-   "args": {},
-   "executed": false,
-   "ok": false,
-   "error": null,
-   "attempts": null,
-   "approved": null,
-   "latency_s": null
+   "latency_s": 0.014
   }
  ],
- "steps": 4,
+ "steps": 3,
  "max_steps": 4,
- "tokens_in": 15266,
- "tokens_out": 2644,
- "latency_s": 17.882,
- "model_latency_s": 13.615,
- "tool_latency_s": 4.242,
- "cost_usd": 0.003305,
- "stop_reason": "max_steps",
- "answer": null,
+ "tokens_in": 10563,
+ "tokens_out": 2141,
+ "latency_s": 7.826,
+ "model_latency_s": 7.769,
+ "tool_latency_s": 0.031,
+ "cost_usd": 0.00144,
+ "stop_reason": "answered",
+ "answer": "",
  "question": null,
  "error": null,
  "backend_changes": [],
@@ -107,15 +81,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je commence par vérifier le profil du compte, puis je chercherai les créneaux de la semaine prochaine.\n\n",
+   "content": "Je commence par identifier le titulaire du compte, puis je chercherai les créneaux de la semaine prochaine.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 3025,
-   "tokens_out": 258,
-   "cost_usd": 0.00048684,
-   "latency_s": 1.563
+   "tokens_in": 3089,
+   "tokens_out": 266,
+   "cost_usd": 0.000211209,
+   "latency_s": 1.022
   },
   {
    "kind": "call",
@@ -132,10 +106,10 @@
    "tool_calls": [
     "search_slots"
    ],
-   "tokens_in": 3368,
-   "tokens_out": 562,
-   "cost_usd": 0.001067,
-   "latency_s": 2.615
+   "tokens_in": 3473,
+   "tokens_out": 375,
+   "cost_usd": 0.000288372,
+   "latency_s": 1.511
   },
   {
    "kind": "call",
@@ -152,59 +126,23 @@
    "step": 3,
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
-   "tool_calls": [
-    "search_fiches"
-   ],
-   "tokens_in": 3896,
-   "tokens_out": 1020,
-   "cost_usd": 0.00089416,
-   "latency_s": 5.429
-  },
-  {
-   "kind": "call",
-   "step": 3,
-   "tool": "search_fiches",
-   "args": {
-    "query": "renouvellement passeport rendez-vous mairie conditions"
-   },
-   "dropped": []
-  },
-  {
-   "kind": "model",
-   "step": 4,
-   "content": "",
-   "model": "deepseek/deepseek-v4.1-flash",
-   "tool_calls": [
-    "read_inbox"
-   ],
-   "tokens_in": 4977,
-   "tokens_out": 804,
-   "cost_usd": 0.00085692,
-   "latency_s": 4.008
-  },
-  {
-   "kind": "call",
-   "step": 4,
-   "tool": "read_inbox",
-   "args": {},
-   "dropped": []
-  },
-  {
-   "kind": "stop",
-   "reason": "max_steps",
-   "step": 4
+   "tool_calls": [],
+   "tokens_in": 4001,
+   "tokens_out": 1500,
+   "cost_usd": 0.000940503,
+   "latency_s": 5.236
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je commence par vérifier le profil du compte, puis je chercherai les créneaux de la semaine prochaine.\n\n",
+   "thought": "Je commence par identifier le titulaire du compte, puis je chercherai les créneaux de la semaine prochaine.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.012,
+   "latency_s": 0.017,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -277,7 +215,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.017,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": [
     {
@@ -342,41 +280,6 @@
      "start": "2026-11-27T16:00",
      "weekday": "vendredi",
      "part_of_day": "afternoon"
-    }
-   ]
-  },
-  {
-   "tool": "search_fiches",
-   "args": {
-    "query": "renouvellement passeport rendez-vous mairie conditions"
-   },
-   "thought": "",
-   "step": 3,
-   "ok": true,
-   "executed": true,
-   "attempts": 1,
-   "latency_s": 4.213,
-   "retried_errors": [],
-   "result": [
-    {
-     "doc_id": "F21091",
-     "title": "Renouvellement du passeport d'un majeur",
-     "excerpt": "## France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des passeports Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée : Outil de recherche : Rechercher un rendez-vous pour une demande de passeport Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de passeport"
-    },
-    {
-     "doc_id": "F21092",
-     "title": "Renouvellement du passeport d'un mineur",
-     "excerpt": "## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe mineur et son représentant légal doivent se présenter ensemble au guichet. Leur présence est indispensable. Le représentant légal doit exercer l'autorité parentale. Il peut s'agir du père, de la mère ou du tuteur. Il doit présenter sa propre pièce d'identité. Le lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. La liste des mairies équipées est consultable en ligne : Où s'adresser : Mairie délivrant des passeports Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée : Outil de recherche : Rechercher un rendez-vous pour une demande de passeport Il est possible de préparer la démarche en effectuant une pré-demande en ligne, mais ce"
-    },
-    {
-     "doc_id": "F21247",
-     "title": "Passeport d'un majeur : renouvellement en cas de vol",
-     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des passeports Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée : Outil de recherche : Rechercher un rendez-vous pour une demande de passeport Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de passeport"
-    },
-    {
-     "doc_id": "F21246",
-     "title": "Passeport d'un majeur : renouvellement en cas de perte",
-     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des passeports Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée : Outil de recherche : Rechercher un rendez-vous pour une demande de passeport Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de passeport"
     }
    ]
   }

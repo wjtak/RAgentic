@@ -1,0 +1,328 @@
+{
+ "id": "h019",
+ "kind": "normal",
+ "task": "Réserve le créneau du lundi 23 novembre à 15h30 à la mairie du 11e pour le renouvellement de mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C02",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-23",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 3,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 2,
+   "approved": null,
+   "latency_s": 0.52
+  }
+ ],
+ "steps": 4,
+ "max_steps": 6,
+ "tokens_in": 13768,
+ "tokens_out": 595,
+ "latency_s": 6.705,
+ "model_latency_s": 6.14,
+ "tool_latency_s": 0.541,
+ "cost_usd": 0.000493,
+ "stop_reason": "answered",
+ "answer": "C'est fait ✅\n\n- **Rendez-vous R1** confirmé : lundi **23 novembre 2026 à 15h30**, mairie du **Paris 11e**, pour **Camille Martin (P1)**, motif **passeport (renouvellement)**.\n\nÀ noter : le passeport de Camille expire le 01/12/2026 (bientôt expiré), le rendez-vous est donc bien dans les temps. Dites-moi si vous souhaitez que je prépare aussi la pré-demande ANTS ou un timbre fiscal.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C02",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T15:30",
+    "weekday": "lundi",
+    "part_of_day": "afternoon",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/h019.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier la personne sur le compte.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3029,
+   "tokens_out": 173,
+   "cost_usd": 0.0001153584,
+   "latency_s": 2.038
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Je cherche le créneau demandé.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3398,
+   "tokens_out": 134,
+   "cost_usd": 0.0001409184,
+   "latency_s": 1.548
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-23",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Le créneau existe (C02). Je le réserve pour Camille (P1).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 3575,
+   "tokens_out": 108,
+   "cost_usd": 8.94672e-05,
+   "latency_s": 0.867
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "C'est fait ✅\n\n- **Rendez-vous R1** confirmé : lundi **23 novembre 2026 à 15h30**, mairie du **Paris 11e**, pour **Camille Martin (P1)**, motif **passeport (renouvellement)**.\n\nÀ noter : le passeport de Camille expire le 01/12/2026 (bientôt expiré), le rendez-vous est donc bien dans les temps. Dites-moi si vous souhaitez que je prépare aussi la pré-demande ANTS ou un timbre fiscal.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3766,
+   "tokens_out": 180,
+   "cost_usd": 0.0001469472,
+   "latency_s": 1.687
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier la personne sur le compte.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-23",
+    "part_of_day": "afternoon"
+   },
+   "thought": "Je cherche le créneau demandé.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C02",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T15:30",
+     "weekday": "lundi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "Le créneau existe (C02). Je le réserve pour Camille (P1).\n\n",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 2,
+   "latency_s": 0.52,
+   "retried_errors": [
+    "timeout"
+   ],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C02",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T15:30",
+    "weekday": "lundi",
+    "part_of_day": "afternoon",
+    "person": "P1",
+    "reason": "passport",
+    "replayed": true
+   }
+  }
+ ]
+}

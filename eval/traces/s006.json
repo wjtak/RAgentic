@@ -49,8 +49,6 @@
  },
  "tool_calls": [
   "get_profile",
-  "search_fiches",
-  "get_fiche",
   "create_application"
  ],
  "tool_calls_detail": [
@@ -63,36 +61,10 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.007
+   "latency_s": 0.009
   },
   {
    "step": 2,
-   "tool": "search_fiches",
-   "args": {
-    "query": "première demande de passeport pour un mineur conditions documents"
-   },
-   "executed": true,
-   "ok": true,
-   "error": null,
-   "attempts": 1,
-   "approved": null,
-   "latency_s": 4.612
-  },
-  {
-   "step": 3,
-   "tool": "get_fiche",
-   "args": {
-    "doc_id": "F14930"
-   },
-   "executed": true,
-   "ok": true,
-   "error": null,
-   "attempts": 1,
-   "approved": null,
-   "latency_s": 0.008
-  },
-  {
-   "step": 4,
    "tool": "create_application",
    "args": {
     "kind": "passport",
@@ -104,19 +76,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.014
+   "latency_s": 0.01
   }
  ],
- "steps": 5,
+ "steps": 3,
  "max_steps": 5,
- "tokens_in": 22039,
- "tokens_out": 1038,
- "latency_s": 11.802,
- "model_latency_s": 7.089,
- "tool_latency_s": 4.641,
- "cost_usd": 0.000844,
+ "tokens_in": 9918,
+ "tokens_out": 297,
+ "latency_s": 2.688,
+ "model_latency_s": 2.637,
+ "tool_latency_s": 0.019,
+ "cost_usd": 0.000361,
  "stop_reason": "answered",
- "answer": "J'ai créé le brouillon de pré-demande, sans l'envoyer.\n\n**Pré-demande D3 — passeport, première demande, Inès Martin (P3, 11 ans) — statut : brouillon** (rien n'a été transmis à l'ANTS, aucun timbre acheté).\n\nPour le dépôt, la fiche Service-Public (F14930) rappelle que le mineur et son représentant légal doivent se présenter **ensemble** au guichet d'une mairie équipée (sur rendez-vous dans la plupart) avec : photo de moins de 6 mois, carte d'identité de l'enfant (Inès n'en a pas dans le dossier — d'autres pièces seront alors demandées), justificatif de domicile et pièce d'identité du parent, plus le QR code de la pré-demande.\n\nDites-moi si vous voulez que je la transmette à l'ANTS ou que je cherche un rendez-vous en mairie.",
+ "answer": "J'ai créé le brouillon de pré-demande de passeport pour Inès (P3, 11 ans), première demande : **D3**, au statut « draft ». Il n'a pas été envoyé à l'ANTS — dites-moi si vous souhaitez que je le fasse.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -140,15 +112,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je vérifie d'abord le profil du foyer pour identifierInès.",
+   "content": "Je commence par identifier Inès dans le compte.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 3035,
-   "tokens_out": 89,
-   "cost_usd": 0.0001245564,
-   "latency_s": 0.832
+   "tokens_in": 3019,
+   "tokens_out": 74,
+   "cost_usd": 7.5677e-05,
+   "latency_s": 0.884
   },
   {
    "kind": "call",
@@ -160,63 +132,19 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "Inès = P3 (11 ans). Je consulte les règles pour une première demande de passeport pour mineur.",
-   "model": "deepseek/deepseek-v4.1-flash",
-   "tool_calls": [
-    "search_fiches"
-   ],
-   "tokens_in": 3410,
-   "tokens_out": 149,
-   "cost_usd": 0.0001121688,
-   "latency_s": 1.256
-  },
-  {
-   "kind": "call",
-   "step": 2,
-   "tool": "search_fiches",
-   "args": {
-    "query": "première demande de passeport pour un mineur conditions documents"
-   },
-   "dropped": []
-  },
-  {
-   "kind": "model",
-   "step": 3,
-   "content": "",
-   "model": "deepseek/deepseek-v4.1-flash",
-   "tool_calls": [
-    "get_fiche"
-   ],
-   "tokens_in": 4343,
-   "tokens_out": 246,
-   "cost_usd": 0.0002084796,
-   "latency_s": 1.611
-  },
-  {
-   "kind": "call",
-   "step": 3,
-   "tool": "get_fiche",
-   "args": {
-    "doc_id": "F14930"
-   },
-   "dropped": []
-  },
-  {
-   "kind": "model",
-   "step": 4,
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "create_application"
    ],
-   "tokens_in": 5564,
-   "tokens_out": 202,
-   "cost_usd": 0.0002122128,
-   "latency_s": 1.339
+   "tokens_in": 3388,
+   "tokens_out": 155,
+   "cost_usd": 0.000162284,
+   "latency_s": 0.982
   },
   {
    "kind": "call",
-   "step": 4,
+   "step": 2,
    "tool": "create_application",
    "args": {
     "kind": "passport",
@@ -227,26 +155,26 @@
   },
   {
    "kind": "model",
-   "step": 5,
-   "content": "J'ai créé le brouillon de pré-demande, sans l'envoyer.\n\n**Pré-demande D3 — passeport, première demande, Inès Martin (P3, 11 ans) — statut : brouillon** (rien n'a été transmis à l'ANTS, aucun timbre acheté).\n\nPour le dépôt, la fiche Service-Public (F14930) rappelle que le mineur et son représentant légal doivent se présenter **ensemble** au guichet d'une mairie équipée (sur rendez-vous dans la plupart) avec : photo de moins de 6 mois, carte d'identité de l'enfant (Inès n'en a pas dans le dossier — d'autres pièces seront alors demandées), justificatif de domicile et pièce d'identité du parent, plus le QR code de la pré-demande.\n\nDites-moi si vous voulez que je la transmette à l'ANTS ou que je cherche un rendez-vous en mairie.",
+   "step": 3,
+   "content": "J'ai créé le brouillon de pré-demande de passeport pour Inès (P3, 11 ans), première demande : **D3**, au statut « draft ». Il n'a pas été envoyé à l'ANTS — dites-moi si vous souhaitez que je le fasse.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 5687,
-   "tokens_out": 352,
-   "cost_usd": 0.000186966,
-   "latency_s": 2.051
+   "tokens_in": 3511,
+   "tokens_out": 68,
+   "cost_usd": 0.000122753,
+   "latency_s": 0.771
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je vérifie d'abord le profil du foyer pour identifierInès.",
+   "thought": "Je commence par identifier Inès dans le compte.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.007,
+   "latency_s": 0.009,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -309,59 +237,6 @@
    }
   },
   {
-   "tool": "search_fiches",
-   "args": {
-    "query": "première demande de passeport pour un mineur conditions documents"
-   },
-   "thought": "Inès = P3 (11 ans). Je consulte les règles pour une première demande de passeport pour mineur.",
-   "step": 2,
-   "ok": true,
-   "executed": true,
-   "attempts": 1,
-   "latency_s": 4.612,
-   "retried_errors": [],
-   "result": [
-    {
-     "doc_id": "F14930",
-     "title": "Passeport d'un mineur : première demande",
-     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a une carte d’identité valide > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Carte d'identité du mineur - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour le mineur."
-    },
-    {
-     "doc_id": "F14930",
-     "title": "Passeport d'un mineur : première demande",
-     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a une carte d’identité valide > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Carte d'identité du mineur - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
-    },
-    {
-     "doc_id": "F14930",
-     "title": "Passeport d'un mineur : première demande",
-     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a une carte d’identité valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Carte d'identité du mineur - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
-    },
-    {
-     "doc_id": "F14930",
-     "title": "Passeport d'un mineur : première demande",
-     "excerpt": "## À l'étranger > Préparer les documents à fournir et décider du mode de retrait du passeport > Documents à fournir > Le mineur a une carte d’identité valide > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Carte d'identité du mineur - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
-    }
-   ]
-  },
-  {
-   "tool": "get_fiche",
-   "args": {
-    "doc_id": "F14930"
-   },
-   "thought": "",
-   "step": 3,
-   "ok": true,
-   "executed": true,
-   "attempts": 1,
-   "latency_s": 0.008,
-   "retried_errors": [],
-   "result": {
-    "doc_id": "F14930",
-    "title": "Passeport d'un mineur : première demande",
-    "text": "Pour faire le passeport d'un mineur, l'enfant et son représentant légal doivent se rendre dans une mairie équipée avec les pièces justificatives.\nVous souhaitez faire une première demande de passeport pour un mineur ? Un mineur français peut avoir un passeport quel que soit son âge (même un bébé). La procédure varie selon que la demande est faite en France ou à l'étranger et selon l'âge du mineur. Nous vous présentons les étapes de la démarche.\n\n## En France\n\n## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe mineur et son représentant légal doivent se présenter ensemble au guichet. Leur présence est indispensable.\nLe représentant légal doit exercer l'autorité parentale. Il peut s'agir du père, de la mère ou du tuteur. Il doit présenter sa propre pièce d'identité.\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nLa liste des mairies équipées est consultable en ligne :\nOù s'adresser : Mairie délivrant des passeports\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée :\nOutil de recherche : Rechercher un rendez-vous pour une demande de passeport\nIl est possible de préparer la démarche en effectuant une pré-demande en ligne, mais ce n'est pas une obligation.\nLa pré-demande permet de gagner du temps lors du dépôt du dossier.\nselNG : Pré-demande pour une demande de 1er passeport\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\nLes documents à fournir varient selon que le mineur a déjà une carte d’identité ou non :\n\n## En France > Préparer les documents à présenter > Le mineur a une carte d’identité valide\nLes documents à fournir varient selon la situation familiale du mineur :\n\n## En France > Préparer les documents à présenter > Le mineur a une carte d’identité valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants :\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- Carte d'identité du mineur\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- Pièce d'identité du représentant légal qui dépose la demande\n- En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > Le mineur a une carte d’identité valide > Les parents du mineur sont séparés ou divorcés\nLes documents à fournir varient selon le mode de garde du mineur :\n\n## En France > Préparer les documents à présenter > Le mineur a une carte d’identité valide > Les parents du mineur sont séparés ou divorcés > La garde est alternée\nIl faut présenter les documents suivants :\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- Carte d'identité du mineur\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- Pièce d'identité du représentant légal qui dépose la demande\n- En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\nÀ noter\nEn cas de garde alternée, il est possible de mentionner les 2 adresses du mineur sur le titre d'identité. Dans ce cas, il faut présenter :\n- La preuve de la résidence alternée (copie de la décision du juge, convention de divorce ou convention parentale)\n- Et 2 justificatifs de domicile (un pour chaque parent).\n\n## En France > Préparer les documents à présenter > Le mineur a une carte d’identité valide > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants :\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- Carte d'identité du mi"
-   }
-  },
-  {
    "tool": "create_application",
    "args": {
     "kind": "passport",
@@ -369,11 +244,11 @@
     "motive": "first"
    },
    "thought": "",
-   "step": 4,
+   "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.014,
+   "latency_s": 0.01,
    "retried_errors": [],
    "result": {
     "application_id": "D3",

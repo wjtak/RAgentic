@@ -31,7 +31,6 @@
  "tool_calls": [
   "get_profile",
   "search_slots",
-  "search_slots",
   "search_slots"
  ],
  "tool_calls_detail": [
@@ -44,7 +43,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.021
+   "latency_s": 0.015
   },
   {
    "step": 2,
@@ -59,7 +58,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.014
   },
   {
    "step": 3,
@@ -72,33 +71,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.014
-  },
-  {
-   "step": 4,
-   "tool": "search_slots",
-   "args": {
-    "date_from": "2026-11-21",
-    "date_to": "2026-11-21"
-   },
-   "executed": true,
-   "ok": true,
-   "error": null,
-   "attempts": 1,
-   "approved": null,
-   "latency_s": 0.02
+   "latency_s": 0.017
   }
  ],
- "steps": 5,
+ "steps": 4,
  "max_steps": 5,
- "tokens_in": 17634,
- "tokens_out": 1118,
- "latency_s": 8.741,
- "model_latency_s": 8.633,
- "tool_latency_s": 0.071,
- "cost_usd": 0.000786,
+ "tokens_in": 13724,
+ "tokens_out": 1450,
+ "latency_s": 8.056,
+ "model_latency_s": 7.977,
+ "tool_latency_s": 0.046,
+ "cost_usd": 0.001128,
  "stop_reason": "answered",
- "answer": "Je n'ai rien pu réserver : **aucun créneau n'est disponible le samedi 21 novembre 2026**, ni à la mairie du 11e ni ailleurs (les mairies ne prennent d'ailleurs pas de rendez-vous le samedi dans les créneaux proposés).\n\nLes prochains créneaux libres à la mairie du 11e sont :\n- **lundi 23 novembre, 09h00** (C01)\n- **lundi 23 novembre, 15h30** (C02)\n- **mercredi 25 novembre, 10h00** (C03)\n- **jeudi 26 novembre, 11h00** (C08)\n\nDites-moi si l'un de ces créneaux vous convient (et je réserve pour votre passeport, Camille Martin) — ou si vous préférez que je regarde une autre mairie.",
+ "answer": "Aucun créneau le samedi 21 novembre 2026 n'est disponible à la mairie du 11e : les seuls créneaux libres pour un passeport à Paris 11e sont :\n\n- C01 — lundi 23/11 à 09h00\n- C02 — lundi 23/11 à 15h30\n- C03 — mercredi 25/11 à 10h00\n- C08 — jeudi 26/11 à 11h00\n\nJe n'ai donc rien réservé. Dites-moi si l'un de ces créneaux vous convient (ou si vous souhaitez que je regarde une autre mairie) et je prends le rendez-vous pour Camille Martin (P1).",
  "question": null,
  "error": null,
  "backend_changes": [],
@@ -111,15 +96,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je commence par vérifier votre profil, puis je chercherai un créneau le samedi 21 novembre à la mairie du 11e.",
+   "content": "Je regarde d'abord le profil du compte pour identifier la personne, puis je chercherai un créneau le samedi 21 novembre 2026 à Paris 11e.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 3035,
-   "tokens_out": 155,
-   "cost_usd": 0.0001074384,
-   "latency_s": 1.213
+   "tokens_in": 3019,
+   "tokens_out": 551,
+   "cost_usd": 0.000361877,
+   "latency_s": 3.079
   },
   {
    "kind": "call",
@@ -136,10 +121,10 @@
    "tool_calls": [
     "search_slots"
    ],
-   "tokens_in": 3425,
-   "tokens_out": 223,
-   "cost_usd": 0.0001868784,
-   "latency_s": 1.409
+   "tokens_in": 3415,
+   "tokens_out": 246,
+   "cost_usd": 0.000219665,
+   "latency_s": 1.151
   },
   {
    "kind": "call",
@@ -160,10 +145,10 @@
    "tool_calls": [
     "search_slots"
    ],
-   "tokens_in": 3526,
-   "tokens_out": 196,
-   "cost_usd": 0.0001258272,
-   "latency_s": 1.365
+   "tokens_in": 3516,
+   "tokens_out": 226,
+   "cost_usd": 0.000181588,
+   "latency_s": 1.286
   },
   {
    "kind": "call",
@@ -177,48 +162,25 @@
   {
    "kind": "model",
    "step": 4,
-   "content": "",
-   "model": "deepseek/deepseek-v4.1-flash",
-   "tool_calls": [
-    "search_slots"
-   ],
-   "tokens_in": 3784,
-   "tokens_out": 236,
-   "cost_usd": 0.0001759872,
-   "latency_s": 1.982
-  },
-  {
-   "kind": "call",
-   "step": 4,
-   "tool": "search_slots",
-   "args": {
-    "date_from": "2026-11-21",
-    "date_to": "2026-11-21"
-   },
-   "dropped": []
-  },
-  {
-   "kind": "model",
-   "step": 5,
-   "content": "Je n'ai rien pu réserver : **aucun créneau n'est disponible le samedi 21 novembre 2026**, ni à la mairie du 11e ni ailleurs (les mairies ne prennent d'ailleurs pas de rendez-vous le samedi dans les créneaux proposés).\n\nLes prochains créneaux libres à la mairie du 11e sont :\n- **lundi 23 novembre, 09h00** (C01)\n- **lundi 23 novembre, 15h30** (C02)\n- **mercredi 25 novembre, 10h00** (C03)\n- **jeudi 26 novembre, 11h00** (C08)\n\nDites-moi si l'un de ces créneaux vous convient (et je réserve pour votre passeport, Camille Martin) — ou si vous préférez que je regarde une autre mairie.",
+   "content": "Aucun créneau le samedi 21 novembre 2026 n'est disponible à la mairie du 11e : les seuls créneaux libres pour un passeport à Paris 11e sont :\n\n- C01 — lundi 23/11 à 09h00\n- C02 — lundi 23/11 à 15h30\n- C03 — mercredi 25/11 à 10h00\n- C08 — jeudi 26/11 à 11h00\n\nJe n'ai donc rien réservé. Dites-moi si l'un de ces créneaux vous convient (ou si vous souhaitez que je regarde une autre mairie) et je prends le rendez-vous pour Camille Martin (P1).",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3864,
-   "tokens_out": 308,
-   "cost_usd": 0.0001900416,
-   "latency_s": 2.664
+   "tokens_in": 3774,
+   "tokens_out": 427,
+   "cost_usd": 0.000365242,
+   "latency_s": 2.461
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je commence par vérifier votre profil, puis je chercherai un créneau le samedi 21 novembre à la mairie du 11e.",
+   "thought": "Je regarde d'abord le profil du compte pour identifier la personne, puis je chercherai un créneau le samedi 21 novembre 2026 à Paris 11e.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.021,
+   "latency_s": 0.015,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -292,7 +254,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": []
   },
@@ -306,7 +268,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.014,
+   "latency_s": 0.017,
    "retried_errors": [],
    "result": [
     {
@@ -338,21 +300,6 @@
      "part_of_day": "morning"
     }
    ]
-  },
-  {
-   "tool": "search_slots",
-   "args": {
-    "date_from": "2026-11-21",
-    "date_to": "2026-11-21"
-   },
-   "thought": "",
-   "step": 4,
-   "ok": true,
-   "executed": true,
-   "attempts": 1,
-   "latency_s": 0.02,
-   "retried_errors": [],
-   "result": []
   }
  ]
 }

@@ -55,13 +55,13 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.012
+   "latency_s": 0.014
   },
   {
    "step": 2,
    "tool": "ask_user",
    "args": {
-    "question": "Quel rendez-vous souhaitez-vous annuler : celui de Camille (passeport, Paris 11e, jeudi 26/11 à 11h00) ou celui de Léo (carte d'identité, Montreuil, vendredi 27/11 à 10h30) ?"
+    "question": "Quel rendez-vous souhaitez-vous annuler : R1 (Camille, passeport, Paris 11e, 26/11) ou R2 (Léo, carte d'identité, Montreuil, 27/11) ?"
    },
    "executed": false,
    "ok": false,
@@ -73,15 +73,15 @@
  ],
  "steps": 2,
  "max_steps": 4,
- "tokens_in": 6252,
- "tokens_out": 271,
- "latency_s": 1.891,
- "model_latency_s": 1.859,
- "tool_latency_s": 0.012,
- "cost_usd": 0.000235,
+ "tokens_in": 6300,
+ "tokens_out": 303,
+ "latency_s": 1.429,
+ "model_latency_s": 1.392,
+ "tool_latency_s": 0.014,
+ "cost_usd": 0.001263,
  "stop_reason": "asked_user",
  "answer": null,
- "question": "Quel rendez-vous souhaitez-vous annuler : celui de Camille (passeport, Paris 11e, jeudi 26/11 à 11h00) ou celui de Léo (carte d'identité, Montreuil, vendredi 27/11 à 10h30) ?",
+ "question": "Quel rendez-vous souhaitez-vous annuler : R1 (Camille, passeport, Paris 11e, 26/11) ou R2 (Léo, carte d'identité, Montreuil, 27/11) ?",
  "error": null,
  "backend_changes": [],
  "trace_file": "traces/s017.json",
@@ -93,15 +93,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je vérifie d'abord les rendez-vous du foyer pour identifier lequel annuler.\n\n",
+   "content": "Je regarde d'abord les rendez-vous du foyer pour identifier lequel annuler.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "list_appointments"
    ],
-   "tokens_in": 3015,
-   "tokens_out": 142,
-   "cost_usd": 0.000107418,
-   "latency_s": 0.894
+   "tokens_in": 2999,
+   "tokens_out": 114,
+   "cost_usd": 0.0010365,
+   "latency_s": 0.593
   },
   {
    "kind": "call",
@@ -113,22 +113,22 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "",
+   "content": "Il y a deux rendez-vous confirmés dans le foyer :\n- **R1** : Camille (P1), passeport, Paris 11e, jeudi 26/11/2026 à 11h00\n- **R2** : Léo (P2), carte d'identité, Montreuil, vendredi 27/11/2026 à 10h30\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "ask_user"
    ],
-   "tokens_in": 3237,
-   "tokens_out": 129,
-   "cost_usd": 0.000127828,
-   "latency_s": 0.965
+   "tokens_in": 3301,
+   "tokens_out": 189,
+   "cost_usd": 0.000226008,
+   "latency_s": 0.799
   },
   {
    "kind": "call",
    "step": 2,
    "tool": "ask_user",
    "args": {
-    "question": "Quel rendez-vous souhaitez-vous annuler : celui de Camille (passeport, Paris 11e, jeudi 26/11 à 11h00) ou celui de Léo (carte d'identité, Montreuil, vendredi 27/11 à 10h30) ?"
+    "question": "Quel rendez-vous souhaitez-vous annuler : R1 (Camille, passeport, Paris 11e, 26/11) ou R2 (Léo, carte d'identité, Montreuil, 27/11) ?"
    },
    "dropped": []
   }
@@ -137,12 +137,12 @@
   {
    "tool": "list_appointments",
    "args": {},
-   "thought": "Je vérifie d'abord les rendez-vous du foyer pour identifier lequel annuler.\n\n",
+   "thought": "Je regarde d'abord les rendez-vous du foyer pour identifier lequel annuler.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.012,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": [
     {

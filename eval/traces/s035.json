@@ -52,10 +52,10 @@
  "tool_calls": [
   "get_profile",
   "search_fiches",
-  "get_fiche",
   "get_wallet",
-  "create_application",
-  "buy_tax_stamp"
+  "get_fiche",
+  "buy_tax_stamp",
+  "create_application"
  ],
  "tool_calls_detail": [
   {
@@ -67,23 +67,34 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.013
+   "latency_s": 0.015
   },
   {
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité volée perte renouvellement timbre fiscal"
+    "query": "carte d'identité vol timbre fiscal gratuit renouvellement"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 3.471
+   "latency_s": 3.582
   },
   {
    "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 4,
    "tool": "get_fiche",
    "args": {
     "doc_id": "F33805"
@@ -96,18 +107,21 @@
    "latency_s": 0.007
   },
   {
-   "step": 4,
-   "tool": "get_wallet",
-   "args": {},
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P2"
+   },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
-   "approved": null,
-   "latency_s": 0.014
+   "approved": true,
+   "latency_s": 0.015
   },
   {
-   "step": 5,
+   "step": 6,
    "tool": "create_application",
    "args": {
     "kind": "id_card",
@@ -119,46 +133,22 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
-  },
-  {
-   "step": 6,
-   "tool": "buy_tax_stamp",
-   "args": {
-    "stamp_type": "id_card_loss_theft",
-    "person_id": "P2"
-   },
-   "executed": true,
-   "ok": true,
-   "error": null,
-   "attempts": 1,
-   "approved": true,
-   "latency_s": 0.022
+   "latency_s": 0.017
   }
  ],
  "steps": 7,
  "max_steps": 9,
- "tokens_in": 30992,
- "tokens_out": 1577,
- "latency_s": 18.012,
- "model_latency_s": 14.42,
- "tool_latency_s": 3.543,
- "cost_usd": 0.001177,
+ "tokens_in": 30062,
+ "tokens_out": 1988,
+ "latency_s": 12.603,
+ "model_latency_s": 8.905,
+ "tool_latency_s": 3.649,
+ "cost_usd": 0.001761,
  "stop_reason": "answered",
- "answer": "Fait pour Léo (P2, 16 ans) :\n\n- **Pré-demande ANTS** : brouillon créé — **D3**, carte d'identité, motif « vol ». Il n'est **pas envoyé** à l'ANTS : dites-moi si vous voulez que je le transmette.\n- **Timbre fiscal** : acheté — **TF1**, « carte d'identité perte/vol », **25 €** (règle vérifiée : fiche F33805, 25 € en France). Nouveau solde : **95 €**. Le timbre n'est pas remboursable.\n\nÀ noter : il faudra ensuite un rendez-vous en mairie pour déposer le dossier (les créneaux existent à Paris 11e, Paris 12e et Montreuil) — je peux en chercher un si vous le souhaitez. Pensez aussi à la déclaration de vol (plainte ou déclaration en ligne) si ce n'est pas déjà fait.",
+ "answer": "Fait pour Léo (P2, 16 ans) :\n\n- **Timbre fiscal** acheté : `TF1` – type « carte d'identité perte/vol », **25 €** (fiche F33805), débité du solde qui passe de 120 € à **95 €**. Il n'est pas remboursable.\n- **Pré-demande ANTS** créée en **brouillon** : `D3` – carte d'identité, motif « vol », pour P2. Rien n'a été envoyé à l'ANTS : dites-moi si vous voulez que je la transmette (action irréversible).\n\nPour mémoire : le dépôt du dossier se fait ensuite en mairie sur rendez-vous — je peux chercher un créneau (Paris 11e, 12e ou Montreuil) si vous le souhaitez.",
  "question": null,
  "error": null,
  "backend_changes": [
-  {
-   "tool": "create_application",
-   "result": {
-    "application_id": "D3",
-    "status": "draft",
-    "kind": "id_card",
-    "person": "P2",
-    "motive": "theft"
-   }
-  },
   {
    "tool": "buy_tax_stamp",
    "result": {
@@ -168,6 +158,16 @@
     "amount_eur": 25.0,
     "balance_eur": 95.0,
     "warning": "A tax stamp is not refundable here."
+   }
+  },
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "theft"
    }
   }
  ],
@@ -185,10 +185,10 @@
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 3035,
-   "tokens_out": 35,
-   "cost_usd": 3.98048e-05,
-   "latency_s": 0.821
+   "tokens_in": 3099,
+   "tokens_out": 189,
+   "cost_usd": 0.00016806,
+   "latency_s": 0.898
   },
   {
    "kind": "call",
@@ -200,22 +200,22 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "Je regarde d'abord le profil : Léo = P2, 16 ans, carte d'identité volée. Je vérifie les règles applicables (timbre, pré-demande).\n\n",
+   "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "search_fiches"
    ],
-   "tokens_in": 3395,
-   "tokens_out": 531,
-   "cost_usd": 0.0002985248,
-   "latency_s": 4.68
+   "tokens_in": 3459,
+   "tokens_out": 136,
+   "cost_usd": 0.000152145,
+   "latency_s": 0.674
   },
   {
    "kind": "call",
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité volée perte renouvellement timbre fiscal"
+    "query": "carte d'identité vol timbre fiscal gratuit renouvellement"
    },
    "dropped": []
   },
@@ -225,16 +225,36 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_fiche"
+    "get_wallet"
    ],
-   "tokens_in": 3894,
-   "tokens_out": 108,
-   "cost_usd": 0.0001385776,
-   "latency_s": 1.178
+   "tokens_in": 3898,
+   "tokens_out": 216,
+   "cost_usd": 0.000207222,
+   "latency_s": 1.066
   },
   {
    "kind": "call",
    "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 3948,
+   "tokens_out": 554,
+   "cost_usd": 0.000388746,
+   "latency_s": 2.113
+  },
+  {
+   "kind": "call",
+   "step": 4,
    "tool": "get_fiche",
    "args": {
     "doc_id": "F33805"
@@ -243,64 +263,20 @@
   },
   {
    "kind": "model",
-   "step": 4,
-   "content": "",
-   "model": "deepseek/deepseek-v4.1-flash",
-   "tool_calls": [
-    "get_wallet"
-   ],
-   "tokens_in": 5033,
-   "tokens_out": 276,
-   "cost_usd": 0.000299068,
-   "latency_s": 2.362
-  },
-  {
-   "kind": "call",
-   "step": 4,
-   "tool": "get_wallet",
-   "args": {},
-   "dropped": []
-  },
-  {
-   "kind": "model",
    "step": 5,
-   "content": "",
-   "model": "deepseek/deepseek-v4.1-flash",
-   "tool_calls": [
-    "create_application"
-   ],
-   "tokens_in": 5083,
-   "tokens_out": 229,
-   "cost_usd": 0.0001298864,
-   "latency_s": 1.771
-  },
-  {
-   "kind": "call",
-   "step": 5,
-   "tool": "create_application",
-   "args": {
-    "kind": "id_card",
-    "person_id": "P2",
-    "motive": "theft"
-   },
-   "dropped": []
-  },
-  {
-   "kind": "model",
-   "step": 6,
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "buy_tax_stamp"
    ],
-   "tokens_in": 5208,
-   "tokens_out": 98,
-   "cost_usd": 9.23664e-05,
-   "latency_s": 1.035
+   "tokens_in": 5087,
+   "tokens_out": 486,
+   "cost_usd": 0.000408279,
+   "latency_s": 2.129
   },
   {
    "kind": "call",
-   "step": 6,
+   "step": 5,
    "tool": "buy_tax_stamp",
    "args": {
     "stamp_type": "id_card_loss_theft",
@@ -310,7 +286,7 @@
   },
   {
    "kind": "approval",
-   "step": 6,
+   "step": 5,
    "tool": "buy_tax_stamp",
    "args": {
     "stamp_type": "id_card_loss_theft",
@@ -321,14 +297,38 @@
   },
   {
    "kind": "model",
+   "step": 6,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 5223,
+   "tokens_out": 96,
+   "cost_usd": 0.000156069,
+   "latency_s": 0.603
+  },
+  {
+   "kind": "call",
+   "step": 6,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "theft"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
    "step": 7,
-   "content": "Fait pour Léo (P2, 16 ans) :\n\n- **Pré-demande ANTS** : brouillon créé — **D3**, carte d'identité, motif « vol ». Il n'est **pas envoyé** à l'ANTS : dites-moi si vous voulez que je le transmette.\n- **Timbre fiscal** : acheté — **TF1**, « carte d'identité perte/vol », **25 €** (règle vérifiée : fiche F33805, 25 € en France). Nouveau solde : **95 €**. Le timbre n'est pas remboursable.\n\nÀ noter : il faudra ensuite un rendez-vous en mairie pour déposer le dossier (les créneaux existent à Paris 11e, Paris 12e et Montreuil) — je peux en chercher un si vous le souhaitez. Pensez aussi à la déclaration de vol (plainte ou déclaration en ligne) si ce n'est pas déjà fait.",
+   "content": "Fait pour Léo (P2, 16 ans) :\n\n- **Timbre fiscal** acheté : `TF1` – type « carte d'identité perte/vol », **25 €** (fiche F33805), débité du solde qui passe de 120 € à **95 €**. Il n'est pas remboursable.\n- **Pré-demande ANTS** créée en **brouillon** : `D3` – carte d'identité, motif « vol », pour P2. Rien n'a été envoyé à l'ANTS : dites-moi si vous voulez que je la transmette (action irréversible).\n\nPour mémoire : le dépôt du dossier se fait ensuite en mairie sur rendez-vous — je peux chercher un créneau (Paris 11e, 12e ou Montreuil) si vous le souhaitez.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 5344,
-   "tokens_out": 300,
-   "cost_usd": 0.000178864,
-   "latency_s": 2.573
+   "tokens_in": 5348,
+   "tokens_out": 311,
+   "cost_usd": 0.000280125,
+   "latency_s": 1.422
   }
  ],
  "observations": [
@@ -340,7 +340,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.013,
+   "latency_s": 0.015,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -405,25 +405,25 @@
   {
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité volée perte renouvellement timbre fiscal"
+    "query": "carte d'identité vol timbre fiscal gratuit renouvellement"
    },
-   "thought": "Je regarde d'abord le profil : Léo = P2, 16 ans, carte d'identité volée. Je vérifie les règles applicables (timbre, pré-demande).\n\n",
+   "thought": "",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 3.471,
+   "latency_s": 3.582,
    "retried_errors": [],
    "result": [
     {
      "doc_id": "F33805",
      "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
-     "excerpt": "En cas de perte ou de vol de votre carte d'identité, vous devez demander le renouvellement de la carte et acheter un timbre fiscal. L'achat du timbre fiscal (en ligne ou sur place) varie selon le lieu de la demande :"
+     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
     },
     {
-     "doc_id": "F33805",
-     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
-     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
+     "doc_id": "F1794",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 €. L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
     },
     {
      "doc_id": "F33805",
@@ -431,11 +431,26 @@
      "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
     },
     {
-     "doc_id": "F33805",
-     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
-     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
+     "doc_id": "F1794",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
+     "excerpt": "## En France > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 € (12,50 € en Guyane). L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
     }
    ]
+  },
+  {
+   "tool": "get_wallet",
+   "args": {},
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": {
+    "balance_eur": 120.0,
+    "stamps": []
+   }
   },
   {
    "tool": "get_fiche",
@@ -443,7 +458,7 @@
     "doc_id": "F33805"
    },
    "thought": "",
-   "step": 3,
+   "step": 4,
    "ok": true,
    "executed": true,
    "attempts": 1,
@@ -456,18 +471,25 @@
    }
   },
   {
-   "tool": "get_wallet",
-   "args": {},
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P2"
+   },
    "thought": "",
-   "step": 4,
+   "step": 5,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.014,
+   "latency_s": 0.015,
    "retried_errors": [],
    "result": {
-    "balance_eur": 120.0,
-    "stamps": []
+    "stamp_id": "TF1",
+    "type": "id_card_loss_theft",
+    "person": "P2",
+    "amount_eur": 25.0,
+    "balance_eur": 95.0,
+    "warning": "A tax stamp is not refundable here."
    }
   },
   {
@@ -478,11 +500,11 @@
     "motive": "theft"
    },
    "thought": "",
-   "step": 5,
+   "step": 6,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.017,
    "retried_errors": [],
    "result": {
     "application_id": "D3",
@@ -490,28 +512,6 @@
     "kind": "id_card",
     "person": "P2",
     "motive": "theft"
-   }
-  },
-  {
-   "tool": "buy_tax_stamp",
-   "args": {
-    "stamp_type": "id_card_loss_theft",
-    "person_id": "P2"
-   },
-   "thought": "",
-   "step": 6,
-   "ok": true,
-   "executed": true,
-   "attempts": 1,
-   "latency_s": 0.022,
-   "retried_errors": [],
-   "result": {
-    "stamp_id": "TF1",
-    "type": "id_card_loss_theft",
-    "person": "P2",
-    "amount_eur": 25.0,
-    "balance_eur": 95.0,
-    "warning": "A tax stamp is not refundable here."
    }
   }
  ]

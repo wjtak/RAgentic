@@ -1,0 +1,215 @@
+{
+ "id": "s005",
+ "kind": "normal",
+ "task": "Envoie ma pré-demande de passeport à l'ANTS.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_applications",
+  "submit_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_applications",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 2,
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D1"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.006
+  }
+ ],
+ "steps": 3,
+ "max_steps": 5,
+ "tokens_in": 9649,
+ "tokens_out": 353,
+ "latency_s": 2.674,
+ "model_latency_s": 2.312,
+ "tool_latency_s": 0.014,
+ "cost_usd": 0.0004,
+ "stop_reason": "answered",
+ "answer": "✅ Votre pré-demande de passeport **D1** (Camille, renouvellement) a été envoyée à l'ANTS. Elle n'est plus modifiable.\n\nRappel : l'envoi de la pré-demande ne remplace pas le rendez-vous en mairie — dites-moi si vous souhaitez en prendre un.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "submit_application",
+   "result": {
+    "application_id": "D1",
+    "status": "submitted",
+    "warning": "Sent to the ANTS: it can no longer be edited."
+   }
+  }
+ ],
+ "trace_file": "traces/s005.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord retrouver votre pré-demande de passeport à l'état de brouillon.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_applications"
+   ],
+   "tokens_in": 3088,
+   "tokens_out": 161,
+   "cost_usd": 0.000144554,
+   "latency_s": 0.945
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_applications",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "submit_application"
+   ],
+   "tokens_in": 3238,
+   "tokens_out": 114,
+   "cost_usd": 0.000142504,
+   "latency_s": 0.717
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D1"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 2,
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D1"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "✅ Votre pré-demande de passeport **D1** (Camille, renouvellement) a été envoyée à l'ANTS. Elle n'est plus modifiable.\n\nRappel : l'envoi de la pré-demande ne remplace pas le rendez-vous en mairie — dites-moi si vous souhaitez en prendre un.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3323,
+   "tokens_out": 78,
+   "cost_usd": 0.00011247,
+   "latency_s": 0.65
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_applications",
+   "args": {},
+   "thought": "Je vais d'abord retrouver votre pré-demande de passeport à l'état de brouillon.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "D1",
+     "kind": "passport",
+     "person": "P1",
+     "motive": "renewal",
+     "status": "draft",
+     "person_name": "Camille"
+    },
+    {
+     "id": "D2",
+     "kind": "id_card",
+     "person": "P2",
+     "motive": "renewal",
+     "status": "submitted",
+     "person_name": "Léo"
+    }
+   ]
+  },
+  {
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D1"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D1",
+    "status": "submitted",
+    "warning": "Sent to the ANTS: it can no longer be edited."
+   }
+  }
+ ]
+}

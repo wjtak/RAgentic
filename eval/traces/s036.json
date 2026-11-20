@@ -69,40 +69,40 @@
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité abîmée renouvellement conditions timbre fiscal gratuit"
+    "query": "carte d'identité abîmée renouvellement timbre fiscal nécessaire ?"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 3.567
+   "latency_s": 3.356
   },
   {
    "step": 3,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité détériorée abîmée renouvellement timbre fiscal prix"
+    "query": "carte d'identité détériorée abîmée renouvellement gratuit ou payant timbre"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 3.266
+   "latency_s": 4.368
   },
   {
    "step": 4,
    "tool": "search_fiches",
    "args": {
-    "query": "renouvellement carte nationale d'identité détériorée usée gratuit ou payant"
+    "query": "renouvellement carte d'identité majeur gratuit présenter ancienne carte détériorée"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 5.873
+   "latency_s": 4.81
   },
   {
    "step": 5,
@@ -115,20 +115,20 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.008
+   "latency_s": 0.009
   },
   {
    "step": 6,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité détériorée endommagée que faire renouvellement"
+    "query": "carte nationale d'identité détériorée endommagée demande de renouvellement"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 4.416
+   "latency_s": 5.621
   },
   {
    "step": 7,
@@ -141,7 +141,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.006
+   "latency_s": 0.014
   },
   {
    "step": 8,
@@ -161,12 +161,12 @@
  ],
  "steps": 8,
  "max_steps": 8,
- "tokens_in": 41911,
- "tokens_out": 881,
- "latency_s": 25.178,
- "model_latency_s": 7.975,
- "tool_latency_s": 17.151,
- "cost_usd": 0.002015,
+ "tokens_in": 40868,
+ "tokens_out": 1582,
+ "latency_s": 27.593,
+ "model_latency_s": 9.345,
+ "tool_latency_s": 18.193,
+ "cost_usd": 0.003097,
  "stop_reason": "max_steps",
  "answer": null,
  "question": null,
@@ -181,15 +181,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "",
+   "content": "Je commence par vérifier votre profil et votre carte d'identité.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 3043,
-   "tokens_out": 31,
-   "cost_usd": 0.00021048,
-   "latency_s": 1.224
+   "tokens_in": 3031,
+   "tokens_out": 163,
+   "cost_usd": 0.00049998,
+   "latency_s": 1.098
   },
   {
    "kind": "call",
@@ -201,22 +201,22 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "",
+   "content": "Je consulte les règles sur le renouvellement de carte d'identité (carte abîmée) et le timbre fiscal.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "search_fiches"
    ],
-   "tokens_in": 3407,
-   "tokens_out": 101,
-   "cost_usd": 0.000131728,
-   "latency_s": 0.792
+   "tokens_in": 3406,
+   "tokens_out": 235,
+   "cost_usd": 0.000218698,
+   "latency_s": 1.048
   },
   {
    "kind": "call",
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité abîmée renouvellement conditions timbre fiscal gratuit"
+    "query": "carte d'identité abîmée renouvellement timbre fiscal nécessaire ?"
    },
    "dropped": []
   },
@@ -228,17 +228,17 @@
    "tool_calls": [
     "search_fiches"
    ],
-   "tokens_in": 3857,
-   "tokens_out": 91,
-   "cost_usd": 0.000183728,
-   "latency_s": 0.825
+   "tokens_in": 3895,
+   "tokens_out": 96,
+   "cost_usd": 0.000191918,
+   "latency_s": 0.911
   },
   {
    "kind": "call",
    "step": 3,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité détériorée abîmée renouvellement timbre fiscal prix"
+    "query": "carte d'identité détériorée abîmée renouvellement gratuit ou payant timbre"
    },
    "dropped": []
   },
@@ -250,17 +250,17 @@
    "tool_calls": [
     "search_fiches"
    ],
-   "tokens_in": 4306,
-   "tokens_out": 87,
-   "cost_usd": 0.000239498,
-   "latency_s": 0.793
+   "tokens_in": 4412,
+   "tokens_out": 183,
+   "cost_usd": 0.00020099,
+   "latency_s": 1.041
   },
   {
    "kind": "call",
    "step": 4,
    "tool": "search_fiches",
    "args": {
-    "query": "renouvellement carte nationale d'identité détériorée usée gratuit ou payant"
+    "query": "renouvellement carte d'identité majeur gratuit présenter ancienne carte détériorée"
    },
    "dropped": []
   },
@@ -272,10 +272,10 @@
    "tool_calls": [
     "get_fiche"
    ],
-   "tokens_in": 5447,
-   "tokens_out": 94,
-   "cost_usd": 0.00027769,
-   "latency_s": 1.147
+   "tokens_in": 5187,
+   "tokens_out": 177,
+   "cost_usd": 0.000412528,
+   "latency_s": 1.374
   },
   {
    "kind": "call",
@@ -294,17 +294,17 @@
    "tool_calls": [
     "search_fiches"
    ],
-   "tokens_in": 6681,
-   "tokens_out": 246,
-   "cost_usd": 0.000340302,
-   "latency_s": 1.309
+   "tokens_in": 6421,
+   "tokens_out": 262,
+   "cost_usd": 0.000628198,
+   "latency_s": 1.414
   },
   {
    "kind": "call",
    "step": 6,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité détériorée endommagée que faire renouvellement"
+    "query": "carte nationale d'identité détériorée endommagée demande de renouvellement"
    },
    "dropped": []
   },
@@ -316,10 +316,10 @@
    "tool_calls": [
     "get_fiche"
    ],
-   "tokens_in": 7430,
-   "tokens_out": 67,
-   "cost_usd": 0.000468778,
-   "latency_s": 0.788
+   "tokens_in": 7103,
+   "tokens_out": 70,
+   "cost_usd": 0.00014969,
+   "latency_s": 1.011
   },
   {
    "kind": "call",
@@ -333,15 +333,15 @@
   {
    "kind": "model",
    "step": 8,
-   "content": "",
+   "content": "La carte abîmée suit la procédure d'un renouvellement classique : gratuit si l'ancienne carte peut être présentée. Je crée donc la pré-demande (brouillon) pour vous.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "create_application"
    ],
-   "tokens_in": 7740,
-   "tokens_out": 164,
-   "cost_usd": 0.000162528,
-   "latency_s": 1.097
+   "tokens_in": 7413,
+   "tokens_out": 396,
+   "cost_usd": 0.000795106,
+   "latency_s": 1.448
   },
   {
    "kind": "call",
@@ -364,7 +364,7 @@
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "",
+   "thought": "Je commence par vérifier votre profil et votre carte d'identité.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
@@ -434,16 +434,21 @@
   {
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité abîmée renouvellement conditions timbre fiscal gratuit"
+    "query": "carte d'identité abîmée renouvellement timbre fiscal nécessaire ?"
    },
-   "thought": "",
+   "thought": "Je consulte les règles sur le renouvellement de carte d'identité (carte abîmée) et le timbre fiscal.\n\n",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 3.567,
+   "latency_s": 3.356,
    "retried_errors": [],
    "result": [
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "En cas de perte ou de vol de votre carte d'identité, vous devez demander le renouvellement de la carte et acheter un timbre fiscal. L'achat du timbre fiscal (en ligne ou sur place) varie selon le lieu de la demande :"
+    },
     {
      "doc_id": "F33805",
      "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
@@ -458,25 +463,20 @@
      "doc_id": "F33805",
      "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
      "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
-    },
-    {
-     "doc_id": "F1153",
-     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
-     "excerpt": "## En France > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 € (12,50 € en Guyane). L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
     }
    ]
   },
   {
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité détériorée abîmée renouvellement timbre fiscal prix"
+    "query": "carte d'identité détériorée abîmée renouvellement gratuit ou payant timbre"
    },
    "thought": "",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 3.266,
+   "latency_s": 4.368,
    "retried_errors": [],
    "result": [
     {
@@ -495,23 +495,23 @@
      "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
     },
     {
-     "doc_id": "F1153",
-     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
-     "excerpt": "## À l'étranger > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 €. L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "La demande de renouvellement de la carte d'identité d’un mineur est gratuite, à condition de pouvoir présenter l'ancienne carte. La carte d'identité de votre enfant mineur est périmée ou le devient bientôt ? La demande de renouvellement de la carte d’identité est gratuite, à condition de pouvoir présenter l’ancienne carte. Nous vous présentons les étapes de la démarche. Elles varient selon que vous vivez en France ou à l’étranger."
     }
    ]
   },
   {
    "tool": "search_fiches",
    "args": {
-    "query": "renouvellement carte nationale d'identité détériorée usée gratuit ou payant"
+    "query": "renouvellement carte d'identité majeur gratuit présenter ancienne carte détériorée"
    },
    "thought": "",
    "step": 4,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 5.873,
+   "latency_s": 4.81,
    "retried_errors": [],
    "result": [
     {
@@ -525,14 +525,14 @@
      "excerpt": "La demande de renouvellement de la carte d'identité d’un mineur est gratuite, à condition de pouvoir présenter l'ancienne carte. La carte d'identité de votre enfant mineur est périmée ou le devient bientôt ? La demande de renouvellement de la carte d’identité est gratuite, à condition de pouvoir présenter l’ancienne carte. Nous vous présentons les étapes de la démarche. Elles varient selon que vous vivez en France ou à l’étranger."
     },
     {
-     "doc_id": "F21090",
-     "title": "Renouvellement de la carte d'identité d'un mineur",
-     "excerpt": "## En France > Préparer les documents à présenter > La carte d'identité est périmée > Date d'expiration : + de 5 ans > Le mineur a un passeport périmé > Date d’expiration : plus de 5 ans > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants : - Carte d’identité du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En l'absence de passeport ou s’il a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, le n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent"
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d'idendité est périmée depuis plus de 5 ans > Vous avez un passeport dont la date de validité est expirée > Votre passeport est périmé depuis plus de 5 ans\nVous devez présenter les documents suivants : - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - Vérifiez si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance (copie intégrale ou extrait avec filiation) de moins de 3 mois. - Justificatif de nationalité française si votre nationalité ne ressort pas de votre acte de naissance - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande : n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
     },
     {
-     "doc_id": "F21090",
-     "title": "Renouvellement de la carte d'identité d'un mineur",
-     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d'identité est périmée > Date d'expiration : + de 5 ans > Le mineur a un passeport périmé > Date d’expiration : plus de 5 ans > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants : - Carte d’identité du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En l'absence de passeport ou s’il a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, le n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent"
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter\nIl faut présenter les documents originaux. Les documents à fournir dépendent de la date d'expiration de votre carte d'identité actuelle :"
     }
    ]
   },
@@ -546,7 +546,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.008,
+   "latency_s": 0.009,
    "retried_errors": [],
    "result": {
     "doc_id": "F21089",
@@ -557,14 +557,14 @@
   {
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité détériorée endommagée que faire renouvellement"
+    "query": "carte nationale d'identité détériorée endommagée demande de renouvellement"
    },
    "thought": "",
    "step": 6,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 4.416,
+   "latency_s": 5.621,
    "retried_errors": [],
    "result": [
     {
@@ -573,19 +573,19 @@
      "excerpt": "Pour refaire une carte d'identité perdue d’un mineur, il faut se rendre dans une mairie équipée. la déclaration de perte se fait en même temps que la demande. La carte d’identité de votre enfant mineur a été perdue et vous souhaitez la renouveler immédiatement ? La déclaration de perte se fait en même temps que le dépôt du dossier. La procédure varie selon que la demande est faite en France ou à l’étranger et selon l’âge du mineur. Nous vous présentons les étapes de la démarche. À savoir Si le renouvellement de la carte d’identité n’est pas demandé immédiatement, il est nécessaire d’en déclarer la perte auprès des autorités de police ou de gendarmerie. Si la perte a eu lieu à l’étranger, la déclaration de perte est à faire auprès des autorités de police locales et à l’ambassade ou au consulat de France."
     },
     {
-     "doc_id": "F1344",
-     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
-     "excerpt": "Pour refaire une carte d'identité perdue, il faut se rendre dans une mairie équipée. La déclaration de perte se fait en même temps que la demande. Vous avez perdu votre carte d'identité et vous souhaitez obtenir une nouvelle carte ? Nous vous présentons étape par étape la démarche à suivre. Elle diffère selon que la perte a eu lieu en France ou à l'étranger."
-    },
-    {
      "doc_id": "F1887",
      "title": "Comment remplacer une carte d'identité abîmée ?",
      "excerpt": "Si votre carte d'identité est abîmée, vous pouvez demander son renouvellement. Si votre carte d'identité est abîmée, vous pouvez demander son renouvellement."
     },
     {
-     "doc_id": "F1153",
-     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
-     "excerpt": "## À l'étranger > Retirer la carte d’identité lorsqu’elle est disponible > Avant 12 ans\nLe représentant légal doit se présenter soit au lieu du dépôt du dossier, soit auprès d'un consul honoraire habilité ou d’un chef de poste diplomatique ou consulaire pour récupérer la carte d’identité. La carte d'identité qui est délivrée est une carte qui se présente sous un nouveau format (de la taille d'une carte bancaire). Elle doit être retirée dans les 3 mois de sa mise à disposition. Passé ce délai, la carte est détruite."
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Vous êtes majeur et la date de validité de votre carte nationale d'identité est prochainement dépassée ou l'est déjà ? Vous avez une carte d'identité ancien modèle et vous souhaitez obtenir une carte au nouveau format ? La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## En France > Vous rendre au lieu que vous avez choisi pour déposer la demande\nVotre présence est indispensable pour procéder à la prise d'empreintes. Vous devez venir avec tous les documents nécessaires."
     }
    ]
   },
@@ -599,7 +599,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.006,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "doc_id": "F1887",

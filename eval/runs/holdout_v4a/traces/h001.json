@@ -1,0 +1,68 @@
+{
+ "id": "h001",
+ "kind": "normal",
+ "task": "Écris à la mairie du 12e pour demander s'il faut apporter l'ancien passeport, puis prends le créneau du jeudi 26 novembre à 14h dans cette mairie pour le renouvellement de mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_state: appointments.R1: missing (expected {'slot': 'C05', 'person': 'P1', 'reason': 'passport', 'status': 'confirmed'}); messages_sent.M1: missing (expected {'to': 'mairie-paris-12'})",
+ "state_ok": false,
+ "state_diff": [
+  "appointments.R1: missing (expected {'slot': 'C05', 'person': 'P1', 'reason': 'passport', 'status': 'confirmed'})",
+  "messages_sent.M1: missing (expected {'to': 'mairie-paris-12'})"
+ ],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [],
+ "tool_calls_detail": [],
+ "steps": 1,
+ "max_steps": 7,
+ "tokens_in": 3052,
+ "tokens_out": 1500,
+ "latency_s": 8.298,
+ "model_latency_s": 8.283,
+ "tool_latency_s": 0,
+ "cost_usd": 0.000817,
+ "stop_reason": "answered",
+ "answer": "",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h001.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3052,
+   "tokens_out": 1500,
+   "cost_usd": 0.00081672,
+   "latency_s": 8.283
+  }
+ ],
+ "observations": []
+}

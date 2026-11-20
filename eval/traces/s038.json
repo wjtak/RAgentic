@@ -63,20 +63,20 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.017
   },
   {
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "peut-on faire une carte d'identité dans une autre mairie que celle de son domicile ?"
+    "query": "carte d'identité première demande peut-on aller dans une autre mairie que celle du domicile"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 5.291
+   "latency_s": 2.947
   },
   {
    "step": 3,
@@ -89,7 +89,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.017
+   "latency_s": 0.007
   },
   {
    "step": 4,
@@ -104,19 +104,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.007
   }
  ],
  "steps": 5,
  "max_steps": 7,
- "tokens_in": 20891,
- "tokens_out": 913,
- "latency_s": 14.492,
- "model_latency_s": 9.115,
- "tool_latency_s": 5.34,
- "cost_usd": 0.000805,
+ "tokens_in": 20869,
+ "tokens_out": 908,
+ "latency_s": 11.44,
+ "model_latency_s": 8.441,
+ "tool_latency_s": 2.978,
+ "cost_usd": 0.001209,
  "stop_reason": "answered",
- "answer": "C'est fait ✅\n\n- Vérification : la fiche Service-Public (F1342, carte d'identité d'un mineur – première demande) confirme que **le lieu de la demande ne dépend pas du domicile** : on peut s'adresser à n'importe quelle mairie équipée d'une station d'enregistrement. Montreuil est donc possible malgré votre domicile à Paris 11e.\n- Rendez-vous réservé pour **Inès (P3)** : **jeudi 19 novembre 2026 à 14h00, mairie de Montreuil** — premier créneau libre (réf. **R3**, motif : carte d'identité).\n\nÀ noter : le dépôt se fait sur rendez-vous ; une pré-demande ANTS en ligne est possible mais pas obligatoire (elle fait gagner du temps). Dites-moi si vous souhaitez que je crée le brouillon de pré-demande — je ne le ferai pas sans votre accord.",
+ "answer": "C'est fait ✅\n\n- **Règle vérifiée** (fiche F1342) : le lieu de la demande ne dépend pas du domicile — on peut déposer une première demande de carte d'identité dans n'importe quelle mairie équipée d'une station d'enregistrement. La condition est donc remplie.\n- **Rendez-vous réservé** : Inès (P3), carte d'identité, **jeudi 19 novembre 2026 à 14h00 à la mairie de Montreuil** — c'était le premier créneau libre (réf. rendez-vous **R3**, créneau C11).\n\nRien d'autre n'a été fait : je n'ai ni créé de pré-demande ANTS ni acheté de timbre. À noter, la pré-demande en ligne est facultative mais fait gagner du temps au dépôt — dites-moi si vous voulez que je la prépare.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -144,15 +144,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je commence par récupérer le profil du foyer pour identifier Inès.\n\n",
+   "content": "Je commence par identifier Inès dans le foyer, puis je vérifierai la règle sur la mairie de domicile.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 3061,
-   "tokens_out": 169,
-   "cost_usd": 9.97248e-05,
-   "latency_s": 1.785
+   "tokens_in": 3047,
+   "tokens_out": 249,
+   "cost_usd": 0.000387812,
+   "latency_s": 1.529
   },
   {
    "kind": "call",
@@ -164,37 +164,37 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "Inès est P3 (11 ans). Je consulte les fiches sur la mairie de rattachement et la première carte d'identité.\n\n",
+   "content": "Inès est P3 (11 ans). Je vérifie la règle sur la mairie de dépôt.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "search_fiches"
    ],
-   "tokens_in": 3436,
-   "tokens_out": 143,
-   "cost_usd": 0.0001413048,
-   "latency_s": 1.51
+   "tokens_in": 3433,
+   "tokens_out": 160,
+   "cost_usd": 0.00019244,
+   "latency_s": 1.949
   },
   {
    "kind": "call",
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "peut-on faire une carte d'identité dans une autre mairie que celle de son domicile ?"
+    "query": "carte d'identité première demande peut-on aller dans une autre mairie que celle du domicile"
    },
    "dropped": []
   },
   {
    "kind": "model",
    "step": 3,
-   "content": "La condition est remplie : le lieu de la demande ne dépend pas du domicile. Je cherche le premier créneau libre à Montreuil.\n\n",
+   "content": "La règle est confirmée : le lieu de la demande ne dépend pas du domicile. Je cherche le premier créneau libre à Montreuil.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "search_slots"
    ],
-   "tokens_in": 4588,
-   "tokens_out": 200,
-   "cost_usd": 0.0002743776,
-   "latency_s": 1.727
+   "tokens_in": 4575,
+   "tokens_out": 103,
+   "cost_usd": 0.000241076,
+   "latency_s": 1.636
   },
   {
    "kind": "call",
@@ -208,15 +208,15 @@
   {
    "kind": "model",
    "step": 4,
-   "content": "",
+   "content": "Le premier créneau libre à Montreuil est le C11 (jeudi 19 novembre, 14h). Je réserve pour Inès.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "book_appointment"
    ],
-   "tokens_in": 4820,
-   "tokens_out": 129,
-   "cost_usd": 0.000120596,
-   "latency_s": 1.559
+   "tokens_in": 4809,
+   "tokens_out": 139,
+   "cost_usd": 0.000167348,
+   "latency_s": 0.996
   },
   {
    "kind": "call",
@@ -232,25 +232,25 @@
   {
    "kind": "model",
    "step": 5,
-   "content": "C'est fait ✅\n\n- Vérification : la fiche Service-Public (F1342, carte d'identité d'un mineur – première demande) confirme que **le lieu de la demande ne dépend pas du domicile** : on peut s'adresser à n'importe quelle mairie équipée d'une station d'enregistrement. Montreuil est donc possible malgré votre domicile à Paris 11e.\n- Rendez-vous réservé pour **Inès (P3)** : **jeudi 19 novembre 2026 à 14h00, mairie de Montreuil** — premier créneau libre (réf. **R3**, motif : carte d'identité).\n\nÀ noter : le dépôt se fait sur rendez-vous ; une pré-demande ANTS en ligne est possible mais pas obligatoire (elle fait gagner du temps). Dites-moi si vous souhaitez que je crée le brouillon de pré-demande — je ne le ferai pas sans votre accord.",
+   "content": "C'est fait ✅\n\n- **Règle vérifiée** (fiche F1342) : le lieu de la demande ne dépend pas du domicile — on peut déposer une première demande de carte d'identité dans n'importe quelle mairie équipée d'une station d'enregistrement. La condition est donc remplie.\n- **Rendez-vous réservé** : Inès (P3), carte d'identité, **jeudi 19 novembre 2026 à 14h00 à la mairie de Montreuil** — c'était le premier créneau libre (réf. rendez-vous **R3**, créneau C11).\n\nRien d'autre n'a été fait : je n'ai ni créé de pré-demande ANTS ni acheté de timbre. À noter, la pré-demande en ligne est facultative mais fait gagner du temps au dépôt — dites-moi si vous voulez que je la prépare.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 4986,
-   "tokens_out": 272,
-   "cost_usd": 0.0001691312,
-   "latency_s": 2.534
+   "tokens_in": 5005,
+   "tokens_out": 257,
+   "cost_usd": 0.000219916,
+   "latency_s": 2.331
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je commence par récupérer le profil du foyer pour identifier Inès.\n\n",
+   "thought": "Je commence par identifier Inès dans le foyer, puis je vérifierai la règle sur la mairie de domicile.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.017,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -315,34 +315,34 @@
   {
    "tool": "search_fiches",
    "args": {
-    "query": "peut-on faire une carte d'identité dans une autre mairie que celle de son domicile ?"
+    "query": "carte d'identité première demande peut-on aller dans une autre mairie que celle du domicile"
    },
-   "thought": "Inès est P3 (11 ans). Je consulte les fiches sur la mairie de rattachement et la première carte d'identité.\n\n",
+   "thought": "Inès est P3 (11 ans). Je vérifie la règle sur la mairie de dépôt.",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 5.291,
+   "latency_s": 2.947,
    "retried_errors": [],
    "result": [
-    {
-     "doc_id": "F1341",
-     "title": "Carte d'identité d'un majeur : première demande",
-     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des cartes d'identité Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée : outilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. Téléservice : Pré-demande pour une 1re demande de carte d'identité"
-    },
     {
      "doc_id": "F1342",
      "title": "Carte d'identité d'un mineur : première demande",
      "excerpt": "## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des cartes d'identité Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée : outilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité Il est possible de préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande permet de gagner du temps lors du dépôt du dossier. Téléservice : Pré-demande pour une 1re demande de carte d'identité"
     },
     {
-     "doc_id": "F1344",
-     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
-     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des cartes d'identité Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée : outilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de carte d'identité"
+     "doc_id": "F1341",
+     "title": "Carte d'identité d'un majeur : première demande",
+     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des cartes d'identité Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée : outilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. Téléservice : Pré-demande pour une 1re demande de carte d'identité"
     },
     {
      "doc_id": "F1759",
      "title": "Carte d'identité d'un majeur : renouvellement en cas de vol",
+     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des cartes d'identité Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée : outilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de carte d'identité"
+    },
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
      "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des cartes d'identité Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée : outilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de carte d'identité"
     }
    ]
@@ -352,12 +352,12 @@
    "args": {
     "town_hall": "Montreuil"
    },
-   "thought": "La condition est remplie : le lieu de la demande ne dépend pas du domicile. Je cherche le premier créneau libre à Montreuil.\n\n",
+   "thought": "La règle est confirmée : le lieu de la demande ne dépend pas du domicile. Je cherche le premier créneau libre à Montreuil.",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.017,
+   "latency_s": 0.007,
    "retried_errors": [],
    "result": [
     {
@@ -390,12 +390,12 @@
     "person_id": "P3",
     "reason": "id_card"
    },
-   "thought": "",
+   "thought": "Le premier créneau libre à Montreuil est le C11 (jeudi 19 novembre, 14h). Je réserve pour Inès.",
    "step": 4,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.007,
    "retried_errors": [],
    "result": {
     "appointment_id": "R3",

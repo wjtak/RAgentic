@@ -1,0 +1,325 @@
+{
+ "id": "h002",
+ "kind": "normal",
+ "task": "Si Léo n'a pas encore de pré-demande de passeport, crée-la (première demande), sans l'envoyer.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "passport",
+    "person": "P2",
+    "motive": "first",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "list_applications",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 2,
+   "tool": "list_applications",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P2",
+    "motive": "first"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 2,
+   "approved": null,
+   "latency_s": 0.551
+  }
+ ],
+ "steps": 4,
+ "max_steps": 6,
+ "tokens_in": 13942,
+ "tokens_out": 1242,
+ "latency_s": 7.084,
+ "model_latency_s": 6.484,
+ "tool_latency_s": 0.575,
+ "cost_usd": 0.00111,
+ "stop_reason": "answered",
+ "answer": "Léo (P2) n'avait aucune pré-demande de passeport (seulement une pré-demande de carte d'identité, D2, déjà envoyée). J'ai donc créé le brouillon **D3** : passeport, première demande, pour Léo Martin — il n'est **pas envoyé** à l'ANTS (statut : brouillon). Aucun timbre fiscal n'a été acheté, vous ne l'avez pas demandé.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P2",
+    "motive": "first"
+   }
+  }
+ ],
+ "trace_file": "traces/h002.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier Léo dans le foyer.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3103,
+   "tokens_out": 229,
+   "cost_usd": 0.000191604,
+   "latency_s": 1.308
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_applications"
+   ],
+   "tokens_in": 3473,
+   "tokens_out": 434,
+   "cost_usd": 0.000395154,
+   "latency_s": 1.956
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "list_applications",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Léo (P2) n'a qu'une pré-demande de carte d'identité (D2), aucune pour un passeport : la condition est remplie, je crée le brouillon.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 3600,
+   "tokens_out": 456,
+   "cost_usd": 0.000365232,
+   "latency_s": 2.217
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P2",
+    "motive": "first"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Léo (P2) n'avait aucune pré-demande de passeport (seulement une pré-demande de carte d'identité, D2, déjà envoyée). J'ai donc créé le brouillon **D3** : passeport, première demande, pour Léo Martin — il n'est **pas envoyé** à l'ANTS (statut : brouillon). Aucun timbre fiscal n'a été acheté, vous ne l'avez pas demandé.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3766,
+   "tokens_out": 123,
+   "cost_usd": 0.000157538,
+   "latency_s": 1.003
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier Léo dans le foyer.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "list_applications",
+   "args": {},
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "D1",
+     "kind": "passport",
+     "person": "P1",
+     "motive": "renewal",
+     "status": "draft",
+     "person_name": "Camille"
+    },
+    {
+     "id": "D2",
+     "kind": "id_card",
+     "person": "P2",
+     "motive": "renewal",
+     "status": "submitted",
+     "person_name": "Léo"
+    }
+   ]
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P2",
+    "motive": "first"
+   },
+   "thought": "Léo (P2) n'a qu'une pré-demande de carte d'identité (D2), aucune pour un passeport : la condition est remplie, je crée le brouillon.\n\n",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 2,
+   "latency_s": 0.551,
+   "retried_errors": [
+    "rate_limited"
+   ],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P2",
+    "motive": "first"
+   }
+  }
+ ]
+}

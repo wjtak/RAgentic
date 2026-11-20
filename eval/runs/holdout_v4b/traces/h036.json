@@ -1,0 +1,409 @@
+{
+ "id": "h036",
+ "kind": "impossible",
+ "task": "Ma carte d'identité a quelques années : crée la pré-demande pour la renouveler.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "max_steps: budget of 5 model calls spent",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_fiches",
+  "get_fiche",
+  "search_fiches"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité timbre fiscal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.259
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité renouvellement gratuit timbre fiscal nécessaire expiration"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.346
+  },
+  {
+   "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1344"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 5,
+   "tool": "search_fiches",
+   "args": {
+    "query": "peut-on renouveler une carte d'identité encore valide motifs de renouvellement"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 5,
+ "max_steps": 5,
+ "tokens_in": 19867,
+ "tokens_out": 1437,
+ "latency_s": 17.081,
+ "model_latency_s": 10.425,
+ "tool_latency_s": 6.622,
+ "cost_usd": 0.001463,
+ "stop_reason": "max_steps",
+ "answer": null,
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h036.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord vérifier votre profil et votre pièce d'identité.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3013,
+   "tokens_out": 130,
+   "cost_usd": 0.00028478,
+   "latency_s": 1.52
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3396,
+   "tokens_out": 194,
+   "cost_usd": 0.000205,
+   "latency_s": 1.845
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité timbre fiscal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3799,
+   "tokens_out": 164,
+   "cost_usd": 0.000178456,
+   "latency_s": 1.149
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité renouvellement gratuit timbre fiscal nécessaire expiration"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 4207,
+   "tokens_out": 454,
+   "cost_usd": 0.000342464,
+   "latency_s": 2.464
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1344"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 5452,
+   "tokens_out": 495,
+   "cost_usd": 0.00045246,
+   "latency_s": 3.447
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "search_fiches",
+   "args": {
+    "query": "peut-on renouveler une carte d'identité encore valide motifs de renouvellement"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "stop",
+   "reason": "max_steps",
+   "step": 5
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vais d'abord vérifier votre profil et votre pièce d'identité.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité timbre fiscal"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.259,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## En France > Acheter le timbre fiscal > Vous faites une pré-demande en ligne\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Acheter le timbre fiscal > Pré-demande en ligne\nIl est possible d’acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    },
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal > Pré-demande\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal > Pré-demande en ligne\nIl est possible d’acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité renouvellement gratuit timbre fiscal nécessaire expiration"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.346,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Acheter le timbre fiscal > Sans pré-demande en ligne\nIl existe 2 possibilités : soit acheter le timbre sur internet, soit l'acheter dans un bureau de tabac."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal > Pré-demande en ligne\nIl est possible d’acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Acheter le timbre fiscal > Pré-demande en ligne\nIl est possible d’acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    },
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal > Pré-demande\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1344"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F1344",
+    "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+    "text": "Pour refaire une carte d'identité perdue, il faut se rendre dans une mairie équipée. La déclaration de perte se fait en même temps que la demande.\nVous avez perdu votre carte d'identité et vous souhaitez obtenir une nouvelle carte ? Nous vous présentons étape par étape la démarche à suivre. Elle diffère selon que la perte a eu lieu en France ou à l'étranger.\n\n## En France\n\n## En France > Si vous ne souhaitez pas refaire votre carte immédiatement, déclarer la perte dans un commissariat de police ou une gendarmerie\nVous devez déclarer la perte de votre carte d'identité aux autorités de police seulement si vous ne souhaitez pas en refaire une immédiatement. Un récépissé vous sera remis.\nOù s'adresser : Commissariat\nOù s'adresser : Brigade de gendarmerie\nSi vous faites immédiatement une demande de nouvelle carte, vous n'avez pas à vous adresser aux autorités de police. La déclaration de perte sera faite au guichet de la mairie au moment du dépôt du dossier et jointe au formulaire de demande.\n\n## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nOù s'adresser : Mairie délivrant des cartes d'identité\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée :\noutilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité\nVous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier.\nselNG : Pré-demande pour un renouvellement de carte d'identité\n\n## En France > Acheter le timbre fiscal\nVous devez acheter un timbre fiscal d'un montant de 25 € (12,50 € en Guyane).\n\n## En France > Acheter le timbre fiscal > Vous faites une pré-demande en ligne\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande.\n\n## En France > Acheter le timbre fiscal > Vous ne faites pas de pré-demande\nVous avez 2 possibilités : soit acheter le timbre sur internet, soit l'acheter dans un bureau de tabac.\n\n## En France > Acheter le timbre fiscal > Vous ne faites pas de pré-demande > Vous voulez acheter le timbre sur internet\nVous devez utiliser ce téléservice :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\n\n## En France > Acheter le timbre fiscal > Vous ne faites pas de pré-demande > Vous voulez acheter le timbre dans un bureau de tabac\nVous pouvez acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\nLes documents à présenter varient selon que vous avez un passeport ou non :\n\n## En France > Préparer les documents à présenter > Vous avez un passeport valide\nVous devez présenter les documents suivants :\n- Votre passeport\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile\n- Déclaration de perte à remplir sur place ou en utilisant le formulaire cerfa n°14011 à remplir, signer et imprimer\n- Timbre fiscal\n- Si vous avez fait une pré-demande, le n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > Vous avez un passeport périmé\n\n## En France > Préparer les documents à présenter > Vous avez un passeport périmé > Date d’expiration : moins de 5 ans\nVous devez présenter les documents suivants :\n- Votre passeport\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile\n- Déclaration de perte à remplir sur place ou en utilisant le formulaire cerfa n°14011 à remplir, signer et imprimer\n- Timbre fiscal\n- Si vous avez "
+   }
+  }
+ ]
+}

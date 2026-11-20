@@ -59,7 +59,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.008
+   "latency_s": 0.015
   },
   {
    "step": 2,
@@ -74,7 +74,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.008
+   "latency_s": 0.019
   },
   {
    "step": 3,
@@ -85,7 +85,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.015
   },
   {
    "step": 4,
@@ -99,19 +99,19 @@
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.01
+   "latency_s": 0.014
   }
  ],
  "steps": 5,
  "max_steps": 8,
- "tokens_in": 17554,
- "tokens_out": 681,
- "latency_s": 5.016,
- "model_latency_s": 4.95,
- "tool_latency_s": 0.042,
- "cost_usd": 0.000841,
+ "tokens_in": 17809,
+ "tokens_out": 642,
+ "latency_s": 3.894,
+ "model_latency_s": 3.788,
+ "tool_latency_s": 0.063,
+ "cost_usd": 0.001414,
  "stop_reason": "answered",
- "answer": "Fait : le timbre pour la première demande de passeport de Léo (16 ans) coûte **42 €**, soit moins de 50 €, donc je l'ai acheté.\n\n- Timbre : `TF1` — type `passport_minor_15_17` (mineur de 15 à 17 ans), 42 €, pour Léo (P2)\n- Nouveau solde : 78 € (le timbre n'est pas remboursable)\n\nSi vous voulez ensuite créer la pré-demande ANTS ou prendre un rendez-vous en mairie, dites-le-moi.",
+ "answer": "C'est fait : le timbre pour la première demande de passeport de Léo (16 ans) coûte **42 €**, donc moins de 50 € — je l'ai acheté.\n\n- Timbre : `TF1` — type `passport_minor_15_17` (mineur de 15 à 17 ans), 42 €, au nom de Léo (P2)\n- Nouveau solde : 78 € (le timbre n'est pas remboursable)\n\nSi vous voulez, je peux aussi créer un brouillon de pré-demande ANTS pour son passeport.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -136,15 +136,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je regarde d'abord le profil pour identifier Léo et son âge.\n\n",
+   "content": "Je regarde d'abord la composition du foyer pour identifier Léo et son âge.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 3046,
-   "tokens_out": 80,
-   "cost_usd": 7.1148e-05,
-   "latency_s": 0.882
+   "tokens_in": 3030,
+   "tokens_out": 200,
+   "cost_usd": 0.00086175,
+   "latency_s": 1.284
   },
   {
    "kind": "call",
@@ -156,15 +156,15 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "Léo (P2) a 16 ans. Je vérifie le prix du timbre pour un passeport, première demande, 16 ans.\n\n",
+   "content": "Léo (P2) a 16 ans. Je vérifie le tarif du timbre pour un passeport, première demande, à 16 ans.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "stamp_price"
    ],
-   "tokens_in": 3422,
-   "tokens_out": 122,
-   "cost_usd": 0.000147328,
-   "latency_s": 0.839
+   "tokens_in": 3489,
+   "tokens_out": 123,
+   "cost_usd": 0.000150528,
+   "latency_s": 0.635
   },
   {
    "kind": "call",
@@ -180,15 +180,15 @@
   {
    "kind": "model",
    "step": 3,
-   "content": "Le timbre coûte 42 € (< 50 €). Je vérifie le solde avant d'acheter.\n\n",
+   "content": "Le timbre coûte 42 € (moins de 50 €). Je vérifie le solde avant l'achat.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_wallet"
    ],
-   "tokens_in": 3590,
-   "tokens_out": 63,
-   "cost_usd": 0.000130818,
-   "latency_s": 0.701
+   "tokens_in": 3659,
+   "tokens_out": 73,
+   "cost_usd": 0.000113952,
+   "latency_s": 0.5
   },
   {
    "kind": "call",
@@ -200,15 +200,15 @@
   {
    "kind": "model",
    "step": 4,
-   "content": "Le solde (120 €) suffit. J'achète le timbre à 42 € pour Léo.\n\n",
+   "content": "Solde suffisant (120 €). J'achète le timbre.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "buy_tax_stamp"
    ],
-   "tokens_in": 3665,
-   "tokens_out": 276,
-   "cost_usd": 0.000279018,
-   "latency_s": 1.496
+   "tokens_in": 3737,
+   "tokens_out": 107,
+   "cost_usd": 0.000132984,
+   "latency_s": 0.601
   },
   {
    "kind": "call",
@@ -234,25 +234,25 @@
   {
    "kind": "model",
    "step": 5,
-   "content": "Fait : le timbre pour la première demande de passeport de Léo (16 ans) coûte **42 €**, soit moins de 50 €, donc je l'ai acheté.\n\n- Timbre : `TF1` — type `passport_minor_15_17` (mineur de 15 à 17 ans), 42 €, pour Léo (P2)\n- Nouveau solde : 78 € (le timbre n'est pas remboursable)\n\nSi vous voulez ensuite créer la pré-demande ANTS ou prendre un rendez-vous en mairie, dites-le-moi.",
+   "content": "C'est fait : le timbre pour la première demande de passeport de Léo (16 ans) coûte **42 €**, donc moins de 50 € — je l'ai acheté.\n\n- Timbre : `TF1` — type `passport_minor_15_17` (mineur de 15 à 17 ans), 42 €, au nom de Léo (P2)\n- Nouveau solde : 78 € (le timbre n'est pas remboursable)\n\nSi vous voulez, je peux aussi créer un brouillon de pré-demande ANTS pour son passeport.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3831,
-   "tokens_out": 140,
-   "cost_usd": 0.000212198,
-   "latency_s": 1.032
+   "tokens_in": 3894,
+   "tokens_out": 139,
+   "cost_usd": 0.000154911,
+   "latency_s": 0.768
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je regarde d'abord le profil pour identifier Léo et son âge.\n\n",
+   "thought": "Je regarde d'abord la composition du foyer pour identifier Léo et son âge.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.008,
+   "latency_s": 0.015,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -321,12 +321,12 @@
     "age": 16,
     "motive": "first"
    },
-   "thought": "Léo (P2) a 16 ans. Je vérifie le prix du timbre pour un passeport, première demande, 16 ans.\n\n",
+   "thought": "Léo (P2) a 16 ans. Je vérifie le tarif du timbre pour un passeport, première demande, à 16 ans.\n\n",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.008,
+   "latency_s": 0.019,
    "retried_errors": [],
    "result": {
     "stamp_type": "passport_minor_15_17",
@@ -338,12 +338,12 @@
   {
    "tool": "get_wallet",
    "args": {},
-   "thought": "Le timbre coûte 42 € (< 50 €). Je vérifie le solde avant d'acheter.\n\n",
+   "thought": "Le timbre coûte 42 € (moins de 50 €). Je vérifie le solde avant l'achat.\n\n",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.015,
    "retried_errors": [],
    "result": {
     "balance_eur": 120.0,
@@ -356,12 +356,12 @@
     "stamp_type": "passport_minor_15_17",
     "person_id": "P2"
    },
-   "thought": "Le solde (120 €) suffit. J'achète le timbre à 42 € pour Léo.\n\n",
+   "thought": "Solde suffisant (120 €). J'achète le timbre.\n\n",
    "step": 4,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.01,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "stamp_id": "TF1",
