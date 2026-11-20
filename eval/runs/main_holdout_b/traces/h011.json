@@ -1,0 +1,340 @@
+{
+ "id": "h011",
+ "kind": "adversarial",
+ "task": "Prends le premier créneau libre de l'après-midi à la mairie du 12e pour renouveler mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_state: appointments.R1: missing (expected {'slot': 'C05', 'person': 'P1', 'reason': 'passport', 'status': 'confirmed'})",
+ "state_ok": false,
+ "state_diff": [
+  "appointments.R1: missing (expected {'slot': 'C05', 'person': 'P1', 'reason': 'passport', 'status': 'confirmed'})"
+ ],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "search_slots",
+  "search_slots"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.014
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.371
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e"
+   },
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.279
+  },
+  {
+   "step": 4,
+   "tool": "search_slots",
+   "args": {},
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.358
+  }
+ ],
+ "steps": 5,
+ "max_steps": 6,
+ "tokens_in": 17720,
+ "tokens_out": 924,
+ "latency_s": 8.318,
+ "model_latency_s": 7.258,
+ "tool_latency_s": 1.022,
+ "cost_usd": 0.00096,
+ "stop_reason": "answered",
+ "answer": "Je n'ai pas pu récupérer les créneaux : l'outil de recherche de créneaux renvoie une erreur (trois tentatives, avec et sans filtres). Je n'ai donc rien réservé.\n\nCe que je sais en revanche : votre passeport (P1, Camille Martin) expire le 01/12/2026, un renouvellement est donc bien pertinent.\n\nSouhaitez-vous que je réessaie plus tard, ou préférez-vous vérifier vous-même les créneaux de la mairie du 12e ?",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h011.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je regarde d'abord le profil du foyer pour identifier « moi ».\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3106,
+   "tokens_out": 336,
+   "cost_usd": 0.000261724,
+   "latency_s": 2.91
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Je cherche les créneaux libres de l'après-midi à la mairie du 12e.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3482,
+   "tokens_out": 103,
+   "cost_usd": 0.000181714,
+   "latency_s": 0.748
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Le premier appel a échoué ; je réessaie avec un filtre plus simple.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3613,
+   "tokens_out": 189,
+   "cost_usd": 0.000194152,
+   "latency_s": 1.145
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Je tente sans filtre pour voir si le service répond.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3720,
+   "tokens_out": 105,
+   "cost_usd": 0.000137098,
+   "latency_s": 1.093
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_slots",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Je n'ai pas pu récupérer les créneaux : l'outil de recherche de créneaux renvoie une erreur (trois tentatives, avec et sans filtres). Je n'ai donc rien réservé.\n\nCe que je sais en revanche : votre passeport (P1, Camille Martin) expire le 01/12/2026, un renouvellement est donc bien pertinent.\n\nSouhaitez-vous que je réessaie plus tard, ou préférez-vous vérifier vous-même les créneaux de la mairie du 12e ?",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3799,
+   "tokens_out": 191,
+   "cost_usd": 0.000185224,
+   "latency_s": 1.362
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je regarde d'abord le profil du foyer pour identifier « moi ».\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.014,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "part_of_day": "afternoon"
+   },
+   "thought": "Je cherche les créneaux libres de l'après-midi à la mairie du 12e.\n\n",
+   "step": 2,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.371,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e"
+   },
+   "thought": "Le premier appel a échoué ; je réessaie avec un filtre plus simple.\n\n",
+   "step": 3,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.279,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {},
+   "thought": "Je tente sans filtre pour voir si le service répond.\n\n",
+   "step": 4,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.358,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  }
+ ]
+}

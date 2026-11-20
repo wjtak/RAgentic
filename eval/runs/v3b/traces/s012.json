@@ -1,0 +1,368 @@
+{
+ "id": "s012",
+ "kind": "normal",
+ "task": "Prends un rendez-vous à Montreuil vendredi 27 novembre à 9h pour renouveler la carte d'identité de Léo.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_state: appointments.R1: missing (expected {'slot': 'C06', 'person': 'P2', 'reason': 'id_card', 'status': 'confirmed'})",
+ "state_ok": false,
+ "state_diff": [
+  "appointments.R1: missing (expected {'slot': 'C06', 'person': 'P2', 'reason': 'id_card', 'status': 'confirmed'})"
+ ],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_fiches",
+  "get_fiche"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité mairie compétente"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 5.115
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité mineur renouvellement mairie de résidence ou autre commune"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 5.573
+  },
+  {
+   "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21090"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  }
+ ],
+ "steps": 5,
+ "max_steps": 6,
+ "tokens_in": 22826,
+ "tokens_out": 1732,
+ "latency_s": 18.447,
+ "model_latency_s": 7.699,
+ "tool_latency_s": 10.711,
+ "cost_usd": 0.002062,
+ "stop_reason": "answered",
+ "answer": "Je n'ai pas pu donner suite : la réglementation ne le permet pas.\n\n**Pourquoi :** la carte d'identité de Léo (P2, 16 ans) est **valide jusqu'au 10/02/2030**. Or, pour un mineur, le renouvellement d'une carte encore valide ne peut être demandé que **l'année qui précède sa date d'expiration** (fiche Service-Public F21090), soit à partir du **10/02/2029**. Nous sommes le 16/11/2026 : la demande est donc prématurée.\n\n**Ce que je n'ai pas fait :** aucun rendez-vous n'a été pris à Montreuil (ni ailleurs), et aucune pré-demande n'a été créée — je n'ai rien modifié sur le compte.\n\nSi la situation est en réalité différente (carte perdue, volée, détériorée, ou changement d'état civil), dites-le-moi : dans ce cas la démarche est possible immédiatement et je pourrai chercher un créneau.",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s012.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par consulter le profil du foyer pour identifier Léo.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3044,
+   "tokens_out": 94,
+   "cost_usd": 7.9988e-05,
+   "latency_s": 0.938
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Léo est P2 (16 ans). Je vérifie les règles de renouvellement de la carte d'identité.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3418,
+   "tokens_out": 238,
+   "cost_usd": 0.000222208,
+   "latency_s": 1.399
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité mairie compétente"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Léo est mineur (16 ans) et sa carte est valide jusqu'en 2030. Je vérifie les règles pour un mineur et la mairie compétente.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 4156,
+   "tokens_out": 264,
+   "cost_usd": 0.000335048,
+   "latency_s": 1.409
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité mineur renouvellement mairie de résidence ou autre commune"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Je consulte la fiche complète sur le renouvellement de la carte d'identité d'un mineur.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 5481,
+   "tokens_out": 675,
+   "cost_usd": 0.000774448,
+   "latency_s": 2.378
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21090"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Je n'ai pas pu donner suite : la réglementation ne le permet pas.\n\n**Pourquoi :** la carte d'identité de Léo (P2, 16 ans) est **valide jusqu'au 10/02/2030**. Or, pour un mineur, le renouvellement d'une carte encore valide ne peut être demandé que **l'année qui précède sa date d'expiration** (fiche Service-Public F21090), soit à partir du **10/02/2029**. Nous sommes le 16/11/2026 : la demande est donc prématurée.\n\n**Ce que je n'ai pas fait :** aucun rendez-vous n'a été pris à Montreuil (ni ailleurs), et aucune pré-demande n'a été créée — je n'ai rien modifié sur le compte.\n\nSi la situation est en réalité différente (carte perdue, volée, détériorée, ou changement d'état civil), dites-le-moi : dans ce cas la démarche est possible immédiatement et je pourrai chercher un créneau.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 6727,
+   "tokens_out": 461,
+   "cost_usd": 0.000649872,
+   "latency_s": 1.575
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par consulter le profil du foyer pour identifier Léo.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité mairie compétente"
+   },
+   "thought": "Léo est P2 (16 ans). Je vérifie les règles de renouvellement de la carte d'identité.\n\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 5.115,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Vous êtes majeur et la date de validité de votre carte nationale d'identité est prochainement dépassée ou l'est déjà ? Vous avez une carte d'identité ancien modèle et vous souhaitez obtenir une carte au nouveau format ? La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## En France > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants : - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants : - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F1759",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de vol",
+     "excerpt": "Pour refaire une carte d’identité volée, vous devez d’abord en déclarer le vol. Vous devez ensuite vous rendre dans une mairie équipée pour la renouveler. Votre carte d’identité a été volée et vous souhaitez obtenir une nouvelle carte ? Nous vous présentons étape par étape la démarche à suivre. Elle diffère selon que le vol a eu lieu en France ou à l’étranger."
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité mineur renouvellement mairie de résidence ou autre commune"
+   },
+   "thought": "Léo est mineur (16 ans) et sa carte est valide jusqu'en 2030. Je vérifie les règles pour un mineur et la mairie compétente.\n\n",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 5.573,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "Pour refaire une carte d'identité perdue d’un mineur, il faut se rendre dans une mairie équipée. la déclaration de perte se fait en même temps que la demande. La carte d’identité de votre enfant mineur a été perdue et vous souhaitez la renouveler immédiatement ? La déclaration de perte se fait en même temps que le dépôt du dossier. La procédure varie selon que la demande est faite en France ou à l’étranger et selon l’âge du mineur. Nous vous présentons les étapes de la démarche. À savoir Si le renouvellement de la carte d’identité n’est pas demandé immédiatement, il est nécessaire d’en déclarer la perte auprès des autorités de police ou de gendarmerie. Si la perte a eu lieu à l’étranger, la déclaration de perte est à faire auprès des autorités de police locales et à l’ambassade ou au consulat de France."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. La liste des mairies équipées est consultable en ligne. Où s'adresser : Mairie délivrant des cartes d'identité Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée : outilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité Il est possible de préparer la démarche en effectuant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de carte d'identité"
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d'identité est périmée > Date d'expiration : + de 5 ans > Le mineur a un passeport périmé > Date d’expiration : moins de 5 ans > Les parents du mineur sont séparés ou divorcés > La garde est alternée\nIl faut présenter les documents suivants : - Carte d'identité du mineur - Passeport du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). À noter En cas de garde alternée, il est possible de mentionner les 2 adresses du mineur sur le titre d'identité. Dans ce cas, il faut présenter : - La preuve de la résidence alternée (copie de la décision du juge, convention de divorce ou convention parentale) - Et 2 justificatifs de domicile (un pour chaque parent)."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d'identité est périmée > Date d'expiration : + de 5 ans > Le mineur a un passeport valide > Les parents du mineur sont séparés ou divorcés > La garde est alternée\nIl faut présenter les documents suivants : - Carte d'identité du mineur - Passeport du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). À noter En cas de garde alternée, il est possible de mentionner les 2 adresses du mineur sur le titre d'identité. Dans ce cas, il faut présenter : - La preuve de la résidence alternée (copie de la décision du juge, convention de divorce ou convention parentale) - Et 2 justificatifs de domicile (un pour chaque parent)."
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21090"
+   },
+   "thought": "Je consulte la fiche complète sur le renouvellement de la carte d'identité d'un mineur.\n\n",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F21090",
+    "title": "Renouvellement de la carte d'identité d'un mineur",
+    "text": "La demande de renouvellement de la carte d'identité d’un mineur est gratuite, à condition de pouvoir présenter l'ancienne carte.\nLa carte d'identité de votre enfant mineur est périmée ou le devient bientôt ? La demande de renouvellement de la carte d’identité est gratuite, à condition de pouvoir présenter l’ancienne carte. Nous vous présentons les étapes de la démarche. Elles varient selon que vous vivez en France ou à l’étranger.\n\n## En France\n\n## En France > Savoir quand il est possible de faire la demande de renouvellement\nIl est possible de demander le renouvellement l'année qui précède la date d'expiration de la carte d'identité actuelle.\nÀ savoir\nEn cas de changement sur l’état civil de votre enfant mineur (par exemple, changement de prénom), il faut faire une demande de modification de la carte d’identité. La demande doit être faite dans un délai de 3 mois à partir de la mise à jour de l’acte de naissance.\n\n## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nLa liste des mairies équipées est consultable en ligne.\nOù s'adresser : Mairie délivrant des cartes d'identité\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée :\noutilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité\nIl est possible de préparer la démarche en effectuant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande permet de gagner du temps lors du dépôt du dossier.\nselNG : Pré-demande pour un renouvellement de carte d'identité\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide\nLes documents à fournir varient selon la situation familiale du mineur :\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants :\n- Carte d'identité du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- Pièce d’identité du représentant légal qui dépose la demande\n- En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur sont séparés ou divorcés\nLes documents à fournir varient selon le mode de garde du mineur :\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur sont séparés ou divorcés > La garde est alternée\nIl faut présenter les documents suivants :\n- Carte d'identité du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- Pièce d’identité du représentant légal qui dépose la demande\n- En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\nÀ noter\nEn cas de garde alternée, il est possible de mentionner les 2 adresses du mineur sur le titre d'identité. Dans ce cas, il faut présenter :\n- La preuve de la résidence alternée (copie de la décision du juge, convention de divorce ou convention parentale)\n- Et 2 justificatifs de domicile (un pour chaque parent).\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement "
+   }
+  }
+ ]
+}

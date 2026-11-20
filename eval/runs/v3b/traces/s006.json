@@ -1,0 +1,333 @@
+{
+ "id": "s006",
+ "kind": "normal",
+ "task": "Crée une pré-demande de passeport pour Inès (première demande), mais ne l'envoie pas.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "passport",
+    "person": "P3",
+    "motive": "first",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.011
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande de passeport pour un mineur"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 17.679
+  },
+  {
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.018
+  }
+ ],
+ "steps": 4,
+ "max_steps": 5,
+ "tokens_in": 14912,
+ "tokens_out": 525,
+ "latency_s": 22.112,
+ "model_latency_s": 4.266,
+ "tool_latency_s": 17.708,
+ "cost_usd": 0.000538,
+ "stop_reason": "answered",
+ "answer": "C'est fait : la pré-demande de passeport (première demande) pour Inès (P3) est créée en brouillon sous la référence **D3**. Elle n'a pas été envoyée à l'ANTS — dites-moi si vous souhaitez que je la transmette.\n\nÀ prévoir ensuite : le déplacement en mairie avec Inès et le parent représentant légal (pièce d'identité, justificatif de domicile, photo de moins de 6 mois), ainsi que le timbre fiscal (gratuit pour un mineur de moins de 15 ans, à confirmer selon la fiche).",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ],
+ "trace_file": "traces/s006.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord consulter le profil du foyer pour identifier Inès.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3035,
+   "tokens_out": 51,
+   "cost_usd": 0.0001108764,
+   "latency_s": 0.753
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Inès est P3 (11 ans). Je consulte les règles sur la première demande de passeport pour un mineur.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3412,
+   "tokens_out": 146,
+   "cost_usd": 0.0001790064,
+   "latency_s": 1.184
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande de passeport pour un mineur"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "La démarche est possible pour un mineur (P3, 11 ans). Je crée le brouillon de pré-demande, sans l'envoyer.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 4154,
+   "tokens_out": 184,
+   "cost_usd": 0.0001691496,
+   "latency_s": 1.238
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "C'est fait : la pré-demande de passeport (première demande) pour Inès (P3) est créée en brouillon sous la référence **D3**. Elle n'a pas été envoyée à l'ANTS — dites-moi si vous souhaitez que je la transmette.\n\nÀ prévoir ensuite : le déplacement en mairie avec Inès et le parent représentant légal (pièce d'identité, justificatif de domicile, photo de moins de 6 mois), ainsi que le timbre fiscal (gratuit pour un mineur de moins de 15 ans, à confirmer selon la fiche).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4311,
+   "tokens_out": 144,
+   "cost_usd": 7.85628e-05,
+   "latency_s": 1.091
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vais d'abord consulter le profil du foyer pour identifier Inès.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.011,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande de passeport pour un mineur"
+   },
+   "thought": "Inès est P3 (11 ans). Je consulte les règles sur la première demande de passeport pour un mineur.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 17.679,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "Pour faire le passeport d'un mineur, l'enfant et son représentant légal doivent se rendre dans une mairie équipée avec les pièces justificatives. Vous souhaitez faire une première demande de passeport pour un mineur ? Un mineur français peut avoir un passeport quel que soit son âge (même un bébé). La procédure varie selon que la demande est faite en France ou à l'étranger et selon l'âge du mineur. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## En France > Se rendre au lieu de rendez-vous choisi pour faire la demande\nIl faut ensuite se rendre au lieu choisi avec les documents justificatifs. Le mineur et son représentant légal doivent se présenter ensemble au guichet. Leur présence est indispensable. Le représentant légal doit exercer l'autorité parentale. Il peut s'agir du père, de la mère ou du tuteur. Il doit présenter sa propre pièce d'identité."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a une carte d'identité périmée > Date d’expiration : + de 5 ans > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nla démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour le mineur."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a une carte d'identité périmée > Date d’expiration : moins de 5 ans > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Carte d'identité du mineur - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    }
+   ]
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "thought": "La démarche est possible pour un mineur (P3, 11 ans). Je crée le brouillon de pré-demande, sans l'envoyer.",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.018,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ]
+}

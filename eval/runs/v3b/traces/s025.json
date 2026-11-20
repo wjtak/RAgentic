@@ -1,0 +1,386 @@
+{
+ "id": "s025",
+ "kind": "impossible",
+ "task": "Prends-moi un rendez-vous samedi prochain à la mairie du 11e pour mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "search_slots",
+  "search_slots",
+  "ask_user"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-21",
+    "date_to": "2026-11-21"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.006
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-16"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.011
+  },
+  {
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-21",
+    "date_to": "2026-11-21"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 5,
+   "tool": "ask_user",
+   "args": {
+    "question": "Aucun créneau le samedi 21/11 (ni au 11e, ni au 12e, ni à Montreuil). Au 11e, les prochains sont : lundi 23/11 9h00, lundi 23/11 15h30, mercredi 25/11 10h00, jeudi 26/11 11h00. Lequel souhaitez-vous ?"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 5,
+ "max_steps": 5,
+ "tokens_in": 17996,
+ "tokens_out": 1325,
+ "latency_s": 7.514,
+ "model_latency_s": 7.453,
+ "tool_latency_s": 0.039,
+ "cost_usd": 0.000855,
+ "stop_reason": "asked_user",
+ "answer": null,
+ "question": "Aucun créneau le samedi 21/11 (ni au 11e, ni au 12e, ni à Montreuil). Au 11e, les prochains sont : lundi 23/11 9h00, lundi 23/11 15h30, mercredi 25/11 10h00, jeudi 26/11 11h00. Lequel souhaitez-vous ?",
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s025.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord identifier la personne concernée sur le compte.\n\n**Plan :** get_profile pour identifier « moi » → vérifier les règles (mairie compétente) → search_slots samedi 21/11 à Paris 11e → réserver.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3035,
+   "tokens_out": 490,
+   "cost_usd": 0.0002011788,
+   "latency_s": 2.428
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Camille Martin (P1), passeport expirant le 01/12/2026. Je cherche un créneau le samedi 21/11 à Paris 11e.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3452,
+   "tokens_out": 141,
+   "cost_usd": 0.0001808064,
+   "latency_s": 1.046
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-21",
+    "date_to": "2026-11-21"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Aucun créneau le samedi 21/11 au 11e. Je vérifie les disponibilités du 11e engénéral.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3591,
+   "tokens_out": 195,
+   "cost_usd": 0.0001224396,
+   "latency_s": 1.078
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-16"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Aucun samedi au 11e. Je vérifie s'il existe des samedis ailleurs (12e, Montreuil) pour proposer une alternative.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3902,
+   "tokens_out": 212,
+   "cost_usd": 0.0001565496,
+   "latency_s": 1.347
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-21",
+    "date_to": "2026-11-21"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "ask_user"
+   ],
+   "tokens_in": 4016,
+   "tokens_out": 287,
+   "cost_usd": 0.0001938096,
+   "latency_s": 1.554
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "ask_user",
+   "args": {
+    "question": "Aucun créneau le samedi 21/11 (ni au 11e, ni au 12e, ni à Montreuil). Au 11e, les prochains sont : lundi 23/11 9h00, lundi 23/11 15h30, mercredi 25/11 10h00, jeudi 26/11 11h00. Lequel souhaitez-vous ?"
+   },
+   "dropped": []
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vais d'abord identifier la personne concernée sur le compte.\n\n**Plan :** get_profile pour identifier « moi » → vérifier les règles (mairie compétente) → search_slots samedi 21/11 à Paris 11e → réserver.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-21",
+    "date_to": "2026-11-21"
+   },
+   "thought": "Camille Martin (P1), passeport expirant le 01/12/2026. Je cherche un créneau le samedi 21/11 à Paris 11e.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": []
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-16"
+   },
+   "thought": "Aucun créneau le samedi 21/11 au 11e. Je vérifie les disponibilités du 11e engénéral.",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.011,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C01",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T09:00",
+     "weekday": "lundi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C02",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T15:30",
+     "weekday": "lundi",
+     "part_of_day": "afternoon"
+    },
+    {
+     "id": "C03",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-25T10:00",
+     "weekday": "mercredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C08",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning"
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-21",
+    "date_to": "2026-11-21"
+   },
+   "thought": "Aucun samedi au 11e. Je vérifie s'il existe des samedis ailleurs (12e, Montreuil) pour proposer une alternative.",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": []
+  }
+ ]
+}

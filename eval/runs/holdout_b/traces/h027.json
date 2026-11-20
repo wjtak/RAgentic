@@ -1,0 +1,518 @@
+{
+ "id": "h027",
+ "kind": "normal",
+ "task": "On m'a volé ma carte d'identité : achète le timbre s'il en faut un et prépare la pré-demande, sans l'envoyer.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "theft",
+    "status": "draft"
+   }
+  },
+  "stamps": {
+   "P1/id_card_loss_theft": 1
+  },
+  "balance_eur": 95.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "get_fiche",
+  "get_wallet",
+  "buy_tax_stamp",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité volée renouvellement timbre fiscal prix"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.193
+  },
+  {
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F33805"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 4,
+   "tool": "get_wallet",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P1"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.013
+  },
+  {
+   "step": 6,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P1",
+    "motive": "theft"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.022
+  }
+ ],
+ "steps": 7,
+ "max_steps": 9,
+ "tokens_in": 31299,
+ "tokens_out": 2143,
+ "latency_s": 23.084,
+ "model_latency_s": 19.776,
+ "tool_latency_s": 3.258,
+ "cost_usd": 0.001423,
+ "stop_reason": "answered",
+ "answer": "C'est fait, sans rien envoyer à l'ANTS :\n\n- **Timbre fiscal** : la fiche Service-Public (F33805) confirme qu'un renouvellement de carte d'identité après vol coûte 25 €. J'ai donc acheté le timbre `id_card_loss_theft` pour Camille (P1) — id **TF1**, 25 €, solde restant 95 € (timbre non remboursable).\n- **Pré-demande** : brouillon créé — id **D3**, type carte d'identité, motif « vol », pour P1, au statut *draft*. Elle n'a **pas** été transmise.\n\nDites-moi si vous souhaitez que je l'envoie, ou que je cherche un rendez-vous en mairie (Paris 11e, 12e ou Montreuil). À noter : le passeport de Camille expire le 01/12/2026 (bientôt périmé), si vous voulez aussi vous en occuper.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "buy_tax_stamp",
+   "result": {
+    "stamp_id": "TF1",
+    "type": "id_card_loss_theft",
+    "person": "P1",
+    "amount_eur": 25.0,
+    "balance_eur": 95.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  },
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "theft"
+   }
+  }
+ ],
+ "trace_file": "traces/h027.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par vérifier le profil du titulaire et les règles applicables à une carte d'identité volée.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3046,
+   "tokens_out": 153,
+   "cost_usd": 9.09048e-05,
+   "latency_s": 1.668
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Je consulte les fiches Service-Public sur la carte d'identité volée (timbre, démarches).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3431,
+   "tokens_out": 150,
+   "cost_usd": 0.0001435448,
+   "latency_s": 1.442
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité volée renouvellement timbre fiscal prix"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 3899,
+   "tokens_out": 126,
+   "cost_usd": 0.0001468376,
+   "latency_s": 1.338
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F33805"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "La fiche confirme qu'un timbre est nécessaire (25 € pour une carte d'identité volée). Je vérifie le solde avant tout paiement.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_wallet"
+   ],
+   "tokens_in": 5038,
+   "tokens_out": 452,
+   "cost_usd": 0.000373688,
+   "latency_s": 3.991
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "get_wallet",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Le solde (120 €) couvre le timbre de 25 €. J'achète le timbre fiscal « carte d'identité perte/vol » pour P1 (Camille).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 5123,
+   "tokens_out": 640,
+   "cost_usd": 0.0003081064,
+   "latency_s": 4.766
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P1"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 5,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P1"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "Le timbre est acheté. Je crée maintenant le brouillon de pré-demande (vol, P1), sans l'envoyer.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 5303,
+   "tokens_out": 335,
+   "cost_usd": 0.000187824,
+   "latency_s": 2.96
+  },
+  {
+   "kind": "call",
+   "step": 6,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P1",
+    "motive": "theft"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 7,
+   "content": "C'est fait, sans rien envoyer à l'ANTS :\n\n- **Timbre fiscal** : la fiche Service-Public (F33805) confirme qu'un renouvellement de carte d'identité après vol coûte 25 €. J'ai donc acheté le timbre `id_card_loss_theft` pour Camille (P1) — id **TF1**, 25 €, solde restant 95 € (timbre non remboursable).\n- **Pré-demande** : brouillon créé — id **D3**, type carte d'identité, motif « vol », pour P1, au statut *draft*. Elle n'a **pas** été transmise.\n\nDites-moi si vous souhaitez que je l'envoie, ou que je cherche un rendez-vous en mairie (Paris 11e, 12e ou Montreuil). À noter : le passeport de Camille expire le 01/12/2026 (bientôt périmé), si vous voulez aussi vous en occuper.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 5459,
+   "tokens_out": 287,
+   "cost_usd": 0.0001721216,
+   "latency_s": 3.611
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par vérifier le profil du titulaire et les règles applicables à une carte d'identité volée.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité volée renouvellement timbre fiscal prix"
+   },
+   "thought": "Je consulte les fiches Service-Public sur la carte d'identité volée (timbre, démarches).\n\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.193,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F1794",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 €. L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F33805"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F33805",
+    "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+    "text": "En cas de perte ou de vol de votre carte d'identité, vous devez demander le renouvellement de la carte et acheter un timbre fiscal.\nL'achat du timbre fiscal (en ligne ou sur place) varie selon le lieu de la demande :\n\n## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €.\nVous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :\n\n## En France > Sur internet\nLa pré-demande sur le site de l'ANTS vous permet de gagner du temps lors du dépôt du dossier.\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande :\nselNG : Pré-demande pour un renouvellement de carte d'identité\nSinon, vous pouvez acheter le timbre fiscal sur le site timbres.impots.gouv.fr :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\nLe timbre électronique peut être délivré sur 2 supports :\n- Document PDF avec un code 2D qui peut également être scanné directement depuis un téléphone ou une tablette par le service chargé de recevoir votre demande\n- SMS contenant l'identifiant à 16 chiffres du timbre qui sera accepté par l'agent chargé de traiter votre dossier.\n\n## En France > Dans un bureau de tabac\nVous pouvez acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €.\nVous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :\n\n## En Guyane > Sur internet\nLa pré-demande sur le site de l'ANTS vous permet de gagner du temps lors du dépôt du dossier.\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande :\nselNG : Pré-demande pour un renouvellement de carte d'identité\nSinon, vous pouvez acheter le timbre fiscal sur le site timbres.impots.gouv.fr :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\nLe timbre électronique peut être délivré sur 2 supports :\n- Document PDF avec un code 2D qui peut également être scanné directement depuis un téléphone ou une tablette par le service chargé de recevoir votre demande\n- SMS contenant l'identifiant à 16 chiffres du timbre qui sera accepté par l'agent chargé de traiter votre dossier.\n\n## En Guyane > Dans un bureau de tabac\nVous pouvez acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €.\nVous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :\n\n## À l'étranger > Sur internet\nLa pré-demande sur le site de l'ANTS vous permet de gagner du temps lors du dépôt du dossier.\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande :\nselNG : Pré-demande pour un renouvellement de carte d'identité\nSinon, vous pouvez acheter le timbre fiscal sur le site timbres.impots.gouv.fr :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\nLe timbre électronique peut être délivré sur 2 supports :\n- Document PDF avec un code 2D qui peut également être scanné directement depuis un téléphone ou une tablette par le service chargé de recevoir votre demande\n- SMS contenant l'identifiant à 16 chiffres du timbre qui sera accepté par l'agent chargé de traiter votre dossier.\n\n## À l'étranger > Au consulat\nVous pouvez aussi régler directement en espèces au consulat. Certains consulats acceptent aussi le paiement par carte bancaire, chèque ou virement. Consultez le site internet du consulat pour savoir comment payer.\nOù s'adresser : Ambassade ou consulat français à l'étranger"
+   }
+  },
+  {
+   "tool": "get_wallet",
+   "args": {},
+   "thought": "La fiche confirme qu'un timbre est nécessaire (25 € pour une carte d'identité volée). Je vérifie le solde avant tout paiement.\n\n",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "balance_eur": 120.0,
+    "stamps": []
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "id_card_loss_theft",
+    "person_id": "P1"
+   },
+   "thought": "Le solde (120 €) couvre le timbre de 25 €. J'achète le timbre fiscal « carte d'identité perte/vol » pour P1 (Camille).\n\n",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": {
+    "stamp_id": "TF1",
+    "type": "id_card_loss_theft",
+    "person": "P1",
+    "amount_eur": 25.0,
+    "balance_eur": 95.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P1",
+    "motive": "theft"
+   },
+   "thought": "Le timbre est acheté. Je crée maintenant le brouillon de pré-demande (vol, P1), sans l'envoyer.\n\n",
+   "step": 6,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.022,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "theft"
+   }
+  }
+ ]
+}

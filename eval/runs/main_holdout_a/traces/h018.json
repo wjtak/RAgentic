@@ -1,0 +1,325 @@
+{
+ "id": "h018",
+ "kind": "normal",
+ "task": "Prends un rendez-vous pour la première demande de passeport de Léo la semaine prochaine, comme d'habitude.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C02",
+    "person": "P2",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 3,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P2",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.014
+  }
+ ],
+ "steps": 4,
+ "max_steps": 6,
+ "tokens_in": 13886,
+ "tokens_out": 999,
+ "latency_s": 8.813,
+ "model_latency_s": 8.734,
+ "tool_latency_s": 0.044,
+ "cost_usd": 0.000938,
+ "stop_reason": "answered",
+ "answer": "Rendez-vous confirmé ✅\n\n- **Léo (P2)** — première demande de **passeport**\n- **Lundi 23 novembre 2026 à 15h30**, mairie du **Paris 11e** (créneau C02)\n- Référence du rendez-vous : **R1**\n\nRien d'autre n'a été fait : si vous souhaitez que je prépare aussi la pré-demande ANTS ou que j'achète le timbre fiscal (Léo a 16 ans → timbre « passeport mineur 15-17 ans »), dites-le-moi.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C02",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T15:30",
+    "weekday": "lundi",
+    "part_of_day": "afternoon",
+    "person": "P2",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/h018.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "- horaire_prefere: l'après-midi\n- mairie_preferee: Paris 11e"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je récupère d'abord les informations du foyer pour identifier Léo.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3045,
+   "tokens_out": 160,
+   "cost_usd": 0.000406588,
+   "latency_s": 1.507
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Je cherche les créneaux à Paris 11e la semaine prochaine (23–29 novembre), l'après-midi.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3421,
+   "tokens_out": 383,
+   "cost_usd": 0.0002400048,
+   "latency_s": 2.648
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Un créneau correspond. Je réserve pour Léo (P2).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 3619,
+   "tokens_out": 322,
+   "cost_usd": 0.0001899576,
+   "latency_s": 2.759
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P2",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Rendez-vous confirmé ✅\n\n- **Léo (P2)** — première demande de **passeport**\n- **Lundi 23 novembre 2026 à 15h30**, mairie du **Paris 11e** (créneau C02)\n- Référence du rendez-vous : **R1**\n\nRien d'autre n'a été fait : si vous souhaitez que je prépare aussi la pré-demande ANTS ou que j'achète le timbre fiscal (Léo a 16 ans → timbre « passeport mineur 15-17 ans »), dites-le-moi.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3801,
+   "tokens_out": 134,
+   "cost_usd": 0.0001017128,
+   "latency_s": 1.82
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je récupère d'abord les informations du foyer pour identifier Léo.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "afternoon"
+   },
+   "thought": "Je cherche les créneaux à Paris 11e la semaine prochaine (23–29 novembre), l'après-midi.\n\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C02",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T15:30",
+     "weekday": "lundi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P2",
+    "reason": "passport"
+   },
+   "thought": "Un créneau correspond. Je réserve pour Léo (P2).\n\n",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.014,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C02",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T15:30",
+    "weekday": "lundi",
+    "part_of_day": "afternoon",
+    "person": "P2",
+    "reason": "passport"
+   }
+  }
+ ]
+}

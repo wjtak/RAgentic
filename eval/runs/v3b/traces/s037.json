@@ -1,0 +1,477 @@
+{
+ "id": "s037",
+ "kind": "impossible",
+ "task": "Prépare le renouvellement de la carte d'identité de Léo : crée la pré-demande.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_state: applications.D3: unexpected {'kind': 'id_card', 'person': 'P2', 'motive': 'renewal', 'status': 'draft'}; forbidden_call: create_application",
+ "state_ok": false,
+ "state_diff": [
+  "applications.D3: unexpected {'kind': 'id_card', 'person': 'P2', 'motive': 'renewal', 'status': 'draft'}"
+ ],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_fiches",
+  "search_fiches",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité perte vol"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 5.19
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité encore valide peut-on demander le renouvellement motif durée validité prolongation"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 5.491
+  },
+  {
+   "step": 4,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte nationale d'identité mineur renouvellement motif carte encore valide détériorée"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 6.121
+  },
+  {
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "renewal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.018
+  }
+ ],
+ "steps": 6,
+ "max_steps": 6,
+ "tokens_in": 28736,
+ "tokens_out": 1101,
+ "latency_s": 25.363,
+ "model_latency_s": 8.489,
+ "tool_latency_s": 16.835,
+ "cost_usd": 0.000815,
+ "stop_reason": "answered",
+ "answer": "La pré-demande de renouvellement de carte d'identité de Léo (P2, 16 ans) est créée en **brouillon** : **D3**, motif « renouvellement ». Rien n'a été envoyé à l'ANTS.\n\nÀ savoir : la carte d'identité actuelle de Léo est valide jusqu'au 10/02/2030 ; le renouvellement anticipé n'est possible que dans certains cas (perte, vol, détérioration, changement d'état civil, voyage imminent…). Dites-moi si l'un de ces motifs s'applique.\n\nPour la suite, quand vous voudrez la soumettre : la démarche est **gratuite** pour un mineur (aucun timbre fiscal à acheter), et il faudra un rendez-vous en mairie avec photo de moins de 6 mois, justificatif de domicile, pièce d'identité du représentant légal et l'ancienne carte. Dites-moi si je dois chercher un créneau ou soumettre D3.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal"
+   }
+  }
+ ],
+ "trace_file": "traces/s037.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan : je vérifie d'abord le profil du foyer pour identifier Léo et ses documents.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3036,
+   "tokens_out": 91,
+   "cost_usd": 5.76288e-05,
+   "latency_s": 0.864
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3416,
+   "tokens_out": 117,
+   "cost_usd": 0.0001011888,
+   "latency_s": 1.01
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité perte vol"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 4257,
+   "tokens_out": 123,
+   "cost_usd": 0.0001338804,
+   "latency_s": 1.799
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité encore valide peut-on demander le renouvellement motif durée validité prolongation"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 5390,
+   "tokens_out": 393,
+   "cost_usd": 0.0002653128,
+   "latency_s": 2.389
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte nationale d'identité mineur renouvellement motif carte encore valide détériorée"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 6255,
+   "tokens_out": 135,
+   "cost_usd": 0.0001373868,
+   "latency_s": 1.038
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "renewal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "La pré-demande de renouvellement de carte d'identité de Léo (P2, 16 ans) est créée en **brouillon** : **D3**, motif « renouvellement ». Rien n'a été envoyé à l'ANTS.\n\nÀ savoir : la carte d'identité actuelle de Léo est valide jusqu'au 10/02/2030 ; le renouvellement anticipé n'est possible que dans certains cas (perte, vol, détérioration, changement d'état civil, voyage imminent…). Dites-moi si l'un de ces motifs s'applique.\n\nPour la suite, quand vous voudrez la soumettre : la démarche est **gratuite** pour un mineur (aucun timbre fiscal à acheter), et il faudra un rendez-vous en mairie avec photo de moins de 6 mois, justificatif de domicile, pièce d'identité du représentant légal et l'ancienne carte. Dites-moi si je dois chercher un créneau ou soumettre D3.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 6382,
+   "tokens_out": 242,
+   "cost_usd": 0.0001195992,
+   "latency_s": 1.389
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Plan : je vérifie d'abord le profil du foyer pour identifier Léo et ses documents.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité perte vol"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 5.19,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1794",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - Passeport du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - Déclaration de vol (récépissé de dépôt de plainte) - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Timbre fiscal - En cas de pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F1794",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > Le mineur a un passeport valide > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - Passeport du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - Déclaration de vol - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Timbre fiscal - En cas de pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F1759",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de vol",
+     "excerpt": "## En France > Préparer les documents à présenter > Vous avez un passeport valide\nVous devez présenter les documents suivants : - Votre passeport - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile - Déclaration de vol - Timbre fiscal - Si vous avez fait une pré-demande, le n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F1759",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de vol",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > Vous avez un passeport valide\nVous devez présenter les documents suivants : - Votre passeport - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile - Déclaration de vol - Timbre fiscal - Si vous avez fait une pré-demande, le n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité encore valide peut-on demander le renouvellement motif durée validité prolongation"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 5.491,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1656",
+     "title": "Procédure de changement de nom de famille par décret (motif légitime)",
+     "excerpt": "## À l'étranger > Demander le renouvellement des titres d'identité\nUne fois les actes de l'état civil concernés par votre changement de nom mis à jour, vous devez demander le renouvellement de votre carte d'identité et/ou de votre passeport. Vous devez faire la démarche dans un délai de 3 mois à partir de la mise à jour de votre acte de naissance. Le renouvellement de votre carte d'identité et/ou de votre passeport est obligatoire même si vos titres d'identité sont encore valides. Cette démarche est gratuite si vous fournissez la carte nationale d’identité et/ou le passeport dont vous demandez le renouvellement. Après le renouvellement de votre carte d’identité et/ou de votre passeport, vous devez également demander le renouvellement de votre permis de conduire ainsi que de votre carte vitale. N’oubliez pas de communiquer votre changement de nom aux administrations et organismes concernés par votre changement de nom. À noter L’usage d’un document d’identité qui ne correspond pas à votre état"
+    },
+    {
+     "doc_id": "F1656",
+     "title": "Procédure de changement de nom de famille par décret (motif légitime)",
+     "excerpt": "## En France > Demander le renouvellement des titres d'identité\nUne fois les actes de l'état civil concernés par votre changement de nom mis à jour, vous devez demander le renouvellement de votre carte d'identité et/ou de votre passeport. Vous devez faire la démarche dans un délai de 3 mois à partir de la mise à jour de votre acte de naissance. Le renouvellement de votre carte d'identité et/ou de votre passeport est obligatoire même si vos titres d'identité sont encore valides. Cette démarche est gratuite si vous fournissez la carte nationale d’identité et/ou le passeport dont vous demandez le renouvellement. Après le renouvellement de votre carte d’identité et/ou de votre passeport, vous devez également demander le renouvellement de votre permis de conduire ainsi que de votre carte vitale. N’oubliez pas de communiquer votre changement de nom aux administrations et organismes concernés par votre changement de nom. À noter L’usage d’un document d’identité qui ne correspond pas à votre état"
+    },
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## Textes de référence\n- Décret n°55-1397 du 22 octobre 1955 relatif à la carte d'identité : article 4-1 - Pièces à fournir pour un renouvellement - Décret n°2013-1188 du 18 décembre 2013 : article 10 - Extension de la durée de la validité de la carte d'identité - Décret n°55-1397 du 22 octobre 1955 relatif à la carte d'identité : article 5 - Retrait de la carte - Réponse ministérielle du 28 novembre 2019 relative au format de la carte d'identité - Réponse ministérielle du 3 décembre 2019 relative au prolongement automatique de la carte d'identité - Arrêté du 11 mai 2021 portant application du décret n°2021-279 portant diverses dispositions relatives à la carte nationale d'identité et au traitement de données à caractère personnel (TES) - Arrêté du 20 avril 2016 autorisant la création d'un système de téléservices destinés à la prédemande et à la demande de titres officiels"
+    },
+    {
+     "doc_id": "F32303",
+     "title": "Peut-on voyager avec une carte d'identité de plus de 10 ans ?",
+     "excerpt": "vous pouvez demander son renouvellement anticipé en produisant un justificatif du voyage à venir. Si le pays accepte que la date inscrite sur votre carte d'identité ne corresponde pas à sa date réelle d'expiration, vous pouvez présenter une fiche d'information traduite aux autorités étrangères. À savoir Nous vous présentons la démarche à suivre pour le renouvellement d'une carte d'identité pour un majeur et celle à suivre pour un mineur."
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte nationale d'identité mineur renouvellement motif carte encore valide détériorée"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 6.121,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - Carte d'identité du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants : - Carte d'identité du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - Carte d'identité du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants : - Carte d'identité du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    }
+   ]
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "renewal"
+   },
+   "thought": "",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.018,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal"
+   }
+  }
+ ]
+}

@@ -1,0 +1,302 @@
+{
+ "id": "h020",
+ "kind": "normal",
+ "task": "Achète le timbre pour la première demande de passeport de Jeanne, seulement si le solde dépasse 100 €.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 90.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "stamp_price",
+  "get_wallet"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.022
+  },
+  {
+   "step": 2,
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 74,
+    "motive": "first"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.016
+  },
+  {
+   "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 3,
+   "approved": null,
+   "latency_s": 1.608
+  }
+ ],
+ "steps": 4,
+ "max_steps": 6,
+ "tokens_in": 13736,
+ "tokens_out": 536,
+ "latency_s": 8.345,
+ "model_latency_s": 6.672,
+ "tool_latency_s": 1.646,
+ "cost_usd": 0.000568,
+ "stop_reason": "answered",
+ "answer": "Le solde est de 90 €, donc il ne dépasse pas 100 € : la condition que vous avez posée n'est pas remplie.\n\n**Rien n'a été fait** — aucun timbre acheté. Pour information : Jeanne (P4, 74 ans) relève d'un timbre **passeport majeur à 86 €** (source F21091), et le solde du compte est de 90 €. Si vous souhaitez tout de même l'acheter, dites-le-moi explicitement.",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h020.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier Jeanne et son âge dans le compte.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3020,
+   "tokens_out": 187,
+   "cost_usd": 0.00015638,
+   "latency_s": 3.702
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Jeanne est P4 (74 ans). Je vérifie le timbre requis pour un passeport (première demande).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "stamp_price"
+   ],
+   "tokens_in": 3440,
+   "tokens_out": 141,
+   "cost_usd": 0.00018378,
+   "latency_s": 1.064
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 74,
+    "motive": "first"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Le timbre est un timbre passeport majeur à 86 €. Je vérifie le solde.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_wallet"
+   ],
+   "tokens_in": 3602,
+   "tokens_out": 62,
+   "cost_usd": 0.000103816,
+   "latency_s": 0.742
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Le solde est de 90 €, donc il ne dépasse pas 100 € : la condition que vous avez posée n'est pas remplie.\n\n**Rien n'a été fait** — aucun timbre acheté. Pour information : Jeanne (P4, 74 ans) relève d'un timbre **passeport majeur à 86 €** (source F21091), et le solde du compte est de 90 €. Si vous souhaitez tout de même l'acheter, dites-le-moi explicitement.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3674,
+   "tokens_out": 146,
+   "cost_usd": 0.000124504,
+   "latency_s": 1.164
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier Jeanne et son âge dans le compte.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.022,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     },
+     {
+      "id": "P4",
+      "first_name": "Jeanne",
+      "last_name": "Martin",
+      "relation": "grand-mère",
+      "birth_date": "1952-06-03",
+      "age": 74
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 74,
+    "motive": "first"
+   },
+   "thought": "Jeanne est P4 (74 ans). Je vérifie le timbre requis pour un passeport (première demande).",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.016,
+   "retried_errors": [],
+   "result": {
+    "stamp_type": "passport_adult",
+    "amount_eur": 86.0,
+    "source": "F21091",
+    "explanation": "Passeport d'un majeur (première demande ou renouvellement)"
+   }
+  },
+  {
+   "tool": "get_wallet",
+   "args": {},
+   "thought": "Le timbre est un timbre passeport majeur à 86 €. Je vérifie le solde.",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 3,
+   "latency_s": 1.608,
+   "retried_errors": [
+    "rate_limited",
+    "rate_limited"
+   ],
+   "result": {
+    "balance_eur": 90.0,
+    "stamps": []
+   }
+  }
+ ]
+}

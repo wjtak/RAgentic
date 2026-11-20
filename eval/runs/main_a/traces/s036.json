@@ -1,0 +1,624 @@
+{
+ "id": "s036",
+ "kind": "normal",
+ "task": "Ma carte d'identité est abîmée : crée la pré-demande de renouvellement, et achète le timbre fiscal s'il en faut un.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "max_steps: budget of 8 model calls spent; wrong_state: applications.D3: missing (expected {'kind': 'id_card', 'person': 'P1', 'motive': 'renewal', 'status': 'draft'})",
+ "state_ok": false,
+ "state_diff": [
+  "applications.D3: missing (expected {'kind': 'id_card', 'person': 'P1', 'motive': 'renewal', 'status': 'draft'})"
+ ],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_fiches",
+  "search_fiches",
+  "get_fiche",
+  "search_fiches",
+  "search_fiches",
+  "get_fiche"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité abîmée renouvellement timbre fiscal gratuité"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 2.48
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité détériorée abîmée renouvellement prix timbre fiscal 25 euros"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 2.437
+  },
+  {
+   "step": 4,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte nationale d'identité détériorée dégradée cas de renouvellement"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.139
+  },
+  {
+   "step": 5,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1344"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 6,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité abîmée détériorée faut-il payer un timbre fiscal gratuit"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 1.912
+  },
+  {
+   "step": 7,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité gratuit ou payant cas de renouvellement détérioration"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.306
+  },
+  {
+   "step": 8,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21089"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 8,
+ "max_steps": 8,
+ "tokens_in": 40219,
+ "tokens_out": 1331,
+ "latency_s": 23.103,
+ "model_latency_s": 9.757,
+ "tool_latency_s": 13.289,
+ "cost_usd": 0.001834,
+ "stop_reason": "max_steps",
+ "answer": null,
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s036.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier la personne et vérifier les règles applicables à une carte d'identité abîmée.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3031,
+   "tokens_out": 194,
+   "cost_usd": 0.000143298,
+   "latency_s": 2.196
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3416,
+   "tokens_out": 125,
+   "cost_usd": 0.000148498,
+   "latency_s": 0.95
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité abîmée renouvellement timbre fiscal gratuité"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3866,
+   "tokens_out": 96,
+   "cost_usd": 0.000188148,
+   "latency_s": 0.835
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité détériorée abîmée renouvellement prix timbre fiscal 25 euros"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 4318,
+   "tokens_out": 114,
+   "cost_usd": 0.00014392,
+   "latency_s": 0.881
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte nationale d'identité détériorée dégradée cas de renouvellement"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 4982,
+   "tokens_out": 258,
+   "cost_usd": 0.000438528,
+   "latency_s": 1.28
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1344"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 6227,
+   "tokens_out": 206,
+   "cost_usd": 0.000320818,
+   "latency_s": 1.275
+  },
+  {
+   "kind": "call",
+   "step": 6,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité abîmée détériorée faut-il payer un timbre fiscal gratuit"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 7,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 6688,
+   "tokens_out": 207,
+   "cost_usd": 0.000217558,
+   "latency_s": 1.385
+  },
+  {
+   "kind": "call",
+   "step": 7,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité gratuit ou payant cas de renouvellement détérioration"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 8,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 7691,
+   "tokens_out": 131,
+   "cost_usd": 0.000233012,
+   "latency_s": 0.955
+  },
+  {
+   "kind": "call",
+   "step": 8,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21089"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "stop",
+   "reason": "max_steps",
+   "step": 8
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier la personne et vérifier les règles applicables à une carte d'identité abîmée.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité abîmée renouvellement timbre fiscal gratuité"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 2.48,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 € (12,50 € en Guyane). L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité détériorée abîmée renouvellement prix timbre fiscal 25 euros"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 2.437,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 €. L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte nationale d'identité détériorée dégradée cas de renouvellement"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.139,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "Pour refaire une carte d'identité perdue, il faut se rendre dans une mairie équipée. La déclaration de perte se fait en même temps que la demande. Vous avez perdu votre carte d'identité et vous souhaitez obtenir une nouvelle carte ? Nous vous présentons étape par étape la démarche à suivre. Elle diffère selon que la perte a eu lieu en France ou à l'étranger."
+    },
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## En France > Vous rendre au lieu que vous avez choisi pour déposer la demande\nVotre présence est indispensable pour procéder à la prise d'empreintes. Vous devez venir avec tous les documents nécessaires."
+    },
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## Textes de référence\nrelative à l'enregistrement des déclarations de perte des documents d'identité - Réponse ministérielle du 28 novembre 2019 relative au format de la carte d'identité - Arrêté du 11 mai 2021 portant application du décret n°2021-279 portant diverses dispositions relatives à la carte nationale d'identité et au traitement de données à caractère personnel (TES) - Arrêté du 20 avril 2016 autorisant la création d'un système de téléservices destinés à la prédemande et à la demande de titres officiels"
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## Textes de référence\nrelative à l'enregistrement des déclarations de perte des documents d'identité - Réponse ministérielle du 28 novembre 2019 relative au format de la carte d'identité - Arrêté du 11 mai 2021 portant application du décret n°2021-279 portant diverses dispositions relatives à la carte nationale d'identité et au traitement de données à caractère personnel (TES) - Arrêté du 20 avril 2016 autorisant la création d'un système de téléservices destinés à la prédemande et à la demande de titres officiels"
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1344"
+   },
+   "thought": "",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F1344",
+    "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+    "text": "Pour refaire une carte d'identité perdue, il faut se rendre dans une mairie équipée. La déclaration de perte se fait en même temps que la demande.\nVous avez perdu votre carte d'identité et vous souhaitez obtenir une nouvelle carte ? Nous vous présentons étape par étape la démarche à suivre. Elle diffère selon que la perte a eu lieu en France ou à l'étranger.\n\n## En France\n\n## En France > Si vous ne souhaitez pas refaire votre carte immédiatement, déclarer la perte dans un commissariat de police ou une gendarmerie\nVous devez déclarer la perte de votre carte d'identité aux autorités de police seulement si vous ne souhaitez pas en refaire une immédiatement. Un récépissé vous sera remis.\nOù s'adresser : Commissariat\nOù s'adresser : Brigade de gendarmerie\nSi vous faites immédiatement une demande de nouvelle carte, vous n'avez pas à vous adresser aux autorités de police. La déclaration de perte sera faite au guichet de la mairie au moment du dépôt du dossier et jointe au formulaire de demande.\n\n## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nOù s'adresser : Mairie délivrant des cartes d'identité\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée :\noutilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité\nVous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier.\nselNG : Pré-demande pour un renouvellement de carte d'identité\n\n## En France > Acheter le timbre fiscal\nVous devez acheter un timbre fiscal d'un montant de 25 € (12,50 € en Guyane).\n\n## En France > Acheter le timbre fiscal > Vous faites une pré-demande en ligne\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande.\n\n## En France > Acheter le timbre fiscal > Vous ne faites pas de pré-demande\nVous avez 2 possibilités : soit acheter le timbre sur internet, soit l'acheter dans un bureau de tabac.\n\n## En France > Acheter le timbre fiscal > Vous ne faites pas de pré-demande > Vous voulez acheter le timbre sur internet\nVous devez utiliser ce téléservice :\nselNG : Achat en ligne du timbre fiscal - Carte d'identité\n\n## En France > Acheter le timbre fiscal > Vous ne faites pas de pré-demande > Vous voulez acheter le timbre dans un bureau de tabac\nVous pouvez acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\nLes documents à présenter varient selon que vous avez un passeport ou non :\n\n## En France > Préparer les documents à présenter > Vous avez un passeport valide\nVous devez présenter les documents suivants :\n- Votre passeport\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile\n- Déclaration de perte à remplir sur place ou en utilisant le formulaire cerfa n°14011 à remplir, signer et imprimer\n- Timbre fiscal\n- Si vous avez fait une pré-demande, le n° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > Vous avez un passeport périmé\n\n## En France > Préparer les documents à présenter > Vous avez un passeport périmé > Date d’expiration : moins de 5 ans\nVous devez présenter les documents suivants :\n- Votre passeport\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile\n- Déclaration de perte à remplir sur place ou en utilisant le formulaire cerfa n°14011 à remplir, signer et imprimer\n- Timbre fiscal\n- Si vous avez "
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité abîmée détériorée faut-il payer un timbre fiscal gratuit"
+   },
+   "thought": "",
+   "step": 6,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 1.912,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En France\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit dans un bureau de tabac :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "En cas de perte ou de vol de votre carte d'identité, vous devez demander le renouvellement de la carte et acheter un timbre fiscal. L'achat du timbre fiscal (en ligne ou sur place) varie selon le lieu de la demande :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## À l'étranger\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 25 €. Vous pouvez acheter un timbre fiscal soit sur internet, soit au consulat :"
+    },
+    {
+     "doc_id": "F33805",
+     "title": "Carte d'identité perdue ou volée : comment acheter un timbre fiscal ?",
+     "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité gratuit ou payant cas de renouvellement détérioration"
+   },
+   "thought": "",
+   "step": 7,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.306,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Vous êtes majeur et la date de validité de votre carte nationale d'identité est prochainement dépassée ou l'est déjà ? Vous avez une carte d'identité ancien modèle et vous souhaitez obtenir une carte au nouveau format ? La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "La demande de renouvellement de la carte d'identité d’un mineur est gratuite, à condition de pouvoir présenter l'ancienne carte. La carte d'identité de votre enfant mineur est périmée ou le devient bientôt ? La demande de renouvellement de la carte d’identité est gratuite, à condition de pouvoir présenter l’ancienne carte. Nous vous présentons les étapes de la démarche. Elles varient selon que vous vivez en France ou à l’étranger."
+    },
+    {
+     "doc_id": "F1656",
+     "title": "Procédure de changement de nom de famille par décret (motif légitime)",
+     "excerpt": "## En France > Demander le renouvellement des titres d'identité\nUne fois les actes de l'état civil concernés par votre changement de nom mis à jour, vous devez demander le renouvellement de votre carte d'identité et/ou de votre passeport. Vous devez faire la démarche dans un délai de 3 mois à partir de la mise à jour de votre acte de naissance. Le renouvellement de votre carte d'identité et/ou de votre passeport est obligatoire même si vos titres d'identité sont encore valides. Cette démarche est gratuite si vous fournissez la carte nationale d’identité et/ou le passeport dont vous demandez le renouvellement. Après le renouvellement de votre carte d’identité et/ou de votre passeport, vous devez également demander le renouvellement de votre permis de conduire ainsi que de votre carte vitale. N’oubliez pas de communiquer votre changement de nom aux administrations et organismes concernés par votre changement de nom. À noter L’usage d’un document d’identité qui ne correspond pas à votre état"
+    },
+    {
+     "doc_id": "F1656",
+     "title": "Procédure de changement de nom de famille par décret (motif légitime)",
+     "excerpt": "## À l'étranger > Demander le renouvellement des titres d'identité\nUne fois les actes de l'état civil concernés par votre changement de nom mis à jour, vous devez demander le renouvellement de votre carte d'identité et/ou de votre passeport. Vous devez faire la démarche dans un délai de 3 mois à partir de la mise à jour de votre acte de naissance. Le renouvellement de votre carte d'identité et/ou de votre passeport est obligatoire même si vos titres d'identité sont encore valides. Cette démarche est gratuite si vous fournissez la carte nationale d’identité et/ou le passeport dont vous demandez le renouvellement. Après le renouvellement de votre carte d’identité et/ou de votre passeport, vous devez également demander le renouvellement de votre permis de conduire ainsi que de votre carte vitale. N’oubliez pas de communiquer votre changement de nom aux administrations et organismes concernés par votre changement de nom. À noter L’usage d’un document d’identité qui ne correspond pas à votre état"
+    }
+   ]
+  }
+ ]
+}

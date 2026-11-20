@@ -1,0 +1,682 @@
+{
+ "id": "s009",
+ "kind": "normal",
+ "task": "Pour le renouvellement de mon passeport : achète le timbre, envoie ma pré-demande et prends le premier créneau libre à la mairie du 11e.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_state: applications.D1.status: expected submitted, got draft; applications.D3: unexpected {'kind': 'passport', 'person': 'P1', 'motive': 'renewal', 'status': 'submitted'}; forbidden_call: create_application",
+ "state_ok": false,
+ "state_diff": [
+  "applications.D1.status: expected submitted, got draft",
+  "applications.D3: unexpected {'kind': 'passport', 'person': 'P1', 'motive': 'renewal', 'status': 'submitted'}"
+ ],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C01",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {
+   "P1/passport_adult": 1
+  },
+  "balance_eur": 34.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "stamp_price",
+  "get_wallet",
+  "buy_tax_stamp",
+  "create_application",
+  "submit_application",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 2,
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 36,
+    "motive": "renewal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.006
+  },
+  {
+   "step": 4,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "passport_adult",
+    "person_id": "P1"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.008
+  },
+  {
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P1",
+    "motive": "renewal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.017
+  },
+  {
+   "step": 6,
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D3"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.016
+  },
+  {
+   "step": 7,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.03
+  },
+  {
+   "step": 8,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C01",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  }
+ ],
+ "steps": 9,
+ "max_steps": 12,
+ "tokens_in": 33704,
+ "tokens_out": 1281,
+ "latency_s": 16.341,
+ "model_latency_s": 16.209,
+ "tool_latency_s": 0.099,
+ "cost_usd": 0.001298,
+ "stop_reason": "answered",
+ "answer": "Tout est fait pour le renouvellement du passeport de Camille Martin (P1) :\n\n- **Timbre fiscal** : achat d'un timbre « passeport majeur » (86 €) — id TF1. Solde restant : 34 €.\n- **Pré-demande ANTS** : créée puis envoyée (id D3, renouvellement, statut « submitted »).\n- **Rendez-vous** : premier créneau libre à la mairie du 11e — lundi 23 novembre 2026 à 09h00 (id R1, motif passeport).\n\nÀ noter : le timbre n'est pas remboursable et la pré-demande envoyée n'est plus modifiable. Pensez à apporter le timbre, l'ancien passeport et une photo d'identité récente au rendez-vous.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "buy_tax_stamp",
+   "result": {
+    "stamp_id": "TF1",
+    "type": "passport_adult",
+    "person": "P1",
+    "amount_eur": 86.0,
+    "balance_eur": 34.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  },
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal"
+   }
+  },
+  {
+   "tool": "submit_application",
+   "result": {
+    "application_id": "D3",
+    "status": "submitted",
+    "warning": "Sent to the ANTS: it can no longer be edited."
+   }
+  },
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C01",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T09:00",
+    "weekday": "lundi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/s009.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier la personne (et son âge) sur le compte.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3035,
+   "tokens_out": 288,
+   "cost_usd": 0.0001712784,
+   "latency_s": 5.283
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "stamp_price"
+   ],
+   "tokens_in": 3410,
+   "tokens_out": 250,
+   "cost_usd": 0.000228968,
+   "latency_s": 1.964
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 36,
+    "motive": "renewal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_wallet"
+   ],
+   "tokens_in": 3549,
+   "tokens_out": 29,
+   "cost_usd": 5.4236e-05,
+   "latency_s": 0.788
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_wallet",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "buy_tax_stamp"
+   ],
+   "tokens_in": 3599,
+   "tokens_out": 152,
+   "cost_usd": 0.000189838,
+   "latency_s": 1.84
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "passport_adult",
+    "person_id": "P1"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 4,
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "passport_adult",
+    "person_id": "P1"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 3733,
+   "tokens_out": 157,
+   "cost_usd": 0.000128588,
+   "latency_s": 1.397
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P1",
+    "motive": "renewal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "submit_application"
+   ],
+   "tokens_in": 3860,
+   "tokens_out": 47,
+   "cost_usd": 5.7214e-05,
+   "latency_s": 1.079
+  },
+  {
+   "kind": "call",
+   "step": 6,
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D3"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 6,
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D3"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 7,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3945,
+   "tokens_out": 54,
+   "cost_usd": 0.000171118,
+   "latency_s": 0.941
+  },
+  {
+   "kind": "call",
+   "step": 7,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 8,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 4203,
+   "tokens_out": 104,
+   "cost_usd": 0.00012247,
+   "latency_s": 1.499
+  },
+  {
+   "kind": "call",
+   "step": 8,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C01",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 9,
+   "content": "Tout est fait pour le renouvellement du passeport de Camille Martin (P1) :\n\n- **Timbre fiscal** : achat d'un timbre « passeport majeur » (86 €) — id TF1. Solde restant : 34 €.\n- **Pré-demande ANTS** : créée puis envoyée (id D3, renouvellement, statut « submitted »).\n- **Rendez-vous** : premier créneau libre à la mairie du 11e — lundi 23 novembre 2026 à 09h00 (id R1, motif passeport).\n\nÀ noter : le timbre n'est pas remboursable et la pré-demande envoyée n'est plus modifiable. Pensez à apporter le timbre, l'ancien passeport et une photo d'identité récente au rendez-vous.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4370,
+   "tokens_out": 200,
+   "cost_usd": 0.000173812,
+   "latency_s": 1.418
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier la personne (et son âge) sur le compte.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "stamp_price",
+   "args": {
+    "document": "passport",
+    "age": 36,
+    "motive": "renewal"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "stamp_type": "passport_adult",
+    "amount_eur": 86.0,
+    "source": "F21091",
+    "explanation": "Passeport d'un majeur (première demande ou renouvellement)"
+   }
+  },
+  {
+   "tool": "get_wallet",
+   "args": {},
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": {
+    "balance_eur": 120.0,
+    "stamps": []
+   }
+  },
+  {
+   "tool": "buy_tax_stamp",
+   "args": {
+    "stamp_type": "passport_adult",
+    "person_id": "P1"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "stamp_id": "TF1",
+    "type": "passport_adult",
+    "person": "P1",
+    "amount_eur": 86.0,
+    "balance_eur": 34.0,
+    "warning": "A tax stamp is not refundable here."
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P1",
+    "motive": "renewal"
+   },
+   "thought": "",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.017,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal"
+   }
+  },
+  {
+   "tool": "submit_application",
+   "args": {
+    "application_id": "D3"
+   },
+   "thought": "",
+   "step": 6,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.016,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "submitted",
+    "warning": "Sent to the ANTS: it can no longer be edited."
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e"
+   },
+   "thought": "",
+   "step": 7,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.03,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C01",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T09:00",
+     "weekday": "lundi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C02",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T15:30",
+     "weekday": "lundi",
+     "part_of_day": "afternoon"
+    },
+    {
+     "id": "C03",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-25T10:00",
+     "weekday": "mercredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C08",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C01",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "",
+   "step": 8,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C01",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T09:00",
+    "weekday": "lundi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ]
+}

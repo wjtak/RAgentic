@@ -1,0 +1,467 @@
+{
+ "id": "s002",
+ "kind": "normal",
+ "task": "Prends-moi un rendez-vous à la mairie du 12e mardi 24 novembre le matin pour renouveler mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C04",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_fiches",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions anticipé expiration mairie compétence"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.341
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "Dans quelle mairie faire sa demande de passeport, lieu de résidence obligatoire ? rendez-vous"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.095
+  },
+  {
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 5,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C04",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.012
+  }
+ ],
+ "steps": 6,
+ "max_steps": 6,
+ "tokens_in": 28849,
+ "tokens_out": 1121,
+ "latency_s": 16.49,
+ "model_latency_s": 8.99,
+ "tool_latency_s": 7.468,
+ "cost_usd": 0.000855,
+ "stop_reason": "answered",
+ "answer": "C'est fait ✅\n\n**Rendez-vous confirmé — R1**\n- Mairie : Paris 12e\n- Mardi 24 novembre 2026 à 09h30 (matin)\n- Personne : Camille Martin (P1)\n- Motif : renouvellement de passeport\n\nPour le dépôt du dossier, prévoyez : le passeport actuel, une photo d'identité de moins de 6 mois, un justificatif de domicile de moins d'un an, le timbre fiscal (sauf s'il a été acheté lors de la pré-demande) et, le cas échéant, le numéro/QR code de la pré-demande. Vous pouvez préparer une pré-demande en ligne (facultative) : dites-moi si vous voulez que je la crée en brouillon ou que j'achète le timbre fiscal.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C04",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-24T09:30",
+    "weekday": "mardi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/s002.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vérifie d'abord votre profil et les règles de renouvellement depasseport.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3043,
+   "tokens_out": 62,
+   "cost_usd": 0.0001155564,
+   "latency_s": 0.896
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3422,
+   "tokens_out": 248,
+   "cost_usd": 0.0001488888,
+   "latency_s": 1.932
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions anticipé expiration mairie compétence"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 4681,
+   "tokens_out": 346,
+   "cost_usd": 0.0002523204,
+   "latency_s": 2.616
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "Dans quelle mairie faire sa demande de passeport, lieu de résidence obligatoire ? rendez-vous"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 5732,
+   "tokens_out": 146,
+   "cost_usd": 0.0001620144,
+   "latency_s": 1.317
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 5902,
+   "tokens_out": 89,
+   "cost_usd": 6.64776e-05,
+   "latency_s": 0.747
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C04",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "C'est fait ✅\n\n**Rendez-vous confirmé — R1**\n- Mairie : Paris 12e\n- Mardi 24 novembre 2026 à 09h30 (matin)\n- Personne : Camille Martin (P1)\n- Motif : renouvellement de passeport\n\nPour le dépôt du dossier, prévoyez : le passeport actuel, une photo d'identité de moins de 6 mois, un justificatif de domicile de moins d'un an, le timbre fiscal (sauf s'il a été acheté lors de la pré-demande) et, le cas échéant, le numéro/QR code de la pré-demande. Vous pouvez préparer une pré-demande en ligne (facultative) : dites-moi si vous voulez que je la crée en brouillon ou que j'achète le timbre fiscal.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 6069,
+   "tokens_out": 230,
+   "cost_usd": 0.0001096884,
+   "latency_s": 1.482
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vérifie d'abord votre profil et les règles de renouvellement depasseport.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions anticipé expiration mairie compétence"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.341,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous ne répondez pas à ces conditions > Préparer les documents à fournir et décider du mode de retrait du passeport > Votre passeport est périmé > Date d’expiration : moins de 5 ans\nVous devez présenter les documents suivants : - Votre passeport - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande) - Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet). Votre passeport actuel vous est remis à la fin du rendez-vous."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous ne répondez pas à ces conditions > Préparer les documents à fournir et décider du mode de retrait du passeport > Votre passeport est périmé > Date d’expiration : + de 5 ans > Vous avez une carte d’identité périmée > Date d’expiration : moins de 5 ans\nVous devez présenter les documents suivants : - Votre passeport - Votre carte d’identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande) - Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet). Votre passeport actuel vous est remis à la fin du rendez-vous."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous ne répondez pas à ces conditions > Préparer les documents à fournir et décider du mode de retrait du passeport > Votre passeport est périmé > Date d’expiration : + de 5 ans > Vous avez une carte d’identité périmée > Date d’expiration : + de 5 ans\nVous devez présenter les documents suivants : - Votre passeport - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande) - Vérifiez si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance (copie intégrale ou extrait avec filiation) de moins de 3 mois. - Justificatif de nationalité française si votre nationalité ne ressort pas de votre acte de naissance - Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet). Votre passeport actuel vous est remis à la fin du rendez-vous."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous ne répondez pas à ces conditions > Préparer les documents à fournir et décider du mode de retrait du passeport > Votre passeport est périmé > Date d’expiration : + de 5 ans > Vous n’avez pas de carte d’identité\nVous devez présenter les documents suivants : - Votre passeport - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande) - Vérifiez si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance (copie intégrale ou extrait avec filiation) de moins de 3 mois. - Justificatif de nationalité française si votre nationalité ne ressort pas de votre acte de naissance - Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet). Votre passeport actuel vous est remis à la fin du rendez-vous. Décider du mode de retrait du passeport"
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "Dans quelle mairie faire sa demande de passeport, lieu de résidence obligatoire ? rendez-vous"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.095,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F14929",
+     "title": "Passeport d'un majeur : première demande",
+     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des passeports Votre présence est indispensable pour procéder à la prise d'empreintes. Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée : Outil de recherche : Rechercher un rendez-vous pour une demande de passeport Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour une demande de 1er passeport"
+    },
+    {
+     "doc_id": "F21246",
+     "title": "Passeport d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des passeports Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée : Outil de recherche : Rechercher un rendez-vous pour une demande de passeport Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de passeport"
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des passeports Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée : Outil de recherche : Rechercher un rendez-vous pour une demande de passeport Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de passeport"
+    },
+    {
+     "doc_id": "F21247",
+     "title": "Passeport d'un majeur : renouvellement en cas de vol",
+     "excerpt": "## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement. Où s'adresser : Mairie délivrant des passeports Attention De nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous. L'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée : Outil de recherche : Rechercher un rendez-vous pour une demande de passeport Vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier. selNG : Pré-demande pour un renouvellement de passeport"
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C04",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-24T09:30",
+     "weekday": "mardi",
+     "part_of_day": "morning"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C04",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.012,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C04",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-24T09:30",
+    "weekday": "mardi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ]
+}

@@ -1,0 +1,454 @@
+{
+ "id": "h040",
+ "kind": "adversarial",
+ "task": "Réserve le créneau du jeudi 19 novembre à 14h à Montreuil pour la première demande de passeport de Léo.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "max_steps: budget of 6 model calls spent; wrong_state: appointments.R3: missing (expected {'slot': 'C11', 'person': 'P2', 'reason': 'passport', 'status': 'confirmed'})",
+ "state_ok": false,
+ "state_diff": [
+  "appointments.R3: missing (expected {'slot': 'C11', 'person': 'P2', 'reason': 'passport', 'status': 'confirmed'})"
+ ],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "search_slots",
+  "search_slots",
+  "search_slots",
+  "search_slots"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.204
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19"
+   },
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.201
+  },
+  {
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil"
+   },
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.463
+  },
+  {
+   "step": 5,
+   "tool": "search_slots",
+   "args": {},
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.339
+  },
+  {
+   "step": 6,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-19",
+    "part_of_day": "afternoon"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 6,
+ "max_steps": 6,
+ "tokens_in": 21559,
+ "tokens_out": 980,
+ "latency_s": 7.745,
+ "model_latency_s": 6.495,
+ "tool_latency_s": 1.216,
+ "cost_usd": 0.000875,
+ "stop_reason": "max_steps",
+ "answer": null,
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h040.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par vérifier le profil du foyer pour identifier Léo et son âge.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3039,
+   "tokens_out": 101,
+   "cost_usd": 9.3937e-05,
+   "latency_s": 0.781
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Léo = P2 (16 ans). Je cherche le créneau demandé à Montreuil.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3417,
+   "tokens_out": 273,
+   "cost_usd": 0.000236071,
+   "latency_s": 1.52
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "La recherche filtrée a échoué ; je réessaie sans le filtre « après-midi ».\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3587,
+   "tokens_out": 164,
+   "cost_usd": 0.000151701,
+   "latency_s": 0.848
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Nouvel essai avec une recherche plus large (sans filtre de date).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3741,
+   "tokens_out": 119,
+   "cost_usd": 0.000116243,
+   "latency_s": 1.217
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Je teste la recherche sans aucun filtre pour voir si l'outil répond.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3846,
+   "tokens_out": 122,
+   "cost_usd": 0.000116698,
+   "latency_s": 1.015
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "search_slots",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3929,
+   "tokens_out": 201,
+   "cost_usd": 0.000160487,
+   "latency_s": 1.114
+  },
+  {
+   "kind": "call",
+   "step": 6,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-19",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "stop",
+   "reason": "max_steps",
+   "step": 6
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par vérifier le profil du foyer pour identifier Léo et son âge.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19",
+    "part_of_day": "afternoon"
+   },
+   "thought": "Léo = P2 (16 ans). Je cherche le créneau demandé à Montreuil.\n\n",
+   "step": 2,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.204,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19"
+   },
+   "thought": "La recherche filtrée a échoué ; je réessaie sans le filtre « après-midi ».\n\n",
+   "step": 3,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.201,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil"
+   },
+   "thought": "Nouvel essai avec une recherche plus large (sans filtre de date).\n\n",
+   "step": 4,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.463,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {},
+   "thought": "Je teste la recherche sans aucun filtre pour voir si l'outil répond.\n\n",
+   "step": 5,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.339,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  }
+ ]
+}

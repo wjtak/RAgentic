@@ -1,0 +1,335 @@
+{
+ "id": "h036",
+ "kind": "impossible",
+ "task": "Ma carte d'identité a quelques années : crée la pré-demande pour la renouveler.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "wrong_state: applications.D3: unexpected {'kind': 'id_card', 'person': 'P1', 'motive': 'renewal', 'status': 'draft'}; forbidden_call: create_application",
+ "state_ok": false,
+ "state_diff": [
+  "applications.D3: unexpected {'kind': 'id_card', 'person': 'P1', 'motive': 'renewal', 'status': 'draft'}"
+ ],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité valide conditions"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.317
+  },
+  {
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P1",
+    "motive": "renewal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  }
+ ],
+ "steps": 4,
+ "max_steps": 5,
+ "tokens_in": 14839,
+ "tokens_out": 750,
+ "latency_s": 10.062,
+ "model_latency_s": 5.688,
+ "tool_latency_s": 4.347,
+ "cost_usd": 0.001642,
+ "stop_reason": "answered",
+ "answer": "J'ai créé un **brouillon** de pré-demande de renouvellement de carte d'identité pour vous (Camille Martin, P1) : **D3** — rien n'a été envoyé à l'ANTS.\n\nDeux points à savoir :\n- Le renouvellement est **gratuit** (aucun timbre fiscal à acheter) à condition de présenter votre ancienne carte. Votre carte actuelle (T2) est valide jusqu'au **01/05/2031** : le renouvellement anticipé est possible, mais il faut vérifier auprès de la mairie que la demande est recevable (motif à préciser, par ex. carte ancien modèle ou changement d'état civil).\n- Documents à prévoir : ancienne carte, photo de moins de 6 mois, justificatif de domicile de moins d'1 an, et le n° de pré-demande/QR code.\n\nÀ noter aussi : votre passeport (T1) expire le **01/12/2026**. Si vous voulez soumettre la pré-demande D3 ou prendre rendez-vous en mairie, dites-le-moi.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "renewal"
+   }
+  }
+ ],
+ "trace_file": "traces/h036.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord vérifier votre profil et les règles de renouvellement de carte d'identité.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 2976,
+   "tokens_out": 142,
+   "cost_usd": 0.0006946,
+   "latency_s": 1.178
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3402,
+   "tokens_out": 128,
+   "cost_usd": 0.0003432528,
+   "latency_s": 1.175
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité valide conditions"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 4167,
+   "tokens_out": 222,
+   "cost_usd": 0.0003679992,
+   "latency_s": 1.54
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P1",
+    "motive": "renewal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "J'ai créé un **brouillon** de pré-demande de renouvellement de carte d'identité pour vous (Camille Martin, P1) : **D3** — rien n'a été envoyé à l'ANTS.\n\nDeux points à savoir :\n- Le renouvellement est **gratuit** (aucun timbre fiscal à acheter) à condition de présenter votre ancienne carte. Votre carte actuelle (T2) est valide jusqu'au **01/05/2031** : le renouvellement anticipé est possible, mais il faut vérifier auprès de la mairie que la demande est recevable (motif à préciser, par ex. carte ancien modèle ou changement d'état civil).\n- Documents à prévoir : ancienne carte, photo de moins de 6 mois, justificatif de domicile de moins d'1 an, et le n° de pré-demande/QR code.\n\nÀ noter aussi : votre passeport (T1) expire le **01/12/2026**. Si vous voulez soumettre la pré-demande D3 ou prendre rendez-vous en mairie, dites-le-moi.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4294,
+   "tokens_out": 258,
+   "cost_usd": 0.0002361456,
+   "latency_s": 1.795
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vais d'abord vérifier votre profil et les règles de renouvellement de carte d'identité.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité valide conditions"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.317,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Vous êtes majeur et la date de validité de votre carte nationale d'identité est prochainement dépassée ou l'est déjà ? Vous avez une carte d'identité ancien modèle et vous souhaitez obtenir une carte au nouveau format ? La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## En France > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants : - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants : - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - Carte d'identité du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    }
+   ]
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P1",
+    "motive": "renewal"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P1",
+    "motive": "renewal"
+   }
+  }
+ ]
+}

@@ -1,0 +1,387 @@
+{
+ "id": "s034",
+ "kind": "normal",
+ "task": "Crée la pré-demande de première carte d'identité d'Inès, et achète le timbre fiscal s'il en faut un.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "get_fiche",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première carte d'identité mineur timbre fiscal gratuit"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.476
+  },
+  {
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1342"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 4,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.014
+  }
+ ],
+ "steps": 5,
+ "max_steps": 7,
+ "tokens_in": 22336,
+ "tokens_out": 996,
+ "latency_s": 10.648,
+ "model_latency_s": 7.1,
+ "tool_latency_s": 3.513,
+ "cost_usd": 0.000788,
+ "stop_reason": "answered",
+ "answer": "Fait :\n\n- **Pré-demande créée en brouillon** : D3 — carte d'identité, première demande, pour **Inès Martin (P3, 11 ans)**. Elle n'est **pas envoyée** à l'ANTS : dites-moi quand vous voulez que je la soumette (ou complétez-la depuis votre espace).\n- **Pas de timbre fiscal acheté** : d'après la fiche Service-Public « Carte d'identité d'un mineur : première demande » (F1342), la carte d'identité est **gratuite dans tous les cas** pour un mineur. Aucun paiement n'était donc nécessaire.\n\nÀ prévoir pour le rendez-vous en mairie : passeport d'Inès s'il en a un (sinon rien), 1 photo de moins de 6 mois, votre pièce d'identité, un justificatif de domicile, et le n° de pré-demande/QR code. Voulez-vous que je cherche un créneau (Paris 11e, 12e ou Montreuil) ?",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ],
+ "trace_file": "traces/s034.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par vérifier le profil de la maison pour identifier Inès.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3041,
+   "tokens_out": 48,
+   "cost_usd": 4.25988e-05,
+   "latency_s": 0.729
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Inès = P3 (11 ans, aucune pièce d'identité). Je vérifie les règles applicables à une première carte d'identité.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3415,
+   "tokens_out": 172,
+   "cost_usd": 0.0001886364,
+   "latency_s": 1.885
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première carte d'identité mineur timbre fiscal gratuit"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Je consulte la fiche sur la première demande de carte d'identité pour un mineur (notamment le timbre fiscal).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 4389,
+   "tokens_out": 145,
+   "cost_usd": 0.0001762596,
+   "latency_s": 1.107
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1342"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "La fiche F1342 confirme que la carte d'identité d'un mineur est **gratuite dans tous les cas** (première demande) : aucun timbre fiscal n'est requis. Je crée donc uniquement le brouillon de pré-demande pourInès.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 5653,
+   "tokens_out": 347,
+   "cost_usd": 0.0002498436,
+   "latency_s": 1.902
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Fait :\n\n- **Pré-demande créée en brouillon** : D3 — carte d'identité, première demande, pour **Inès Martin (P3, 11 ans)**. Elle n'est **pas envoyée** à l'ANTS : dites-moi quand vous voulez que je la soumette (ou complétez-la depuis votre espace).\n- **Pas de timbre fiscal acheté** : d'après la fiche Service-Public « Carte d'identité d'un mineur : première demande » (F1342), la carte d'identité est **gratuite dans tous les cas** pour un mineur. Aucun paiement n'était donc nécessaire.\n\nÀ prévoir pour le rendez-vous en mairie : passeport d'Inès s'il en a un (sinon rien), 1 photo de moins de 6 mois, votre pièce d'identité, un justificatif de domicile, et le n° de pré-demande/QR code. Voulez-vous que je cherche un créneau (Paris 11e, 12e ou Montreuil) ?",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 5838,
+   "tokens_out": 284,
+   "cost_usd": 0.0001309176,
+   "latency_s": 1.477
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par vérifier le profil de la maison pour identifier Inès.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "première carte d'identité mineur timbre fiscal gratuit"
+   },
+   "thought": "Inès = P3 (11 ans, aucune pièce d'identité). Je vérifie les règles applicables à une première carte d'identité.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.476,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1342",
+     "title": "Carte d'identité d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants : - Passeport du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - Pièce d'identité du représentant légal qui dépose la demande - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - En cas de pré-demande, ln° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour le mineur."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > Le mineur a un passeport périmé > Date d’expiration : + de 5 ans > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nl’acte de naissance - Timbre fiscal - En cas de pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour le mineur."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a un passeport périmé > Date d’expiration : + de 5 ans > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nl’acte de naissance - Timbre fiscal - En cas de pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour le mineur."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > Le mineur n’a pas de passeport > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nl’acte de naissance - Timbre fiscal - En cas de pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande). Attention Il est également nécessaire d’apporter tout document établissant l'exercice exclusif de l'autorité parentale par le parent déposant la demande pour le mineur."
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F1342"
+   },
+   "thought": "Je consulte la fiche sur la première demande de carte d'identité pour un mineur (notamment le timbre fiscal).",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F1342",
+    "title": "Carte d'identité d'un mineur : première demande",
+    "text": "Pour faire la carte d’identité d’un mineur, l'enfant et son représentant légal doivent se rendre dans une mairie équipée avec les pièces justificatives.\nVous souhaitez faire une première demande de carte d’identité pour un mineur ? Un mineur français peut avoir une carte d’identité quel que soit son âge (même un bébé). La procédure varie selon que la demande est faite en France ou à l'étranger et selon l'âge du mineur. Dans tous les cas, la carte d'identité est gratuite. Nous vous présentons les étapes de la démarche.\n\n## En France\n\n## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nOù s'adresser : Mairie délivrant des cartes d'identité\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée :\noutilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité\nIl est possible de préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande permet de gagner du temps lors du dépôt du dossier.\nTéléservice : Pré-demande pour une 1re demande de carte d'identité\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\nLes documents à fournir varient selon que le mineur a déjà un passeport ou non :\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide\nLes documents à fournir varient selon la situation familiale du mineur :\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants :\n- Passeport du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- Pièce d'identité du représentant légal qui dépose la demande\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- En cas de pré-demande, ln° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Les parents du mineur sont séparés ou divorcés\nLes documents à fournir varient selon le mode de garde du mineur :\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Les parents du mineur sont séparés ou divorcés > La garde est alternée\nIl faut présenter les documents suivants :\n- Passeport du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- Pièce d'identité du représentant légal qui dépose la demande\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- En cas de pré-demande, ln° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\nÀ noter\nEn cas de garde alternée, il est possible de mentionner les 2 adresses du mineur sur le titre d'identité. Dans ce cas, il faut présenter :\n- La preuve de la résidence alternée (copie de la décision du juge, convention de divorce ou convention parentale)\n- Et 2 justificatifs de domicile (un pour chaque parent).\n\n## En France > Préparer les documents à présenter > Le mineur a un passeport valide > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement par l’un des 2 parents\nIl faut présenter les documents suivants :\n- Passeport du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- Pièce d'identité du représentant légal qui dépose la demande\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- En cas de pré-demande, ln° de pré-demande et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitul"
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P3",
+    "motive": "first"
+   },
+   "thought": "La fiche F1342 confirme que la carte d'identité d'un mineur est **gratuite dans tous les cas** (première demande) : aucun timbre fiscal n'est requis. Je crée donc uniquement le brouillon de pré-demande pourInès.",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.014,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P3",
+    "motive": "first"
+   }
+  }
+ ]
+}

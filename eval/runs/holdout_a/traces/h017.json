@@ -1,0 +1,402 @@
+{
+ "id": "h017",
+ "kind": "normal",
+ "task": "Crée la pré-demande de renouvellement du passeport de Jeanne, sans l'envoyer.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "passport",
+    "person": "P4",
+    "motive": "renewal",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "get_fiche",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.017
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions délai validité"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.636
+  },
+  {
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21091"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 4,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P4",
+    "motive": "renewal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  }
+ ],
+ "steps": 5,
+ "max_steps": 6,
+ "tokens_in": 22622,
+ "tokens_out": 1042,
+ "latency_s": 13.74,
+ "model_latency_s": 9.026,
+ "tool_latency_s": 4.677,
+ "cost_usd": 0.002045,
+ "stop_reason": "answered",
+ "answer": "J'ai créé le brouillon de pré-demande de renouvellement du passeport pour Jeanne (P4) : **D3**, statut *draft* — rien n'a été envoyé à l'ANTS.\n\nPour information : le passeport de Jeanne est expiré depuis le 01/03/2025 (moins de 5 ans), le renouvellement est donc possible ; il faudra un timbre fiscal de 86 € (passeport majeur) et un rendez-vous en mairie. Dites-moi si vous voulez que je m'en occupe.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P4",
+    "motive": "renewal"
+   }
+  }
+ ],
+ "trace_file": "traces/h017.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord consulter le profil du foyer pour identifier Jeanne.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3032,
+   "tokens_out": 53,
+   "cost_usd": 5.1778e-05,
+   "latency_s": 0.72
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Jeanne = P4 (74 ans, passeport expiré). Je consulte les fiches Service-Public sur le renouvellement de passeport.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3496,
+   "tokens_out": 174,
+   "cost_usd": 0.000190748,
+   "latency_s": 1.764
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions délai validité"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 4497,
+   "tokens_out": 410,
+   "cost_usd": 0.000474278,
+   "latency_s": 3.224
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21091"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Jeanne (P4) a un passeport expiré depuis le 01/03/2025 (moins de 5 ans) : le renouvellement est possible. Je crée le brouillon de pré-demande, sans l'envoyer.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 5707,
+   "tokens_out": 224,
+   "cost_usd": 0.000445142,
+   "latency_s": 1.713
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P4",
+    "motive": "renewal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "J'ai créé le brouillon de pré-demande de renouvellement du passeport pour Jeanne (P4) : **D3**, statut *draft* — rien n'a été envoyé à l'ANTS.\n\nPour information : le passeport de Jeanne est expiré depuis le 01/03/2025 (moins de 5 ans), le renouvellement est donc possible ; il faudra un timbre fiscal de 86 € (passeport majeur) et un rendez-vous en mairie. Dites-moi si vous voulez que je m'en occupe.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 5890,
+   "tokens_out": 181,
+   "cost_usd": 0.00088335,
+   "latency_s": 1.605
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vais d'abord consulter le profil du foyer pour identifier Jeanne.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.017,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     },
+     {
+      "id": "P4",
+      "first_name": "Jeanne",
+      "last_name": "Martin",
+      "relation": "grand-mère",
+      "birth_date": "1952-06-03",
+      "age": 74
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     },
+     {
+      "id": "T4",
+      "kind": "passport",
+      "person": "P4",
+      "expires": "2025-03-01",
+      "status": "expired"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport conditions délai validité"
+   },
+   "thought": "Jeanne = P4 (74 ans, passeport expiré). Je consulte les fiches Service-Public sur le renouvellement de passeport.\n\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.636,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Textes de référence\n- Décret n°2005-1726 du 30 décembre 2005 relatif au passeport : article 4 - Durée de validité - Décret n°2005-1726 du 30 décembre 2005 relatif au passeport : article 5 - Pièces à fournir pour une première demande - Décret n°2005-1726 du 30 décembre 2005 relatif au passeport : article 6-1 - Empreintes et photo - Décret n°2005-1726 du 30 décembre 2005 relatif au passeport : article 10 - Retrait du passeport - Arrêté du 5 février 2009 relatif aux photos d'identité produites pour une demande de passeport - Arrêté du 27 avril 2017 relatif aux conditions d'envoi d'un passeport à l'étranger - Arrêté du 20 avril 2016 autorisant la création d'un système de téléservices destinés à la prédemande et à la demande de titres officiels"
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## France > Retirer le passeport quand il est disponible\nLe passeport doit être retiré dans les 3 mois. Passé ce délai, le passeport est détruit. Vous devez le retirer personnellement au lieu de dépôt du dossier et le signer sur place. Le passeport est valide 10 ans. L'ancien passeport doit être restitué. S'il comportait un visa, il peut être conservé pendant la durée de validité de ce visa."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous ne répondez pas à ces conditions > Obtenir le passeport une fois qu'il est prêt > Autre cas\nVous devez le retirer personnellement soit au lieu du dépôt du dossier, soit auprès d'un consul honoraire habilité ou d’un chef de poste diplomatique ou consulaire et le signer sur place. Il doit être retiré dans les 3 mois qui suivent sa mise à disposition. Passé ce délai, le passeport est détruit. L'ancien passeport doit être restitué. S'il comportait un visa, il peut être conservé pendant la durée de validité de ce visa. Le passeport est valide 10 ans."
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous répondez aux conditions pour faire la procédure à distance > Activer votre nouveau passeport\nConfirmer sur internet la réception du passeport Dans un délai maximum de 40 jours après la réception de votre passeport, vous devez vous connecter au site de l'ANTS : Téléservice : Déclarer la réception de son passeport Vous devez saisir le numéro de sécurité qui est indiqué sur le récépissé que vous avez téléchargé votre espace personnel Service Public. Envoyer l'ancien passeport par courrier postal dans les 40 jours (sauf si vous le conservez, car il contient un visa encore valide) Vous devez acheter une enveloppe pré-payée (identique à celles utilisées lors de l'envoi de vos documents au consulat). Dans un délai maximum de 40 jours après la réception de votre nouveau passeport, vous devez placer votre ancien passeport dans l'enveloppe et l'envoyer à votre consulat. Attention Si le consulat n'a pas reçu votre ancien passeport dans ce délai, votre nouveau passeport sera désactivé. Vous ne pourrez plus l'utiliser."
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21091"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F21091",
+    "title": "Renouvellement du passeport d'un majeur",
+    "text": "La démarche de renouvellement de passeport (date de validité bientôt dépassée, changement de nom, etc.) varie selon le lieu où vous faites la demande.\nVous êtes majeur et vous voulez renouveler votre passeport (date de validité bientôt dépassée ou déjà dépassée, changement de nom d'usage,...) ? Nous vous présentons les étapes de la démarche. Elles varient selon le pays où vous faites la demande : en France, en Australie, au Canada, en Espagne, au Portugal ou dans un autre pays.\n\n## France\n\n## France > Savoir quand vous pouvez faire la demande de renouvellement\nVous pouvez demander le renouvellement l'année qui précède la date d'expiration de votre passeport actuel.\nÀ savoir\nEn cas de changement sur votre état civil (par exemple, changement de prénom), vous devez faire une demande de modification de votre passeport. La demande doit être faite dans un délai de 3 mois à partir de la mise à jour de votre acte de naissance.\n\n## France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile. Vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nOù s'adresser : Mairie délivrant des passeports\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche vous permettant de trouver un rendez-vous dans une mairie équipée :\nOutil de recherche : Rechercher un rendez-vous pour une demande de passeport\nVous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier.\nselNG : Pré-demande pour un renouvellement de passeport\n\n## France > Acheter le timbre fiscal\nVous devez acheter un timbre fiscal d’un montant de 86 € (43 € en Guyane).\nL’achat du timbre diffère selon qu’une pré-demande est faite ou non :\n\n## France > Acheter le timbre fiscal > Vous faites une pré-demande\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande.\n\n## France > Acheter le timbre fiscal > Vous ne faites pas de pré-demande\nVous avez 2 possibilités : soit acheter le timbre sur internet, soit l'acheter dans un bureau de tabac.\n\n## France > Acheter le timbre fiscal > Vous ne faites pas de pré-demande > Vous voulez acheter le timbre sur internet\nVous devez utiliser ce téléservice :\nselNG : Achat en ligne du timbre fiscal - Passeport\n\n## France > Acheter le timbre fiscal > Vous ne faites pas de pré-demande > Vous voulez acheter le timbre dans un bureau de tabac\nVous pouvez acheter un timbre fiscal dans un bureau de tabac s'il est équipé de l'application Point de vente agréé.\n\n## France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\nLes documents à fournir dépendent de la date d’expiration de votre passeport actuel :\n\n## France > Préparer les documents à présenter > Votre passeport est en cours de validité\nVous devez présenter les documents suivants :\n- Votre passeport\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif du domicile de moins de 1 an\n- Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande)\n- Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet).\nVotre passeport actuel vous est remis à la fin du rendez-vous.\n\n## France > Préparer les documents à présenter > Votre passeport est périmé\nLa situation varie selon la date d’expiration de votre passeport :\n\n## France > Préparer les documents à présenter > Votre passeport est périmé > Date d’expiration : moins de 5 ans\nVous devez présenter les documents suivants :\n- Votre passeport\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif du domicile de moins de 1 an\n- Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande)\n"
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "passport",
+    "person_id": "P4",
+    "motive": "renewal"
+   },
+   "thought": "Jeanne (P4) a un passeport expiré depuis le 01/03/2025 (moins de 5 ans) : le renouvellement est possible. Je crée le brouillon de pré-demande, sans l'envoyer.\n\n",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "passport",
+    "person": "P4",
+    "motive": "renewal"
+   }
+  }
+ ]
+}
