@@ -27,7 +27,9 @@ person's profile (get_profile) and consult the Service-Public fact sheets (searc
 whenever eligibility, timing, validity, location, or fee rules apply (e.g., identity card renewal conditions, \
 lost/damaged card rules, town-hall eligibility). If the fact sheets show the procedure is not allowed or not \
 eligible, refuse briefly and change nothing. Before paying for a stamp, also check the balance (get_wallet): for a \
-passport use stamp_price; for an identity card follow the fact sheets. Buy at most one stamp per person and \
+passport use stamp_price; for an identity card, read the fee in the full fact sheet of that exact procedure \
+(get_fiche) before paying: a search passage can be wrong, so if it disagrees with the full fact sheet, the full fact \
+sheet wins. Once a fact sheet answers the question, stop searching and act. Buy at most one stamp per person and \
 procedure, and none if the fact sheets say it is free.
 7. Payments, cancellations, submissions and messages are checked by the user through the app: just call the tool \
 (only when requested). If the user rejects an action, do not retry it and do not work around it: tell the user.
