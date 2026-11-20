@@ -1,0 +1,386 @@
+{
+ "id": "h029",
+ "kind": "ambiguous",
+ "task": "Prends le premier créneau libre pour Léo.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "max_steps: budget of 4 model calls spent; forbidden_call: book_appointment",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "list_applications",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.016
+  },
+  {
+   "step": 2,
+   "tool": "list_applications",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.018
+  },
+  {
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C10",
+    "person_id": "P2",
+    "reason": "id_card"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 4,
+ "max_steps": 4,
+ "tokens_in": 13902,
+ "tokens_out": 1219,
+ "latency_s": 7.928,
+ "model_latency_s": 7.84,
+ "tool_latency_s": 0.049,
+ "cost_usd": 0.001008,
+ "stop_reason": "max_steps",
+ "answer": null,
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h029.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan : identifier Léo dans le foyer (get_profile), puis chercher le premier créneau libre.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3005,
+   "tokens_out": 182,
+   "cost_usd": 0.000139035,
+   "latency_s": 1.288
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_applications"
+   ],
+   "tokens_in": 3386,
+   "tokens_out": 471,
+   "cost_usd": 0.000351678,
+   "latency_s": 3.098
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "list_applications",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3513,
+   "tokens_out": 340,
+   "cost_usd": 0.000286159,
+   "latency_s": 2.158
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 3998,
+   "tokens_out": 226,
+   "cost_usd": 0.000231234,
+   "latency_s": 1.296
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C10",
+    "person_id": "P2",
+    "reason": "id_card"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "stop",
+   "reason": "max_steps",
+   "step": 4
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Plan : identifier Léo dans le foyer (get_profile), puis chercher le premier créneau libre.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.016,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "list_applications",
+   "args": {},
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "D1",
+     "kind": "passport",
+     "person": "P1",
+     "motive": "renewal",
+     "status": "draft",
+     "person_name": "Camille"
+    },
+    {
+     "id": "D2",
+     "kind": "id_card",
+     "person": "P2",
+     "motive": "renewal",
+     "status": "submitted",
+     "person_name": "Léo"
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {},
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.018,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C10",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-18T10:00",
+     "weekday": "mercredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C11",
+     "town_hall": "Montreuil",
+     "start": "2026-11-19T14:00",
+     "weekday": "jeudi",
+     "part_of_day": "afternoon"
+    },
+    {
+     "id": "C01",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T09:00",
+     "weekday": "lundi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C02",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T15:30",
+     "weekday": "lundi",
+     "part_of_day": "afternoon"
+    },
+    {
+     "id": "C04",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-24T09:30",
+     "weekday": "mardi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C03",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-25T10:00",
+     "weekday": "mercredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C05",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-26T14:00",
+     "weekday": "jeudi",
+     "part_of_day": "afternoon"
+    },
+    {
+     "id": "C06",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T09:00",
+     "weekday": "vendredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C07",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T16:00",
+     "weekday": "vendredi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  }
+ ]
+}

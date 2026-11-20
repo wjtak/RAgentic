@@ -1,0 +1,308 @@
+{
+ "id": "h036",
+ "kind": "impossible",
+ "task": "Ma carte d'identité a quelques années : crée la pré-demande pour la renouveler.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "get_fiche"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.019
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 5.052
+  },
+  {
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21089"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  }
+ ],
+ "steps": 4,
+ "max_steps": 5,
+ "tokens_in": 16015,
+ "tokens_out": 1903,
+ "latency_s": 19.463,
+ "model_latency_s": 14.359,
+ "tool_latency_s": 5.078,
+ "cost_usd": 0.0013,
+ "stop_reason": "answered",
+ "answer": "Je n'ai rien créé, car la démarche n'est pas possible aujourd'hui.\n\nD'après votre profil, votre carte d'identité (P1, Camille Martin) est **valide jusqu'au 01/05/2031**. Or la fiche Service-Public « Renouvellement de la carte d'identité d'un majeur » (F21089) indique que le renouvellement ne peut être demandé que **l'année qui précède la date d'expiration** — soit à partir de mai 2030 dans votre cas. La demande serait donc refusée à ce stade.\n\nSeule exception : si votre carte est un **ancien modèle** (format papier/avant 2021), un renouvellement anticipé pour obtenir le nouveau format est possible, et la pré-demande est alors obligatoire. Si c'est votre situation, dites-le-moi et je crée la pré-demande.",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h036.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par vérifier votre profil pour identifier la personne concernée.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3033,
+   "tokens_out": 87,
+   "cost_usd": 7.45584e-05,
+   "latency_s": 1.573
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3406,
+   "tokens_out": 516,
+   "cost_usd": 0.0003252384,
+   "latency_s": 4.056
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 4171,
+   "tokens_out": 219,
+   "cost_usd": 0.0002142672,
+   "latency_s": 1.579
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21089"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Je n'ai rien créé, car la démarche n'est pas possible aujourd'hui.\n\nD'après votre profil, votre carte d'identité (P1, Camille Martin) est **valide jusqu'au 01/05/2031**. Or la fiche Service-Public « Renouvellement de la carte d'identité d'un majeur » (F21089) indique que le renouvellement ne peut être demandé que **l'année qui précède la date d'expiration** — soit à partir de mai 2030 dans votre cas. La demande serait donc refusée à ce stade.\n\nSeule exception : si votre carte est un **ancien modèle** (format papier/avant 2021), un renouvellement anticipé pour obtenir le nouveau format est possible, et la pré-demande est alors obligatoire. Si c'est votre situation, dites-le-moi et je crée la pré-demande.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 5405,
+   "tokens_out": 1081,
+   "cost_usd": 0.0006857904,
+   "latency_s": 7.151
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par vérifier votre profil pour identifier la personne concernée.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.019,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité conditions validité"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 5.052,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Vous êtes majeur et la date de validité de votre carte nationale d'identité est prochainement dépassée ou l'est déjà ? Vous avez une carte d'identité ancien modèle et vous souhaitez obtenir une carte au nouveau format ? La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## En France > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants : - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants : - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - Carte d'identité du mineur - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d’identité du représentant légal qui dépose la demande - En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21089"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F21089",
+    "title": "Renouvellement de la carte d'identité d'un majeur",
+    "text": "La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte.\nVous êtes majeur et la date de validité de votre carte nationale d'identité est prochainement dépassée ou l'est déjà ? Vous avez une carte d'identité ancien modèle et vous souhaitez obtenir une carte au nouveau format ? La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Nous vous présentons les étapes de la démarche.\n\n## En France\n\n## En France > Savoir quand vous pouvez faire la demande de renouvellement\nVous pouvez demander le renouvellement l'année qui précède la date d'expiration de votre carte d'identité actuelle.\nÀ savoir\nSi vous avez une carte d'identité ancien modèle, vous pouvez demander son renouvellement anticipé pour obtenir une carte au nouveau format.\n\n## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile : vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nOù s'adresser : Mairie délivrant des cartes d'identité\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée :\noutilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité\nAvant de vous déplacer, vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier.\nAttention : si vous avez une carte d'identité ancien modèle et que vous souhaitez obtenir une carte au nouveau format, la pré-demande est obligatoire.\nselNG : Pré-demande pour un renouvellement de carte d'identité\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\nLes documents à fournir dépendent de la date d'expiration de votre carte d'identité actuelle :\n\n## En France > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants :\n- Votre carte d'identité\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif du domicile de moins de 1 an\n- Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis moins de 5 ans\nVous devez présenter les documents suivants :\n- Votre carte d'identité\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif du domicile de moins de 1 an\n- Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis plus de 5 ans\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis plus de 5 ans > Vous avez un passeport en cours de validité\nVous devez présenter les documents suivants :\n- Votre passeport\n- Votre carte d'identité\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif du domicile de moins de 1 an\n- Si vous avez fait une pré-demande : n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis plus de 5 ans > Vous avez un passeport dont la date d'expiration est dépassée\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis plus de 5 ans > Vous avez un passeport dont la date d'expiration est dépassée > Votre passeport est périmé depuis moins de 5 ans\nVous devez pr"
+   }
+  }
+ ]
+}

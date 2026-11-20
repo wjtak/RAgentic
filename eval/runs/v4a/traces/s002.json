@@ -1,0 +1,325 @@
+{
+ "id": "s002",
+ "kind": "normal",
+ "task": "Prends-moi un rendez-vous à la mairie du 12e mardi 24 novembre le matin pour renouveler mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C04",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.011
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.02
+  },
+  {
+   "step": 3,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C04",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  }
+ ],
+ "steps": 4,
+ "max_steps": 6,
+ "tokens_in": 13724,
+ "tokens_out": 425,
+ "latency_s": 4.59,
+ "model_latency_s": 4.525,
+ "tool_latency_s": 0.041,
+ "cost_usd": 0.003075,
+ "stop_reason": "answered",
+ "answer": "Rendez-vous confirmé : **R1** — mardi 24 novembre 2026 à 9h30, mairie du **Paris 12e**, pour un **renouvellement de passeport** au nom de **Camille Martin (P1)**.\n\nÀ noter : votre passeport actuel expire le 1er décembre 2026. Pensez à préparer le timbre fiscal et les pièces à fournir avant le rendez-vous — dites-moi si vous voulez que je crée la pré-demande ANTS ou que j'achète le timbre.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C04",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-24T09:30",
+    "weekday": "mardi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/s002.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier le compte et la personne concernée.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3023,
+   "tokens_out": 83,
+   "cost_usd": 0.00050325,
+   "latency_s": 1.731
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3398,
+   "tokens_out": 126,
+   "cost_usd": 0.00113662,
+   "latency_s": 0.642
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 3568,
+   "tokens_out": 86,
+   "cost_usd": 0.000196096,
+   "latency_s": 1.269
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C04",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Rendez-vous confirmé : **R1** — mardi 24 novembre 2026 à 9h30, mairie du **Paris 12e**, pour un **renouvellement de passeport** au nom de **Camille Martin (P1)**.\n\nÀ noter : votre passeport actuel expire le 1er décembre 2026. Pensez à préparer le timbre fiscal et les pièces à fournir avant le rendez-vous — dites-moi si vous voulez que je crée la pré-demande ANTS ou que j'achète le timbre.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3735,
+   "tokens_out": 130,
+   "cost_usd": 0.00123915,
+   "latency_s": 0.883
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier le compte et la personne concernée.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.011,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-24",
+    "date_to": "2026-11-24",
+    "part_of_day": "morning"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.02,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C04",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-24T09:30",
+     "weekday": "mardi",
+     "part_of_day": "morning"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C04",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C04",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-24T09:30",
+    "weekday": "mardi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ]
+}

@@ -59,7 +59,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.013
+   "latency_s": 0.012
   },
   {
    "step": 2,
@@ -74,7 +74,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.018
+   "latency_s": 0.017
   },
   {
    "step": 3,
@@ -85,7 +85,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.014
   },
   {
    "step": 4,
@@ -99,17 +99,19 @@
    "error": null,
    "attempts": 2,
    "approved": true,
-   "latency_s": 0.606
+   "latency_s": 0.56
   }
  ],
  "steps": 5,
  "max_steps": 8,
- "tokens_in": 16541,
- "tokens_out": 464,
- "latency_s": 5.609,
- "cost_usd": 0.000815,
+ "tokens_in": 17270,
+ "tokens_out": 457,
+ "latency_s": 4.735,
+ "model_latency_s": 4.093,
+ "tool_latency_s": 0.603,
+ "cost_usd": 0.001195,
  "stop_reason": "answered",
- "answer": "Acheté : timbre fiscal **passport_adult** pour Camille Martin (P1), renouvellement de passeport, **86,00 €** — timbre TF1. Nouveau solde du compte : **34,00 €**. Le timbre n'est pas remboursable.",
+ "answer": "Acheté : timbre fiscal **passport_adult** pour Camille Martin (P1), 86 €, référence **TF1**. Nouveau solde : 34 €. Le timbre n'est pas remboursable.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -134,15 +136,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je commence par identifier la personne et son âge.\n\n",
+   "content": "Je vais d'abord vérifier votre profil pour connaître votre âge.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 2881,
-   "tokens_out": 105,
-   "cost_usd": 9.2223e-05,
-   "latency_s": 1.439
+   "tokens_in": 2970,
+   "tokens_out": 89,
+   "cost_usd": 0.0006563,
+   "latency_s": 1.297
   },
   {
    "kind": "call",
@@ -154,16 +156,15 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "",
+   "content": "Vous avez 36 ans. Je vérifie le timbre requis pour un renouvellement de passeport.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "stamp_price",
-    "get_wallet"
+    "stamp_price"
    ],
-   "tokens_in": 3251,
-   "tokens_out": 111,
-   "cost_usd": 0.000133933,
-   "latency_s": 0.754
+   "tokens_in": 3386,
+   "tokens_out": 155,
+   "cost_usd": 0.000162078,
+   "latency_s": 0.876
   },
   {
    "kind": "call",
@@ -174,22 +175,20 @@
     "age": 36,
     "motive": "renewal"
    },
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
    "step": 3,
-   "content": "",
+   "content": "Je vérifie maintenant le solde du compte.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_wallet"
    ],
-   "tokens_in": 3390,
-   "tokens_out": 24,
-   "cost_usd": 0.00036357,
-   "latency_s": 0.626
+   "tokens_in": 3547,
+   "tokens_out": 38,
+   "cost_usd": 7.1981e-05,
+   "latency_s": 0.559
   },
   {
    "kind": "call",
@@ -201,15 +200,15 @@
   {
    "kind": "model",
    "step": 4,
-   "content": "",
+   "content": "Solde suffisant (120 €). J'achète le timbre fiscal.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "buy_tax_stamp"
    ],
-   "tokens_in": 3440,
-   "tokens_out": 108,
-   "cost_usd": 0.00010296,
-   "latency_s": 0.916
+   "tokens_in": 3606,
+   "tokens_out": 111,
+   "cost_usd": 0.000158338,
+   "latency_s": 0.766
   },
   {
    "kind": "call",
@@ -235,25 +234,25 @@
   {
    "kind": "model",
    "step": 5,
-   "content": "Acheté : timbre fiscal **passport_adult** pour Camille Martin (P1), renouvellement de passeport, **86,00 €** — timbre TF1. Nouveau solde du compte : **34,00 €**. Le timbre n'est pas remboursable.",
+   "content": "Acheté : timbre fiscal **passport_adult** pour Camille Martin (P1), 86 €, référence **TF1**. Nouveau solde : 34 €. Le timbre n'est pas remboursable.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3579,
-   "tokens_out": 116,
-   "cost_usd": 0.000122077,
-   "latency_s": 1.195
+   "tokens_in": 3761,
+   "tokens_out": 64,
+   "cost_usd": 0.000146103,
+   "latency_s": 0.595
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je commence par identifier la personne et son âge.\n\n",
+   "thought": "Je vais d'abord vérifier votre profil pour connaître votre âge.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.013,
+   "latency_s": 0.012,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -322,12 +321,12 @@
     "age": 36,
     "motive": "renewal"
    },
-   "thought": "",
+   "thought": "Vous avez 36 ans. Je vérifie le timbre requis pour un renouvellement de passeport.\n\n",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.018,
+   "latency_s": 0.017,
    "retried_errors": [],
    "result": {
     "stamp_type": "passport_adult",
@@ -339,12 +338,12 @@
   {
    "tool": "get_wallet",
    "args": {},
-   "thought": "",
+   "thought": "Je vérifie maintenant le solde du compte.\n\n",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "balance_eur": 120.0,
@@ -357,12 +356,12 @@
     "stamp_type": "passport_adult",
     "person_id": "P1"
    },
-   "thought": "",
+   "thought": "Solde suffisant (120 €). J'achète le timbre fiscal.\n\n",
    "step": 4,
    "ok": true,
    "executed": true,
    "attempts": 2,
-   "latency_s": 0.606,
+   "latency_s": 0.56,
    "retried_errors": [
     "timeout"
    ],

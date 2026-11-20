@@ -62,7 +62,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.014
+   "latency_s": 0.017
   },
   {
    "step": 2,
@@ -77,14 +77,14 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.013
+   "latency_s": 0.014
   },
   {
    "step": 3,
    "tool": "stamp_price",
    "args": {
-    "age": 11,
     "document": "passport",
+    "age": 11,
     "motive": "first"
    },
    "executed": true,
@@ -92,7 +92,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.013
   },
   {
    "step": 4,
@@ -103,7 +103,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.011
+   "latency_s": 0.008
   },
   {
    "step": 5,
@@ -117,7 +117,7 @@
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.011
+   "latency_s": 0.016
   },
   {
    "step": 6,
@@ -131,17 +131,19 @@
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.011
+   "latency_s": 0.015
   }
  ],
  "steps": 7,
  "max_steps": 10,
- "tokens_in": 24310,
- "tokens_out": 801,
- "latency_s": 12.193,
- "cost_usd": 0.000881,
+ "tokens_in": 25238,
+ "tokens_out": 742,
+ "latency_s": 7.859,
+ "model_latency_s": 7.721,
+ "tool_latency_s": 0.083,
+ "cost_usd": 0.000645,
  "stop_reason": "answered",
- "answer": "Fait : deux timbres achetés pour les premières demandes de passeport.\n\n- **Léo (P2, 16 ans)** : timbre `passport_minor_15_17` — 42 € (TF1)\n- **Inès (P3, 11 ans)** : timbre `passport_minor_0_14` — 17 € (TF2)\n\nTotal débité : 59 €. Nouveau solde : **61 €**. Les timbres ne sont pas remboursables.",
+ "answer": "C'est fait ✅\n\n- **Léo (P2, 16 ans)** : timbre `passport_minor_15_17` — **42 €** (id TF1)\n- **Inès (P3, 11 ans)** : timbre `passport_minor_0_14` — **17 €** (id TF2)\n\nTotal : **59 €** débités, nouveau solde : **61 €**. Les timbres ne sont pas remboursables. Il reste à créer puis envoyer les pré-demandes ANTS pour chaque enfant si vous le souhaitez.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -182,10 +184,10 @@
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 2886,
-   "tokens_out": 81,
-   "cost_usd": 7.8338e-05,
-   "latency_s": 2.345
+   "tokens_in": 3016,
+   "tokens_out": 74,
+   "cost_usd": 6.62784e-05,
+   "latency_s": 1.394
   },
   {
    "kind": "call",
@@ -200,14 +202,12 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "stamp_price",
-    "stamp_price",
-    "get_wallet"
+    "stamp_price"
    ],
-   "tokens_in": 3259,
-   "tokens_out": 191,
-   "cost_usd": 0.000182757,
-   "latency_s": 2.337
+   "tokens_in": 3389,
+   "tokens_out": 172,
+   "cost_usd": 0.0001580784,
+   "latency_s": 1.153
   },
   {
    "kind": "call",
@@ -218,10 +218,7 @@
     "age": 16,
     "motive": "first"
    },
-   "dropped": [
-    "stamp_price",
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -229,26 +226,23 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "stamp_price",
-    "get_wallet"
+    "stamp_price"
    ],
-   "tokens_in": 3397,
-   "tokens_out": 127,
-   "cost_usd": 0.000122091,
-   "latency_s": 1.627
+   "tokens_in": 3527,
+   "tokens_out": 86,
+   "cost_usd": 7.31472e-05,
+   "latency_s": 0.606
   },
   {
    "kind": "call",
    "step": 3,
    "tool": "stamp_price",
    "args": {
-    "age": 11,
     "document": "passport",
+    "age": 11,
     "motive": "first"
    },
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -258,10 +252,10 @@
    "tool_calls": [
     "get_wallet"
    ],
-   "tokens_in": 3534,
-   "tokens_out": 40,
-   "cost_usd": 7.1842e-05,
-   "latency_s": 0.901
+   "tokens_in": 3664,
+   "tokens_out": 42,
+   "cost_usd": 6.84672e-05,
+   "latency_s": 0.828
   },
   {
    "kind": "call",
@@ -273,16 +267,15 @@
   {
    "kind": "model",
    "step": 5,
-   "content": "J'achète les deux timbres (42 € pour Léo, 17 € pour Inès ; solde 120 €).\n\n",
+   "content": "Solde suffisant (120 € pour 59 € nécessaires). J'achète le timbre de Léo.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "buy_tax_stamp",
     "buy_tax_stamp"
    ],
-   "tokens_in": 3584,
-   "tokens_out": 178,
-   "cost_usd": 0.000147632,
-   "latency_s": 2.35
+   "tokens_in": 3714,
+   "tokens_out": 144,
+   "cost_usd": 9.33216e-05,
+   "latency_s": 1.062
   },
   {
    "kind": "call",
@@ -292,9 +285,7 @@
     "stamp_type": "passport_minor_15_17",
     "person_id": "P2"
    },
-   "dropped": [
-    "buy_tax_stamp"
-   ]
+   "dropped": []
   },
   {
    "kind": "approval",
@@ -310,15 +301,15 @@
   {
    "kind": "model",
    "step": 6,
-   "content": "",
+   "content": "Timbre de Léo acheté (TF1, 42 €). J'achète maintenant celui d'Inès.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "buy_tax_stamp"
    ],
-   "tokens_in": 3754,
-   "tokens_out": 69,
-   "cost_usd": 0.000160542,
-   "latency_s": 0.788
+   "tokens_in": 3880,
+   "tokens_out": 95,
+   "cost_usd": 8.97216e-05,
+   "latency_s": 0.953
   },
   {
    "kind": "call",
@@ -344,13 +335,13 @@
   {
    "kind": "model",
    "step": 7,
-   "content": "Fait : deux timbres achetés pour les premières demandes de passeport.\n\n- **Léo (P2, 16 ans)** : timbre `passport_minor_15_17` — 42 € (TF1)\n- **Inès (P3, 11 ans)** : timbre `passport_minor_0_14` — 17 € (TF2)\n\nTotal débité : 59 €. Nouveau solde : **61 €**. Les timbres ne sont pas remboursables.",
+   "content": "C'est fait ✅\n\n- **Léo (P2, 16 ans)** : timbre `passport_minor_15_17` — **42 €** (id TF1)\n- **Inès (P3, 11 ans)** : timbre `passport_minor_0_14` — **17 €** (id TF2)\n\nTotal : **59 €** débités, nouveau solde : **61 €**. Les timbres ne sont pas remboursables. Il reste à créer puis envoyer les pré-demandes ANTS pour chaque enfant si vous le souhaitez.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3896,
-   "tokens_out": 115,
-   "cost_usd": 0.000117648,
-   "latency_s": 1.723
+   "tokens_in": 4048,
+   "tokens_out": 129,
+   "cost_usd": 9.6096e-05,
+   "latency_s": 1.725
   }
  ],
  "observations": [
@@ -362,7 +353,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.014,
+   "latency_s": 0.017,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -436,7 +427,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.013,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "stamp_type": "passport_minor_15_17",
@@ -448,8 +439,8 @@
   {
    "tool": "stamp_price",
    "args": {
-    "age": 11,
     "document": "passport",
+    "age": 11,
     "motive": "first"
    },
    "thought": "",
@@ -457,7 +448,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.013,
    "retried_errors": [],
    "result": {
     "stamp_type": "passport_minor_0_14",
@@ -474,7 +465,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.011,
+   "latency_s": 0.008,
    "retried_errors": [],
    "result": {
     "balance_eur": 120.0,
@@ -487,12 +478,12 @@
     "stamp_type": "passport_minor_15_17",
     "person_id": "P2"
    },
-   "thought": "J'achète les deux timbres (42 € pour Léo, 17 € pour Inès ; solde 120 €).\n\n",
+   "thought": "Solde suffisant (120 € pour 59 € nécessaires). J'achète le timbre de Léo.\n\n",
    "step": 5,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.011,
+   "latency_s": 0.016,
    "retried_errors": [],
    "result": {
     "stamp_id": "TF1",
@@ -509,12 +500,12 @@
     "person_id": "P3",
     "stamp_type": "passport_minor_0_14"
    },
-   "thought": "",
+   "thought": "Timbre de Léo acheté (TF1, 42 €). J'achète maintenant celui d'Inès.\n\n",
    "step": 6,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.011,
+   "latency_s": 0.015,
    "retried_errors": [],
    "result": {
     "stamp_id": "TF2",

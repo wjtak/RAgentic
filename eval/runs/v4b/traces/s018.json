@@ -1,0 +1,312 @@
+{
+ "id": "s018",
+ "kind": "ambiguous",
+ "task": "Prends un rendez-vous pour un passeport la semaine prochaine.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "ask_user"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.006
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 3,
+   "tool": "ask_user",
+   "args": {
+    "question": "Plusieurs créneaux sont libres la semaine prochaine pour un passeport (Paris 11e, Paris 12e, Montreuil). Lequel choisir ? Par ex. lundi 23/11 9h00 (Paris 11e), mardi 24/11 9h30 (Paris 12e), mercredi 25/11 10h00 (Paris 11e), jeudi 26/11 11h00 (Paris 11e) ou 14h00 (Paris 12e), vendredi 27/11 9h00, 10h30 ou 16h00 (Montreuil)."
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 3,
+ "max_steps": 4,
+ "tokens_in": 10587,
+ "tokens_out": 1264,
+ "latency_s": 6.213,
+ "model_latency_s": 6.182,
+ "tool_latency_s": 0.015,
+ "cost_usd": 0.00094,
+ "stop_reason": "asked_user",
+ "answer": null,
+ "question": "Plusieurs créneaux sont libres la semaine prochaine pour un passeport (Paris 11e, Paris 12e, Montreuil). Lequel choisir ? Par ex. lundi 23/11 9h00 (Paris 11e), mardi 24/11 9h30 (Paris 12e), mercredi 25/11 10h00 (Paris 11e), jeudi 26/11 11h00 (Paris 11e) ou 14h00 (Paris 12e), vendredi 27/11 9h00, 10h30 ou 16h00 (Montreuil).",
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s018.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par consulter le profil du foyer pour identifier la personne concernée.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3089,
+   "tokens_out": 523,
+   "cost_usd": 0.000352704,
+   "latency_s": 2.248
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Le titulaire (P1, Camille) est la personne par défaut. Je cherche les créneaux libres pour la semaine prochaine (23–29 novembre 2026).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3465,
+   "tokens_out": 360,
+   "cost_usd": 0.000279459,
+   "latency_s": 2.108
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Plusieurs créneaux sont libres la semaine prochaine. Lequel souhaitez-vous ?\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "ask_user"
+   ],
+   "tokens_in": 4033,
+   "tokens_out": 381,
+   "cost_usd": 0.000307662,
+   "latency_s": 1.826
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "ask_user",
+   "args": {
+    "question": "Plusieurs créneaux sont libres la semaine prochaine pour un passeport (Paris 11e, Paris 12e, Montreuil). Lequel choisir ? Par ex. lundi 23/11 9h00 (Paris 11e), mardi 24/11 9h30 (Paris 12e), mercredi 25/11 10h00 (Paris 11e), jeudi 26/11 11h00 (Paris 11e) ou 14h00 (Paris 12e), vendredi 27/11 9h00, 10h30 ou 16h00 (Montreuil)."
+   },
+   "dropped": []
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par consulter le profil du foyer pour identifier la personne concernée.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.006,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29"
+   },
+   "thought": "Le titulaire (P1, Camille) est la personne par défaut. Je cherche les créneaux libres pour la semaine prochaine (23–29 novembre 2026).\n\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C01",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T09:00",
+     "weekday": "lundi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C02",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T15:30",
+     "weekday": "lundi",
+     "part_of_day": "afternoon"
+    },
+    {
+     "id": "C04",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-24T09:30",
+     "weekday": "mardi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C03",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-25T10:00",
+     "weekday": "mercredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C08",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C05",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-26T14:00",
+     "weekday": "jeudi",
+     "part_of_day": "afternoon"
+    },
+    {
+     "id": "C06",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T09:00",
+     "weekday": "vendredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C09",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C07",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T16:00",
+     "weekday": "vendredi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  }
+ ]
+}

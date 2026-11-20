@@ -61,13 +61,13 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.019
   },
   {
    "step": 2,
    "tool": "ask_user",
    "args": {
-    "question": "Quelle pré-demande dois-je envoyer : D1 (passeport, renouvellement, Camille) ou D3 (passeport, première demande, Inès) ?"
+    "question": "Quelle pré-demande dois-je envoyer : D1 (passeport, Camille) ou D3 (passeport, Inès) ?"
    },
    "executed": false,
    "ok": false,
@@ -79,13 +79,15 @@
  ],
  "steps": 2,
  "max_steps": 4,
- "tokens_in": 5924,
- "tokens_out": 224,
- "latency_s": 3.448,
- "cost_usd": 0.000156,
+ "tokens_in": 6264,
+ "tokens_out": 237,
+ "latency_s": 1.865,
+ "model_latency_s": 1.821,
+ "tool_latency_s": 0.019,
+ "cost_usd": 0.000671,
  "stop_reason": "asked_user",
  "answer": null,
- "question": "Quelle pré-demande dois-je envoyer : D1 (passeport, renouvellement, Camille) ou D3 (passeport, première demande, Inès) ?",
+ "question": "Quelle pré-demande dois-je envoyer : D1 (passeport, Camille) ou D3 (passeport, Inès) ?",
  "error": null,
  "backend_changes": [],
  "trace_file": "traces/s020.json",
@@ -97,15 +99,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je regarde d'abord les pré-demandes du compte.",
+   "content": "Je vérifie d'abord les pré-demandes du compte.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "list_applications"
    ],
-   "tokens_in": 2871,
-   "tokens_out": 83,
-   "cost_usd": 5.31984e-05,
-   "latency_s": 1.902
+   "tokens_in": 3001,
+   "tokens_out": 124,
+   "cost_usd": 0.00052455,
+   "latency_s": 1.235
   },
   {
    "kind": "call",
@@ -122,17 +124,17 @@
    "tool_calls": [
     "ask_user"
    ],
-   "tokens_in": 3053,
-   "tokens_out": 141,
-   "cost_usd": 0.0001028784,
-   "latency_s": 1.517
+   "tokens_in": 3263,
+   "tokens_out": 113,
+   "cost_usd": 0.000146604,
+   "latency_s": 0.586
   },
   {
    "kind": "call",
    "step": 2,
    "tool": "ask_user",
    "args": {
-    "question": "Quelle pré-demande dois-je envoyer : D1 (passeport, renouvellement, Camille) ou D3 (passeport, première demande, Inès) ?"
+    "question": "Quelle pré-demande dois-je envoyer : D1 (passeport, Camille) ou D3 (passeport, Inès) ?"
    },
    "dropped": []
   }
@@ -141,12 +143,12 @@
   {
    "tool": "list_applications",
    "args": {},
-   "thought": "Je regarde d'abord les pré-demandes du compte.",
+   "thought": "Je vérifie d'abord les pré-demandes du compte.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.019,
    "retried_errors": [],
    "result": [
     {

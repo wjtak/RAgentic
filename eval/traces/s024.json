@@ -55,7 +55,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.014
   },
   {
    "step": 2,
@@ -66,17 +66,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.02
   }
  ],
  "steps": 3,
  "max_steps": 4,
- "tokens_in": 9568,
- "tokens_out": 322,
- "latency_s": 4.535,
- "cost_usd": 0.000209,
+ "tokens_in": 9952,
+ "tokens_out": 368,
+ "latency_s": 4.573,
+ "model_latency_s": 4.513,
+ "tool_latency_s": 0.034,
+ "cost_usd": 0.000521,
  "stop_reason": "answered",
- "answer": "Je n'ai rien annulé : Inès (P3) n'a aucun rendez-vous enregistré sur l'espace usager.\n\nLes deux rendez-vous confirmés du foyer sont :\n- **R1** — Camille, passeport, jeudi 26/11/2026 à 11h00, mairie du Paris 11e\n- **R2** — Léo, carte d'identité, vendredi 27/11/2026 à 10h30, mairie de Montreuil\n\nSi vous souhaitiez annuler l'un de ces deux rendez-vous (par exemple celui de Léo), dites-le-moi : l'annulation est définitive et je vous demanderai confirmation.",
+ "answer": "Inès (P3) n'a aucun rendez-vous enregistré : les seuls rendez-vous confirmés sont ceux de Camille (R1, passeport, Paris 11e, le 26/11 à 11h00) et de Léo (R2, carte d'identité, Montreuil, le 27/11 à 10h30). Je n'ai donc rien annulé. Voulez-vous que j'annule l'un de ces deux rendez-vous à la place ?",
  "question": null,
  "error": null,
  "backend_changes": [],
@@ -89,25 +91,22 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je regarde vos rendez-vous et les personnes du foyer.",
+   "content": "Je commence par identifier Inès dansle compte.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "list_appointments"
+    "get_profile"
    ],
-   "tokens_in": 2873,
-   "tokens_out": 56,
-   "cost_usd": 3.03588e-05,
-   "latency_s": 1.149
+   "tokens_in": 3003,
+   "tokens_out": 204,
+   "cost_usd": 0.0001906776,
+   "latency_s": 2.472
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "list_appointments"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -117,10 +116,10 @@
    "tool_calls": [
     "list_appointments"
    ],
-   "tokens_in": 3245,
-   "tokens_out": 34,
-   "cost_usd": 5.59188e-05,
-   "latency_s": 0.959
+   "tokens_in": 3372,
+   "tokens_out": 36,
+   "cost_usd": 0.0001361376,
+   "latency_s": 0.874
   },
   {
    "kind": "call",
@@ -132,25 +131,25 @@
   {
    "kind": "model",
    "step": 3,
-   "content": "Je n'ai rien annulé : Inès (P3) n'a aucun rendez-vous enregistré sur l'espace usager.\n\nLes deux rendez-vous confirmés du foyer sont :\n- **R1** — Camille, passeport, jeudi 26/11/2026 à 11h00, mairie du Paris 11e\n- **R2** — Léo, carte d'identité, vendredi 27/11/2026 à 10h30, mairie de Montreuil\n\nSi vous souhaitiez annuler l'un de ces deux rendez-vous (par exemple celui de Léo), dites-le-moi : l'annulation est définitive et je vous demanderai confirmation.",
+   "content": "Inès (P3) n'a aucun rendez-vous enregistré : les seuls rendez-vous confirmés sont ceux de Camille (R1, passeport, Paris 11e, le 26/11 à 11h00) et de Léo (R2, carte d'identité, Montreuil, le 27/11 à 10h30). Je n'ai donc rien annulé. Voulez-vous que j'annule l'un de ces deux rendez-vous à la place ?",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3450,
-   "tokens_out": 232,
-   "cost_usd": 0.0001230696,
-   "latency_s": 2.38
+   "tokens_in": 3577,
+   "tokens_out": 128,
+   "cost_usd": 0.0001941192,
+   "latency_s": 1.167
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je regarde vos rendez-vous et les personnes du foyer.",
+   "thought": "Je commence par identifier Inès dansle compte.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -220,7 +219,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.02,
    "retried_errors": [],
    "result": [
     {

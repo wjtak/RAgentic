@@ -43,7 +43,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.008
+   "latency_s": 0.015
   },
   {
    "step": 2,
@@ -64,25 +64,26 @@
    "step": 3,
    "tool": "search_slots",
    "args": {
-    "date_from": "2026-11-16",
-    "date_to": "2026-12-31"
+    "town_hall": "Paris 11e"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.014
+   "latency_s": 0.017
   }
  ],
  "steps": 4,
  "max_steps": 5,
- "tokens_in": 13466,
- "tokens_out": 897,
- "latency_s": 11.016,
- "cost_usd": 0.00077,
+ "tokens_in": 13724,
+ "tokens_out": 1450,
+ "latency_s": 8.056,
+ "model_latency_s": 7.977,
+ "tool_latency_s": 0.046,
+ "cost_usd": 0.001128,
  "stop_reason": "answered",
- "answer": "Aucun créneau n'est disponible le samedi 21 novembre 2026 — et d'ailleurs il n'y a aucun créneau le samedi dans les mairies proposées (Paris 11e, Paris 12e, Montreuil). Je n'ai donc rien réservé.\n\nLes créneaux libres à la mairie du 11e sont :\n- C01 : lundi 23/11 à 09h00\n- C02 : lundi 23/11 à 15h30\n- C03 : mercredi 25/11 à 10h00\n- C08 : jeudi 26/11 à 11h00\n\nDites-moi si vous voulez que je réserve l'un de ces créneaux pour votre passeport (ou un créneau en soirée dans une autre mairie).",
+ "answer": "Aucun créneau le samedi 21 novembre 2026 n'est disponible à la mairie du 11e : les seuls créneaux libres pour un passeport à Paris 11e sont :\n\n- C01 — lundi 23/11 à 09h00\n- C02 — lundi 23/11 à 15h30\n- C03 — mercredi 25/11 à 10h00\n- C08 — jeudi 26/11 à 11h00\n\nJe n'ai donc rien réservé. Dites-moi si l'un de ces créneaux vous convient (ou si vous souhaitez que je regarde une autre mairie) et je prends le rendez-vous pour Camille Martin (P1).",
  "question": null,
  "error": null,
  "backend_changes": [],
@@ -95,25 +96,22 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "",
+   "content": "Je regarde d'abord le profil du compte pour identifier la personne, puis je chercherai un créneau le samedi 21 novembre 2026 à Paris 11e.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "search_slots"
+    "get_profile"
    ],
-   "tokens_in": 2889,
-   "tokens_out": 161,
-   "cost_usd": 0.000126647,
-   "latency_s": 1.786
+   "tokens_in": 3019,
+   "tokens_out": 551,
+   "cost_usd": 0.000361877,
+   "latency_s": 3.079
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "search_slots"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -123,10 +121,10 @@
    "tool_calls": [
     "search_slots"
    ],
-   "tokens_in": 3249,
-   "tokens_out": 130,
-   "cost_usd": 0.000145127,
-   "latency_s": 2.145
+   "tokens_in": 3415,
+   "tokens_out": 246,
+   "cost_usd": 0.000219665,
+   "latency_s": 1.151
   },
   {
    "kind": "call",
@@ -147,43 +145,42 @@
    "tool_calls": [
     "search_slots"
    ],
-   "tokens_in": 3350,
-   "tokens_out": 203,
-   "cost_usd": 0.00016285,
-   "latency_s": 2.539
+   "tokens_in": 3516,
+   "tokens_out": 226,
+   "cost_usd": 0.000181588,
+   "latency_s": 1.286
   },
   {
    "kind": "call",
    "step": 3,
    "tool": "search_slots",
    "args": {
-    "date_from": "2026-11-16",
-    "date_to": "2026-12-31"
+    "town_hall": "Paris 11e"
    },
    "dropped": []
   },
   {
    "kind": "model",
    "step": 4,
-   "content": "Aucun créneau n'est disponible le samedi 21 novembre 2026 — et d'ailleurs il n'y a aucun créneau le samedi dans les mairies proposées (Paris 11e, Paris 12e, Montreuil). Je n'ai donc rien réservé.\n\nLes créneaux libres à la mairie du 11e sont :\n- C01 : lundi 23/11 à 09h00\n- C02 : lundi 23/11 à 15h30\n- C03 : mercredi 25/11 à 10h00\n- C08 : jeudi 26/11 à 11h00\n\nDites-moi si vous voulez que je réserve l'un de ces créneaux pour votre passeport (ou un créneau en soirée dans une autre mairie).",
+   "content": "Aucun créneau le samedi 21 novembre 2026 n'est disponible à la mairie du 11e : les seuls créneaux libres pour un passeport à Paris 11e sont :\n\n- C01 — lundi 23/11 à 09h00\n- C02 — lundi 23/11 à 15h30\n- C03 — mercredi 25/11 à 10h00\n- C08 — jeudi 26/11 à 11h00\n\nJe n'ai donc rien réservé. Dites-moi si l'un de ces créneaux vous convient (ou si vous souhaitez que je regarde une autre mairie) et je prends le rendez-vous pour Camille Martin (P1).",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3978,
-   "tokens_out": 403,
-   "cost_usd": 0.000335374,
-   "latency_s": 4.488
+   "tokens_in": 3774,
+   "tokens_out": 427,
+   "cost_usd": 0.000365242,
+   "latency_s": 2.461
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "",
+   "thought": "Je regarde d'abord le profil du compte pour identifier la personne, puis je chercherai un créneau le samedi 21 novembre 2026 à Paris 11e.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.008,
+   "latency_s": 0.015,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -264,31 +261,16 @@
   {
    "tool": "search_slots",
    "args": {
-    "date_from": "2026-11-16",
-    "date_to": "2026-12-31"
+    "town_hall": "Paris 11e"
    },
    "thought": "",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.014,
+   "latency_s": 0.017,
    "retried_errors": [],
    "result": [
-    {
-     "id": "C10",
-     "town_hall": "Paris 12e",
-     "start": "2026-11-18T10:00",
-     "weekday": "mercredi",
-     "part_of_day": "morning"
-    },
-    {
-     "id": "C11",
-     "town_hall": "Montreuil",
-     "start": "2026-11-19T14:00",
-     "weekday": "jeudi",
-     "part_of_day": "afternoon"
-    },
     {
      "id": "C01",
      "town_hall": "Paris 11e",
@@ -304,13 +286,6 @@
      "part_of_day": "afternoon"
     },
     {
-     "id": "C04",
-     "town_hall": "Paris 12e",
-     "start": "2026-11-24T09:30",
-     "weekday": "mardi",
-     "part_of_day": "morning"
-    },
-    {
      "id": "C03",
      "town_hall": "Paris 11e",
      "start": "2026-11-25T10:00",
@@ -323,34 +298,6 @@
      "start": "2026-11-26T11:00",
      "weekday": "jeudi",
      "part_of_day": "morning"
-    },
-    {
-     "id": "C05",
-     "town_hall": "Paris 12e",
-     "start": "2026-11-26T14:00",
-     "weekday": "jeudi",
-     "part_of_day": "afternoon"
-    },
-    {
-     "id": "C06",
-     "town_hall": "Montreuil",
-     "start": "2026-11-27T09:00",
-     "weekday": "vendredi",
-     "part_of_day": "morning"
-    },
-    {
-     "id": "C09",
-     "town_hall": "Montreuil",
-     "start": "2026-11-27T10:30",
-     "weekday": "vendredi",
-     "part_of_day": "morning"
-    },
-    {
-     "id": "C07",
-     "town_hall": "Montreuil",
-     "start": "2026-11-27T16:00",
-     "weekday": "vendredi",
-     "part_of_day": "afternoon"
     }
    ]
   }

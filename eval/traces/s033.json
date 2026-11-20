@@ -66,20 +66,20 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.013
   },
   {
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité perte vol timbre fiscal prix gratuit"
+    "query": "carte d'identité perdue timbre fiscal prix renouvellement"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 49.272
+   "latency_s": 3.147
   },
   {
    "step": 3,
@@ -90,7 +90,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.014
   },
   {
    "step": 4,
@@ -104,7 +104,7 @@
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.013
+   "latency_s": 0.011
   },
   {
    "step": 5,
@@ -119,17 +119,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.011
+   "latency_s": 0.017
   }
  ],
  "steps": 6,
  "max_steps": 9,
- "tokens_in": 21639,
- "tokens_out": 2123,
- "latency_s": 65.652,
- "cost_usd": 0.001298,
+ "tokens_in": 22400,
+ "tokens_out": 1098,
+ "latency_s": 11.263,
+ "model_latency_s": 8.017,
+ "tool_latency_s": 3.202,
+ "cost_usd": 0.001459,
  "stop_reason": "answered",
- "answer": "C'est fait :\n\n- **Timbre fiscal** : un timbre « carte d'identité – perte/vol » de **25 €** a été acheté pour vous (Camille Martin, P1) — id **TF1**. Solde restant : **95 €**. (La fiche F33805 confirme que le renouvellement d'une carte d'identité perdue coûte 25 € en France.)\n- **Pré-demande ANTS** : créée en brouillon — id **D3**, carte d'identité, motif « perte », pour P1.\n\nElle n'a pas été envoyée à l'ANTS (vous ne me l'avez pas demandé) : dites-moi si vous voulez que je la soumette.",
+ "answer": "Fait pour vous, Camille :\n\n- **Timbre fiscal acheté** : 1 timbre « carte d'identité – perte/vol » (TF1), 25 €, débité du solde (restant : 95 €). Il n'est pas remboursable.\n- **Pré-demande créée en brouillon** : D3 – carte d'identité, motif « perte », pour P1 (Camille Martin). Elle n'est **pas envoyée** à l'ANTS : dites-moi si vous voulez que je la soumette.\n\nPour information : votre ancienne carte (T2) est encore notée valide jusqu'au 01/05/2031 dans le compte, mais une déclaration de perte rend la nouvelle demande nécessaire. Souhaitez-vous aussi que je cherche un rendez-vous en mairie (Paris 11e, 12e ou Montreuil) ?",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -164,25 +166,22 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je vérifie d'abord votre profil et les règles sur le timbre fiscal pour une carte d'identité perdue.\n\n",
+   "content": "Je commence par identifier la personne et vérifier les règles applicables à une carte d'identité perdue.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "search_fiches"
+    "get_profile"
    ],
-   "tokens_in": 2898,
-   "tokens_out": 995,
-   "cost_usd": 0.0004941984,
-   "latency_s": 6.251
+   "tokens_in": 3028,
+   "tokens_out": 293,
+   "cost_usd": 0.000300264,
+   "latency_s": 1.635
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "search_fiches"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -190,24 +189,21 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "search_fiches",
-    "get_wallet"
+    "search_fiches"
    ],
-   "tokens_in": 3284,
-   "tokens_out": 537,
-   "cost_usd": 0.0003206784,
-   "latency_s": 3.285
+   "tokens_in": 3411,
+   "tokens_out": 237,
+   "cost_usd": 0.000336039,
+   "latency_s": 1.584
   },
   {
    "kind": "call",
    "step": 2,
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité perte vol timbre fiscal prix gratuit"
+    "query": "carte d'identité perdue timbre fiscal prix renouvellement"
    },
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -217,10 +213,10 @@
    "tool_calls": [
     "get_wallet"
    ],
-   "tokens_in": 3728,
-   "tokens_out": 67,
-   "cost_usd": 0.0001182528,
-   "latency_s": 1.018
+   "tokens_in": 3854,
+   "tokens_out": 138,
+   "cost_usd": 0.000262518,
+   "latency_s": 1.335
   },
   {
    "kind": "call",
@@ -235,13 +231,12 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "buy_tax_stamp",
-    "create_application"
+    "buy_tax_stamp"
    ],
-   "tokens_in": 3778,
-   "tokens_out": 230,
-   "cost_usd": 0.0001422816,
-   "latency_s": 2.248
+   "tokens_in": 3904,
+   "tokens_out": 117,
+   "cost_usd": 0.00014274,
+   "latency_s": 1.087
   },
   {
    "kind": "call",
@@ -251,9 +246,7 @@
     "stamp_type": "id_card_loss_theft",
     "person_id": "P1"
    },
-   "dropped": [
-    "create_application"
-   ]
+   "dropped": []
   },
   {
    "kind": "approval",
@@ -274,10 +267,10 @@
    "tool_calls": [
     "create_application"
    ],
-   "tokens_in": 3914,
+   "tokens_in": 4040,
    "tokens_out": 95,
-   "cost_usd": 9.38016e-05,
-   "latency_s": 1.356
+   "cost_usd": 0.00015354,
+   "latency_s": 0.951
   },
   {
    "kind": "call",
@@ -293,25 +286,25 @@
   {
    "kind": "model",
    "step": 6,
-   "content": "C'est fait :\n\n- **Timbre fiscal** : un timbre « carte d'identité – perte/vol » de **25 €** a été acheté pour vous (Camille Martin, P1) — id **TF1**. Solde restant : **95 €**. (La fiche F33805 confirme que le renouvellement d'une carte d'identité perdue coûte 25 € en France.)\n- **Pré-demande ANTS** : créée en brouillon — id **D3**, carte d'identité, motif « perte », pour P1.\n\nElle n'a pas été envoyée à l'ANTS (vous ne me l'avez pas demandé) : dites-moi si vous voulez que je la soumette.",
+   "content": "Fait pour vous, Camille :\n\n- **Timbre fiscal acheté** : 1 timbre « carte d'identité – perte/vol » (TF1), 25 €, débité du solde (restant : 95 €). Il n'est pas remboursable.\n- **Pré-demande créée en brouillon** : D3 – carte d'identité, motif « perte », pour P1 (Camille Martin). Elle n'est **pas envoyée** à l'ANTS : dites-moi si vous voulez que je la soumette.\n\nPour information : votre ancienne carte (T2) est encore notée valide jusqu'au 01/05/2031 dans le compte, mais une déclaration de perte rend la nouvelle demande nécessaire. Souhaitez-vous aussi que je cherche un rendez-vous en mairie (Paris 11e, 12e ou Montreuil) ?",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 4037,
-   "tokens_out": 199,
-   "cost_usd": 0.000128376,
-   "latency_s": 2.134
+   "tokens_in": 4163,
+   "tokens_out": 218,
+   "cost_usd": 0.000263883,
+   "latency_s": 1.425
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je vérifie d'abord votre profil et les règles sur le timbre fiscal pour une carte d'identité perdue.\n\n",
+   "thought": "Je commence par identifier la personne et vérifier les règles applicables à une carte d'identité perdue.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.013,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -376,14 +369,14 @@
   {
    "tool": "search_fiches",
    "args": {
-    "query": "carte d'identité perte vol timbre fiscal prix gratuit"
+    "query": "carte d'identité perdue timbre fiscal prix renouvellement"
    },
    "thought": "",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 49.272,
+   "latency_s": 3.147,
    "retried_errors": [],
    "result": [
     {
@@ -402,9 +395,9 @@
      "excerpt": "## En Guyane\nLe renouvellement d’une carte d'identité qui a été perdue ou volée coûte 12,50 €. Vous pouvez acheter le timbre fiscal sur internet ou dans un bureau de tabac :"
     },
     {
-     "doc_id": "F1794",
-     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
-     "excerpt": "## En France > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 € (12,50 € en Guyane). L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal\nLe timbre fiscal coûte 25 €. L’achat du timbre diffère selon qu’une pré-demande est faite ou non :"
     }
    ]
   },
@@ -416,7 +409,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "balance_eur": 120.0,
@@ -434,7 +427,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.013,
+   "latency_s": 0.011,
    "retried_errors": [],
    "result": {
     "stamp_id": "TF1",
@@ -457,7 +450,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.011,
+   "latency_s": 0.017,
    "retried_errors": [],
    "result": {
     "application_id": "D3",

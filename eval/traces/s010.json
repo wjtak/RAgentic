@@ -62,7 +62,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.011
+   "latency_s": 0.009
   },
   {
    "step": 2,
@@ -78,7 +78,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.014
+   "latency_s": 0.008
   },
   {
    "step": 3,
@@ -93,17 +93,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.013
   }
  ],
  "steps": 4,
  "max_steps": 6,
- "tokens_in": 13655,
- "tokens_out": 760,
- "latency_s": 6.628,
- "cost_usd": 0.000856,
+ "tokens_in": 13821,
+ "tokens_out": 921,
+ "latency_s": 6.196,
+ "model_latency_s": 6.138,
+ "tool_latency_s": 0.03,
+ "cost_usd": 0.001204,
  "stop_reason": "answered",
- "answer": "C'est fait : rendez-vous confirmé pour la première carte d'identité d'Inès (P3).\n\n- **Rendez-vous R3** — Montreuil, **vendredi 27 novembre 2026 à 16h00** (après-midi), motif : carte d'identité.\n- C'était le seul créneau disponible à Montreuil la semaine prochaine sur ce demi-journée.\n\nJe n'ai rien fait d'autre (pas de pré-demande ANTS ni de timbre) : dites-moi si vous souhaitez que je m'en occupe.",
+ "answer": "C'est fait ✅\n\n- **Rendez-vous R3** confirmé : **vendredi 27 novembre 2026 à 16h00**, mairie de **Montreuil**, pour **Inès Martin (P3)** — motif : **carte d'identité** (première demande).\n- C'était le seul créneau disponible à Montreuil l'après-midi de la semaine prochaine.\n\nJe n'ai rien fait d'autre : si vous souhaitez que je prépare une pré-demande ANTS ou que je vérifie s'il faut un timbre fiscal, dites-le-moi.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -131,38 +133,35 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je commence par identifier Inès dans le compte, puis je cherche les créneaux à Montreuil.\n\n",
+   "content": "Je commence par identifier Inès dans le compte.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "search_slots"
+    "get_profile"
    ],
-   "tokens_in": 2978,
-   "tokens_out": 223,
-   "cost_usd": 0.000209522,
-   "latency_s": 2.625
+   "tokens_in": 3029,
+   "tokens_out": 111,
+   "cost_usd": 0.000663915,
+   "latency_s": 0.778
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "search_slots"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
    "step": 2,
-   "content": "Inès est P3 (11 ans). Je cherche les créneaux à Montreuil pour la semaine prochaine (23–29 novembre), l'après-midi.\n\n",
+   "content": "Inès = P3 (11 ans). Je cherche les créneaux à Montreuil la semaine prochaine (23–29 nov.), l'après-midi.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "search_slots"
    ],
-   "tokens_in": 3359,
-   "tokens_out": 206,
-   "cost_usd": 0.000248078,
-   "latency_s": 1.643
+   "tokens_in": 3397,
+   "tokens_out": 351,
+   "cost_usd": 0.0002449584,
+   "latency_s": 2.201
   },
   {
    "kind": "call",
@@ -179,15 +178,15 @@
   {
    "kind": "model",
    "step": 3,
-   "content": "Un seul créneau correspond : vendredi 27 novembre à 16h00. Je le réserve pour Inès.\n\n",
+   "content": "Un seul créneau correspond : C07, vendredi 27 novembre à 16h00. Je le réserve pour Inès.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "book_appointment"
    ],
-   "tokens_in": 3564,
-   "tokens_out": 155,
-   "cost_usd": 0.000185526,
-   "latency_s": 1.083
+   "tokens_in": 3601,
+   "tokens_out": 247,
+   "cost_usd": 0.0001593072,
+   "latency_s": 1.656
   },
   {
    "kind": "call",
@@ -203,25 +202,25 @@
   {
    "kind": "model",
    "step": 4,
-   "content": "C'est fait : rendez-vous confirmé pour la première carte d'identité d'Inès (P3).\n\n- **Rendez-vous R3** — Montreuil, **vendredi 27 novembre 2026 à 16h00** (après-midi), motif : carte d'identité.\n- C'était le seul créneau disponible à Montreuil la semaine prochaine sur ce demi-journée.\n\nJe n'ai rien fait d'autre (pas de pré-demande ANTS ni de timbre) : dites-moi si vous souhaitez que je m'en occupe.",
+   "content": "C'est fait ✅\n\n- **Rendez-vous R3** confirmé : **vendredi 27 novembre 2026 à 16h00**, mairie de **Montreuil**, pour **Inès Martin (P3)** — motif : **carte d'identité** (première demande).\n- C'était le seul créneau disponible à Montreuil l'après-midi de la semaine prochaine.\n\nJe n'ai rien fait d'autre : si vous souhaitez que je prépare une pré-demande ANTS ou que je vérifie s'il faut un timbre fiscal, dites-le-moi.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3754,
-   "tokens_out": 176,
-   "cost_usd": 0.000212492,
-   "latency_s": 1.21
+   "tokens_in": 3794,
+   "tokens_out": 212,
+   "cost_usd": 0.0001355616,
+   "latency_s": 1.503
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je commence par identifier Inès dans le compte, puis je cherche les créneaux à Montreuil.\n\n",
+   "thought": "Je commence par identifier Inès dans le compte.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.011,
+   "latency_s": 0.009,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -291,12 +290,12 @@
     "date_to": "2026-11-29",
     "part_of_day": "afternoon"
    },
-   "thought": "Inès est P3 (11 ans). Je cherche les créneaux à Montreuil pour la semaine prochaine (23–29 novembre), l'après-midi.\n\n",
+   "thought": "Inès = P3 (11 ans). Je cherche les créneaux à Montreuil la semaine prochaine (23–29 nov.), l'après-midi.",
    "step": 2,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.014,
+   "latency_s": 0.008,
    "retried_errors": [],
    "result": [
     {
@@ -315,12 +314,12 @@
     "person_id": "P3",
     "reason": "id_card"
    },
-   "thought": "Un seul créneau correspond : vendredi 27 novembre à 16h00. Je le réserve pour Inès.\n\n",
+   "thought": "Un seul créneau correspond : C07, vendredi 27 novembre à 16h00. Je le réserve pour Inès.\n\n",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.013,
    "retried_errors": [],
    "result": {
     "appointment_id": "R3",

@@ -71,7 +71,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.011
+   "latency_s": 0.014
   },
   {
    "step": 3,
@@ -79,24 +79,26 @@
    "args": {
     "to": "mairie-montreuil",
     "subject": "Rendez-vous du vendredi 27 novembre – Léo Martin",
-    "body": "Madame, Monsieur,\n\nJe vous informe que Léo Martin, qui a rendez-vous le vendredi 27 novembre 2026 à 10h30 pour une demande de carte d'identité, se présentera accompagné de son père.\n\nJe vous remercie de bien vouloir en prendre note.\n\nCordialement,\nCamille Martin"
+    "body": "Madame, Monsieur,\n\nJe vous informe que Léo Martin, qui a rendez-vous le vendredi 27 novembre 2026 à 10h30 pour une carte d'identité, se présentera accompagné de son père.\n\nJe vous remercie par avance.\n\nCordialement,\nCamille Martin"
    },
    "executed": true,
    "ok": true,
    "error": null,
    "attempts": 1,
    "approved": true,
-   "latency_s": 0.01
+   "latency_s": 0.013
   }
  ],
  "steps": 4,
  "max_steps": 5,
- "tokens_in": 13267,
- "tokens_out": 1025,
- "latency_s": 10.061,
- "cost_usd": 0.001853,
+ "tokens_in": 13864,
+ "tokens_out": 996,
+ "latency_s": 4.705,
+ "model_latency_s": 4.631,
+ "tool_latency_s": 0.041,
+ "cost_usd": 0.002633,
  "stop_reason": "answered",
- "answer": "Message envoyé à la mairie de Montreuil (id M1).\n\nRécapitulatif : Léo Martin (P2) a un rendez-vous confirmé le **vendredi 27 novembre 2026 à 10h30** à Montreuil (R2, carte d'identité). J'ai prévenu la mairie qu'il viendra accompagné de son père. Aucune autre action effectuée.",
+ "answer": "Message envoyé à la mairie de Montreuil (id M1) : Léo Martin (P2) sera accompagné de son père au rendez-vous du vendredi 27 novembre 2026 à 10h30 (carte d'identité, créneau C09).",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -118,25 +120,22 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "",
+   "content": "Je vais d'abord vérifier le profil du foyer et les rendez-vous pour identifier Léo et le rendez-vous de vendredi.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "list_appointments"
+    "get_profile"
    ],
-   "tokens_in": 2895,
-   "tokens_out": 168,
-   "cost_usd": 0.00094926,
-   "latency_s": 1.663
+   "tokens_in": 3025,
+   "tokens_out": 173,
+   "cost_usd": 0.0011151,
+   "latency_s": 0.668
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "list_appointments"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -146,10 +145,10 @@
    "tool_calls": [
     "list_appointments"
    ],
-   "tokens_in": 3255,
-   "tokens_out": 68,
-   "cost_usd": 0.00042324,
-   "latency_s": 1.785
+   "tokens_in": 3413,
+   "tokens_out": 58,
+   "cost_usd": 0.00048139,
+   "latency_s": 0.735
   },
   {
    "kind": "call",
@@ -166,10 +165,10 @@
    "tool_calls": [
     "send_message"
    ],
-   "tokens_in": 3460,
-   "tokens_out": 617,
-   "cost_usd": 0.0003500928,
-   "latency_s": 4.412
+   "tokens_in": 3618,
+   "tokens_out": 697,
+   "cost_usd": 0.000497406,
+   "latency_s": 2.465
   },
   {
    "kind": "call",
@@ -178,7 +177,7 @@
    "args": {
     "to": "mairie-montreuil",
     "subject": "Rendez-vous du vendredi 27 novembre – Léo Martin",
-    "body": "Madame, Monsieur,\n\nJe vous informe que Léo Martin, qui a rendez-vous le vendredi 27 novembre 2026 à 10h30 pour une demande de carte d'identité, se présentera accompagné de son père.\n\nJe vous remercie de bien vouloir en prendre note.\n\nCordialement,\nCamille Martin"
+    "body": "Madame, Monsieur,\n\nJe vous informe que Léo Martin, qui a rendez-vous le vendredi 27 novembre 2026 à 10h30 pour une carte d'identité, se présentera accompagné de son père.\n\nJe vous remercie par avance.\n\nCordialement,\nCamille Martin"
    },
    "dropped": []
   },
@@ -189,7 +188,7 @@
    "args": {
     "to": "mairie-montreuil",
     "subject": "Rendez-vous du vendredi 27 novembre – Léo Martin",
-    "body": "Madame, Monsieur,\n\nJe vous informe que Léo Martin, qui a rendez-vous le vendredi 27 novembre 2026 à 10h30 pour une demande de carte d'identité, se présentera accompagné de son père.\n\nJe vous remercie de bien vouloir en prendre note.\n\nCordialement,\nCamille Martin"
+    "body": "Madame, Monsieur,\n\nJe vous informe que Léo Martin, qui a rendez-vous le vendredi 27 novembre 2026 à 10h30 pour une carte d'identité, se présentera accompagné de son père.\n\nJe vous remercie par avance.\n\nCordialement,\nCamille Martin"
    },
    "approve": true,
    "reason": ""
@@ -197,20 +196,20 @@
   {
    "kind": "model",
    "step": 4,
-   "content": "Message envoyé à la mairie de Montreuil (id M1).\n\nRécapitulatif : Léo Martin (P2) a un rendez-vous confirmé le **vendredi 27 novembre 2026 à 10h30** à Montreuil (R2, carte d'identité). J'ai prévenu la mairie qu'il viendra accompagné de son père. Aucune autre action effectuée.",
+   "content": "Message envoyé à la mairie de Montreuil (id M1) : Léo Martin (P2) sera accompagné de son père au rendez-vous du vendredi 27 novembre 2026 à 10h30 (carte d'identité, créneau C09).",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3657,
-   "tokens_out": 172,
-   "cost_usd": 0.0001300272,
-   "latency_s": 2.134
+   "tokens_in": 3808,
+   "tokens_out": 68,
+   "cost_usd": 0.00053924,
+   "latency_s": 0.763
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "",
+   "thought": "Je vais d'abord vérifier le profil du foyer et les rendez-vous pour identifier Léo et le rendez-vous de vendredi.",
    "step": 1,
    "ok": true,
    "executed": true,
@@ -285,7 +284,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.011,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": [
     {
@@ -319,14 +318,14 @@
    "args": {
     "to": "mairie-montreuil",
     "subject": "Rendez-vous du vendredi 27 novembre – Léo Martin",
-    "body": "Madame, Monsieur,\n\nJe vous informe que Léo Martin, qui a rendez-vous le vendredi 27 novembre 2026 à 10h30 pour une demande de carte d'identité, se présentera accompagné de son père.\n\nJe vous remercie de bien vouloir en prendre note.\n\nCordialement,\nCamille Martin"
+    "body": "Madame, Monsieur,\n\nJe vous informe que Léo Martin, qui a rendez-vous le vendredi 27 novembre 2026 à 10h30 pour une carte d'identité, se présentera accompagné de son père.\n\nJe vous remercie par avance.\n\nCordialement,\nCamille Martin"
    },
    "thought": "",
    "step": 3,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.01,
+   "latency_s": 0.013,
    "retried_errors": [],
    "result": {
     "message_id": "M1",

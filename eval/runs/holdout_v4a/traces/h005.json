@@ -1,0 +1,458 @@
+{
+ "id": "h005",
+ "kind": "normal",
+ "task": "La carte d'identité de Léo expire le 15 janvier 2027. Si on peut déjà la renouveler, crée la pré-demande de renouvellement, et achète le timbre fiscal s'il en faut un.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   },
+   "D3": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "draft"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_fiches",
+  "get_fiche",
+  "create_application"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité délai avant expiration timbre fiscal gratuit"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 2.035
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité renouvellement avant expiration date limite validité"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 3.417
+  },
+  {
+   "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21090"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "renewal"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.007
+  }
+ ],
+ "steps": 6,
+ "max_steps": 7,
+ "tokens_in": 26220,
+ "tokens_out": 1137,
+ "latency_s": 12.032,
+ "model_latency_s": 6.532,
+ "tool_latency_s": 5.477,
+ "cost_usd": 0.00237,
+ "stop_reason": "answered",
+ "answer": "C'est fait :\n\n- **Renouvellement possible** : la carte d'identité de Léo (P2) expire le 15/01/2027 ; le renouvellement peut être demandé dès l'année précédant l'expiration, donc c'est bon depuis le 15/01/2026.\n- **Pré-demande créée** : D3 — carte d'identité, renouvellement, pour Léo Martin (P2), au statut **brouillon** (rien n'est envoyé à l'ANTS ; dites-moi si vous voulez que je la transmette).\n- **Aucun timbre fiscal acheté** : le renouvellement de la carte d'identité d'un mineur est **gratuit** lorsqu'on peut présenter l'ancienne carte (fiche F21090). Rien à payer.\n\nPour le dépôt en mairie, prévoyez : l'ancienne carte de Léo, une photo d'identité de moins de 6 mois, un justificatif de domicile et votre pièce d'identité, plus le récapitulatif de la pré-demande. Souhaitez-vous que je cherche un rendez-vous en mairie ?",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "create_application",
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal"
+   }
+  }
+ ],
+ "trace_file": "traces/h005.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vérifie d'abord la situation de Léo dans le compte.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3047,
+   "tokens_out": 95,
+   "cost_usd": 0.00099763,
+   "latency_s": 0.69
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3425,
+   "tokens_out": 232,
+   "cost_usd": 0.000255747,
+   "latency_s": 1.366
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité délai avant expiration timbre fiscal gratuit"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3828,
+   "tokens_out": 83,
+   "cost_usd": 0.000162264,
+   "latency_s": 0.754
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité renouvellement avant expiration date limite validité"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 4427,
+   "tokens_out": 92,
+   "cost_usd": 0.000211281,
+   "latency_s": 0.701
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21090"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "La règle est confirmée : le renouvellement est possible l'année qui précède l'expiration (donc depuis le 15/01/2026), et il est **gratuit** pour un mineur pouvant présenter l'ancienne carte → aucun timbre fiscal. Je crée la pré-demande.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "create_application"
+   ],
+   "tokens_in": 5647,
+   "tokens_out": 345,
+   "cost_usd": 0.000493281,
+   "latency_s": 1.516
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "renewal"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "C'est fait :\n\n- **Renouvellement possible** : la carte d'identité de Léo (P2) expire le 15/01/2027 ; le renouvellement peut être demandé dès l'année précédant l'expiration, donc c'est bon depuis le 15/01/2026.\n- **Pré-demande créée** : D3 — carte d'identité, renouvellement, pour Léo Martin (P2), au statut **brouillon** (rien n'est envoyé à l'ANTS ; dites-moi si vous voulez que je la transmette).\n- **Aucun timbre fiscal acheté** : le renouvellement de la carte d'identité d'un mineur est **gratuit** lorsqu'on peut présenter l'ancienne carte (fiche F21090). Rien à payer.\n\nPour le dépôt en mairie, prévoyez : l'ancienne carte de Léo, une photo d'identité de moins de 6 mois, un justificatif de domicile et votre pièce d'identité, plus le récapitulatif de la pré-demande. Souhaitez-vous que je cherche un rendez-vous en mairie ?",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 5846,
+   "tokens_out": 290,
+   "cost_usd": 0.000250026,
+   "latency_s": 1.505
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je vérifie d'abord la situation de Léo dans le compte.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2027-01-15",
+      "status": "expires_soon"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement carte d'identité délai avant expiration timbre fiscal gratuit"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 2.035,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## En France > Acheter le timbre fiscal > Pré-demande en ligne\nIl est possible d’acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    },
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal > Pré-demande en ligne\nIl est possible d’acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    },
+    {
+     "doc_id": "F1794",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
+     "excerpt": "## En France > Acheter le timbre fiscal > Pré-demande en ligne\nIl est possible d’acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    },
+    {
+     "doc_id": "F1344",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de perte",
+     "excerpt": "## À l'étranger > Acheter le timbre fiscal > Pré-demande\nVous pouvez acheter le timbre fiscal à la fin de la procédure de pré-demande."
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité renouvellement avant expiration date limite validité"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 3.417,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F35005",
+     "title": "Quelle est la durée de validité d'une carte d'identité ?",
+     "excerpt": "## Vous étiez mineur lors de la délivrance de la carte\nLa durée de validité de la carte d'identité est de 10 ans. La date d'expiration est celle qui figure sur la carte. À savoir Si vous devenez majeur avant la date d'expiration de la carte d'identité, vous pouvez continuer à l’utiliser. Vous n’avez pas besoin de demander une nouvelle carte tant que la validité n’est pas dépassée."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## En France > Retirer la carte d'identité quand elle est disponible > À partir de 12 ans\nLe représentant légal doit se présenter au guichet avec son enfant pour récupérer la carte d'identité. La carte d'identité qui est délivrée est une carte qui se présente sous un nouveau format (de la taille d'une carte bancaire). Elle doit être retirée dans les 3 mois de sa mise à disposition. Passé ce délai, la carte est détruite. La carte d'identité d'un mineur est valable pendant 10 ans. S'il devient majeur avant sa date d'expiration, il peut continuer à l'utiliser. Il n'a pas besoin de demander une nouvelle carte."
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## En France > Préparer les documents à présenter > La carte d'identité est périmée > Date d'expiration : + de 5 ans\nLa situation varie selon que le mineur a un passeport ou non :"
+    },
+    {
+     "doc_id": "F21090",
+     "title": "Renouvellement de la carte d'identité d'un mineur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d'identité est périmée > Date d'expiration : + de 5 ans\nLa situation varie selon que le mineur a un passeport ou non :"
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21090"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F21090",
+    "title": "Renouvellement de la carte d'identité d'un mineur",
+    "text": "La demande de renouvellement de la carte d'identité d’un mineur est gratuite, à condition de pouvoir présenter l'ancienne carte.\nLa carte d'identité de votre enfant mineur est périmée ou le devient bientôt ? La demande de renouvellement de la carte d’identité est gratuite, à condition de pouvoir présenter l’ancienne carte. Nous vous présentons les étapes de la démarche. Elles varient selon que vous vivez en France ou à l’étranger.\n\n## En France\n\n## En France > Savoir quand il est possible de faire la demande de renouvellement\nIl est possible de demander le renouvellement l'année qui précède la date d'expiration de la carte d'identité actuelle.\nÀ savoir\nEn cas de changement sur l’état civil de votre enfant mineur (par exemple, changement de prénom), il faut faire une demande de modification de la carte d’identité. La demande doit être faite dans un délai de 3 mois à partir de la mise à jour de l’acte de naissance.\n\n## En France > Choisir le lieu où faire la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas du domicile. Le mineur et son représentant légal peuvent se rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nLa liste des mairies équipées est consultable en ligne.\nOù s'adresser : Mairie délivrant des cartes d'identité\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée :\noutilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité\nIl est possible de préparer la démarche en effectuant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande permet de gagner du temps lors du dépôt du dossier.\nselNG : Pré-demande pour un renouvellement de carte d'identité\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide\nLes documents à fournir varient selon la situation familiale du mineur :\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants :\n- Carte d'identité du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- Pièce d’identité du représentant légal qui dépose la demande\n- En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur sont séparés ou divorcés\nLes documents à fournir varient selon le mode de garde du mineur :\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur sont séparés ou divorcés > La garde est alternée\nIl faut présenter les documents suivants :\n- Carte d'identité du mineur\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif de domicile au nom du représentant légal qui dépose la demande\n- Pièce d’identité du représentant légal qui dépose la demande\n- En cas de pré-demande, n° et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\nÀ noter\nEn cas de garde alternée, il est possible de mentionner les 2 adresses du mineur sur le titre d'identité. Dans ce cas, il faut présenter :\n- La preuve de la résidence alternée (copie de la décision du juge, convention de divorce ou convention parentale)\n- Et 2 justificatifs de domicile (un pour chaque parent).\n\n## En France > Préparer les documents à présenter > La carte d’identité du mineur est encore valide > Les parents du mineur sont séparés ou divorcés > La garde est exercée exclusivement "
+   }
+  },
+  {
+   "tool": "create_application",
+   "args": {
+    "kind": "id_card",
+    "person_id": "P2",
+    "motive": "renewal"
+   },
+   "thought": "La règle est confirmée : le renouvellement est possible l'année qui précède l'expiration (donc depuis le 15/01/2026), et il est **gratuit** pour un mineur pouvant présenter l'ancienne carte → aucun timbre fiscal. Je crée la pré-demande.\n\n",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "application_id": "D3",
+    "status": "draft",
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal"
+   }
+  }
+ ]
+}

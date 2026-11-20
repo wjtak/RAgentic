@@ -1,0 +1,396 @@
+{
+ "id": "h018",
+ "kind": "normal",
+ "task": "Prends un rendez-vous pour la première demande de passeport de Léo la semaine prochaine, comme d'habitude.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C02",
+    "person": "P2",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_slots",
+  "book_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.013
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande de passeport pour un mineur de 16 ans pièces justificatives"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 4.434
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.009
+  },
+  {
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P2",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  }
+ ],
+ "steps": 5,
+ "max_steps": 6,
+ "tokens_in": 20409,
+ "tokens_out": 1322,
+ "latency_s": 13.965,
+ "model_latency_s": 9.463,
+ "tool_latency_s": 4.471,
+ "cost_usd": 0.001942,
+ "stop_reason": "answered",
+ "answer": "Rendez-vous confirmé pour Léo (P2) : **lundi 23 novembre 2026 à 15h30, mairie du Paris 11e**, motif « passeport » (réf. R1).\n\nRappel pour la première demande de passeport d'un mineur : Léo (16 ans) et son représentant légal doivent venir ensemble, avec photo d'identité de moins de 6 mois, la carte d'identité de Léo, un justificatif de domicile et la pièce d'identité du parent. Je n'ai rien créé d'autre (aucune pré-demande ni timbre) : dites-moi si vous voulez que je prépare la pré-demande ANTS.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C02",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T15:30",
+    "weekday": "lundi",
+    "part_of_day": "afternoon",
+    "person": "P2",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/h018.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "- horaire_prefere: l'après-midi\n- mairie_preferee: Paris 11e"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier Léo dans le compte.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3057,
+   "tokens_out": 212,
+   "cost_usd": 0.00037422,
+   "latency_s": 2.599
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Léo est P2 (16 ans). Je vérifie les règles pour une première demande de passeport pour un mineur.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3430,
+   "tokens_out": 422,
+   "cost_usd": 0.000294216,
+   "latency_s": 3.378
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande de passeport pour un mineur de 16 ans pièces justificatives"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "La procédure est possible. Je cherche un créneau à Paris 11e, l'après-midi, la semaine prochaine (23–29 novembre).\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 4440,
+   "tokens_out": 334,
+   "cost_usd": 0.0007943,
+   "latency_s": 1.346
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Un créneau correspond : lundi 23 novembre à 15h30. Je le réserve pour Léo.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 4646,
+   "tokens_out": 151,
+   "cost_usd": 0.000276146,
+   "latency_s": 0.903
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P2",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "Rendez-vous confirmé pour Léo (P2) : **lundi 23 novembre 2026 à 15h30, mairie du Paris 11e**, motif « passeport » (réf. R1).\n\nRappel pour la première demande de passeport d'un mineur : Léo (16 ans) et son représentant légal doivent venir ensemble, avec photo d'identité de moins de 6 mois, la carte d'identité de Léo, un justificatif de domicile et la pièce d'identité du parent. Je n'ai rien créé d'autre (aucune pré-demande ni timbre) : dites-moi si vous voulez que je prépare la pré-demande ANTS.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4836,
+   "tokens_out": 203,
+   "cost_usd": 0.000203574,
+   "latency_s": 1.237
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier Léo dans le compte.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.013,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "première demande de passeport pour un mineur de 16 ans pièces justificatives"
+   },
+   "thought": "Léo est P2 (16 ans). Je vérifie les règles pour une première demande de passeport pour un mineur.\n\n",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 4.434,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "Pour faire le passeport d'un mineur, l'enfant et son représentant légal doivent se rendre dans une mairie équipée avec les pièces justificatives. Vous souhaitez faire une première demande de passeport pour un mineur ? Un mineur français peut avoir un passeport quel que soit son âge (même un bébé). La procédure varie selon que la demande est faite en France ou à l'étranger et selon l'âge du mineur. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a une carte d'identité périmée > Date d’expiration : + de 5 ans > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - En l'absence de carte d'identité ou si elle a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a une carte d’identité valide > Les parents du mineur vivent ensemble\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - Carte d'identité du mineur - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    },
+    {
+     "doc_id": "F14930",
+     "title": "Passeport d'un mineur : première demande",
+     "excerpt": "## En France > Préparer les documents à présenter > Le mineur a une carte d'identité périmée > Date d’expiration : + de 5 ans > Le mineur n’a qu’un seul parent\nIl faut présenter les documents suivants : - 1 photo d'identité de moins de 6 mois et conforme aux normes - En l'absence de carte d'identité ou si elle a plus de 5 ans, il est nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française si la nationalité ne ressort pas de l’acte de naissance - 1 justificatif de domicile au nom du représentant légal qui dépose la demande - Pièce d'identité du représentant légal qui dépose la demande - En cas de pré-demande, le numéro et/ou QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-23",
+    "date_to": "2026-11-29",
+    "part_of_day": "afternoon"
+   },
+   "thought": "La procédure est possible. Je cherche un créneau à Paris 11e, l'après-midi, la semaine prochaine (23–29 novembre).\n\n",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.009,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C02",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T15:30",
+     "weekday": "lundi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C02",
+    "person_id": "P2",
+    "reason": "passport"
+   },
+   "thought": "Un créneau correspond : lundi 23 novembre à 15h30. Je le réserve pour Léo.\n\n",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C02",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-23T15:30",
+    "weekday": "lundi",
+    "part_of_day": "afternoon",
+    "person": "P2",
+    "reason": "passport"
+   }
+  }
+ ]
+}

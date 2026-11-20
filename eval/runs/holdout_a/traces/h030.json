@@ -1,0 +1,193 @@
+{
+ "id": "h030",
+ "kind": "ambiguous",
+ "task": "Annule le rendez-vous à Paris.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   },
+   "R3": {
+    "slot": "C05",
+    "person": "P3",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_appointments",
+  "ask_user"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.016
+  },
+  {
+   "step": 2,
+   "tool": "ask_user",
+   "args": {
+    "question": "Deux rendez-vous sont à Paris : R1 (Camille, Paris 11e, jeudi 26/11 à 11h00) et R3 (Inès, Paris 12e, jeudi 26/11 à 14h00). Lequel faut-il annuler ?"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 2,
+ "max_steps": 4,
+ "tokens_in": 6336,
+ "tokens_out": 255,
+ "latency_s": 1.814,
+ "model_latency_s": 1.78,
+ "tool_latency_s": 0.016,
+ "cost_usd": 0.00022,
+ "stop_reason": "asked_user",
+ "answer": null,
+ "question": "Deux rendez-vous sont à Paris : R1 (Camille, Paris 11e, jeudi 26/11 à 11h00) et R3 (Inès, Paris 12e, jeudi 26/11 à 14h00). Lequel faut-il annuler ?",
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h030.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vérifie d'abord les rendez-vous du foyer.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_appointments"
+   ],
+   "tokens_in": 3017,
+   "tokens_out": 126,
+   "cost_usd": 9.13584e-05,
+   "latency_s": 1.009
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "ask_user"
+   ],
+   "tokens_in": 3319,
+   "tokens_out": 129,
+   "cost_usd": 0.0001290384,
+   "latency_s": 0.771
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "ask_user",
+   "args": {
+    "question": "Deux rendez-vous sont à Paris : R1 (Camille, Paris 11e, jeudi 26/11 à 11h00) et R3 (Inès, Paris 12e, jeudi 26/11 à 14h00). Lequel faut-il annuler ?"
+   },
+   "dropped": []
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_appointments",
+   "args": {},
+   "thought": "Je vérifie d'abord les rendez-vous du foyer.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.016,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "R1",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning",
+     "slot": "C08",
+     "person": "P1",
+     "person_name": "Camille",
+     "reason": "passport",
+     "status": "confirmed"
+    },
+    {
+     "id": "R2",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning",
+     "slot": "C09",
+     "person": "P2",
+     "person_name": "Léo",
+     "reason": "id_card",
+     "status": "confirmed"
+    },
+    {
+     "id": "R3",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-26T14:00",
+     "weekday": "jeudi",
+     "part_of_day": "afternoon",
+     "slot": "C05",
+     "person": "P3",
+     "person_name": "Inès",
+     "reason": "id_card",
+     "status": "confirmed"
+    }
+   ]
+  }
+ ]
+}

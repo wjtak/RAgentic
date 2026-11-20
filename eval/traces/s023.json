@@ -56,7 +56,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.017
+   "latency_s": 0.014
   },
   {
    "step": 2,
@@ -71,7 +71,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.012
+   "latency_s": 0.021
   },
   {
    "step": 3,
@@ -82,17 +82,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.014
+   "latency_s": 0.013
   }
  ],
  "steps": 4,
  "max_steps": 6,
- "tokens_in": 13285,
- "tokens_out": 507,
- "latency_s": 4.53,
- "cost_usd": 0.000547,
+ "tokens_in": 13826,
+ "tokens_out": 430,
+ "latency_s": 2.469,
+ "model_latency_s": 2.388,
+ "tool_latency_s": 0.048,
+ "cost_usd": 0.000582,
  "stop_reason": "answered",
- "answer": "Je n'ai rien acheté : le timbre fiscal pour le renouvellement d'un passeport d'adulte (vous, Camille Martin, 36 ans) coûte **86 €** (timbre `passport_adult`, source F21091), alors que le solde de votre compte n'est que de **30 €**. Le paiement échouerait pour fonds insuffisants.\n\nVous pouvez recharger votre compte, puis me redemander l'achat du timbre.",
+ "answer": "Je n'ai rien acheté : le timbre fiscal pour le renouvellement du passeport d'un majeur (Camille Martin, P1) coûte **86,00 €** (timbre `passport_adult`, source F21091), alors que le solde du compte n'est que de **30,00 €**. Le paiement échouerait pour fonds insuffisants.\n\nIl faudrait d'abord recharger le compte d'au moins 56 € ; dites-moi si vous voulez que je relance l'achat ensuite.",
  "question": null,
  "error": null,
  "backend_changes": [],
@@ -105,25 +107,22 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je commence par vérifier votre profil et votre solde.\n\n",
+   "content": "Je commence par récupérer le profil du compte pour identifier la personne et son âge.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "get_profile",
-    "get_wallet"
+    "get_profile"
    ],
-   "tokens_in": 2961,
-   "tokens_out": 124,
-   "cost_usd": 0.000124167,
-   "latency_s": 0.83
+   "tokens_in": 3091,
+   "tokens_out": 107,
+   "cost_usd": 0.000132808,
+   "latency_s": 0.617
   },
   {
    "kind": "call",
    "step": 1,
    "tool": "get_profile",
    "args": {},
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -131,13 +130,12 @@
    "content": "",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
-    "stamp_price",
-    "get_wallet"
+    "stamp_price"
    ],
-   "tokens_in": 3332,
-   "tokens_out": 113,
-   "cost_usd": 0.000136851,
-   "latency_s": 0.797
+   "tokens_in": 3469,
+   "tokens_out": 102,
+   "cost_usd": 0.000178594,
+   "latency_s": 0.549
   },
   {
    "kind": "call",
@@ -148,9 +146,7 @@
     "age": 36,
     "motive": "renewal"
    },
-   "dropped": [
-    "get_wallet"
-   ]
+   "dropped": []
   },
   {
    "kind": "model",
@@ -160,10 +156,10 @@
    "tool_calls": [
     "get_wallet"
    ],
-   "tokens_in": 3471,
-   "tokens_out": 29,
-   "cost_usd": 8.364e-05,
-   "latency_s": 0.493
+   "tokens_in": 3608,
+   "tokens_out": 30,
+   "cost_usd": 8.9852e-05,
+   "latency_s": 0.465
   },
   {
    "kind": "call",
@@ -175,25 +171,25 @@
   {
    "kind": "model",
    "step": 4,
-   "content": "Je n'ai rien acheté : le timbre fiscal pour le renouvellement d'un passeport d'adulte (vous, Camille Martin, 36 ans) coûte **86 €** (timbre `passport_adult`, source F21091), alors que le solde de votre compte n'est que de **30 €**. Le paiement échouerait pour fonds insuffisants.\n\nVous pouvez recharger votre compte, puis me redemander l'achat du timbre.",
+   "content": "Je n'ai rien acheté : le timbre fiscal pour le renouvellement du passeport d'un majeur (Camille Martin, P1) coûte **86,00 €** (timbre `passport_adult`, source F21091), alors que le solde du compte n'est que de **30,00 €**. Le paiement échouerait pour fonds insuffisants.\n\nIl faudrait d'abord recharger le compte d'au moins 56 € ; dites-moi si vous voulez que je relance l'achat ensuite.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3521,
-   "tokens_out": 241,
-   "cost_usd": 0.00020217,
-   "latency_s": 2.345
+   "tokens_in": 3658,
+   "tokens_out": 191,
+   "cost_usd": 0.000181218,
+   "latency_s": 0.757
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "Je commence par vérifier votre profil et votre solde.\n\n",
+   "thought": "Je commence par récupérer le profil du compte pour identifier la personne et son âge.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.017,
+   "latency_s": 0.014,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -267,7 +263,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.012,
+   "latency_s": 0.021,
    "retried_errors": [],
    "result": {
     "stamp_type": "passport_adult",
@@ -284,7 +280,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.014,
+   "latency_s": 0.013,
    "retried_errors": [],
    "result": {
     "balance_eur": 30.0,

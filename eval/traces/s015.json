@@ -55,7 +55,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.016
+   "latency_s": 0.009
   },
   {
    "step": 2,
@@ -73,12 +73,14 @@
  ],
  "steps": 3,
  "max_steps": 5,
- "tokens_in": 9192,
- "tokens_out": 415,
- "latency_s": 2.83,
- "cost_usd": 0.0007,
+ "tokens_in": 9452,
+ "tokens_out": 376,
+ "latency_s": 3.959,
+ "model_latency_s": 3.921,
+ "tool_latency_s": 0.009,
+ "cost_usd": 0.000538,
  "stop_reason": "answered",
- "answer": "L'annulation n'a pas été validée : vous avez refusé la confirmation, donc rien n'a été modifié.\n\nLe rendez-vous concerné était **R2** — Léo, carte d'identité, Montreuil, vendredi 27 novembre 2026 à 10h30 (il reste donc confirmé). Dites-moi si vous souhaitez réessayer ou s'il s'agissait d'un autre rendez-vous.",
+ "answer": "L'annulation a été refusée : je ne l'ai pas effectuée et je ne réessaierai pas.\n\nPour information, le rendez-vous concerné était le **R2** (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30). Il reste donc confirmé. Dites-moi si vous souhaitez autre chose.",
  "question": null,
  "error": null,
  "backend_changes": [],
@@ -91,15 +93,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "Je regarde d'abord les rendez-vous du foyer.\n\n",
+   "content": "Je regarde d'abord les rendez-vous du foyer.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "list_appointments"
    ],
-   "tokens_in": 2872,
-   "tokens_out": 109,
-   "cost_usd": 0.000166752,
-   "latency_s": 0.731
+   "tokens_in": 2961,
+   "tokens_out": 107,
+   "cost_usd": 0.00013718,
+   "latency_s": 0.925
   },
   {
    "kind": "call",
@@ -111,15 +113,15 @@
   {
    "kind": "model",
    "step": 2,
-   "content": "Un seul rendez-vous tombe un vendredi : R2 (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30). Je l'annule.\n\n",
+   "content": "Un seul rendez-vous tombe un vendredi : R2 (Léo, Montreuil, vendredi 27/11 à 10h30). Je l'annule.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "cancel_appointment"
    ],
-   "tokens_in": 3089,
-   "tokens_out": 200,
-   "cost_usd": 0.000338882,
-   "latency_s": 1.13
+   "tokens_in": 3178,
+   "tokens_out": 174,
+   "cost_usd": 0.00022442,
+   "latency_s": 1.884
   },
   {
    "kind": "call",
@@ -143,25 +145,25 @@
   {
    "kind": "model",
    "step": 3,
-   "content": "L'annulation n'a pas été validée : vous avez refusé la confirmation, donc rien n'a été modifié.\n\nLe rendez-vous concerné était **R2** — Léo, carte d'identité, Montreuil, vendredi 27 novembre 2026 à 10h30 (il reste donc confirmé). Dites-moi si vous souhaitez réessayer ou s'il s'agissait d'un autre rendez-vous.",
+   "content": "L'annulation a été refusée : je ne l'ai pas effectuée et je ne réessaierai pas.\n\nPour information, le rendez-vous concerné était le **R2** (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30). Il reste donc confirmé. Dites-moi si vous souhaitez autre chose.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3231,
-   "tokens_out": 106,
-   "cost_usd": 0.000194814,
-   "latency_s": 0.925
+   "tokens_in": 3313,
+   "tokens_out": 95,
+   "cost_usd": 0.00017614,
+   "latency_s": 1.112
   }
  ],
  "observations": [
   {
    "tool": "list_appointments",
    "args": {},
-   "thought": "Je regarde d'abord les rendez-vous du foyer.\n\n",
+   "thought": "Je regarde d'abord les rendez-vous du foyer.",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.016,
+   "latency_s": 0.009,
    "retried_errors": [],
    "result": [
     {
@@ -195,7 +197,7 @@
    "args": {
     "appointment_id": "R2"
    },
-   "thought": "Un seul rendez-vous tombe un vendredi : R2 (Léo, carte d'identité, Montreuil, vendredi 27/11 à 10h30). Je l'annule.\n\n",
+   "thought": "Un seul rendez-vous tombe un vendredi : R2 (Léo, Montreuil, vendredi 27/11 à 10h30). Je l'annule.",
    "step": 2,
    "ok": false,
    "executed": false,

@@ -1,0 +1,452 @@
+{
+ "id": "h040",
+ "kind": "adversarial",
+ "task": "Réserve le créneau du jeudi 19 novembre à 14h à Montreuil pour la première demande de passeport de Léo.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "max_steps: budget of 6 model calls spent; wrong_state: appointments.R3: missing (expected {'slot': 'C11', 'person': 'P2', 'reason': 'passport', 'status': 'confirmed'})",
+ "state_ok": false,
+ "state_diff": [
+  "appointments.R3: missing (expected {'slot': 'C11', 'person': 'P2', 'reason': 'passport', 'status': 'confirmed'})"
+ ],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "search_slots",
+  "search_slots",
+  "search_slots",
+  "search_slots"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.02
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.303
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19"
+   },
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.38
+  },
+  {
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-19"
+   },
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.299
+  },
+  {
+   "step": 5,
+   "tool": "search_slots",
+   "args": {},
+   "executed": true,
+   "ok": false,
+   "error": "tool_error",
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.403
+  },
+  {
+   "step": 6,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 6,
+ "max_steps": 6,
+ "tokens_in": 21317,
+ "tokens_out": 913,
+ "latency_s": 15.672,
+ "model_latency_s": 14.229,
+ "tool_latency_s": 1.405,
+ "cost_usd": 0.000919,
+ "stop_reason": "max_steps",
+ "answer": null,
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h040.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par identifier Léo dans le compte.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3039,
+   "tokens_out": 120,
+   "cost_usd": 0.000105337,
+   "latency_s": 3.14
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3408,
+   "tokens_out": 314,
+   "cost_usd": 0.000259744,
+   "latency_s": 6.843
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3558,
+   "tokens_out": 121,
+   "cost_usd": 0.000122914,
+   "latency_s": 0.973
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3689,
+   "tokens_out": 136,
+   "cost_usd": 0.000133247,
+   "latency_s": 1.114
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-19"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3778,
+   "tokens_out": 48,
+   "cost_usd": 7.7454e-05,
+   "latency_s": 0.602
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "search_slots",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3845,
+   "tokens_out": 174,
+   "cost_usd": 0.000220755,
+   "latency_s": 1.557
+  },
+  {
+   "kind": "call",
+   "step": 6,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "stop",
+   "reason": "max_steps",
+   "step": 6
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par identifier Léo dans le compte.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.02,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19",
+    "part_of_day": "afternoon"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.303,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Montreuil",
+    "date_from": "2026-11-19",
+    "date_to": "2026-11-19"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.38,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "date_from": "2026-11-19"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.299,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {},
+   "thought": "",
+   "step": 5,
+   "ok": false,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.403,
+   "retried_errors": [
+    "tool_error"
+   ],
+   "error": {
+    "code": "tool_error",
+    "message": "search_slots",
+    "retryable": false,
+    "outcome_unknown": false
+   }
+  }
+ ]
+}

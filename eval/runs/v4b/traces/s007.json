@@ -1,0 +1,373 @@
+{
+ "id": "s007",
+ "kind": "normal",
+ "task": "Déplace mon rendez-vous passeport de jeudi au mercredi 25 novembre à 10h, dans la même mairie.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "cancelled"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   },
+   "R3": {
+    "slot": "C03",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_appointments",
+  "search_slots",
+  "book_appointment",
+  "cancel_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.008
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-25",
+    "date_to": "2026-11-25"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 3,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C03",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 4,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.007
+  }
+ ],
+ "steps": 5,
+ "max_steps": 8,
+ "tokens_in": 16867,
+ "tokens_out": 1329,
+ "latency_s": 8.336,
+ "model_latency_s": 8.227,
+ "tool_latency_s": 0.035,
+ "cost_usd": 0.000856,
+ "stop_reason": "answered",
+ "answer": "C'est fait : votre rendez-vous passeport est déplacé.\n\n- **Nouveau rendez-vous (R3)** : mercredi 25 novembre 2026 à 10h00, mairie du **Paris 11e**, pour Camille (passeport).\n- **Ancien rendez-vous (R1)** du jeudi 26 novembre à 11h00 : annulé (le créneau a été libéré).\n\nÀ noter : le rendez-vous de Léo (R2, carte d'identité, vendredi 27 novembre à Montreuil) n'a pas été touché.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R3",
+    "status": "confirmed",
+    "id": "C03",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-25T10:00",
+    "weekday": "mercredi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  },
+  {
+   "tool": "cancel_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  }
+ ],
+ "trace_file": "traces/s007.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par retrouver votre rendez-vous passeport de jeudi.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_appointments"
+   ],
+   "tokens_in": 3023,
+   "tokens_out": 308,
+   "cost_usd": 0.0001794384,
+   "latency_s": 1.692
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3241,
+   "tokens_out": 337,
+   "cost_usd": 0.0002195184,
+   "latency_s": 1.847
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-25",
+    "date_to": "2026-11-25"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 3393,
+   "tokens_out": 347,
+   "cost_usd": 0.0002124528,
+   "latency_s": 2.127
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C03",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "cancel_appointment"
+   ],
+   "tokens_in": 3561,
+   "tokens_out": 199,
+   "cost_usd": 0.0001314672,
+   "latency_s": 1.575
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 4,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "C'est fait : votre rendez-vous passeport est déplacé.\n\n- **Nouveau rendez-vous (R3)** : mercredi 25 novembre 2026 à 10h00, mairie du **Paris 11e**, pour Camille (passeport).\n- **Ancien rendez-vous (R1)** du jeudi 26 novembre à 11h00 : annulé (le créneau a été libéré).\n\nÀ noter : le rendez-vous de Léo (R2, carte d'identité, vendredi 27 novembre à Montreuil) n'a pas été touché.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3649,
+   "tokens_out": 138,
+   "cost_usd": 0.0001127472,
+   "latency_s": 0.986
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_appointments",
+   "args": {},
+   "thought": "Je commence par retrouver votre rendez-vous passeport de jeudi.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.008,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "R1",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning",
+     "slot": "C08",
+     "person": "P1",
+     "person_name": "Camille",
+     "reason": "passport",
+     "status": "confirmed"
+    },
+    {
+     "id": "R2",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning",
+     "slot": "C09",
+     "person": "P2",
+     "person_name": "Léo",
+     "reason": "id_card",
+     "status": "confirmed"
+    }
+   ]
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-25",
+    "date_to": "2026-11-25"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C03",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-25T10:00",
+     "weekday": "mercredi",
+     "part_of_day": "morning"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C03",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R3",
+    "status": "confirmed",
+    "id": "C03",
+    "town_hall": "Paris 11e",
+    "start": "2026-11-25T10:00",
+    "weekday": "mercredi",
+    "part_of_day": "morning",
+    "person": "P1",
+    "reason": "passport"
+   }
+  },
+  {
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R1"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.007,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  }
+ ]
+}

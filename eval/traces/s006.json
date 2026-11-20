@@ -61,7 +61,7 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.015
+   "latency_s": 0.009
   },
   {
    "step": 2,
@@ -76,17 +76,19 @@
    "error": null,
    "attempts": 1,
    "approved": null,
-   "latency_s": 0.012
+   "latency_s": 0.01
   }
  ],
  "steps": 3,
  "max_steps": 5,
- "tokens_in": 9510,
- "tokens_out": 215,
- "latency_s": 4.308,
- "cost_usd": 0.000233,
+ "tokens_in": 9918,
+ "tokens_out": 297,
+ "latency_s": 2.688,
+ "model_latency_s": 2.637,
+ "tool_latency_s": 0.019,
+ "cost_usd": 0.000361,
  "stop_reason": "answered",
- "answer": "J'ai créé la pré-demande de passeport pour Inès (P3), première demande : elle porte l'identifiant **D3** et reste au statut **brouillon** — rien n'a été envoyé à l'ANTS, comme demandé. Dites-moi si vous voulez que je la transmette.",
+ "answer": "J'ai créé le brouillon de pré-demande de passeport pour Inès (P3, 11 ans), première demande : **D3**, au statut « draft ». Il n'a pas été envoyé à l'ANTS — dites-moi si vous souhaitez que je le fasse.",
  "question": null,
  "error": null,
  "backend_changes": [
@@ -110,15 +112,15 @@
   {
    "kind": "model",
    "step": 1,
-   "content": "",
+   "content": "Je commence par identifier Inès dans le compte.\n\n",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [
     "get_profile"
    ],
-   "tokens_in": 2889,
-   "tokens_out": 50,
-   "cost_usd": 9.73764e-05,
-   "latency_s": 0.981
+   "tokens_in": 3019,
+   "tokens_out": 74,
+   "cost_usd": 7.5677e-05,
+   "latency_s": 0.884
   },
   {
    "kind": "call",
@@ -135,10 +137,10 @@
    "tool_calls": [
     "create_application"
    ],
-   "tokens_in": 3249,
-   "tokens_out": 89,
-   "cost_usd": 7.60788e-05,
-   "latency_s": 1.35
+   "tokens_in": 3388,
+   "tokens_out": 155,
+   "cost_usd": 0.000162284,
+   "latency_s": 0.982
   },
   {
    "kind": "call",
@@ -154,25 +156,25 @@
   {
    "kind": "model",
    "step": 3,
-   "content": "J'ai créé la pré-demande de passeport pour Inès (P3), première demande : elle porte l'identifiant **D3** et reste au statut **brouillon** — rien n'a été envoyé à l'ANTS, comme demandé. Dites-moi si vous voulez que je la transmette.",
+   "content": "J'ai créé le brouillon de pré-demande de passeport pour Inès (P3, 11 ans), première demande : **D3**, au statut « draft ». Il n'a pas été envoyé à l'ANTS — dites-moi si vous souhaitez que je le fasse.",
    "model": "deepseek/deepseek-v4.1-flash",
    "tool_calls": [],
-   "tokens_in": 3372,
-   "tokens_out": 76,
-   "cost_usd": 5.98896e-05,
-   "latency_s": 1.929
+   "tokens_in": 3511,
+   "tokens_out": 68,
+   "cost_usd": 0.000122753,
+   "latency_s": 0.771
   }
  ],
  "observations": [
   {
    "tool": "get_profile",
    "args": {},
-   "thought": "",
+   "thought": "Je commence par identifier Inès dans le compte.\n\n",
    "step": 1,
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.015,
+   "latency_s": 0.009,
    "retried_errors": [],
    "result": {
     "today": "2026-11-16",
@@ -246,7 +248,7 @@
    "ok": true,
    "executed": true,
    "attempts": 1,
-   "latency_s": 0.012,
+   "latency_s": 0.01,
    "retried_errors": [],
    "result": {
     "application_id": "D3",

@@ -1,0 +1,223 @@
+{
+ "id": "s001",
+ "kind": "normal",
+ "task": "Annule le rendez-vous de vendredi.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "cancelled"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "list_appointments",
+  "cancel_appointment"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.073
+  },
+  {
+   "step": 2,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R2"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.011
+  }
+ ],
+ "steps": 3,
+ "max_steps": 5,
+ "tokens_in": 9629,
+ "tokens_out": 548,
+ "latency_s": 4.016,
+ "model_latency_s": 3.895,
+ "tool_latency_s": 0.084,
+ "cost_usd": 0.000432,
+ "stop_reason": "answered",
+ "answer": "Le rendez-vous de vendredi a été annulé : **R2** — Léo, carte d'identité, mairie de Montreuil, vendredi 27 novembre 2026 à 10h30. Le créneau est désormais libéré (annulation irréversible). Le rendez-vous de Camille (R1, jeudi 26/11 à 11h, passeport, Paris 11e) reste confirmé.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "cancel_appointment",
+   "result": {
+    "appointment_id": "R2",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  }
+ ],
+ "trace_file": "traces/s001.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je vais d'abord consulter les rendez-vous du foyer pour identifier celui devendredi.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "list_appointments"
+   ],
+   "tokens_in": 3018,
+   "tokens_out": 237,
+   "cost_usd": 0.0001763064,
+   "latency_s": 1.625
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "list_appointments",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "Un seul rendez-vous vendredi : R2 (Léo, carte d'identité, Montreuil, 27/11 à 10h30). Jel'annule.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "cancel_appointment"
+   ],
+   "tokens_in": 3243,
+   "tokens_out": 212,
+   "cost_usd": 0.0001875564,
+   "latency_s": 1.502
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R2"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 2,
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R2"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "Le rendez-vous de vendredi a été annulé : **R2** — Léo, carte d'identité, mairie de Montreuil, vendredi 27 novembre 2026 à 10h30. Le créneau est désormais libéré (annulation irréversible). Le rendez-vous de Camille (R1, jeudi 26/11 à 11h, passeport, Paris 11e) reste confirmé.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3368,
+   "tokens_out": 99,
+   "cost_usd": 6.78096e-05,
+   "latency_s": 0.768
+  }
+ ],
+ "observations": [
+  {
+   "tool": "list_appointments",
+   "args": {},
+   "thought": "Je vais d'abord consulter les rendez-vous du foyer pour identifier celui devendredi.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.073,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "R1",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning",
+     "slot": "C08",
+     "person": "P1",
+     "person_name": "Camille",
+     "reason": "passport",
+     "status": "confirmed"
+    },
+    {
+     "id": "R2",
+     "town_hall": "Montreuil",
+     "start": "2026-11-27T10:30",
+     "weekday": "vendredi",
+     "part_of_day": "morning",
+     "slot": "C09",
+     "person": "P2",
+     "person_name": "Léo",
+     "reason": "id_card",
+     "status": "confirmed"
+    }
+   ]
+  },
+  {
+   "tool": "cancel_appointment",
+   "args": {
+    "appointment_id": "R2"
+   },
+   "thought": "Un seul rendez-vous vendredi : R2 (Léo, carte d'identité, Montreuil, 27/11 à 10h30). Jel'annule.",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.011,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R2",
+    "status": "cancelled",
+    "warning": "The slot is released to other users: this cannot be undone."
+   }
+  }
+ ]
+}

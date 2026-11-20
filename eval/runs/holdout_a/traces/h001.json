@@ -1,0 +1,480 @@
+{
+ "id": "h001",
+ "kind": "normal",
+ "task": "Écris à la mairie du 12e pour demander s'il faut apporter l'ancien passeport, puis prends le créneau du jeudi 26 novembre à 14h dans cette mairie pour le renouvellement de mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C05",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {
+   "M1": {
+    "to": "mairie-paris-12"
+   }
+  }
+ },
+ "tool_calls": [
+  "send_message",
+  "get_profile",
+  "search_slots",
+  "book_appointment",
+  "search_fiches"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "send_message",
+   "args": {
+    "to": "mairie-paris-12",
+    "subject": "Renouvellement de passeport : faut-il apporter l'ancien passeport ?",
+    "body": "Madame, Monsieur,\n\nJe souhaite renouveler mon passeport et j'ai pris rendez-vous dans votre mairie. Pourriez-vous me confirmer si je dois apporter mon ancien passeport le jour du rendez-vous, et s'il faut prévoir d'autres justificatifs particuliers dans le cadre d'un renouvellement ?\n\nJe vous remercie par avance de votre réponse.\n\nCordialement,"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": true,
+   "latency_s": 0.019
+  },
+  {
+   "step": 2,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.02
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-26",
+    "date_to": "2026-11-26",
+    "part_of_day": "afternoon"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.103
+  },
+  {
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C05",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.01
+  },
+  {
+   "step": 5,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport : faut-il apporter l'ancien passeport ? documents à fournir"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 22.532
+  }
+ ],
+ "steps": 6,
+ "max_steps": 7,
+ "tokens_in": 22862,
+ "tokens_out": 1754,
+ "latency_s": 32.949,
+ "model_latency_s": 10.216,
+ "tool_latency_s": 22.684,
+ "cost_usd": 0.001386,
+ "stop_reason": "answered",
+ "answer": "C'est fait :\n\n- **Message envoyé** à la mairie de Paris 12e (id M1) pour demander s'il faut apporter l'ancien passeport lors du renouvellement.\n- **Rendez-vous confirmé** (id R1) : jeudi **26 novembre 2026 à 14h00**, mairie du **Paris 12e**, pour le **renouvellement du passeport** de Camille Martin (P1) — créneau C05. C'est un rendez-vous gratuit, réservable/annulable.\n\nÀ titre indicatif, les fiches Service-Public sur le renouvellement de passeport indiquent qu'il faut en principe présenter son passeport actuel (ainsi qu'une photo de moins de 6 mois, un justificatif de domicile et le timbre fiscal) : attendez tout de même la réponse de la mairie, que vous retrouverez dans votre messagerie. Votre passeport actuel expire le 1er décembre 2026.",
+ "question": null,
+ "error": null,
+ "backend_changes": [
+  {
+   "tool": "send_message",
+   "result": {
+    "message_id": "M1",
+    "to": "mairie-paris-12",
+    "status": "sent"
+   }
+  },
+  {
+   "tool": "book_appointment",
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C05",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-26T14:00",
+    "weekday": "jeudi",
+    "part_of_day": "afternoon",
+    "person": "P1",
+    "reason": "passport"
+   }
+  }
+ ],
+ "trace_file": "traces/h001.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Plan : j'envoie d'abord votre message à la mairie du 12e, puis je vérifie votre profil et les règles de renouvellement de passeport avant de réserver le créneau du jeudi 26 novembre à14h.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "send_message"
+   ],
+   "tokens_in": 3068,
+   "tokens_out": 849,
+   "cost_usd": 0.0003333888,
+   "latency_s": 3.808
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "send_message",
+   "args": {
+    "to": "mairie-paris-12",
+    "subject": "Renouvellement de passeport : faut-il apporter l'ancien passeport ?",
+    "body": "Madame, Monsieur,\n\nJe souhaite renouveler mon passeport et j'ai pris rendez-vous dans votre mairie. Pourriez-vous me confirmer si je dois apporter mon ancien passeport le jour du rendez-vous, et s'il faut prévoir d'autres justificatifs particuliers dans le cadre d'un renouvellement ?\n\nJe vous remercie par avance de votre réponse.\n\nCordialement,"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "approval",
+   "step": 1,
+   "tool": "send_message",
+   "args": {
+    "to": "mairie-paris-12",
+    "subject": "Renouvellement de passeport : faut-il apporter l'ancien passeport ?",
+    "body": "Madame, Monsieur,\n\nJe souhaite renouveler mon passeport et j'ai pris rendez-vous dans votre mairie. Pourriez-vous me confirmer si je dois apporter mon ancien passeport le jour du rendez-vous, et s'il faut prévoir d'autres justificatifs particuliers dans le cadre d'un renouvellement ?\n\nJe vous remercie par avance de votre réponse.\n\nCordialement,"
+   },
+   "approve": true,
+   "reason": ""
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3345,
+   "tokens_out": 27,
+   "cost_usd": 6.23988e-05,
+   "latency_s": 0.884
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3705,
+   "tokens_out": 252,
+   "cost_usd": 0.0001532196,
+   "latency_s": 1.327
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-26",
+    "date_to": "2026-11-26",
+    "part_of_day": "afternoon"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "book_appointment"
+   ],
+   "tokens_in": 3875,
+   "tokens_out": 77,
+   "cost_usd": 0.0001055196,
+   "latency_s": 0.702
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C05",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 4042,
+   "tokens_out": 231,
+   "cost_usd": 0.0001759896,
+   "latency_s": 1.627
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport : faut-il apporter l'ancien passeport ? documents à fournir"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 6,
+   "content": "C'est fait :\n\n- **Message envoyé** à la mairie de Paris 12e (id M1) pour demander s'il faut apporter l'ancien passeport lors du renouvellement.\n- **Rendez-vous confirmé** (id R1) : jeudi **26 novembre 2026 à 14h00**, mairie du **Paris 12e**, pour le **renouvellement du passeport** de Camille Martin (P1) — créneau C05. C'est un rendez-vous gratuit, réservable/annulable.\n\nÀ titre indicatif, les fiches Service-Public sur le renouvellement de passeport indiquent qu'il faut en principe présenter son passeport actuel (ainsi qu'une photo de moins de 6 mois, un justificatif de domicile et le timbre fiscal) : attendez tout de même la réponse de la mairie, que vous retrouverez dans votre messagerie. Votre passeport actuel expire le 1er décembre 2026.",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 4827,
+   "tokens_out": 318,
+   "cost_usd": 0.0005559192,
+   "latency_s": 1.868
+  }
+ ],
+ "observations": [
+  {
+   "tool": "send_message",
+   "args": {
+    "to": "mairie-paris-12",
+    "subject": "Renouvellement de passeport : faut-il apporter l'ancien passeport ?",
+    "body": "Madame, Monsieur,\n\nJe souhaite renouveler mon passeport et j'ai pris rendez-vous dans votre mairie. Pourriez-vous me confirmer si je dois apporter mon ancien passeport le jour du rendez-vous, et s'il faut prévoir d'autres justificatifs particuliers dans le cadre d'un renouvellement ?\n\nJe vous remercie par avance de votre réponse.\n\nCordialement,"
+   },
+   "thought": "Plan : j'envoie d'abord votre message à la mairie du 12e, puis je vérifie votre profil et les règles de renouvellement de passeport avant de réserver le créneau du jeudi 26 novembre à14h.",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.019,
+   "retried_errors": [],
+   "result": {
+    "message_id": "M1",
+    "to": "mairie-paris-12",
+    "status": "sent"
+   }
+  },
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.02,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 12e",
+    "date_from": "2026-11-26",
+    "date_to": "2026-11-26",
+    "part_of_day": "afternoon"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.103,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C05",
+     "town_hall": "Paris 12e",
+     "start": "2026-11-26T14:00",
+     "weekday": "jeudi",
+     "part_of_day": "afternoon"
+    }
+   ]
+  },
+  {
+   "tool": "book_appointment",
+   "args": {
+    "slot_id": "C05",
+    "person_id": "P1",
+    "reason": "passport"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.01,
+   "retried_errors": [],
+   "result": {
+    "appointment_id": "R1",
+    "status": "confirmed",
+    "id": "C05",
+    "town_hall": "Paris 12e",
+    "start": "2026-11-26T14:00",
+    "weekday": "jeudi",
+    "part_of_day": "afternoon",
+    "person": "P1",
+    "reason": "passport"
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "renouvellement passeport : faut-il apporter l'ancien passeport ? documents à fournir"
+   },
+   "thought": "",
+   "step": 5,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 22.532,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Australie, Canada, Espagne, Portugal > Vous répondez aux conditions pour faire la procédure à distance > Préparer les documents et les informations nécessaires pour faire la pré-demande en ligne\nDocuments obligatoires à fournir Vous devez fournir les élements suivants : - Votre numéro d'inscription consulaire (Numic) au Registre des Français établis hors de France - L’adresse mail communiquée au Registre des Français établis hors de France - Une photo d'identité aux normes françaises et ayant moins de 6 mois - Une copie de votre passeport actuel (double page où sont votre photo d’identité et votre signature) - Le numéro du timbre électronique que vous avez acheté - Un justificatif de domicile datant de moins de 3 mois. Documents supplémentaires à fournir selon votre situation Selon le motif de renouvellement du passeport, vous devez fournir : - Une attestation sur l’honneur dans laquelle vous présentez l'erreur de l’administration afin de faire corriger votre passeport (un modèle d'attestation est disponible) - La copie de l’ensemble des pages du passeport en un seul fichier pour prouver que vous avez épuisé toutes ses"
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Autre pays > Préparer les documents à fournir et décider du mode de retrait du passeport > Documents à fournir\nIl faut présenter les documents originaux. Les documents à fournir dépendent de la date d’expiration de votre passeport actuel :"
+    },
+    {
+     "doc_id": "F21092",
+     "title": "Renouvellement du passeport d'un mineur",
+     "excerpt": "## À l'étranger > Préparer les documents à fournir et décider du mode de retrait du passeport\nDocuments à fournir Il faut présenter les documents originaux. Les documents à fournir dépendent de la date d’expiration du passeport actuel du mineur :"
+    },
+    {
+     "doc_id": "F21091",
+     "title": "Renouvellement du passeport d'un majeur",
+     "excerpt": "## Autre pays > Préparer les documents à fournir et décider du mode de retrait du passeport > Documents à fournir > Votre passeport est en cours de validité\nVous devez présenter les documents suivants : - Votre passeport - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Timbre fiscal (sauf si vous l’avez déjà acheté lors de la pré-demande) - Si vous avez fait la pré-demande, le numéro et/ou QR code obtenus (si vous n'avez pas fait de pré-demande, vous devrez remplir et signer le formulaire qui vous sera remis au guichet). Votre passeport actuel vous est remis à la fin du rendez-vous."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,409 @@
+{
+ "id": "h035",
+ "kind": "impossible",
+ "task": "Il me faut une nouvelle carte d'identité en urgence : fais la demande en procédure d'urgence.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "fail",
+ "passed": false,
+ "reason": "max_steps: budget of 5 model calls spent",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {
+   "R1": {
+    "slot": "C08",
+    "person": "P1",
+    "reason": "passport",
+    "status": "confirmed"
+   },
+   "R2": {
+    "slot": "C09",
+    "person": "P2",
+    "reason": "id_card",
+    "status": "confirmed"
+   }
+  },
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_fiches",
+  "search_fiches",
+  "get_fiche",
+  "search_fiches"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.024
+  },
+  {
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité procédure d'urgence renouvellement"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 5.296
+  },
+  {
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité urgence délai court voyage récépissé"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 6.092
+  },
+  {
+   "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21089"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.004
+  },
+  {
+   "step": 5,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte nationale d'identité procédure d'urgence existe-t-il"
+   },
+   "executed": false,
+   "ok": false,
+   "error": null,
+   "attempts": null,
+   "approved": null,
+   "latency_s": null
+  }
+ ],
+ "steps": 5,
+ "max_steps": 5,
+ "tokens_in": 23148,
+ "tokens_out": 1059,
+ "latency_s": 22.275,
+ "model_latency_s": 10.825,
+ "tool_latency_s": 11.416,
+ "cost_usd": 0.001147,
+ "stop_reason": "max_steps",
+ "answer": null,
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/h035.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je commence par vérifier votre profil et les règles applicables à la carte d'identité.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3115,
+   "tokens_out": 211,
+   "cost_usd": 0.000177126,
+   "latency_s": 1.935
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 3495,
+   "tokens_out": 187,
+   "cost_usd": 0.000182898,
+   "latency_s": 1.516
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité procédure d'urgence renouvellement"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 4342,
+   "tokens_out": 290,
+   "cost_usd": 0.000271824,
+   "latency_s": 3.394
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité urgence délai court voyage récépissé"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_fiche"
+   ],
+   "tokens_in": 5481,
+   "tokens_out": 154,
+   "cost_usd": 0.000227457,
+   "latency_s": 1.768
+  },
+  {
+   "kind": "call",
+   "step": 4,
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21089"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 5,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_fiches"
+   ],
+   "tokens_in": 6715,
+   "tokens_out": 217,
+   "cost_usd": 0.000288096,
+   "latency_s": 2.212
+  },
+  {
+   "kind": "call",
+   "step": 5,
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte nationale d'identité procédure d'urgence existe-t-il"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "stop",
+   "reason": "max_steps",
+   "step": 5
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je commence par vérifier votre profil et les règles applicables à la carte d'identité.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.024,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité procédure d'urgence renouvellement"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 5.296,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1153",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de perte",
+     "excerpt": "Pour refaire une carte d'identité perdue d’un mineur, il faut se rendre dans une mairie équipée. la déclaration de perte se fait en même temps que la demande. La carte d’identité de votre enfant mineur a été perdue et vous souhaitez la renouveler immédiatement ? La déclaration de perte se fait en même temps que le dépôt du dossier. La procédure varie selon que la demande est faite en France ou à l’étranger et selon l’âge du mineur. Nous vous présentons les étapes de la démarche. À savoir Si le renouvellement de la carte d’identité n’est pas demandé immédiatement, il est nécessaire d’en déclarer la perte auprès des autorités de police ou de gendarmerie. Si la perte a eu lieu à l’étranger, la déclaration de perte est à faire auprès des autorités de police locales et à l’ambassade ou au consulat de France."
+    },
+    {
+     "doc_id": "F1794",
+     "title": "Carte d'identité d'un mineur : renouvellement en cas de vol",
+     "excerpt": "Pour refaire la carte d’identité volée de votre enfant mineur, il faut d’abord en déclarer le vol puis se rendre dans une mairie équipée pour la renouveler. La carte d’identité de votre enfant mineur a été volée et vous souhaitez obtenir une nouvelle carte ? La procédure varie selon que la demande est faite en France ou à l’étranger et selon l’âge du mineur. Nous vous présentons les étapes de la démarche."
+    },
+    {
+     "doc_id": "F1759",
+     "title": "Carte d'identité d'un majeur : renouvellement en cas de vol",
+     "excerpt": "Pour refaire une carte d’identité volée, vous devez d’abord en déclarer le vol. Vous devez ensuite vous rendre dans une mairie équipée pour la renouveler. Votre carte d’identité a été volée et vous souhaitez obtenir une nouvelle carte ? Nous vous présentons étape par étape la démarche à suivre. Elle diffère selon que le vol a eu lieu en France ou à l’étranger."
+    },
+    {
+     "doc_id": "F21089",
+     "title": "Renouvellement de la carte d'identité d'un majeur",
+     "excerpt": "## À l'étranger > Préparer les documents à présenter > La carte d'idendité est périmée depuis plus de 5 ans > Vous avez un passeport dont la date de validité est expirée > Votre passeport est périmé depuis moins de 5 ans\nVous devez présenter les documents suivants : - Votre passeport - Votre carte d'identité - 1 photo d'identité de moins de 6 mois et conforme aux normes - 1 justificatif du domicile de moins de 1 an - Si vous avez fait une pré-demande : n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande)."
+    }
+   ]
+  },
+  {
+   "tool": "search_fiches",
+   "args": {
+    "query": "carte d'identité urgence délai court voyage récépissé"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 6.092,
+   "retried_errors": [],
+   "result": [
+    {
+     "doc_id": "F1373",
+     "title": "Passeport en urgence : passeport temporaire pour un majeur",
+     "excerpt": "## À l'étranger > Quels sont les documents à fournir pour demander un passeport en urgence ? > Vous n'avez pas de passeport > Vous avez une carte d'identité > La carte d'identité est périmée > Date d'expiration : + de 5 ans\n- 1 justificatif de domicile - 1 photo d'identité de moins de 6 mois et conforme aux normes - Si vous n'avez pas de carte d'identité ou si elle est plus ancienne, vérifiez si l'état civil de votre lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - 1 justificatif de nationalité française si vous vous trouvez dans une situation particulière (naissance à l'étranger de parents nés à l'étranger par exemple) - Timbre fiscal de 90 € - Tout document justifiant l'urgence du déplacement et demandé par la préfecture (par exemple, acte de décès, attestation d'hospitalisation)"
+    },
+    {
+     "doc_id": "F1035",
+     "title": "Passeport en urgence : passeport temporaire pour un mineur",
+     "excerpt": "## À l'étranger > Quels sont les documents à fournir pour demander un passeport en urgence ? > Le mineur a déjà un passeport > Le passeport est périmé > Date d'expiration : + de 5 ans\n- Carte d'identité récente du mineur (valide ou périmée depuis moins de 5 ans) - En l'absence de carte d'identité ou si elle est plus ancienne, il nécessaire de vérifier si l'état civil du lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - Justificatif de nationalité française en cas de situation particulière (naissance à l'étranger de parents nés à l'étranger par exemple) - Pièce d'identité du représentant légal - Justificatif de domicile - 1 photo d'identité de moins de 6 mois et conforme aux normes - 90 € en espèce, mandat, chèque ou carte bancaire (selon les consulats) - Tout document justifiant l'urgence du déplacement (par exemple, acte de décès, attestation d'hospitalisation,...)."
+    },
+    {
+     "doc_id": "F1373",
+     "title": "Passeport en urgence : passeport temporaire pour un majeur",
+     "excerpt": "## En France > Quels sont les documents à fournir pour demander un passeport en urgence ? > Vous n'avez pas de passeport > Vous avez une carte d'identité périmée > Date d'expiration : + de 5 ans\n- 1 justificatif de domicile - 1 photo d'identité de moins de 6 mois et conforme aux normes - Si vous n'avez pas de carte d'identité ou si elle est plus ancienne, vérifiez si l'état civil de votre lieu de naissance est dématérialisé. Si ce n'est pas le cas, il faut fournir un acte de naissance de moins de 3 mois. - 1 justificatif de nationalité française si vous vous trouvez dans une situation particulière (naissance à l'étranger de parents nés à l'étranger par exemple) - Timbre fiscal de 30 € (il s'achète en ligne) - Tout document justifiant l'urgence du déplacement et demandé par la préfecture (par exemple, acte de décès, attestation d'hospitalisation)"
+    },
+    {
+     "doc_id": "F1373",
+     "title": "Passeport en urgence : passeport temporaire pour un majeur",
+     "excerpt": "## À l'étranger > Quels sont les documents à fournir pour demander un passeport en urgence ? > Vous n'avez pas de passeport > Vous avez une carte d'identité > La carte d'identité est périmée > Date d'expiration : moins de 5 ans\n- Carte d'identité - 1 justificatif de domicile - 1 photo d'identité de moins de 6 mois et conforme aux normes - Timbre fiscal de 90 € - Tout document justifiant l'urgence du déplacement et demandé par la préfecture (par exemple, acte de décès, attestation d'hospitalisation)"
+    }
+   ]
+  },
+  {
+   "tool": "get_fiche",
+   "args": {
+    "doc_id": "F21089"
+   },
+   "thought": "",
+   "step": 4,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.004,
+   "retried_errors": [],
+   "result": {
+    "doc_id": "F21089",
+    "title": "Renouvellement de la carte d'identité d'un majeur",
+    "text": "La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte.\nVous êtes majeur et la date de validité de votre carte nationale d'identité est prochainement dépassée ou l'est déjà ? Vous avez une carte d'identité ancien modèle et vous souhaitez obtenir une carte au nouveau format ? La demande de renouvellement de la carte d'identité est gratuite, à condition de pouvoir présenter l'ancienne carte. Nous vous présentons les étapes de la démarche.\n\n## En France\n\n## En France > Savoir quand vous pouvez faire la demande de renouvellement\nVous pouvez demander le renouvellement l'année qui précède la date d'expiration de votre carte d'identité actuelle.\nÀ savoir\nSi vous avez une carte d'identité ancien modèle, vous pouvez demander son renouvellement anticipé pour obtenir une carte au nouveau format.\n\n## En France > Choisir le lieu où vous ferez la démarche et, en général, prendre rendez-vous\nLe lieu de la demande ne dépend pas de votre domicile : vous pouvez vous rendre dans n'importe quelle mairie, à condition qu'elle soit équipée d'une station d'enregistrement.\nOù s'adresser : Mairie délivrant des cartes d'identité\nAttention\nDe nombreuses mairies exigent que le dépôt du dossier se fasse uniquement sur rendez-vous.\nL'ANTS met à disposition un moteur de recherche permettant de trouver un rendez-vous dans une mairie équipée :\noutilRechercheNG : Rechercher un rendez-vous pour une demande de carte d'identité\nAvant de vous déplacer, vous pouvez préparer la démarche en faisant une pré-demande en ligne, mais ce n'est pas une obligation. La pré-demande vous permet de gagner du temps lors du dépôt du dossier.\nAttention : si vous avez une carte d'identité ancien modèle et que vous souhaitez obtenir une carte au nouveau format, la pré-demande est obligatoire.\nselNG : Pré-demande pour un renouvellement de carte d'identité\n\n## En France > Préparer les documents à présenter\nIl faut présenter les documents originaux.\nLes documents à fournir dépendent de la date d'expiration de votre carte d'identité actuelle :\n\n## En France > Préparer les documents à présenter > La carte est en cours de validité\nVous devez présenter les documents suivants :\n- Votre carte d'identité\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif du domicile de moins de 1 an\n- Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis moins de 5 ans\nVous devez présenter les documents suivants :\n- Votre carte d'identité\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif du domicile de moins de 1 an\n- Si vous avez fait une pré-demande, le n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis plus de 5 ans\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis plus de 5 ans > Vous avez un passeport en cours de validité\nVous devez présenter les documents suivants :\n- Votre passeport\n- Votre carte d'identité\n- 1 photo d'identité de moins de 6 mois et conforme aux normes\n- 1 justificatif du domicile de moins de 1 an\n- Si vous avez fait une pré-demande : n° de pré-demande et/ou le QR code obtenus à la fin de la démarche (il est conseillé d'imprimer le récapitulatif de pré-demande).\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis plus de 5 ans > Vous avez un passeport dont la date d'expiration est dépassée\n\n## En France > Préparer les documents à présenter > La carte d'identité est périmée depuis plus de 5 ans > Vous avez un passeport dont la date d'expiration est dépassée > Votre passeport est périmé depuis moins de 5 ans\nVous devez pr"
+   }
+  }
+ ]
+}

@@ -1,0 +1,305 @@
+{
+ "id": "s025",
+ "kind": "impossible",
+ "task": "Prends-moi un rendez-vous samedi prochain à la mairie du 11e pour mon passeport.",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "outcome": "pass",
+ "passed": true,
+ "reason": "pass",
+ "state_ok": true,
+ "state_diff": [],
+ "final_state": {
+  "appointments": {},
+  "applications": {
+   "D1": {
+    "kind": "passport",
+    "person": "P1",
+    "motive": "renewal",
+    "status": "draft"
+   },
+   "D2": {
+    "kind": "id_card",
+    "person": "P2",
+    "motive": "renewal",
+    "status": "submitted"
+   }
+  },
+  "stamps": {},
+  "balance_eur": 120.0,
+  "messages_sent": {}
+ },
+ "tool_calls": [
+  "get_profile",
+  "search_slots",
+  "search_slots"
+ ],
+ "tool_calls_detail": [
+  {
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.015
+  },
+  {
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-21",
+    "date_to": "2026-11-21"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.014
+  },
+  {
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e"
+   },
+   "executed": true,
+   "ok": true,
+   "error": null,
+   "attempts": 1,
+   "approved": null,
+   "latency_s": 0.017
+  }
+ ],
+ "steps": 4,
+ "max_steps": 5,
+ "tokens_in": 13724,
+ "tokens_out": 1450,
+ "latency_s": 8.056,
+ "model_latency_s": 7.977,
+ "tool_latency_s": 0.046,
+ "cost_usd": 0.001128,
+ "stop_reason": "answered",
+ "answer": "Aucun créneau le samedi 21 novembre 2026 n'est disponible à la mairie du 11e : les seuls créneaux libres pour un passeport à Paris 11e sont :\n\n- C01 — lundi 23/11 à 09h00\n- C02 — lundi 23/11 à 15h30\n- C03 — mercredi 25/11 à 10h00\n- C08 — jeudi 26/11 à 11h00\n\nJe n'ai donc rien réservé. Dites-moi si l'un de ces créneaux vous convient (ou si vous souhaitez que je regarde une autre mairie) et je prends le rendez-vous pour Camille Martin (P1).",
+ "question": null,
+ "error": null,
+ "backend_changes": [],
+ "trace_file": "traces/s025.json",
+ "events": [
+  {
+   "kind": "recall",
+   "facts": "(none)"
+  },
+  {
+   "kind": "model",
+   "step": 1,
+   "content": "Je regarde d'abord le profil du compte pour identifier la personne, puis je chercherai un créneau le samedi 21 novembre 2026 à Paris 11e.\n\n",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "get_profile"
+   ],
+   "tokens_in": 3019,
+   "tokens_out": 551,
+   "cost_usd": 0.000361877,
+   "latency_s": 3.079
+  },
+  {
+   "kind": "call",
+   "step": 1,
+   "tool": "get_profile",
+   "args": {},
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 2,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3415,
+   "tokens_out": 246,
+   "cost_usd": 0.000219665,
+   "latency_s": 1.151
+  },
+  {
+   "kind": "call",
+   "step": 2,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-21",
+    "date_to": "2026-11-21"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 3,
+   "content": "",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [
+    "search_slots"
+   ],
+   "tokens_in": 3516,
+   "tokens_out": 226,
+   "cost_usd": 0.000181588,
+   "latency_s": 1.286
+  },
+  {
+   "kind": "call",
+   "step": 3,
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e"
+   },
+   "dropped": []
+  },
+  {
+   "kind": "model",
+   "step": 4,
+   "content": "Aucun créneau le samedi 21 novembre 2026 n'est disponible à la mairie du 11e : les seuls créneaux libres pour un passeport à Paris 11e sont :\n\n- C01 — lundi 23/11 à 09h00\n- C02 — lundi 23/11 à 15h30\n- C03 — mercredi 25/11 à 10h00\n- C08 — jeudi 26/11 à 11h00\n\nJe n'ai donc rien réservé. Dites-moi si l'un de ces créneaux vous convient (ou si vous souhaitez que je regarde une autre mairie) et je prends le rendez-vous pour Camille Martin (P1).",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "tool_calls": [],
+   "tokens_in": 3774,
+   "tokens_out": 427,
+   "cost_usd": 0.000365242,
+   "latency_s": 2.461
+  }
+ ],
+ "observations": [
+  {
+   "tool": "get_profile",
+   "args": {},
+   "thought": "Je regarde d'abord le profil du compte pour identifier la personne, puis je chercherai un créneau le samedi 21 novembre 2026 à Paris 11e.\n\n",
+   "step": 1,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.015,
+   "retried_errors": [],
+   "result": {
+    "today": "2026-11-16",
+    "account_holder": "P1",
+    "name": "Camille Martin",
+    "address": {
+     "street": "12 rue des Lilas",
+     "postcode": "75011",
+     "city": "Paris"
+    },
+    "household": [
+     {
+      "id": "P1",
+      "first_name": "Camille",
+      "last_name": "Martin",
+      "relation": "titulaire",
+      "birth_date": "1990-04-12",
+      "age": 36
+     },
+     {
+      "id": "P2",
+      "first_name": "Léo",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2010-03-02",
+      "age": 16
+     },
+     {
+      "id": "P3",
+      "first_name": "Inès",
+      "last_name": "Martin",
+      "relation": "enfant",
+      "birth_date": "2015-09-20",
+      "age": 11
+     }
+    ],
+    "documents": [
+     {
+      "id": "T1",
+      "kind": "passport",
+      "person": "P1",
+      "expires": "2026-12-01",
+      "status": "expires_soon"
+     },
+     {
+      "id": "T2",
+      "kind": "id_card",
+      "person": "P1",
+      "expires": "2031-05-01",
+      "status": "valid"
+     },
+     {
+      "id": "T3",
+      "kind": "id_card",
+      "person": "P2",
+      "expires": "2030-02-10",
+      "status": "valid"
+     }
+    ]
+   }
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e",
+    "date_from": "2026-11-21",
+    "date_to": "2026-11-21"
+   },
+   "thought": "",
+   "step": 2,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.014,
+   "retried_errors": [],
+   "result": []
+  },
+  {
+   "tool": "search_slots",
+   "args": {
+    "town_hall": "Paris 11e"
+   },
+   "thought": "",
+   "step": 3,
+   "ok": true,
+   "executed": true,
+   "attempts": 1,
+   "latency_s": 0.017,
+   "retried_errors": [],
+   "result": [
+    {
+     "id": "C01",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T09:00",
+     "weekday": "lundi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C02",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-23T15:30",
+     "weekday": "lundi",
+     "part_of_day": "afternoon"
+    },
+    {
+     "id": "C03",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-25T10:00",
+     "weekday": "mercredi",
+     "part_of_day": "morning"
+    },
+    {
+     "id": "C08",
+     "town_hall": "Paris 11e",
+     "start": "2026-11-26T11:00",
+     "weekday": "jeudi",
+     "part_of_day": "morning"
+    }
+   ]
+  }
+ ]
+}
